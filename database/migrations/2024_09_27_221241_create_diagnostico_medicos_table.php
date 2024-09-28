@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('diagnostico_medicos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('datos_alumnos_id')->constrained('datos_alumnos')->onDelete('cascade');
+            $table->string('diagnostico');
             $table->timestamps();
         });
     }
