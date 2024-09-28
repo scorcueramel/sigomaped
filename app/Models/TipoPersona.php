@@ -15,6 +15,6 @@ class TipoPersona extends Model
     ];
 
     public function persona(){
-        return $this->hasMany(Persona::class);
+        return $this->hasMany(Persona::class,'tipo_persona_id','id');
     }
 }

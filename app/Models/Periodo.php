@@ -11,6 +11,6 @@ class Periodo extends Model
     protected $fillable = ['periodo'];
 
     public function anioIngreso(){
-        $this->belongsTo(AnioIngreso::class,'id','periodo_id');
+        $this->belongsTo(AnioIngreso::class,'periodo_id','id');
     }
 }
