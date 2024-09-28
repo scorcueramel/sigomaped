@@ -18,10 +18,18 @@ class Persona extends Model
     ];
 
     public function tipo_persona():BelongsTo{
-        return $this->belongsTo( TipoPersona::class,'id');
+        return $this->belongsTo( TipoPersona::class);
     }
 
     public function inscripcion(){
-        $this->hasMany(Inscripcion::class,'persona_id','id');
+        $this->hasMany(Inscripcion::class);
+    }
+
+    public function datosAlumno(){
+        $this->hasMany(DatosAlumno::class);
+    }
+
+    public function user(){
+        $this->hasMany(Persona::class);
     }
 }

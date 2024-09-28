@@ -5,18 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AnioIngreso extends Model
+class CondicionSocioEconomica extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'periodo_id',
-        'anio',
-    ];
-
-    public function periodo(){
-        $this->hasOne(Periodo::class);
-    }
+    protected $fillable = ['condicion'];
 
     public function datosAlumno(){
         $this->hasMany(DatosAlumno::class);

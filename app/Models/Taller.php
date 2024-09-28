@@ -17,14 +17,14 @@ class Taller extends Model
     ];
 
     public function tipoTaller(){
-        $this->hasOne(TipoTaller::class,'tipo_taller_id');
+        $this->hasOne(TipoTaller::class);
     }
 
     public function programa(){
-        $this->hasOne(Programa::class,'programa_id');
+        $this->hasOne(Programa::class);
     }
 
     public function ciclo(){
-        $this->hasMany(Ciclo::class,'taller_id');
+        $this->hasMany(Ciclo::class);
     }
 }

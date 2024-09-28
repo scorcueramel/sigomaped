@@ -21,10 +21,15 @@ class Inscripcion extends Model
         'usuario_actualiza',
     ];
 
-    public function ciclo(){
-        $this->belongsTo(Ciclo::class,'ciclo_id','id');
-    }
     public function persona(){
-        $this->belongsTo(Persona::class,'persona_id','id');
+        $this->belongsTo(Persona::class);
+    }
+
+    public function ciclo(){
+        $this->belongsTo(Ciclo::class);
+    }
+
+    public function asistencia(){
+        $this->hasMany(Asistencia::class);
     }
 }

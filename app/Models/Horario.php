@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Horario extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'persona_id',
+        'ciclo_id',
+        'dia',
+        'hora_inicio',
+        'hora_fin',
+        'usuario_actualiza',
+    ];
+
+    public function ciclos(){
+        $this->belongsTo(Ciclo::class);
+    }
 }

@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Asistencia extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'inscripcion_id',
+        'fecha',
+        'asistio',
+        'justificada',
+        'motivo',
+        'usuario_actualiza',
+    ];
+
+    public function inscripcion(){
+        $this->belongsTo(Inscripcion::class);
+    }
 }
