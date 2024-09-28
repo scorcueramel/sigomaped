@@ -21,6 +21,10 @@ class Ciclo extends Model
     ];
 
     public function taller(){
-        $this->belongsTo(Taller::class,'taller_id');
+        $this->belongsTo(Taller::class,'id');
+    }
+
+    public function inscripcion(){
+        $this->hasMany(Inscripcion::class,'id');
     }
 }
