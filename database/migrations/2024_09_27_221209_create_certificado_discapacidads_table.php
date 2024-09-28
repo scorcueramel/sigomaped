@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('certificado_discapacidads', function (Blueprint $table) {
             $table->id();
             $table->foreignId('datos_alumno_id')->constrained('datos_alumnos')->onDelete('cascade');
-            $table->string('emision_cert_discapacidad');
-            $table->string('vigencia_cert_discapacidad');
+            $table->string('emision_cert_discapacidad',length: 20);
+            $table->string('vigencia_cert_discapacidad',20);
             $table->timestamps();
         });
     }

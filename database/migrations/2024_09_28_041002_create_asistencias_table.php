@@ -13,13 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('asistencias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('persona_id')->constrained('personas');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->foreignId('inscripcion_id')->constrained('inscripcions')->onDelete('cascade');
+            $table->dateTime('fecha');
+            $table->boolean('asistio')->default(false);
+            $table->boolean('justificada')->default(false);
+            $table->string('motivo',350)->nullable();
             $table->string('usuario_actualiza',50)->nullable();
             $table->softDeletes();
             $table->timestamps();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('asistencias');
     }
 };
