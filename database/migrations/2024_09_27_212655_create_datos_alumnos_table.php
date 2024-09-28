@@ -23,6 +23,22 @@ return new class extends Migration
             $table->foreignId('manif_volunta_id')->constrained('manifestacion_voluntads')->onDelete('cascade');
             $table->foreignId('acred_resid_id')->constrained('acreditacion_residencias')->onDelete('cascade');
             $table->foreignId('tipo_discapacidad_id')->constrained('tipo_discapacidads')->onDelete('cascade');
+            $table->date('fecha_inscripcion');
+            $table->string('ds_exp_inscripcion',25);
+            $table->string('distrito',30);
+            $table->string('sector',5);
+            $table->string('subsector',5);
+            $table->string('domicilio',150);
+            $table->date('fecha_nacimiento');
+            $table->string('ro_carnet_conadis',20);
+            $table->boolean('solicitud_inscripcion')->default(false);
+            $table->string('cons_empadronamiento_sisfoh',10);
+            $table->boolean('copia_dni')->default(false);
+            $table->boolean('informe_medico')->default(false);
+            $table->boolean('recibo_serv')->default(false);
+            $table->boolean('copia_carnet_conadis')->default(false);
+            $table->boolean('documentacion_digital')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
