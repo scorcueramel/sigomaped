@@ -15,10 +15,10 @@ class AnioIngreso extends Model
     ];
 
     public function periodo(){
-        $this->hasOne(Periodo::class);
+        return $this->belongsTo(Periodo::class);
     }
 
     public function datosAlumno(){
-        $this->hasMany(DatosAlumno::class);
+        return $this->hasMany(DatosAlumno::class);
     }
 }

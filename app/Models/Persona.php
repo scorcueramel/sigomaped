@@ -22,14 +22,14 @@ class Persona extends Model
     }
 
     public function inscripcion(){
-        $this->hasMany(Inscripcion::class);
+        return $this->hasMany(Inscripcion::class);
     }
 
     public function datosAlumno(){
-        $this->hasMany(DatosAlumno::class);
+        return $this->hasMany(DatosAlumno::class);
     }
 
     public function user(){
-        $this->hasMany(Persona::class);
+        return $this->hasMany(Persona::class);
     }
 }

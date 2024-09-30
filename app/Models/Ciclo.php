@@ -21,14 +21,14 @@ class Ciclo extends Model
     ];
 
     public function taller(){
-        $this->belongsTo(Taller::class);
+        return $this->belongsTo(Taller::class);
     }
 
     public function inscripcion(){
-        $this->hasMany(Inscripcion::class);
+        return $this->hasMany(Inscripcion::class);
     }
 
     public function horario(){
-        $this->hasMany(Horario::class);
+        return $this->hasMany(Horario::class);
     }
 }

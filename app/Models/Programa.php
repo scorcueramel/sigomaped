@@ -15,6 +15,6 @@ class Programa extends Model
     ];
 
     public function taller(){
-        $this->hasOne(Taller::class);
+        return $this->hasMany(Taller::class);
     }
 }

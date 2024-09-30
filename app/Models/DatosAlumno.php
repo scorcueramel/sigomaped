@@ -36,46 +36,46 @@ class DatosAlumno extends Model
     ];
 
     public function persona(){
-        $this->belongsTo(Persona::class);
+        return $this->belongsTo(Persona::class);
     }
 
     public function genero(){
-        $this->belongsTo(Genero::class);
+        return $this->belongsTo(Genero::class);
     }
 
     public function anioIngreso(){
-        $this->belongsTo(AnioIngreso::class);
+        return $this->belongsTo(AnioIngreso::class);
     }
 
     public function tipoSeguro(){
-        $this->belongsTo(TipoSeguro::class);
+        return $this->belongsTo(TipoSeguro::class);
     }
 
     public function condicionSocioEconomica(){
-        $this->belongsTo(CondicionSocioEconomica::class);
+        return $this->belongsTo(CondicionSocioEconomica::class);
     }
 
     public function manifesctacionVoluntad(){
-        $this->belongsTo(ManifestacionVoluntad::class);
+        return $this->belongsTo(ManifestacionVoluntad::class);
     }
 
     public function acreditacionResidencia(){
-        $this->belongsTo(AcreditacionResidencia::class);
+        return $this->belongsTo(AcreditacionResidencia::class);
     }
 
     public function tipoDiscapacidad(){
-        $this->belongsTo(TipoDiscapacidad::class);
+        return $this->belongsTo(TipoDiscapacidad::class);
     }
 
     public function diagnosticoMedico(){
-        $this->hasMany(DiagnosticoMedico::class);
+        return $this->hasMany(DiagnosticoMedico::class);
     }
 
     public function certificadoDiscapacidad(){
-        $this->hasMany(CertificadoDiscapacidad::class);
+        return $this->hasMany(CertificadoDiscapacidad::class);
     }
 
     public function representante(){
-        $this->hasMany(Horario::class);
+        return $this->hasMany(Horario::class);
     }
 }

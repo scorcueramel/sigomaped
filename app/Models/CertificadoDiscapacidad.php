@@ -16,6 +16,6 @@ class CertificadoDiscapacidad extends Model
     ];
 
     public function datosAlumno(){
-        $this->belongsTo(DatosAlumno::class);
+        return $this->belongsTo(DatosAlumno::class);
     }
 }

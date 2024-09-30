@@ -15,6 +15,6 @@ class TipoTaller extends Model
     ];
 
     public function taller(){
-        $this->belongsTo(Taller::class);
+        return $this->hasMany(Taller::class);
     }
 }

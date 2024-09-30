@@ -19,6 +19,6 @@ class Asistencia extends Model
     ];
 
     public function inscripcion(){
-        $this->belongsTo(Inscripcion::class);
+        return $this->belongsTo(Inscripcion::class);
     }
 }

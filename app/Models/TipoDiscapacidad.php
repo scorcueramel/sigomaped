@@ -12,6 +12,6 @@ class TipoDiscapacidad extends Model
     protected $fillable = ['tipo_discapacidad'];
 
     public function datosAlumno(){
-        $this->hasMany(DatosAlumno::class);
+        return $this->hasMany(DatosAlumno::class);
     }
 }

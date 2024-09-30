@@ -14,6 +14,6 @@ class TipoSeguro extends Model
     ];
 
     public function datosAlumno(){
-        $this->hasMany(DatosAlumno::class);
+        return $this->hasMany(DatosAlumno::class);
     }
 }

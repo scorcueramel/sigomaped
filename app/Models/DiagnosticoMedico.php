@@ -12,6 +12,6 @@ class DiagnosticoMedico extends Model
     protected $fillable = ['datos_alumnos_id','diagnostico'];
 
     public function datosAlumno(){
-        $this->belongsTo(DatosAlumno::class);
+        return $this->belongsTo(DatosAlumno::class);
     }
 }

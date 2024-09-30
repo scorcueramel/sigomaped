@@ -22,14 +22,14 @@ class Inscripcion extends Model
     ];
 
     public function persona(){
-        $this->belongsTo(Persona::class);
+        return $this->belongsTo(Persona::class);
     }
 
     public function ciclo(){
-        $this->belongsTo(Ciclo::class);
+        return $this->belongsTo(Ciclo::class);
     }
 
     public function asistencia(){
-        $this->hasMany(Asistencia::class);
+        return $this->hasMany(Asistencia::class);
     }
 }

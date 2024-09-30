@@ -12,6 +12,6 @@ class AcreditacionResidencia extends Model
     protected $fillable = ['acreditacion'];
 
     public function datosAlumno(){
-        $this->hasMany(DatosAlumno::class);
+        return $this->hasMany(DatosAlumno::class);
     }
 }
