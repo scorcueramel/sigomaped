@@ -15,6 +15,7 @@ class InscripcionController extends Controller
     public function index()
     {
         //
+        return view('pages.inscripciones.index');
     }
 
     /**
@@ -25,6 +26,7 @@ class InscripcionController extends Controller
     public function create()
     {
         //
+        return view('pages.inscripciones.create');
     }
 
     /**

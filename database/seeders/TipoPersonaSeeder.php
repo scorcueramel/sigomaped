@@ -18,9 +18,9 @@ class TipoPersonaSeeder extends Seeder
         $tipoPersona = [
             "ADMINISTRADOR",
             "ENCARGADO",
+            "ALUMNO",
             "PADRE",
             "MADRE",
-            "ADMINISTRADOR",
             "REPRESENTANTE LEGAL"
         ];
 

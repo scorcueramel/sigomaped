@@ -183,27 +183,27 @@ $(function () {
   // Layout options
   $demoSettings.append(
     '<h4 class="control-sidebar-heading">'
-    + 'Layout Options'
+    + 'Opciones de vista'
     + '</h4>'
     // Fixed layout
     + '<div class="form-group">'    
     + '<input id="layout_fixed" type="checkbox"data-layout="fixed" class="pull-right chk-col-grey"/> '
 	+ '<label for="layout_fixed" class="control-sidebar-subheading">'
-    + 'Fixed layout'
+    + 'Diseño Fijo'
     + '</label>'
     + '</div>'
     // Boxed layout
 	+ '<div class="form-group">'    
     + '<input id="layout_boxed" type="checkbox"data-layout="layout-boxed" class="pull-right chk-col-grey"/> '
 	+ '<label for="layout_boxed" class="control-sidebar-subheading">'
-    + 'Boxed Layout'
+    + 'Diseño de Caja'
     + '</label>'
     + '</div>'
     // Sidebar Toggle
 	+ '<div class="form-group">'    
     + '<input id="toggle_sidebar" type="checkbox"data-layout="sidebar-collapse" class="pull-right chk-col-grey"/> '
 	+ '<label for="toggle_sidebar" class="control-sidebar-subheading">'
-    + 'Toggle Sidebar'
+    + 'Alternar Barra Lateral'
     + '</label>'
     + '</div>'
     
@@ -211,14 +211,14 @@ $(function () {
 	+ '<div class="form-group">'    
     + '<input id="toggle_right_sidebar" type="checkbox"data-controlsidebar="control-sidebar-open" class="pull-right chk-col-grey"/> '
 	+ '<label for="toggle_right_sidebar" class="control-sidebar-subheading">'
-    + 'Toggle Right Sidebar Slide'
+    + 'Fijar Barra Lateral Derecha'
     + '</label>'
     + '</div>'	
     // Control Sidebar Skin Toggle
 	+ '<div class="form-group">'    
     + '<input id="toggle_right_sidebar_skin" type="checkbox"data-sidebarskin="toggle" class="pull-right chk-col-grey"/> '
 	+ '<label for="toggle_right_sidebar_skin" class="control-sidebar-subheading">'
-    + 'Toggle Right Sidebar Skin'
+    + 'Cambiar Color Barra Derecha'
     + '</label>'
     + '</div>'
   )
@@ -315,7 +315,7 @@ $(function () {
 
   
 
-  $demoSettings.append('<h4 class="control-sidebar-heading">Skins</h4>')
+  $demoSettings.append('<h4 class="control-sidebar-heading">Colores</h4>')
   $demoSettings.append($skinsList)
 
   $tabPane.append($demoSettings)
