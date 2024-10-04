@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Genero extends Model
+class Dia extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'tipo_genero'
+        'dia'
     ];
 
-    public function Alumno(){
-        return $this->hasMany(Alumno::class);
+    public function horario(){
+        return $this->hasMany(Horario::class);
     }
 }

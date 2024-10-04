@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('representantes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('persona_id')->constrained('personas')->onDelete('cascade');
-            $table->foreignId('datos_alumno_id')->constrained('datos_alumnos')->onDelete('cascade');
+            $table->foreignId('alumno_id')->constrained('alumnos')->onDelete('cascade');
             $table->string('telefono',12)->nullable();
             $table->string('email',50)->nullable();
             $table->string('usuario_actualiza',50)->nullable();

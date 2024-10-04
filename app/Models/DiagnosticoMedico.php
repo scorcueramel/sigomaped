@@ -9,9 +9,9 @@ class DiagnosticoMedico extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['datos_alumnos_id','diagnostico'];
+    protected $fillable = ['alumno_id','diagnostico'];
 
-    public function datosAlumno(){
-        return $this->belongsTo(DatosAlumno::class);
+    public function Alumno(){
+        return $this->belongsTo(Alumno::class);
     }
 }

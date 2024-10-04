@@ -15,9 +15,7 @@ return new class extends Migration
     {
         Schema::create('horarios', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('persona_id')->constrained('personas')->onDelete('cascade');
-            $table->foreignId('ciclo_id')->constrained('ciclos')->onDelete('cascade');
-            $table->string('dia');
+            $table->foreignId('dia_id')->constrained('dias')->onDelete('cascade');
             $table->string('hora_inicio');
             $table->string('hora_fin');
             $table->string('usuario_actualiza',50)->nullable();

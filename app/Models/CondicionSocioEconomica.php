@@ -11,7 +11,7 @@ class CondicionSocioEconomica extends Model
 
     protected $fillable = ['condicion'];
 
-    public function datosAlumno(){
-        return $this->hasMany(DatosAlumno::class);
+    public function Alumno(){
+        return $this->hasMany(Alumno::class);
     }
 }

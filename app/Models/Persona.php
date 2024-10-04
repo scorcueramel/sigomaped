@@ -25,11 +25,23 @@ class Persona extends Model
         return $this->hasMany(Inscripcion::class);
     }
 
-    public function datosAlumno(){
-        return $this->hasMany(DatosAlumno::class);
+    public function alumno(){
+        return $this->hasMany(Alumno::class);
     }
 
     public function user(){
-        return $this->hasMany(Persona::class);
+        return $this->hasMany(User::class);
+    }
+
+    public function representante(){
+        return $this->hasMany(Representante::class);
+    }
+
+    public function encargadoCiclo(){
+        return $this->hasMany(EncargadoCiclo::class);
+    }
+    
+    public function esperaPersonaTaller(){
+        return $this->hasMany(EsperaPersonaTaller::class);
     }
 }

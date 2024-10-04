@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('diagnostico_medicos', function (Blueprint $table) {
+        Schema::create('dias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('alumnos_id')->constrained('alumnos')->onDelete('cascade');
-            $table->string('diagnostico',100);
+            $table->string('dia',100);
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('diagnostico_medicos');
+        Schema::dropIfExists('dias');
     }
 };
