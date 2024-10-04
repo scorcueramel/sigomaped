@@ -11,7 +11,7 @@ class ManifestacionVoluntad extends Model
 
     protected $fillable = ['manifestacion'];
 
-    public function datosAlumno(){
-        return $this->hasMany(DatosAlumno::class);
+    public function Alumno(){
+        return $this->hasMany(Alumno::class);
     }
 }

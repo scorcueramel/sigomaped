@@ -5,22 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Representante extends Model
+class EsperaPersonaTaller extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'persona_id',
-        'alumno_id',
-        'telefono',
-        'email',
+        'taller_id',
+        'inscrito',
         'usuario_actualiza',
     ];
-
-    public function alumno(){
-        return $this->belongsTo(Alumno::class);
-    }
+        
     public function persona(){
         return $this->belongsTo(Persona::class);
+    }
+
+    public function taller(){
+        return $this->belongsTo(Taller::class);
     }
 }

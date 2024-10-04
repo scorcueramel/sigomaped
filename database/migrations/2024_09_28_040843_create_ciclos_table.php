@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('periodo',1);
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->integer('cupos_maximos');
-            $table->integer('cupos_actuales');
             $table->string('usuario_actualiza',50)->nullable();
             $table->softDeletes();
             $table->timestamps();

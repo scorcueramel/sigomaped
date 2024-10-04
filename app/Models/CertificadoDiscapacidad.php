@@ -10,12 +10,12 @@ class CertificadoDiscapacidad extends Model
     use HasFactory;
 
     protected $fillable = [
-        'datos_alumno_id',
+        'alumno_id',
         'emision_cert_discapacidad',
         'vigencia_cert_discapacidad',
     ];
 
-    public function datosAlumno(){
-        return $this->belongsTo(DatosAlumno::class);
+    public function Alumno(){
+        return $this->belongsTo(Alumno::class);
     }
 }

@@ -20,7 +20,6 @@ class TipoPersonaSeeder extends Seeder
             "ENCARGADO",
             "PADRE",
             "MADRE",
-            "ADMINISTRADOR",
             "REPRESENTANTE LEGAL"
         ];
 

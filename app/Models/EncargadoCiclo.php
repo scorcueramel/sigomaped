@@ -5,21 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Representante extends Model
+class EncargadoCiclo extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'persona_id',
-        'alumno_id',
-        'telefono',
-        'email',
-        'usuario_actualiza',
+        'ciclo_horario_id',
     ];
-
-    public function alumno(){
-        return $this->belongsTo(Alumno::class);
+        
+    public function cicloHorario(){
+        return $this->belongsTo(CicloHorario::class);
     }
+
     public function persona(){
         return $this->belongsTo(Persona::class);
     }
