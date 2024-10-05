@@ -25,4 +25,5 @@ Route::get('/panel/principal', [App\Http\Controllers\HomeController::class, 'ind
 Route::group(['prefix'=> 'inscripciones'],function(){
     Route::get('/index',[InscripcionController::class,'index'])->name('inscripciones.index');
     Route::get('/create',[InscripcionController::class,'create'])->name('inscripciones.create');
+    Route::get('/get-taller/{id}',[InscripcionController::class,'getTallerByType'])->name('inscripciones.gettaller');
 });

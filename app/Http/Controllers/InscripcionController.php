@@ -3,10 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inscripcion;
+use App\Models\TipoTaller;
+use App\Services\TalleresService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class InscripcionController extends Controller
 {
+
+    public function __construct(
+        private TalleresService $talleresService
+    ){}
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +22,7 @@ class InscripcionController extends Controller
      */
     public function index()
     {
-        //
-        return view('pages.inscripciones.index');
+        return Response::view('pages.inscripciones.index');
     }
 
     /**
@@ -25,8 +32,18 @@ class InscripcionController extends Controller
      */
     public function create()
     {
-        //
-        return view('pages.inscripciones.create');
+        $tiposTalleres = TipoTaller::all();
+        return Response::view('pages.inscripciones.create', compact('tiposTalleres'));
+    }
+
+    public function getTallerByType($id){
+        $programasAll = $this->talleresService->getTalleres($id);        
+        return Response::json($programasAll);
+    }
+    
+    public function getCicloByTalleres($id){
+        $programasAll = $this->talleresService->getCicloTalleres($id);        
+        return Response::json($programasAll);
     }
 
     /**

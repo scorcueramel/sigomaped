@@ -46,7 +46,7 @@ class TallerController extends Controller
      */
     public function show(Taller $taller)
     {
-        //
+
     }
 
     /**

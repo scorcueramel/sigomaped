@@ -107,7 +107,7 @@
     <script src="{{ asset('/assets/js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('/assets/js/jquery.steps.js') }}"></script>
     <script src="{{ asset('/assets/js/steps.js') }}"></script>
-    <script src="{{ asset('/assets/js/jq') }}"></script>
+    <!-- <script src="{{ asset('/assets/js/jq') }}"></script> -->
 
     {{-- icons --}}
 
@@ -118,6 +118,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/dist/boxicons.min.js"
         integrity="sha512-y8/3lysXD6CUJkBj4RZM7o9U0t35voPBOSRHLvlUZ2zmU+NLQhezEpe/pMeFxfpRJY7RmlTv67DYhphyiyxBRA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    @stack('js')
 </body>
 
 </html>
