@@ -36,14 +36,19 @@ class InscripcionController extends Controller
         return Response::view('pages.inscripciones.create', compact('tiposTalleres'));
     }
 
-    public function getTallerByType($id){
-        $programasAll = $this->talleresService->getTalleres($id);        
+    public function getProgramaByType($id){
+        $programasAll = $this->talleresService->getProgramas($id);  
         return Response::json($programasAll);
     }
-    
-    public function getCicloByTalleres($id){
-        $programasAll = $this->talleresService->getCicloTalleres($id);        
-        return Response::json($programasAll);
+
+    public function getTalleresByType($id){
+        $talleresAll = $this->talleresService->getTalleres($id);
+        return Response::json($talleresAll);
+    }
+
+    public function getCiclosByType($id){
+        $ciclosAll = $this->talleresService->getCiclos($id);
+        return Response::json($ciclosAll);
     }
 
     /**
