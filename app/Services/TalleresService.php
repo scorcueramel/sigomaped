@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Ciclo;
+use App\Models\CicloHorario;
 use App\Models\Taller;
 use Illuminate\Support\Facades\DB;
 
@@ -27,5 +28,10 @@ class TalleresService
     public function getCiclos($id){
         $ciclos = Ciclo::where('taller_id',$id)->get();
         return $ciclos;
+    }
+
+    public function getHorarioCiclos($id){
+        $cicloHorario = CicloHorario::where('ciclo_id',$id)->get();
+        return $cicloHorario;
     }
 }

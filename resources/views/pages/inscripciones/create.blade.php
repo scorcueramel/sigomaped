@@ -174,24 +174,57 @@
                 if (response.length > 0) {                    
                     $("#cicloTitulo").html(`${descripcion}`);
                     response.forEach((e) => {
-                        console.log(e);
                         $("#radios-ciclos").append(`                        
                             <tr>                            
                                 <td>
-                                    <input type="radio" name="ciclos" id="ciclo_${e.id}">
-                                    <label></label>
+                                    <input type="radio" name="ciclos" id="ciclo_${e.id}" onclick="javascript:consultaHorariosCiclos(${e.id},'${e.anio}')">
+                                    <label for="ciclo_${e.id}"></label>
                                 </td>
                                 <td>
                                     <label for="ciclo_${e.id}">${e.anio}</label>
                                 </td>
                                 <td>
-                                    ${e.periodo}
+                                    <label for="ciclo_${e.id}">${e.periodo}</label>
                                 </td>
                                 <td>
-                                    ${e.fecha_inicio} / ${e.fecha_fin}
+                                    <label for="ciclo_${e.id}">${e.fecha_inicio} / ${e.fecha_fin}</label>
                                 </td>
                             </tr>                            
                         `);
+                    });
+                }
+            }
+        });
+    }
+
+    function consultaHorariosCiclos(id, descripcion) {
+        // $("#radios-ciclos").html('');
+        // $("#ciclos").removeClass('d-none');
+        $.ajax({
+            type: "GET",
+            url: `/inscripciones/get-horarios-ciclos/${id}`,
+            success: function(response) {
+                if (response.length > 0) {                    
+                    // $("#cicloTitulo").html(`${descripcion}`);
+                    response.forEach((e) => {
+                        console.log(e);
+                        // $("#radios-ciclos").append(`                        
+                        //     <tr>                            
+                        //         <td>
+                        //             <input type="radio" name="ciclos" id="ciclo_${e.id}">
+                        //             <label for="ciclo_${e.id}"></label>
+                        //         </td>
+                        //         <td>
+                        //             <label for="ciclo_${e.id}">${e.anio}</label>
+                        //         </td>
+                        //         <td>
+                        //             <label for="ciclo_${e.id}">${e.periodo}</label>
+                        //         </td>
+                        //         <td>
+                        //             <label for="ciclo_${e.id}">${e.fecha_inicio} / ${e.fecha_fin}</label>
+                        //         </td>
+                        //     </tr>                            
+                        // `);
                     });
                 }
             }

@@ -51,6 +51,11 @@ class InscripcionController extends Controller
         return Response::json($ciclosAll);
     }
 
+    public function getCiclosByHorarios($id){
+        $ciclosHorariosAll = $this->talleresService->getHorarioCiclos($id);
+        return Response::json($ciclosHorariosAll);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
