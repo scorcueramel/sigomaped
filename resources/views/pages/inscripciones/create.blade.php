@@ -26,6 +26,58 @@
                         <!-- Form Element sizes -->
                         <div class="box">
                             <div class="box-header with-border">
+                                <h4 class="box-title">ALUMNO A INSCRIBIR</h4>
+                            </div>
+                            <div class="box-body form-element">
+                                <div class="form-group">
+                                    <label for="documento_alumno">Buscar alumno por número de documento</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control input-sm" placeholder="Documento del alumno" id="documento_alumno" required>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-info" type="button" id="buscador"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                            <button class="btn btn-warning" type="button" id="limpiar"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <div class="row d-none" id="datosAlumno">
+                    <div class="col-12 col-lg-12">
+                        <!-- Form Element sizes -->
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">DATOS DEL ALUMNO</h4>
+                            </div>
+                            <div class="box-body ">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nombres</th>
+                                                <th>Apellidos</th>
+                                                <th>Documento</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="datos_alumno">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <div class="row d-none" id="tiposTalleres">
+                    <div class="col-12 col-lg-12">
+                        <!-- Form Element sizes -->
+                        <div class="box">
+                            <div class="box-header with-border">
                                 <h4 class="box-title">TIPOS DE TALLERES</h4>
                             </div>
                             <p style="margin: 25px 0 0 20px">SELECCINA UN TIPO DE TALLER</p>
@@ -92,14 +144,50 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Año</th>
-                                                <th scope="col">Periodo</th>
-                                                <th scope="col">Inicio / Fin</th>
+                                                <th scope="col">AÑO</th>
+                                                <th scope="col">PERIODO</th>
+                                                <th scope="col">DURACIÓN</th>
                                             </tr>
                                         </thead>
                                         <tbody id="radios-ciclos">
                                         </tbody>
                                     </table>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <div class="row d-none" id="dias">
+                    <div class="col-12 col-lg-12">
+                        <!-- Form Element sizes -->
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">DIAS RELACIONADOS A <span class="font-weight-bold" id="diaTitulo"></span></h4>
+                            </div>
+                            <p style="margin: 20px 0 0 20px">SELECCINA UN DÍA</p>
+                            <div class="box-body form-element">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">DÍA</th>
+                                                <th scope="col">HORA INICIO</th>
+                                                <th scope="col">HORA FIN</th>
+                                                <th scope="col">CUPOS MÁXIMOS</th>
+                                                <th scope="col">CUPOS ACTUALES</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dias-ciclo">
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-12">
+                                        <button class="btn btn-block btn-info disabled" id="inscribiralumno">INSCRIBIR</button>
+                                    </div>
                                 </div>
                             </div>
                             <!-- /.box-body -->
@@ -117,6 +205,54 @@
 @endsection
 @push('js')
 <script>
+    $("#buscador").on('click', function() {
+        let documento = $('#documento_alumno').val();
+        $.ajax({
+            type: "GET",
+            url: `/inscripciones/get-persona/${documento}`,
+            success: function(response) {
+                if (response.length > 0) {
+                    let data = response[0];
+                    $("#datosAlumno").removeClass('d-none');
+                    $(".datos_alumno").append(`
+                        <tr>
+                            <td>
+                                <input type="radio" name="alumnoid" id="alumno_${data.id}" onclick="javascript:$('#tiposTalleres').removeClass('d-none')">
+                                <label for="alumno_${data.id}"></label>
+                            </td>
+                            <td>
+                                <label for="alumno_${data.id}">
+                                    ${data.nombres}
+                                </label>
+                            </td>
+                            <td>
+                                <label for="alumno_${data.id}">
+                                    ${data.apellidos}
+                                </label>
+                            </td>
+                            <td>
+                                <label for="alumno_${data.id}">
+                                    ${data.documento}
+                                </label>
+                            </td>
+                        </tr>
+                    `);
+                } else {
+                    $("#datosAlumno").addClass('d-none');
+                    $.toast({
+                        heading: 'Mensaje Informativo',
+                        text: `${response.mensaje}`,
+                        position: 'top-right',
+                        loaderBg: '#ff6849',
+                        icon: 'error',
+                        hideAfter: 5000,
+                        stack: 6
+                    });
+                }
+            }
+        });
+    });
+
     function consultaProgramas(id, descripcion) {
         $("#radios-programas").html('');
         $("#talleres").addClass('d-none');
@@ -125,6 +261,9 @@
             url: `/inscripciones/get-programa/${id}`,
             success: function(response) {
                 if (response.length > 0) {
+                    $("#dias").addClass('d-none');
+                    $("#ciclos").addClass('d-none');
+                    $("#talleres").addClass('d-none');
                     $("#programas").removeClass('d-none');
                     $("#programaTitulo").html(descripcion);
                     response.forEach((e) => {
@@ -171,7 +310,7 @@
             type: "GET",
             url: `/inscripciones/get-ciclos/${id}`,
             success: function(response) {
-                if (response.length > 0) {                    
+                if (response.length > 0) {
                     $("#cicloTitulo").html(`${descripcion}`);
                     response.forEach((e) => {
                         $("#radios-ciclos").append(`                        
@@ -198,37 +337,59 @@
     }
 
     function consultaHorariosCiclos(id, descripcion) {
-        // $("#radios-ciclos").html('');
-        // $("#ciclos").removeClass('d-none');
+        $("#dias-ciclo").html('');
+        $("#dias").removeClass('d-none');
         $.ajax({
             type: "GET",
             url: `/inscripciones/get-horarios-ciclos/${id}`,
             success: function(response) {
-                if (response.length > 0) {                    
-                    // $("#cicloTitulo").html(`${descripcion}`);
-                    response.forEach((e) => {
-                        console.log(e);
-                        // $("#radios-ciclos").append(`                        
-                        //     <tr>                            
-                        //         <td>
-                        //             <input type="radio" name="ciclos" id="ciclo_${e.id}">
-                        //             <label for="ciclo_${e.id}"></label>
-                        //         </td>
-                        //         <td>
-                        //             <label for="ciclo_${e.id}">${e.anio}</label>
-                        //         </td>
-                        //         <td>
-                        //             <label for="ciclo_${e.id}">${e.periodo}</label>
-                        //         </td>
-                        //         <td>
-                        //             <label for="ciclo_${e.id}">${e.fecha_inicio} / ${e.fecha_fin}</label>
-                        //         </td>
-                        //     </tr>                            
-                        // `);
+                $("#diaTitulo").html(`${descripcion}`);
+                console.log(response);
+                if(response.length > 0){
+                response.forEach((e) => {
+                    $("#dias-ciclo").append(`                        
+                    <tr>                            
+                        <td>
+                            <input type="radio" name="cliclodia" id="dia_${e.id}" onclick="javascript:$('#inscribiralumno').removeClass('disabled')">
+                            <label for="dia_${e.id}"></label>
+                        </td>
+                        <td>
+                            <label for="dia_${e.id}">${e.dia}</label>
+                        </td>
+                        <td>
+                            <label for="dia_${e.id}">${e.hora_inicio}</label>
+                        </td>
+                        <td>
+                            <label for="dia_${e.id}">${e.hora_fin}</label>
+                        </td>
+                        <td>
+                            <label for="dia_${e.id}">${e.cupo_maximo}</label>
+                        </td>
+                        <td>
+                            <label for="dia_${e.id}">${e.cupo_actual}</label>
+                        </td>
+                    </tr>                                             
+                    `);
+                });
+                }else{
+                    $("#dias").addClass('d-none');
+                    $.toast({
+                        heading: 'Mensaje Informativo',
+                        text: `${response.mensaje}`,
+                        position: 'top-right',
+                        loaderBg: '#ff6849',
+                        icon: 'error',
+                        hideAfter: 5000,
+                        stack: 6
                     });
                 }
             }
         });
     }
+
+    $('#inscribiralumno').on('click',function(){
+        alert('Click on inscription');
+
+    });
 </script>
 @endpush

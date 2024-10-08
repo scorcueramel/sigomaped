@@ -34,6 +34,7 @@
 
     <!-- sweetalert -->
     <link rel="stylesheet" href="{{ asset('/assets/css/sweetalert.css') }}">
+
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 
@@ -47,6 +48,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- toast tr -->
+    <link rel="stylesheet" href="{{ asset('assets/css/jquery.toast.css') }}">
 </head>
 
 <body class="hold-transition">
@@ -118,6 +122,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/dist/boxicons.min.js"
         integrity="sha512-y8/3lysXD6CUJkBj4RZM7o9U0t35voPBOSRHLvlUZ2zmU+NLQhezEpe/pMeFxfpRJY7RmlTv67DYhphyiyxBRA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="{{asset('assets/js/jquery.toast.js')}}"></script>
+    <script src="{{asset('assets/js/toastr.js')}}"></script>
 
     @stack('js')
 </body>

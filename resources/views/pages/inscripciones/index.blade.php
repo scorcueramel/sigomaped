@@ -35,31 +35,7 @@
                                         <span class="badge badge-lg badge-secondary">3259</span>
                                     </a>
 
-                                    <a class="media media-single" href="#">
-                                        <span class="title font-size-16 text-fade">Active Applicants</span>
-                                        <span class="badge badge-lg badge-primary">12458</span>
-                                    </a>
-
-                                    <a class="media media-single" href="#">
-                                        <span class="title font-size-16 text-fade">Active Postings</span>
-                                        <span class="badge badge-lg badge-info">9658</span>
-                                    </a>
-
-                                    <a class="media media-single" href="#">
-                                        <span class="title font-size-16 text-fade">Postings Expiring Expired</span>
-                                        <span class="badge badge-lg badge-success">1524</span>
-                                    </a>
-
-                                    <a class="media media-single" href="#">
-                                        <span class="title font-size-16 text-fade">Totle Job Opening</span>
-                                        <span class="badge badge-lg badge-danger">41582</span>
-                                    </a>
-
-                                    <a class="media media-single" href="#">
-                                        <span class="title font-size-16 text-fade">Active Job Seekar</span>
-                                        <span class="badge badge-lg badge-warning">1548</span>
-                                    </a>
-
+                                    {{ $inscritos[0]->persona->nombres }}
                                 </div>
                             </div>
                         </div>

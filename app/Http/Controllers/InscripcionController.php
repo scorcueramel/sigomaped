@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Inscripcion;
 use App\Models\TipoTaller;
+use App\Services\CicloHorarioService;
+use App\Services\CiclosService;
+use App\Services\InscripcionService;
+use App\Services\PersonaService;
+use App\Services\ProgramaService;
 use App\Services\TalleresService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -12,7 +17,12 @@ class InscripcionController extends Controller
 {
 
     public function __construct(
-        private TalleresService $talleresService
+        private PersonaService $personaService,
+        private ProgramaService $programaService,
+        private CiclosService $ciclosService,
+        private CicloHorarioService $cicloHorarioService,
+        private TalleresService $talleresService,
+        private InscripcionService $inscripcionService,
     ){}
 
     /**
@@ -22,7 +32,8 @@ class InscripcionController extends Controller
      */
     public function index()
     {
-        return Response::view('pages.inscripciones.index');
+        $inscritosAll = $this->inscripcionService->getInscritos();
+        return Response::view('pages.inscripciones.index', ['inscritos'=>$inscritosAll]);
     }
 
     /**
@@ -36,8 +47,16 @@ class InscripcionController extends Controller
         return Response::view('pages.inscripciones.create', compact('tiposTalleres'));
     }
 
+    public function getPersonaByDocumento($documento) {
+        $persona = $this->personaService->getPersonas($documento);
+        if(count($persona)>0)
+            return Response::json($persona);
+        else            
+            return Response::json(['mensaje'=>'No se encontro al alumno con el documento ingresado']);
+    }
+
     public function getProgramaByType($id){
-        $programasAll = $this->talleresService->getProgramas($id);  
+        $programasAll = $this->programaService->getProgramas($id);  
         return Response::json($programasAll);
     }
 
@@ -47,13 +66,16 @@ class InscripcionController extends Controller
     }
 
     public function getCiclosByType($id){
-        $ciclosAll = $this->talleresService->getCiclos($id);
+        $ciclosAll = $this->ciclosService->getCiclos($id);
         return Response::json($ciclosAll);
     }
 
     public function getCiclosByHorarios($id){
-        $ciclosHorariosAll = $this->talleresService->getHorarioCiclos($id);
-        return Response::json($ciclosHorariosAll);
+        $ciclosHorariosAll = $this->cicloHorarioService->getHorarioCiclos($id);
+        if(count($ciclosHorariosAll) > 0)
+            return Response::json($ciclosHorariosAll);
+        else
+            return Response::json(['mensaje'=>'No hay días disponibles para el periodo elegido']);
     }
 
     /**
