@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre',100);
             $table->string('usuario_actualiza',50)->nullable();
+            $table->boolean('estado')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });
