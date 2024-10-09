@@ -35,7 +35,7 @@
                                         <span class="badge badge-lg badge-secondary">3259</span>
                                     </a>
 
-                                    {{ $inscritos[0]->persona->nombres }}
+                                    {{ $inscritos }}
                                 </div>
                             </div>
                         </div>

@@ -6,7 +6,7 @@ use App\Models\Inscripcion;
 
 class InscripcionService{
     public function getInscritos(){
-        $inscritos = Inscripcion::with('persona')->with('horario')->get();
+        $inscritos = Inscripcion::all();
         return $inscritos;
     }
 }
