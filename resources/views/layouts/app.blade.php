@@ -108,7 +108,7 @@
 
     <!-- jquerysteps -->
     <script src="{{ asset('/assets/js/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/sweetalert2@11.js') }}"></script>
     <script src="{{ asset('/assets/js/jquery.steps.js') }}"></script>
     <script src="{{ asset('/assets/js/steps.js') }}"></script>
     <!-- <script src="{{ asset('/assets/js/jq') }}"></script> -->

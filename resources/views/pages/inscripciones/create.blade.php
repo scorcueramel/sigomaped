@@ -417,14 +417,14 @@
                 horarioId
             },
             success: function(response) {
-                swal({
-                    title: "Alumno registrado",
+                Swal.fire({
+                    title: "Alumno Inscrito",
                     text: `${response.mensaje}`,
-                    icon: "Success",
-                    // confirmButtonColor: "#3085d6",
+                    icon: "success",
+                    confirmButtonColor: "#3085d6",
                     confirmButtonText: "Entendido!"
                 }).then((result) => {
-                    if (result) {
+                    if (result.isConfirmed) {
                         window.location.href = "{{route('inscripciones.index')}}";
                     }
                 });
