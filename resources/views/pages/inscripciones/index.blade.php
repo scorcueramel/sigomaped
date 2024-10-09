@@ -23,6 +23,49 @@
             <section class="content">
                 <div class="row">
                     <div class="col-12 col-lg-12">
+                        <!-- Form Element sizes -->
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">LISTA DE PROGRAMAS</span></h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="programa">PROGRAMAS</label>
+                                    <select class="form-control" id="programas">
+                                        <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
+                                        @foreach ($programas as $programa)
+                                        <option value="{{$programa->id}}">{{$programa->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <div class="row d-none" id="talleres">
+                    <div class="col-12 col-lg-12">
+                        <!-- Form Element sizes -->
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">TALLERES</h4>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="programa">TALLERES</label>
+                                    <select class="form-control" id="talleresprogramas">
+                                        <option selected disabled value="">SELECCIONA UN TALLER</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <div class="row d-none">
+                    <div class="col-12 col-lg-12">
                         <div class="box">
                             <div class="box-header with-border d-flex justify-content-between">
                                 <h4 class="box-title">Lista de Inscritos</h4>
@@ -34,8 +77,6 @@
                                         <span class="title font-size-16 text-fade">New Applicants</span>
                                         <span class="badge badge-lg badge-secondary">3259</span>
                                     </a>
-
-                                    {{ $inscritos }}
                                 </div>
                             </div>
                         </div>
@@ -50,3 +91,29 @@
     </div>
 </div>
 @endsection
+@push('js')
+<script>
+    $('#programas').on('change', function() {
+        let id = $(this).val();
+        $("#talleres").addClass('d-none');
+        $.ajax({
+            type: "GET",
+            url: `/inscripciones/get-talleres/${id}`,
+            success: function(response) {
+                if (response.length > 0) {
+                    $("#talleresprogramas").html('');
+                    $("#talleres").removeClass('d-none');
+                    $("#talleresprogramas").append(` 
+                        <option selected disabled value="">SELECCIONA UN PROGRAMA</option>               
+                    `);
+                    response.forEach((e) => {
+                        $("#talleresprogramas").append(` 
+                            <option value="${e.id}">${e.nombre}</option>               
+                        `);
+                    });
+                }
+            }
+        });
+    });
+</script>
+@endpush

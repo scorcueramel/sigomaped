@@ -2,9 +2,15 @@
 
 namespace App\Services;
 
+use App\Models\Programa;
 use Illuminate\Support\Facades\DB;
 
 class ProgramaService{
+    public function getProgramasAll(){
+        $programas = Programa::all();
+        return $programas;
+    }
+
     public function getProgramas($id)
     {
         $programas = DB::select('SELECT p.id, p.nombre FROM tallers t 

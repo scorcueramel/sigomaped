@@ -32,8 +32,8 @@ class InscripcionController extends Controller
      */
     public function index()
     {
-        $inscritosAll = $this->inscripcionService->getInscritos();
-        return Response::view('pages.inscripciones.index', ['inscritos'=>$inscritosAll]);
+        $programas = $this->programaService->getProgramasAll();
+        return Response::view('pages.inscripciones.index', ['programas'=>$programas]);
     }
 
     /**
