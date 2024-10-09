@@ -107,9 +107,12 @@ class InscripcionController extends Controller
         $request->input('alumnoId');
         $request->input('horarioId');
 
-        $this->inscripcionService->inscribirAlumno($request->inscripcion);
+        $registerCode = $this->inscripcionService->inscribirAlumno($request->inscripcion);
 
-        return Response::json(['codigo'=>200,'mensaje'=>'Alumno inscrito correctamente!']);
+        if($registerCode === 200)
+            return Response::json(['mensaje'=>'Alumno inscrito correctamente!']);
+        else
+            return Response::json(['mensaje'=> 'Algo sucedio al intentar inscribir al alumno, comuniquese con sistemas porfavor.']);
     }
 
     /**

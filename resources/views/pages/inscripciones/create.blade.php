@@ -264,8 +264,8 @@
         $.ajax({
             type: "GET",
             url: `/inscripciones/get-validacion/${tipotallerid}/${alumnoid}/inscripciones`,
-            success: function (response) {
-                response.forEach((e)=>{
+            success: function(response) {
+                response.forEach((e) => {
                     console.log(e);
                 });
             }
@@ -358,9 +358,9 @@
             url: `/inscripciones/get-horarios-ciclos/${id}`,
             success: function(response) {
                 $("#diaTitulo").html(`${descripcion}`);
-                if(response.length > 0){
-                response.forEach((e) => {
-                    $("#dias-ciclo").append(`
+                if (response.length > 0) {
+                    response.forEach((e) => {
+                        $("#dias-ciclo").append(`
                     <tr>
                         <td>
                             <input type="radio" name="cliclodia" id="dia_${e.id}" onclick="javascript:activaInscripcionAsignaDiaId(${e.id})">
@@ -383,8 +383,8 @@
                         </td>
                     </tr>
                     `);
-                });
-                }else{
+                    });
+                } else {
                     $("#dias").addClass("d-none");
                     $.toast({
                         heading: 'Mensaje Informativo',
@@ -400,27 +400,40 @@
         });
     }
 
-    function activaInscripcionAsignaDiaId(diaid){
+    function activaInscripcionAsignaDiaId(diaid) {
         $("#inscribiralumno").removeClass("disabled");
         $("#horarioid").val(diaid);
     }
 
-    $('#inscribiralumno').on("click",function(){
+    $('#inscribiralumno').on("click", function() {
         let alumnoId = $("#alumonid").val();
         let horarioId = $("#horarioid").val();
 
         $.ajax({
             type: "POST",
             url: "{{route('inscirpciones.store')}}",
-            data: {alumnoId,horarioId},
-            success: function (response) {
-                console.log(response);
+            data: {
+                alumnoId,
+                horarioId
+            },
+            success: function(response) {
+                swal({
+                    title: "Alumno registrado",
+                    text: `${response.mensaje}`,
+                    icon: "Success",
+                    // confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Entendido!"
+                }).then((result) => {
+                    if (result) {
+                        window.location.href = "{{route('inscripciones.index')}}";
+                    }
+                });
             }
         });
 
     });
 
-    $("#limpiar").on("click",function(){
+    $("#limpiar").on("click", function() {
         $("#documento_alumno").val('');
         $("#documento_alumno").focus();
         $("#datosAlumno").addClass('d-none');
