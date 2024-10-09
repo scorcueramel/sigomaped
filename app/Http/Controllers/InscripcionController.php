@@ -10,8 +10,10 @@ use App\Services\InscripcionService;
 use App\Services\PersonaService;
 use App\Services\ProgramaService;
 use App\Services\TalleresService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\View\View;
 
 class InscripcionController extends Controller
 {
@@ -30,14 +32,20 @@ class InscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index():View
     {
         $programas = $this->programaService->getProgramasAll();
-        return Response::view('pages.inscripciones.index', ['programas'=>$programas]);
+        return view('pages.inscripciones.index', ['programas'=>$programas]);
     }
 
-    public function getAnioPeriodoByTaller($id){
+    public function getAnioPeriodoByTaller($id): JsonResponse{
+        $ciclosByTaller = $this->ciclosService->getCiclosBytaller($id);
+        return Response::json($ciclosByTaller);
+    }
 
+    public function getInscritoToCicle($id): JsonResponse{
+        $inscritosCiclo = $this->inscripcionService->getInscritos($id);
+        return Response::json($inscritosCiclo);
     }
 
     /**
@@ -56,7 +64,7 @@ class InscripcionController extends Controller
         dd($validatation);
     }
 
-    public function getPersonaByDocumento($documento) {
+    public function getPersonaByDocumento($documento): JsonResponse {
         $persona = $this->personaService->getPersonas($documento);
         if(count($persona)>0)
             return Response::json($persona);
@@ -64,22 +72,22 @@ class InscripcionController extends Controller
             return Response::json(['mensaje'=>'No se encontro al alumno con el documento ingresado']);
     }
 
-    public function getProgramaByType($id){
+    public function getProgramaByType($id): JsonResponse{
         $programasAll = $this->programaService->getProgramas($id);
         return Response::json($programasAll);
     }
 
-    public function getTalleresByType($id){
+    public function getTalleresByType($id): JsonResponse{
         $talleresAll = $this->talleresService->getTalleres($id);
         return Response::json($talleresAll);
     }
 
-    public function getCiclosByType($id){
+    public function getCiclosByType($id): JsonResponse{
         $ciclosAll = $this->ciclosService->getCiclos($id);
         return Response::json($ciclosAll);
     }
 
-    public function getCiclosByHorarios($id){
+    public function getCiclosByHorarios($id): JsonResponse{
         $ciclosHorariosAll = $this->cicloHorarioService->getHorarioCiclos($id);
         if(count($ciclosHorariosAll) > 0)
             return Response::json($ciclosHorariosAll);

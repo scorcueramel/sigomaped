@@ -32,7 +32,6 @@
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="programa">PROGRAMAS</label>
                                     <select class="form-control" id="programas">
                                         <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
                                         @foreach ($programas as $programa)
@@ -55,7 +54,6 @@
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="programa">TALLERES</label>
                                     <select class="form-control" id="talleresprogramas">
                                         <option selected disabled value="">SELECCIONA UN TALLER</option>
                                     </select>
@@ -66,22 +64,48 @@
                         <!-- /.box -->
                     </div>
                 </div>
-                <div class="row d-none">
+                <div class="row d-none" id="anioperiodo">
                     <div class="col-12 col-lg-12">
+                        <!-- Form Element sizes -->
                         <div class="box">
-                            <div class="box-header with-border d-flex justify-content-between">
-                                <h4 class="box-title">Lista de Inscritos</h4>
-                                <a href="{{route('inscripciones.create')}}" class="btn btn-sm btn-success"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo</a>
+                            <div class="box-header with-border">
+                                <h4 class="box-title">AÑO Y PERIODO</h4>
                             </div>
-                            <div class="box-body px-0 pt-0 pb-30">
-                                <div class="media-list media-list-hover media-list-divided">
-                                    <a class="media media-single" href="#">
-                                        <span class="title font-size-16 text-fade">New Applicants</span>
-                                        <span class="badge badge-lg badge-secondary">3259</span>
-                                    </a>
+                            <div class="box-body form-element">
+                                <div class="form-group" id="radios-anio-periodo">
                                 </div>
                             </div>
+                            <!-- /.box-body -->
                         </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <div class="row d-none" id="datosAlumnos">
+                    <div class="col-12 col-lg-12">
+                        <!-- Form Element sizes -->
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">ALUMNOS INSCRITOS</h4>
+                            </div>
+                            <div class="box-body ">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>NOMBRES</th>
+                                                <th>DIAS</th>
+                                                <th>HORA INICIO</th>
+                                                <th>HORA FIN</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="datos_alumnos">
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
                     </div>
                 </div>
                 <!-- /.row -->
@@ -117,5 +141,60 @@
             }
         });
     });
+    $('#talleresprogramas').on('change', function() {
+        $("#anioperiodo").addClass('d-none');
+        $("#radios-anio-periodo").html('');
+        $("#datosAlumnos").addClass('d-none');
+        $(".datos_alumnos").html('');
+        let id = $(this).val();
+        $.ajax({
+            type: "GET",
+            url: `/inscripciones/get-ciclo-taller/${id}`,
+            success: function(response) {
+                if (response.length > 0) {
+                    $("#anioperiodo").removeClass('d-none');
+                    response.forEach((e) => {
+                        $("#radios-anio-periodo").append(`
+                        <div class="radio">
+                            <input name="taller_programa" type="radio" id="taller_programa_${e.id}" onclick="javascript:selectedRadio(${e.id})">
+                            <label for="taller_programa_${e.id}">${e.anio} - ${e.periodo}</label>
+                        </div>
+                        `);
+                    });
+                }
+            }
+        });
+    });
+    function selectedRadio(id) {
+        $("#datosAlumnos").addClass('d-none');
+        $(".datos_alumnos").html('');
+        $.ajax({
+            type: "GET",
+            url: `/inscripciones/get-inscritos-ciclo/${id}`,
+            success: function(response) {
+                if (response.length > 0) {
+                    $("#datosAlumnos").removeClass('d-none');
+                    response.forEach((e) => {
+                        $(".datos_alumnos").append(`
+                            <tr>
+                                <td>
+                                    ${e.nombres}
+                                </td>
+                                <td>
+                                    ${e.dia}
+                                </td>
+                                <td>
+                                    ${e.hora_inicio}
+                                </td>
+                                <td>
+                                    ${e.hora_fin}
+                                </td>
+                            </tr>
+                        `);
+                    });
+                }
+            }
+        });
+    }
 </script>
 @endpush

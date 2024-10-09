@@ -11,6 +11,7 @@ class CiclosService{
     }
 
     public function getCiclosBytaller($id){
-        $ciclos = Ciclo::where('taller_id',$id)->with('talleres')->get();
+        $ciclos = Ciclo::where('taller_id',$id)->get();
+        return $ciclos;
     }
 }

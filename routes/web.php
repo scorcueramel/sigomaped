@@ -24,6 +24,8 @@ Route::get('/panel/principal', [App\Http\Controllers\HomeController::class, 'ind
 
 Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
     Route::get('/index',[InscripcionController::class,'index'])->name('inscripciones.index');
+    Route::get('/get-ciclo-taller/{id}',[InscripcionController::class,'getAnioPeriodoByTaller'])->name('inscripciones.ciclos.taller');
+    Route::get('/get-inscritos-ciclo/{id}',[InscripcionController::class,'getInscritoToCicle'])->name('inscripciones.ciclos.inscritos');
     Route::get('/create',[InscripcionController::class,'create'])->name('inscripciones.create');
     Route::get('/get-persona/{documento}',[InscripcionController::class,'getPersonaByDocumento'])->name('inscripciones.ciclos.horarios');
     Route::get('/get-programa/{id}',[InscripcionController::class,'getProgramaByType'])->name('inscripciones.getprogram');

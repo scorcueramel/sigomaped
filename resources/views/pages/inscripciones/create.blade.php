@@ -59,9 +59,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Nombres</th>
-                                                <th>Apellidos</th>
-                                                <th>Documento</th>
+                                                <th>NOMBRES</th>
+                                                <th>APELLIDOS</th>
+                                                <th>DOCUMENTO</th>
                                             </tr>
                                         </thead>
                                         <tbody class="datos_alumno">
