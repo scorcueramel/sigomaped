@@ -84,7 +84,7 @@ class InscripcionController extends Controller
     }
 
     public function getCiclosByType($id): JsonResponse{
-        $ciclosAll = $this->ciclosService->getCiclos($id);
+        $ciclosAll = $this->ciclosService->getCiclosBytaller($id);
         return Response::json($ciclosAll);
     }
 

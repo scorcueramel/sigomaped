@@ -337,7 +337,7 @@
                                     <label for="ciclo_${e.id}">${e.anio}</label>
                                 </td>
                                 <td>
-                                    <label for="ciclo_${e.id}">${e.periodo}</label>
+                                    <label for="ciclo_${e.id}">${e.periodo.periodo}</label>
                                 </td>
                                 <td>
                                     <label for="ciclo_${e.id}">${e.fecha_inicio} / ${e.fecha_fin}</label>

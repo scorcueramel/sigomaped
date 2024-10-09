@@ -154,10 +154,11 @@
                 if (response.length > 0) {
                     $("#anioperiodo").removeClass('d-none');
                     response.forEach((e) => {
+                        console.log(e);
                         $("#radios-anio-periodo").append(`
                         <div class="radio">
                             <input name="taller_programa" type="radio" id="taller_programa_${e.id}" onclick="javascript:selectedRadio(${e.id})">
-                            <label for="taller_programa_${e.id}">${e.anio} - ${e.periodo}</label>
+                            <label for="taller_programa_${e.id}">${e.anio} - ${e.periodo.periodo}</label>
                         </div>
                         `);
                     });
