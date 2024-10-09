@@ -21,13 +21,17 @@ class InscripcionService{
     }
 
     public function inscribirAlumno(array $alumnoinscribir){
-        $usuarioActual = User::find(Auth::id())->with('persona');
-        dd($usuarioActual);
+        $obtenerUsuario = User::find(Auth::id())->with('persona')->get();
+        $usuarioActualiza = $obtenerUsuario[0]->persona->nombres.' '.$obtenerUsuario[0]->persona->apellidos;
+
         foreach($alumnoinscribir as $inscripcion){
             $nuevoInscrito = new Inscripcion();
-            $nuevoInscrito->persona_id = '';
-            $nuevoInscrito->horario_id = '';
-            $nuevoInscrito->usuario_actualiza = '';
+            $nuevoInscrito->persona_id = $inscripcion->alumnoid;
+            $nuevoInscrito->horario_id = $inscripcion->horarioid;
+            $nuevoInscrito->usuario_actualiza = $usuarioActualiza;
+            $nuevoInscrito->save();
         }
+
+        return 200;
     }
 }
