@@ -2,7 +2,7 @@
 
 DROP TABLE IF EXISTS "acreditacion_residencias";
 DROP SEQUENCE IF EXISTS acreditacion_residencias_id_seq;
-CREATE SEQUENCE acreditacion_residencias_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE acreditacion_residencias_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
 
 CREATE TABLE "public"."acreditacion_residencias" (
     "id" bigint DEFAULT nextval('acreditacion_residencias_id_seq') NOT NULL,
@@ -19,7 +19,7 @@ INSERT INTO "acreditacion_residencias" ("id", "acreditacion", "created_at", "upd
 
 DROP TABLE IF EXISTS "alumnos";
 DROP SEQUENCE IF EXISTS alumnos_id_seq;
-CREATE SEQUENCE alumnos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE alumnos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;
 
 CREATE TABLE "public"."alumnos" (
     "id" bigint DEFAULT nextval('alumnos_id_seq') NOT NULL,
@@ -57,7 +57,7 @@ INSERT INTO "alumnos" ("id", "persona_id", "genero_id", "anio_ingreso_id", "tipo
 
 DROP TABLE IF EXISTS "anio_ingresos";
 DROP SEQUENCE IF EXISTS anio_ingresos_id_seq;
-CREATE SEQUENCE anio_ingresos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE anio_ingresos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 10 CACHE 1;
 
 CREATE TABLE "public"."anio_ingresos" (
     "id" bigint DEFAULT nextval('anio_ingresos_id_seq') NOT NULL,
@@ -116,7 +116,7 @@ CREATE TABLE "public"."certificado_discapacidads" (
 
 DROP TABLE IF EXISTS "ciclo_horarios";
 DROP SEQUENCE IF EXISTS ciclo_horarios_id_seq;
-CREATE SEQUENCE ciclo_horarios_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE ciclo_horarios_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
 
 CREATE TABLE "public"."ciclo_horarios" (
     "id" bigint DEFAULT nextval('ciclo_horarios_id_seq') NOT NULL,
@@ -136,7 +136,7 @@ INSERT INTO "ciclo_horarios" ("id", "ciclo_id", "horario_id", "cupo_maximo", "cu
 
 DROP TABLE IF EXISTS "ciclos";
 DROP SEQUENCE IF EXISTS ciclos_id_seq;
-CREATE SEQUENCE ciclos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE ciclos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 4 CACHE 1;
 
 CREATE TABLE "public"."ciclos" (
     "id" bigint DEFAULT nextval('ciclos_id_seq') NOT NULL,
@@ -160,7 +160,7 @@ INSERT INTO "ciclos" ("id", "taller_id", "anio", "periodo", "fecha_inicio", "fec
 
 DROP TABLE IF EXISTS "condicion_socio_economicas";
 DROP SEQUENCE IF EXISTS condicion_socio_economicas_id_seq;
-CREATE SEQUENCE condicion_socio_economicas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE condicion_socio_economicas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
 
 CREATE TABLE "public"."condicion_socio_economicas" (
     "id" bigint DEFAULT nextval('condicion_socio_economicas_id_seq') NOT NULL,
@@ -191,7 +191,7 @@ CREATE TABLE "public"."diagnostico_medicos" (
 
 DROP TABLE IF EXISTS "dias";
 DROP SEQUENCE IF EXISTS dias_id_seq;
-CREATE SEQUENCE dias_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE dias_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 7 CACHE 1;
 
 CREATE TABLE "public"."dias" (
     "id" bigint DEFAULT nextval('dias_id_seq') NOT NULL,
@@ -212,7 +212,7 @@ INSERT INTO "dias" ("id", "dia", "created_at", "updated_at") VALUES
 
 DROP TABLE IF EXISTS "encargado_ciclos";
 DROP SEQUENCE IF EXISTS encargado_ciclos_id_seq;
-CREATE SEQUENCE encargado_ciclos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE encargado_ciclos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
 
 CREATE TABLE "public"."encargado_ciclos" (
     "id" bigint DEFAULT nextval('encargado_ciclos_id_seq') NOT NULL,
@@ -261,7 +261,7 @@ CREATE TABLE "public"."failed_jobs" (
 
 DROP TABLE IF EXISTS "generos";
 DROP SEQUENCE IF EXISTS generos_id_seq;
-CREATE SEQUENCE generos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE generos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
 
 CREATE TABLE "public"."generos" (
     "id" bigint DEFAULT nextval('generos_id_seq') NOT NULL,
@@ -278,7 +278,7 @@ INSERT INTO "generos" ("id", "tipo_genero", "created_at", "updated_at") VALUES
 
 DROP TABLE IF EXISTS "horarios";
 DROP SEQUENCE IF EXISTS horarios_id_seq;
-CREATE SEQUENCE horarios_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE horarios_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 7 CACHE 1;
 
 CREATE TABLE "public"."horarios" (
     "id" bigint DEFAULT nextval('horarios_id_seq') NOT NULL,
@@ -303,7 +303,7 @@ INSERT INTO "horarios" ("id", "dia_id", "hora_inicio", "hora_fin", "usuario_actu
 
 DROP TABLE IF EXISTS "inscripcions";
 DROP SEQUENCE IF EXISTS inscripcions_id_seq;
-CREATE SEQUENCE inscripcions_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE inscripcions_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 2 CACHE 1;
 
 CREATE TABLE "public"."inscripcions" (
     "id" bigint DEFAULT nextval('inscripcions_id_seq') NOT NULL,
@@ -326,7 +326,7 @@ INSERT INTO "inscripcions" ("id", "persona_id", "horario_id", "es_derivado", "fe
 
 DROP TABLE IF EXISTS "manifestacion_voluntads";
 DROP SEQUENCE IF EXISTS manifestacion_voluntads_id_seq;
-CREATE SEQUENCE manifestacion_voluntads_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE manifestacion_voluntads_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
 
 CREATE TABLE "public"."manifestacion_voluntads" (
     "id" bigint DEFAULT nextval('manifestacion_voluntads_id_seq') NOT NULL,
@@ -343,7 +343,7 @@ INSERT INTO "manifestacion_voluntads" ("id", "manifestacion", "created_at", "upd
 
 DROP TABLE IF EXISTS "migrations";
 DROP SEQUENCE IF EXISTS migrations_id_seq;
-CREATE SEQUENCE migrations_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1;
+CREATE SEQUENCE migrations_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 2147483647 START 29 CACHE 1;
 
 CREATE TABLE "public"."migrations" (
     "id" integer DEFAULT nextval('migrations_id_seq') NOT NULL,
@@ -395,7 +395,7 @@ CREATE INDEX "password_resets_email_index" ON "public"."password_resets" USING b
 
 DROP TABLE IF EXISTS "periodos";
 DROP SEQUENCE IF EXISTS periodos_id_seq;
-CREATE SEQUENCE periodos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE periodos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
 
 CREATE TABLE "public"."periodos" (
     "id" bigint DEFAULT nextval('periodos_id_seq') NOT NULL,
@@ -433,7 +433,7 @@ CREATE INDEX "personal_access_tokens_tokenable_type_tokenable_id_index" ON "publ
 
 DROP TABLE IF EXISTS "personas";
 DROP SEQUENCE IF EXISTS personas_id_seq;
-CREATE SEQUENCE personas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE personas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 4 CACHE 1;
 
 CREATE TABLE "public"."personas" (
     "id" bigint DEFAULT nextval('personas_id_seq') NOT NULL,
@@ -455,7 +455,7 @@ INSERT INTO "personas" ("id", "tipo_persona_id", "documento", "nombres", "apelli
 
 DROP TABLE IF EXISTS "programas";
 DROP SEQUENCE IF EXISTS programas_id_seq;
-CREATE SEQUENCE programas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE programas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 7 CACHE 1;
 
 CREATE TABLE "public"."programas" (
     "id" bigint DEFAULT nextval('programas_id_seq') NOT NULL,
@@ -496,7 +496,7 @@ CREATE TABLE "public"."representantes" (
 
 DROP TABLE IF EXISTS "tallers";
 DROP SEQUENCE IF EXISTS tallers_id_seq;
-CREATE SEQUENCE tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 32 CACHE 1;
 
 CREATE TABLE "public"."tallers" (
     "id" bigint DEFAULT nextval('tallers_id_seq') NOT NULL,
@@ -546,7 +546,7 @@ INSERT INTO "tallers" ("id", "programa_id", "tipo_taller_id", "nombre", "usuario
 
 DROP TABLE IF EXISTS "tipo_discapacidads";
 DROP SEQUENCE IF EXISTS tipo_discapacidads_id_seq;
-CREATE SEQUENCE tipo_discapacidads_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE tipo_discapacidads_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 5 CACHE 1;
 
 CREATE TABLE "public"."tipo_discapacidads" (
     "id" bigint DEFAULT nextval('tipo_discapacidads_id_seq') NOT NULL,
@@ -565,7 +565,7 @@ INSERT INTO "tipo_discapacidads" ("id", "tipo_discapacidad", "created_at", "upda
 
 DROP TABLE IF EXISTS "tipo_personas";
 DROP SEQUENCE IF EXISTS tipo_personas_id_seq;
-CREATE SEQUENCE tipo_personas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE tipo_personas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 6 CACHE 1;
 
 CREATE TABLE "public"."tipo_personas" (
     "id" bigint DEFAULT nextval('tipo_personas_id_seq') NOT NULL,
@@ -585,7 +585,7 @@ INSERT INTO "tipo_personas" ("id", "tipo_persona", "created_at", "updated_at") V
 
 DROP TABLE IF EXISTS "tipo_seguros";
 DROP SEQUENCE IF EXISTS tipo_seguros_id_seq;
-CREATE SEQUENCE tipo_seguros_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE tipo_seguros_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 5 CACHE 1;
 
 CREATE TABLE "public"."tipo_seguros" (
     "id" bigint DEFAULT nextval('tipo_seguros_id_seq') NOT NULL,
@@ -604,7 +604,7 @@ INSERT INTO "tipo_seguros" ("id", "tipo_seguro", "created_at", "updated_at") VAL
 
 DROP TABLE IF EXISTS "tipo_tallers";
 DROP SEQUENCE IF EXISTS tipo_tallers_id_seq;
-CREATE SEQUENCE tipo_tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE tipo_tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
 
 CREATE TABLE "public"."tipo_tallers" (
     "id" bigint DEFAULT nextval('tipo_tallers_id_seq') NOT NULL,
@@ -623,7 +623,7 @@ INSERT INTO "tipo_tallers" ("id", "descripcion", "usuario_actualiza", "deleted_a
 
 DROP TABLE IF EXISTS "users";
 DROP SEQUENCE IF EXISTS users_id_seq;
-CREATE SEQUENCE users_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE users_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;
 
 CREATE TABLE "public"."users" (
     "id" bigint DEFAULT nextval('users_id_seq') NOT NULL,
@@ -686,4 +686,4 @@ ALTER TABLE ONLY "public"."tallers" ADD CONSTRAINT "tallers_tipo_taller_id_forei
 
 ALTER TABLE ONLY "public"."users" ADD CONSTRAINT "users_persona_id_foreign" FOREIGN KEY (persona_id) REFERENCES personas(id) NOT DEFERRABLE;
 
--- 2024-10-04 17:45:21.951261-05
+-- 2024-10-09 08:32:30.077808-05
