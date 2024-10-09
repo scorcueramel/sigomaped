@@ -13,4 +13,8 @@ class Periodo extends Model
     public function anio_ingreso(){
         return $this->hasMany(AnioIngreso::class);
     }
+
+    public function ciclo(){
+        return $this->hasMany(Ciclo::class);
+    }
 }

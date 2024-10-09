@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('ciclos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('taller_id')->constrained('tallers')->onDelete('cascade');
+            $table->foreignId('periodo_id')->constrained('periodos')->onDelete('cascade');
             $table->string('anio',4);
-            $table->string('periodo',1);
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->string('usuario_actualiza',50)->nullable();
+            $table->boolean('estado')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });

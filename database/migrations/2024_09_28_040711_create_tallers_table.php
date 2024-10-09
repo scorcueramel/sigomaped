@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('tipo_taller_id')->constrained('tipo_tallers')->onDelete('cascade');
             $table->string('nombre',100);
             $table->string('usuario_actualiza',50)->nullable();
+            $table->boolean('estado')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });

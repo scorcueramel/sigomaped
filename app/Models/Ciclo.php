@@ -12,7 +12,7 @@ class Ciclo extends Model
     protected $fillable = [
         'taller_id',
         'anio',
-        'periodo',
+        'periodo_id',
         'fecha_inicio',
         'fecha_fin',
         'usuario_actualiza',
@@ -24,5 +24,9 @@ class Ciclo extends Model
 
     public function taller(){
         return $this->belongsTo(Taller::class);
+    }
+
+    public function periodo(){
+        return $this->belongsTo(Periodo::class);
     }
 }

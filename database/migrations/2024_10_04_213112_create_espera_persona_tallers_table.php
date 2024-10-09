@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('persona_id')->constrained('personas')->onDelete('cascade');
             $table->foreignId('taller_id')->constrained('tallers')->onDelete('cascade');
+            $table->string('inscrito',1)->default('E');
             $table->timestamps();
         });
     }
