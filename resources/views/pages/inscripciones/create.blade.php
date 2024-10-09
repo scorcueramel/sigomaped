@@ -18,7 +18,6 @@
                     <li class="breadcrumb-item active">Nuevo Inscrito</li>
                 </ol>
             </section>
-
             <!-- Main content -->
             <section class="content">
                 <div class="row">
@@ -32,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="documento_alumno">Buscar alumno por número de documento</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control input-sm" placeholder="Documento del alumno" id="documento_alumno" required>
+                                        <input type="text" class="form-control input-sm" placeholder="Documento del alumno" id="documento_alumno" autofocus required>
                                         <span class="input-group-btn">
                                             <button class="btn btn-info" type="button" id="buscador"><i class="fa fa-search" aria-hidden="true"></i></button>
                                             <button class="btn btn-warning" type="button" id="limpiar"><i class="fa fa-eraser" aria-hidden="true"></i></button>
@@ -161,6 +160,7 @@
                     </div>
                 </div>
                 <div class="row d-none" id="dias">
+                    <input type="hidden" id="horarioid" value="">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
                         <div class="box">
@@ -247,7 +247,7 @@
                         text: `${response.mensaje}`,
                         position: 'top-right',
                         loaderBg: '#ff6849',
-                        icon: 'error',
+                        icon: 'warning',
                         hideAfter: 5000,
                         stack: 6
                     });
@@ -258,16 +258,18 @@
 
     function consultaProgramas(tipotallerid, descripcion) {
         let alumnoid = $("#alumonid").val();
-
         $("#radios-programas").html('');
         $("#talleres").addClass('d-none');
-        // $.ajax({
-        //     type: "GET",
-        //     url: `/inscripciones/get-validacion/${tipotallerid}/${alumnoid}/inscripciones`,
-        //     success: function (response) {
-        //         console.log(response);
-        //     }
-        // });
+        // pendiente para la validacion sobre la cantidad de talleres al que se encuentra inscrito el alumno
+        $.ajax({
+            type: "GET",
+            url: `/inscripciones/get-validacion/${tipotallerid}/${alumnoid}/inscripciones`,
+            success: function (response) {
+                response.forEach((e)=>{
+                    console.log(e);
+                });
+            }
+        });
         $.ajax({
             type: "GET",
             url: `/inscripciones/get-programa/${tipotallerid}`,
@@ -316,8 +318,8 @@
     }
 
     function consultaCiclos(id, descripcion) {
-        $("#radios-ciclos").html('');
-        $("#ciclos").removeClass('d-none');
+        $("#radios-ciclos").html("");
+        $("#ciclos").removeClass("d-none");
         $.ajax({
             type: "GET",
             url: `/inscripciones/get-ciclos/${id}`,
@@ -349,20 +351,19 @@
     }
 
     function consultaHorariosCiclos(id, descripcion) {
-        $("#dias-ciclo").html('');
-        $("#dias").removeClass('d-none');
+        $("#dias-ciclo").html("");
+        $("#dias").removeClass("d-none");
         $.ajax({
             type: "GET",
             url: `/inscripciones/get-horarios-ciclos/${id}`,
             success: function(response) {
                 $("#diaTitulo").html(`${descripcion}`);
-                console.log(response);
                 if(response.length > 0){
                 response.forEach((e) => {
                     $("#dias-ciclo").append(`
                     <tr>
                         <td>
-                            <input type="radio" name="cliclodia" id="dia_${e.id}" onclick="javascript:$('#inscribiralumno').removeClass('disabled')">
+                            <input type="radio" name="cliclodia" id="dia_${e.id}" onclick="javascript:activaInscripcionAsignaDiaId(${e.id})">
                             <label for="dia_${e.id}"></label>
                         </td>
                         <td>
@@ -384,13 +385,13 @@
                     `);
                 });
                 }else{
-                    $("#dias").addClass('d-none');
+                    $("#dias").addClass("d-none");
                     $.toast({
                         heading: 'Mensaje Informativo',
                         text: `${response.mensaje}`,
                         position: 'top-right',
                         loaderBg: '#ff6849',
-                        icon: 'error',
+                        icon: 'warning',
                         hideAfter: 5000,
                         stack: 6
                     });
@@ -399,9 +400,40 @@
         });
     }
 
-    $('#inscribiralumno').on('click',function(){
-        alert('Click on inscription');
+    function activaInscripcionAsignaDiaId(diaid){
+        $("#inscribiralumno").removeClass("disabled");
+        $("#horarioid").val(diaid);
+    }
 
+    $('#inscribiralumno').on("click",function(){
+        let alumnoId = $("#alumonid").val();
+        let horarioId = $("#horarioid").val();
+
+        $.ajax({
+            type: "POST",
+            url: "{{route('inscirpciones.store')}}",
+            data: {alumnoId,horarioId},
+            success: function (response) {
+                console.log(response);
+            }
+        });
+
+    });
+
+    $("#limpiar").on("click",function(){
+        $("#documento_alumno").val('');
+        $("#documento_alumno").focus();
+        $("#datosAlumno").addClass('d-none');
+        $(".datos_alumno").html('');
+        $("#tiposTalleres").addClass('d-none');
+        $("#programas").addClass('d-none');
+        $("#radios-programas").html('');
+        $("#talleres").addClass('d-none');
+        $("#radios-talleres").html('');
+        $("#ciclos").addClass('d-none');
+        $("#radios-ciclos").html('');
+        $("#dias").addClass('d-none');
+        $("#dias-ciclo").html('');
     });
 </script>
 @endpush

@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Inscripcion;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class InscripcionService{
@@ -15,5 +18,16 @@ class InscripcionService{
                                     LEFT JOIN ciclos c ON c.id = ch.ciclo_id
                                     WHERE c.id = ?",[$id]);
         return $inscritos;
+    }
+
+    public function inscribirAlumno(array $alumnoinscribir){
+        $usuarioActual = User::find(Auth::id())->with('persona');
+        dd($usuarioActual);
+        foreach($alumnoinscribir as $inscripcion){
+            $nuevoInscrito = new Inscripcion();
+            $nuevoInscrito->persona_id = '';
+            $nuevoInscrito->horario_id = '';
+            $nuevoInscrito->usuario_actualiza = '';
+        }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InscripcionNuevoRequest;
 use App\Models\Inscripcion;
 use App\Models\TipoTaller;
 use App\Services\CicloHorarioService;
@@ -61,7 +62,7 @@ class InscripcionController extends Controller
 
     public function validateAlumnoInscription($tipo_programa,$alumno_id){
         $validatation = $this->programaService->getValidateInscriptionUser($tipo_programa,$alumno_id);
-        dd($validatation);
+        return Response::json($validatation);
     }
 
     public function getPersonaByDocumento($documento): JsonResponse {
@@ -101,9 +102,14 @@ class InscripcionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InscripcionNuevoRequest $request):JsonResponse
     {
-        //
+        $request->input('alumnoId');
+        $request->input('horarioId');
+
+        $this->inscripcionService->inscribirAlumno($request->inscripcion);
+
+        return Response::json(['codigo'=>200,'mensaje'=>'Alumno inscrito correctamente!']);
     }
 
     /**
