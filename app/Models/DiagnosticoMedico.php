@@ -11,7 +11,7 @@ class DiagnosticoMedico extends Model
 
     protected $fillable = ['alumno_id','diagnostico'];
 
-    public function Alumno(){
+    public function alumno(){
         return $this->belongsTo(Alumno::class);
     }
 }

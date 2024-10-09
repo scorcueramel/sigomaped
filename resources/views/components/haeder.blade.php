@@ -24,7 +24,7 @@
                 <span class="sr-only">Toggle navigation</span>
             </a>
 
-            <div class="btn-group d-none d-lg-inline-block mt-5">
+            {{-- <div class="btn-group d-none d-lg-inline-block mt-5">
                 <button class="btn dropdown-toggle mr-10 btn-outline btn-white" type="button" data-toggle="dropdown">Dashboard</button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="http://html-templates.multipurposethemes.com/bootstrap-4/admin/fab-admin/src/"><i class="fa fa-dashboard w-30"></i>Main Dashboard</a>
@@ -33,20 +33,20 @@
                     <a class="dropdown-item" href="http://html-templates.multipurposethemes.com/bootstrap-4/admin/fab-admin/horizontal-nav/main"><i class="fa fa-bars w-30"></i>Horizontal Nav Dashboard</a>
                     <a class="dropdown-item" href="http://html-templates.multipurposethemes.com/bootstrap-4/admin/fab-admin/horizontal-nav/real-estate-dashboard"><i class="fa fa-building w-30"></i>Real Estate Dashboard</a>
                 </div>
-            </div>
+            </div> --}}
         </div>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
 
-                <li class="search-box">
+                {{-- <li class="search-box">
                     <a class="nav-link hidden-sm-down" href="javascript:void(0)"><i class="mdi mdi-magnify"></i></a>
                     <form class="app-search" style="display: none;">
                         <input type="text" class="form-control" placeholder="Search &amp; enter"> <a class="srh-btn"><i class="ti-close"></i></a>
                     </form>
-                </li>
+                </li> --}}
 
                 <!-- Messages -->
-                <li class="dropdown messages-menu">
+                {{-- <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="mdi mdi-email"></i>
                     </a>
@@ -130,9 +130,9 @@
                         </li>
                         <li class="footer"><a href="#">See all e-Mails</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <!-- Notifications -->
-                <li class="dropdown notifications-menu">
+                {{-- <li class="dropdown notifications-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="mdi mdi-bell"></i>
                     </a>
@@ -180,9 +180,9 @@
                         </li>
                         <li class="footer"><a href="#">View all</a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <!-- Tasks-->
-                <li class="dropdown tasks-menu">
+                {{-- <li class="dropdown tasks-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="mdi mdi-message"></i>
                     </a>
@@ -287,7 +287,7 @@
                             <a href="#">View all tasks</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <!-- User Account-->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

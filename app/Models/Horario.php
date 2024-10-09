@@ -15,8 +15,8 @@ class Horario extends Model
         'hora_fin',
         'usuario_actualiza',
     ];
-        
-    public function cicloHorario(){
+
+    public function ciclo_horario(){
         return $this->hasMany(CicloHorario::class);
     }
 

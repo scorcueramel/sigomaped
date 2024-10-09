@@ -16,7 +16,7 @@ class Taller extends Model
         'usuario_actualiza',
     ];
 
-    public function tipoTaller(){
+    public function tipo_taller(){
         return $this->belongsTo(TipoTaller::class);
     }
 

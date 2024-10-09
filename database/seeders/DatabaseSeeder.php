@@ -24,24 +24,5 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this->call([
-            TipoPersonaSeeder::class,
-            GeneroSeeder::class,
-            PeriodoSeeder::class,
-            AnioIngresoSeeder::class
-        ]);
-
-        // Persona::create([
-        //     'tipo_persona_id' => 1,
-        //     'documento' => '48398529',
-        //     'nombres' => 'Sergio Alejandro',
-        //     'apellidos' => 'Corcuera Mel',
-        // ]);
-
-        // User::create([
-        //     'persona_id'=>1,
-        //     'email'=>'scorcueramel@gmail.com',
-        //     'password'=>Hash::make('administrador'),
-        // ]);
     }
 }

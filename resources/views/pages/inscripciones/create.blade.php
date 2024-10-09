@@ -46,6 +46,7 @@
                     </div>
                 </div>
                 <div class="row d-none" id="datosAlumno">
+                    <input type="hidden" id="alumonid" value="">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
                         <div class="box">
@@ -213,7 +214,9 @@
             success: function(response) {
                 if (response.length > 0) {
                     let data = response[0];
+                    $("#alumonid").val(data.id);
                     $("#datosAlumno").removeClass('d-none');
+                    $(".datos_alumno").html('');
                     $(".datos_alumno").append(`
                         <tr>
                             <td>
@@ -253,12 +256,21 @@
         });
     });
 
-    function consultaProgramas(id, descripcion) {
+    function consultaProgramas(tipotallerid, descripcion) {
+        let alumnoid = $("#alumonid").val();
+
         $("#radios-programas").html('');
         $("#talleres").addClass('d-none');
+        // $.ajax({
+        //     type: "GET",
+        //     url: `/inscripciones/get-validacion/${tipotallerid}/${alumnoid}/inscripciones`,
+        //     success: function (response) {
+        //         console.log(response);
+        //     }
+        // });
         $.ajax({
             type: "GET",
-            url: `/inscripciones/get-programa/${id}`,
+            url: `/inscripciones/get-programa/${tipotallerid}`,
             success: function(response) {
                 if (response.length > 0) {
                     $("#dias").addClass('d-none');
@@ -267,11 +279,11 @@
                     $("#programas").removeClass('d-none');
                     $("#programaTitulo").html(descripcion);
                     response.forEach((e) => {
-                        $("#radios-programas").append(` 
-                        <div class="radio">                       
+                        $("#radios-programas").append(`
+                        <div class="radio">
                             <input name="programa" type="radio" id="programa_${e.id}" onclick="javascript:consultaTalleres(${e.id},'${e.nombre}')">
-                            <label for="programa_${e.id}">${e.nombre}</label>       
-                        </div>                 
+                            <label for="programa_${e.id}">${e.nombre}</label>
+                        </div>
                         `);
                     });
                 }
@@ -291,11 +303,11 @@
                     $("#talleres").removeClass('d-none');
                     $("#tallerTitulo").html(`TALLERES ${titulo}`);
                     response.forEach((e) => {
-                        $("#radios-talleres").append(` 
-                        <div class="radio">                       
+                        $("#radios-talleres").append(`
+                        <div class="radio">
                             <input name="taller" type="radio" id="taller_${e.id}" onclick="javascript:consultaCiclos(${id},'${descripcion}')">
-                            <label for="taller_${e.id}">${e.nombre}</label>       
-                        </div>                 
+                            <label for="taller_${e.id}">${e.nombre}</label>
+                        </div>
                         `);
                     });
                 }
@@ -313,8 +325,8 @@
                 if (response.length > 0) {
                     $("#cicloTitulo").html(`${descripcion}`);
                     response.forEach((e) => {
-                        $("#radios-ciclos").append(`                        
-                            <tr>                            
+                        $("#radios-ciclos").append(`
+                            <tr>
                                 <td>
                                     <input type="radio" name="ciclos" id="ciclo_${e.id}" onclick="javascript:consultaHorariosCiclos(${e.id},'${e.anio}')">
                                     <label for="ciclo_${e.id}"></label>
@@ -328,7 +340,7 @@
                                 <td>
                                     <label for="ciclo_${e.id}">${e.fecha_inicio} / ${e.fecha_fin}</label>
                                 </td>
-                            </tr>                            
+                            </tr>
                         `);
                     });
                 }
@@ -347,8 +359,8 @@
                 console.log(response);
                 if(response.length > 0){
                 response.forEach((e) => {
-                    $("#dias-ciclo").append(`                        
-                    <tr>                            
+                    $("#dias-ciclo").append(`
+                    <tr>
                         <td>
                             <input type="radio" name="cliclodia" id="dia_${e.id}" onclick="javascript:$('#inscribiralumno').removeClass('disabled')">
                             <label for="dia_${e.id}"></label>
@@ -368,7 +380,7 @@
                         <td>
                             <label for="dia_${e.id}">${e.cupo_actual}</label>
                         </td>
-                    </tr>                                             
+                    </tr>
                     `);
                 });
                 }else{

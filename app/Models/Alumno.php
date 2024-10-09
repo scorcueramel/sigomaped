@@ -43,35 +43,35 @@ class Alumno extends Model
         return $this->belongsTo(Genero::class);
     }
 
-    public function anioIngreso(){
+    public function anio_ingreso(){
         return $this->belongsTo(AnioIngreso::class);
     }
 
-    public function tipoSeguro(){
+    public function tipo_seguro(){
         return $this->belongsTo(TipoSeguro::class);
     }
 
-    public function condicionSocioEconomica(){
+    public function condicion_socio_economica(){
         return $this->belongsTo(CondicionSocioEconomica::class);
     }
 
-    public function manifesctacionVoluntad(){
+    public function manifesctacion_voluntad(){
         return $this->belongsTo(ManifestacionVoluntad::class);
     }
 
-    public function acreditacionResidencia(){
+    public function acreditacion_residencia(){
         return $this->belongsTo(AcreditacionResidencia::class);
     }
 
-    public function tipoDiscapacidad(){
+    public function tipo_discapacidad(){
         return $this->belongsTo(TipoDiscapacidad::class);
     }
 
-    public function diagnosticoMedico(){
+    public function diagnostico_medico(){
         return $this->hasMany(DiagnosticoMedico::class);
     }
 
-    public function certificadoDiscapacidad(){
+    public function certificado_discapacidad(){
         return $this->hasMany(CertificadoDiscapacidad::class);
     }
 

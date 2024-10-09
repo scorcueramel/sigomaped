@@ -13,7 +13,7 @@ class Genero extends Model
         'tipo_genero'
     ];
 
-    public function Alumno(){
+    public function alumno(){
         return $this->hasMany(Alumno::class);
     }
 }

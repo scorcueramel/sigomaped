@@ -36,6 +36,10 @@ class InscripcionController extends Controller
         return Response::view('pages.inscripciones.index', ['programas'=>$programas]);
     }
 
+    public function getAnioPeriodoByTaller($id){
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -47,16 +51,21 @@ class InscripcionController extends Controller
         return Response::view('pages.inscripciones.create', compact('tiposTalleres'));
     }
 
+    public function validateAlumnoInscription($tipo_programa,$alumno_id){
+        $validatation = $this->programaService->getValidateInscriptionUser($tipo_programa,$alumno_id);
+        dd($validatation);
+    }
+
     public function getPersonaByDocumento($documento) {
         $persona = $this->personaService->getPersonas($documento);
         if(count($persona)>0)
             return Response::json($persona);
-        else            
+        else
             return Response::json(['mensaje'=>'No se encontro al alumno con el documento ingresado']);
     }
 
     public function getProgramaByType($id){
-        $programasAll = $this->programaService->getProgramas($id);  
+        $programasAll = $this->programaService->getProgramas($id);
         return Response::json($programasAll);
     }
 

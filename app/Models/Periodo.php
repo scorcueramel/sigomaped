@@ -10,7 +10,7 @@ class Periodo extends Model
     use HasFactory;
     protected $fillable = ['periodo'];
 
-    public function anioIngreso(){
+    public function anio_ingreso(){
         return $this->hasMany(AnioIngreso::class);
     }
 }

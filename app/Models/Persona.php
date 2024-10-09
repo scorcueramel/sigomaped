@@ -37,11 +37,11 @@ class Persona extends Model
         return $this->hasMany(Representante::class);
     }
 
-    public function encargadoCiclo(){
+    public function encargado_ciclo(){
         return $this->hasMany(EncargadoCiclo::class);
     }
-    
-    public function esperaPersonaTaller(){
+
+    public function espera_persona_taller(){
         return $this->hasMany(EsperaPersonaTaller::class);
     }
 }

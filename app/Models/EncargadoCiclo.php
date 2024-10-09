@@ -11,8 +11,8 @@ class EncargadoCiclo extends Model
         'persona_id',
         'ciclo_horario_id',
     ];
-        
-    public function cicloHorario(){
+
+    public function ciclo_horario(){
         return $this->belongsTo(CicloHorario::class);
     }
 

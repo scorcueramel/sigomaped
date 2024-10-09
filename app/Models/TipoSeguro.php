@@ -13,7 +13,7 @@ class TipoSeguro extends Model
         'tipo_seguro'
     ];
 
-    public function Alumno(){
+    public function alumno(){
         return $this->hasMany(Alumno::class);
     }
 }

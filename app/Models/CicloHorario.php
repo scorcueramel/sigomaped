@@ -14,7 +14,7 @@ class CicloHorario extends Model
         'cupo_actual',
         'usuario_actualiza',
     ];
-    
+
     public function horario(){
         return $this->belongsTo(Horario::class);
     }
@@ -22,8 +22,8 @@ class CicloHorario extends Model
     public function ciclos(){
         return $this->belongsTo(Ciclo::class);
     }
-    
-    public function encargadoCiclo(){
+
+    public function encargado_ciclo(){
         return $this->hasMany(EncargadoCiclo::class);
     }
 }

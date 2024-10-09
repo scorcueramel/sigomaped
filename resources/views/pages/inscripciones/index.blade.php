@@ -25,8 +25,10 @@
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
                         <div class="box">
-                            <div class="box-header with-border">
-                                <h4 class="box-title">LISTA DE PROGRAMAS</span></h4>
+                            <div class="box-header with-border d-flex justify-content-between">
+                                <h4 class="box-title">PROGRAMAS</span></h4>
+                                <a href="{{route('inscripciones.create')}}" class="text-info font-weight-bold"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    Nuevo</a>
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
@@ -103,12 +105,12 @@
                 if (response.length > 0) {
                     $("#talleresprogramas").html('');
                     $("#talleres").removeClass('d-none');
-                    $("#talleresprogramas").append(` 
-                        <option selected disabled value="">SELECCIONA UN PROGRAMA</option>               
+                    $("#talleresprogramas").append(`
+                        <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
                     `);
                     response.forEach((e) => {
-                        $("#talleresprogramas").append(` 
-                            <option value="${e.id}">${e.nombre}</option>               
+                        $("#talleresprogramas").append(`
+                            <option value="${e.id}">${e.nombre}</option>
                         `);
                     });
                 }

@@ -15,7 +15,7 @@ class CertificadoDiscapacidad extends Model
         'vigencia_cert_discapacidad',
     ];
 
-    public function Alumno(){
+    public function alumno(){
         return $this->belongsTo(Alumno::class);
     }
 }
