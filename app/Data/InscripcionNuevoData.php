@@ -9,5 +9,6 @@ class InscripcionNuevoData extends Data
     public function __construct(
         public int $alumnoid,
         public int $horarioid,
+        public int $fechainscripcion,
     ) {}
 }

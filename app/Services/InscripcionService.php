@@ -28,6 +28,7 @@ class InscripcionService{
             $nuevoInscrito = new Inscripcion();
             $nuevoInscrito->persona_id = $inscripcion->alumnoid;
             $nuevoInscrito->horario_id = $inscripcion->horarioid;
+            $nuevoInscrito->fecha_inscripcion = $inscripcion->fechainscripcion;
             $nuevoInscrito->usuario_actualiza = $usuarioActualiza;
             $nuevoInscrito->save();
         }
