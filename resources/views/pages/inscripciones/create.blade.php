@@ -409,6 +409,15 @@
         let alumnoId = $("#alumonid").val();
         let horarioId = $("#horarioid").val();
 
+        Swal.fire({
+            icon: 'info',
+            html: "Espere un momento porfavor ...",
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
         $.ajax({
             type: "POST",
             url: "{{route('inscirpciones.store')}}",
