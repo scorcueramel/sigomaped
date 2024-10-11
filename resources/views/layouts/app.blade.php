@@ -49,6 +49,10 @@
 
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
     <!-- toast tr -->
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.toast.css') }}">
 </head>
@@ -109,8 +113,8 @@
     <!-- jquerysteps -->
     <script src="{{ asset('/assets/js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('/assets/js/sweetalert2@11.js') }}"></script>
-    <script src="{{ asset('/assets/js/jquery.steps.js') }}"></script>
-    <script src="{{ asset('/assets/js/steps.js') }}"></script>
+    <!-- validar su funcionalidad -->
+    <!-- <script src="{{ asset('/assets/js/steps.js') }}"></script> -->
     <!-- <script src="{{ asset('/assets/js/jq') }}"></script> -->
 
     {{-- icons --}}

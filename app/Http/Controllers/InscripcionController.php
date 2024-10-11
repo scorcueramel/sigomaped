@@ -7,6 +7,7 @@ use App\Models\Inscripcion;
 use App\Models\TipoTaller;
 use App\Services\CicloHorarioService;
 use App\Services\CiclosService;
+use App\Services\InscripcionEsperaService;
 use App\Services\InscripcionService;
 use App\Services\PersonaService;
 use App\Services\ProgramaService;
@@ -26,6 +27,7 @@ class InscripcionController extends Controller
         private CicloHorarioService $cicloHorarioService,
         private TalleresService $talleresService,
         private InscripcionService $inscripcionService,
+        private InscripcionEsperaService $inscripcionEsperaService,
     ){}
 
     /**
@@ -106,13 +108,20 @@ class InscripcionController extends Controller
     {
         $request->input('alumnoId');
         $request->input('horarioId');
+        $enEspera = $request->input('listaEspera');
+        $request->input('tallerId');
 
-        $registerCode = $this->inscripcionService->inscribirAlumno($request->inscripcion);
+        if($enEspera == 0)
+            $registerCode = $this->inscripcionService->inscribirAlumno($request->inscripcion);
+        elseif($enEspera == 1)
+            $registerCode = $this->inscripcionEsperaService->inscribirEspera($request->personaespera);
 
         if($registerCode === 200)
-            return Response::json(['mensaje'=>'Alumno inscrito correctamente!']);
+            return Response::json(['code'=>$registerCode,'mensaje'=>'Alumno inscrito correctamente!']);
+        elseif($registerCode === 300)
+            return Response::json(['code'=>$registerCode,'mensaje'=> 'El alumno ya se encuentra en lista de espera para el taller seleccionado.']);
         else
-            return Response::json(['mensaje'=> 'Algo sucedio al intentar inscribir al alumno, comuniquese con sistemas porfavor.']);
+            return Response::json(['code'=>500,'mensaje'=> 'Algo sucedio al intentar inscribir al alumno, comuniquese con sistemas porfavor.']);
     }
 
     /**

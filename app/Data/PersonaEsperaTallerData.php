@@ -4,11 +4,12 @@ namespace App\Data;
 
 use Spatie\LaravelData\Data;
 
-class InscripcionNuevoData extends Data
-{
+class PersonaEsperaTallerData extends Data {
+
     public function __construct(
         public int $alumnoid,
-        public int $horarioid,
-        public string $fechainscripcion,
+        public int $tallerid,
+        public string $inscrito,
     ) {}
+
 }

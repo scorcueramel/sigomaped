@@ -122,6 +122,7 @@
     $('#programas').on('change', function() {
         let id = $(this).val();
         $("#talleres").addClass('d-none');
+        $("#anioperiodo").addClass('d-none');
         $.ajax({
             type: "GET",
             url: `/inscripciones/get-talleres/${id}`,
@@ -154,7 +155,6 @@
                 if (response.length > 0) {
                     $("#anioperiodo").removeClass('d-none');
                     response.forEach((e) => {
-                        console.log(e);
                         $("#radios-anio-periodo").append(`
                         <div class="radio">
                             <input name="taller_programa" type="radio" id="taller_programa_${e.id}" onclick="javascript:selectedRadio(${e.id})">

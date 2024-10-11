@@ -3,12 +3,15 @@
 namespace App\Http\Requests;
 
 use App\Data\InscripcionNuevoData;
+use App\Data\PersonaEsperaTallerData;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Carbon;
 
 class InscripcionNuevoRequest extends FormRequest
 {
 
     public array $inscripcion;
+    public array $personaespera;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -28,19 +31,19 @@ class InscripcionNuevoRequest extends FormRequest
     public function rules()
     {
         return [
-            'alumnoId' => 'required|numeric',
-            'horarioId' => 'required|numeric',
+            'alumnoId' => 'required',
+            'listaEspera' => 'required',
+            'tallerId' => 'required',
         ];
     }
 
-    public function messages(){
-        return [
-            'alumnoId.required' => 'Debes seleccionar un alumno para inscribir',
-            'horarioId.required' => 'Debes seleccionar un horario',
-        ];
-    }
-
-    public function passedValidation(){
-        $this->inscripcion[] = InscripcionNuevoData::from(['alumnoid'=>$this->alumnoId,'horarioid'=>$this->horarioId]);
+    public function passedValidation()
+    {
+        $fechainscripcion = Carbon::today()->format('Y-m-d');
+        if ($this->listaEspera == "0") {
+            $this->inscripcion[] = InscripcionNuevoData::from(['alumnoid' => $this->alumnoId, 'horarioid' => $this->horarioId, 'fechainscripcion' => $fechainscripcion]);
+        } elseif ($this->listaEspera == "1") {
+            $this->personaespera[] = PersonaEsperaTallerData::from(['alumnoid' => $this->alumnoId, 'tallerid' => $this->tallerId, 'inscrito' => 'E']);
+        }
     }
 }
