@@ -84,6 +84,22 @@
                         <!-- /.box -->
                     </div>
                 </div>
+                <div class="row d-none" id="dias">
+                    <div class="col-12 col-lg-12">
+                        <!-- Form Element sizes -->
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h4 class="box-title">DIAS RELACIONADOS AL AÑO Y PERIODO</h4>
+                            </div>
+                            <div class="box-body form-element">
+                                <div class="form-group" id="radios_dias">
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
                 <div class="row d-none" id="datosAlumnos">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
@@ -127,6 +143,9 @@
         let id = $(this).val();
         $("#talleres").addClass('d-none');
         $("#anioperiodo").addClass('d-none');
+        $("#datosAlumnos").addClass('d-none');
+        $("#dias").addClass('d-none');
+        $("#radios_dias").html('');
         $.ajax({
             type: "GET",
             url: `/inscripciones/get-talleres/${id}`,
@@ -149,6 +168,8 @@
     $('#talleresprogramas').on('change', function() {
         $("#anioperiodo").addClass('d-none');
         $("#radios-anio-periodo").html('');
+        $("#dias").addClass('d-none');
+        $("#radios_dias").html('');
         $("#datosAlumnos").addClass('d-none');
         $(".datos_alumnos").html('');
         let id = $(this).val();
@@ -161,7 +182,7 @@
                     response.forEach((e) => {
                         $("#radios-anio-periodo").append(`
                         <div class="radio">
-                            <input name="taller_programa" type="radio" id="taller_programa_${e.id}" onclick="javascript:selectedRadio(${e.id})">
+                            <input name="taller_programa" type="radio" id="taller_programa_${e.id}" onclick="javascript:diasPorAnioYPeriodo(${e.id})">
                             <label for="taller_programa_${e.id}">${e.anio} - ${e.periodo.periodo}</label>
                         </div>
                         `);
@@ -171,7 +192,29 @@
         });
     });
 
-    function selectedRadio(id) {
+    function diasPorAnioYPeriodo(id){
+        $("#dias").addClass('d-none');
+        $("#radios_dias").html('');
+        $.ajax({
+            type: "GET",
+            url: `/inscripciones/get-ciclo-dias/${id}`,
+            success: function(response) {
+                if (response.length > 0) {
+                    $("#dias").removeClass('d-none');
+                    response.forEach((e) => {
+                        $("#radios_dias").append(`
+                        <div class="radio">
+                            <input name="dias" type="radio" id="dias_${e.id}" onclick="javascript:alumnosPorDiaYTaller(${e.id})">
+                            <label for="dias_${e.id}">${e.dia}</label>
+                        </div>
+                        `);
+                    });
+                }
+            }
+        });
+    }
+
+    function alumnosPorDiaYTaller(id) {
         $("#datosAlumnos").addClass('d-none');
         $(".datos_alumnos").html('');
         $.ajax({

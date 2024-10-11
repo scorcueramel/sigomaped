@@ -47,6 +47,11 @@ class InscripcionController extends Controller
         return Response::json($ciclosByTaller);
     }
 
+    public function getDiasByPeriodAndYear($id): JsonResponse{
+        $inscritosCiclo = $this->inscripcionService->getDiasInscritos($id);
+        return Response::json($inscritosCiclo);
+    }
+
     public function getInscritoToCicle($id): JsonResponse{
         $inscritosCiclo = $this->inscripcionService->getInscritos($id);
         return Response::json($inscritosCiclo);
