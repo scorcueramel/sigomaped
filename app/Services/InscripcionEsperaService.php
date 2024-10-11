@@ -7,7 +7,7 @@ use App\Models\EsperaPersonaTaller;
 
 class InscripcionEsperaService{
 
-    public array $listaDeEspera;
+    public array $listaDeEspera = [];
 
     public function getListaEspera(){
         $alumnosEspera = EsperaPersonaTaller::where("inscrito","=","E")->with('taller')->get();
