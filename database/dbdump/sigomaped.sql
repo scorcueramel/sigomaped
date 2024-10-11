@@ -2,7 +2,7 @@
 
 DROP TABLE IF EXISTS "acreditacion_residencias";
 DROP SEQUENCE IF EXISTS acreditacion_residencias_id_seq;
-CREATE SEQUENCE acreditacion_residencias_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
+CREATE SEQUENCE acreditacion_residencias_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."acreditacion_residencias" (
     "id" bigint DEFAULT nextval('acreditacion_residencias_id_seq') NOT NULL,
@@ -53,11 +53,17 @@ CREATE TABLE "public"."alumnos" (
 ) WITH (oids = false);
 
 INSERT INTO "alumnos" ("id", "persona_id", "genero_id", "anio_ingreso_id", "tipo_seguro_id", "cond_socio_economica_id", "manif_volunta_id", "acred_resid_id", "tipo_discapacidad_id", "fecha_inscripcion", "ds_exp_inscripcion", "distrito", "sector", "subsector", "domicilio", "fecha_nacimiento", "ro_carnet_conadis", "solicitud_inscripcion", "cons_empadronamiento_sisfoh", "copia_dni", "informe_medico", "recibo_serv", "copia_carnet_conadis", "documentacion_digital", "deleted_at", "created_at", "updated_at") VALUES
-(1,	4,	1,	10,	1,	1,	1,	1,	5,	'2024-10-01',	'OK',	'SANTIAGO DE SURCO',	'1',	'1.2',	'AV MONTE DE LOS OLIVOS 545',	'1992-06-26',	'OK123',	't',	'OK',	't',	't',	't',	't',	't',	NULL,	'2024-10-04 17:43:20',	'2024-10-04 17:43:20');
+(1,	4,	1,	10,	1,	1,	1,	1,	5,	'2024-10-01',	'OK',	'SANTIAGO DE SURCO',	'1',	'1.2',	'AV MONTE DE LOS OLIVOS 545',	'1992-06-26',	'OK123',	't',	'OK',	't',	't',	't',	't',	't',	NULL,	'2024-10-04 17:43:20',	'2024-10-04 17:43:20'),
+(2,	5,	2,	8,	4,	3,	2,	1,	1,	'2023-03-20',	'162-2023/OMAPED',	'SANTIAGO DE SURCO',	'2',	'2.4',	'JR. VILLA LARIENA 272 ',	'2021-01-06',	'419923',	'f',	'SI',	't',	'f',	't',	't',	'f',	NULL,	'2024-10-10 09:36:40',	'2024-10-10 09:36:40'),
+(3,	6,	1,	1,	4,	3,	3,	3,	1,	'2023-03-20',	'161-2023/OMAPED',	'SANTIAGO DE SURCO',	'2',	'2.3',	'AV. LAS GAVIOTAS MZ. C LT1',	'1992-10-26',	'',	'f',	'NO',	'f',	'f',	'f',	'f',	'f',	NULL,	'2024-10-10 10:08:37',	'2024-10-10 10:08:37'),
+(4,	7,	1,	1,	1,	1,	2,	1,	1,	'2023-03-20',	'158-2023/OMAPED',	'SANTIAGO DE SURCO',	'3',	'3.1',	'MZ B LOTE 6 ASOC. VIV. CANEVARO',	'2011-01-04',	'00884-M-2021',	'f',	'SI',	't',	't',	't',	't',	'f',	NULL,	'2024-10-10 10:18:09',	'2024-10-10 10:18:09'),
+(5,	8,	1,	1,	4,	3,	2,	1,	1,	'2023-03-20',	'149-2023/OMAPED',	'SANTIAGO DE SURCO',	'3',	'3.1',	'BAYOVAR MZ E4 LOTE 17 PROL. BENAVIDES',	'1999-01-10',	'342331',	'f',	'NO',	't',	'f',	't',	'f',	'f',	NULL,	'2024-10-10 10:23:31',	'2024-10-10 10:23:31'),
+(6,	9,	1,	1,	1,	3,	2,	1,	1,	'2023-03-20',	'148-2023/OMAPED',	'SANTIAGO DE SURCO',	'2',	'2.4',	'CALLE LA QUEBRANTA 157 URB. LA TALARA',	'2013-05-04',	'NO',	'f',	'CADUCADO',	't',	't',	't',	't',	'f',	NULL,	'2024-10-10 10:30:56',	'2024-10-10 10:30:56'),
+(7,	10,	2,	7,	4,	3,	1,	1,	1,	'2023-03-20',	'147-2023/OMAPED',	'SANTIAGO DE SURCO',	'',	'',	'TACNA 463 INT 7',	'1991-11-10',	'06103-2006',	'f',	'',	't',	'f',	't',	'f',	'f',	NULL,	'2024-10-10 10:54:36',	'2024-10-10 10:54:36');
 
 DROP TABLE IF EXISTS "anio_ingresos";
 DROP SEQUENCE IF EXISTS anio_ingresos_id_seq;
-CREATE SEQUENCE anio_ingresos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 10 CACHE 1;
+CREATE SEQUENCE anio_ingresos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."anio_ingresos" (
     "id" bigint DEFAULT nextval('anio_ingresos_id_seq') NOT NULL,
@@ -116,7 +122,7 @@ CREATE TABLE "public"."certificado_discapacidads" (
 
 DROP TABLE IF EXISTS "ciclo_horarios";
 DROP SEQUENCE IF EXISTS ciclo_horarios_id_seq;
-CREATE SEQUENCE ciclo_horarios_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
+CREATE SEQUENCE ciclo_horarios_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."ciclo_horarios" (
     "id" bigint DEFAULT nextval('ciclo_horarios_id_seq') NOT NULL,
@@ -130,37 +136,45 @@ CREATE TABLE "public"."ciclo_horarios" (
 ) WITH (oids = false);
 
 INSERT INTO "ciclo_horarios" ("id", "ciclo_id", "horario_id", "cupo_maximo", "cupo_actual", "created_at", "updated_at") VALUES
-(1,	1,	3,	8,	8,	'2024-10-04 17:18:16',	'2024-10-04 17:18:16'),
-(2,	3,	7,	1,	1,	'2024-10-04 17:21:05',	'2024-10-04 17:21:05'),
-(3,	4,	6,	8,	8,	'2024-10-04 17:28:28',	'2024-10-04 17:28:28');
+(1,	1,	3,	8,	7,	'2024-10-04 17:18:16',	'2024-10-04 17:18:16'),
+(2,	3,	7,	1,	0,	'2024-10-04 17:21:05',	'2024-10-04 17:21:05'),
+(3,	4,	6,	8,	7,	'2024-10-04 17:28:28',	'2024-10-04 17:28:28'),
+(4,	5,	8,	10,	9,	'2024-10-09 14:53:16',	'2024-10-09 14:53:16'),
+(5,	6,	10,	14,	13,	'2024-10-09 14:55:22',	'2024-10-09 14:55:22'),
+(6,	7,	11,	8,	7,	'2024-10-09 14:55:22',	'2024-10-09 14:55:22'),
+(7,	4,	5,	6,	0,	'2024-10-09 15:56:02',	'2024-10-09 15:56:02');
 
 DROP TABLE IF EXISTS "ciclos";
 DROP SEQUENCE IF EXISTS ciclos_id_seq;
-CREATE SEQUENCE ciclos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 4 CACHE 1;
+CREATE SEQUENCE ciclos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 2 CACHE 1;
 
 CREATE TABLE "public"."ciclos" (
     "id" bigint DEFAULT nextval('ciclos_id_seq') NOT NULL,
     "taller_id" bigint NOT NULL,
+    "periodo_id" bigint NOT NULL,
     "anio" character varying(4) NOT NULL,
-    "periodo" character varying(1) NOT NULL,
     "fecha_inicio" date NOT NULL,
     "fecha_fin" date NOT NULL,
     "usuario_actualiza" character varying(50),
+    "estado" boolean DEFAULT true NOT NULL,
     "deleted_at" timestamp(0),
     "created_at" timestamp(0),
     "updated_at" timestamp(0),
     CONSTRAINT "ciclos_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
-INSERT INTO "ciclos" ("id", "taller_id", "anio", "periodo", "fecha_inicio", "fecha_fin", "usuario_actualiza", "deleted_at", "created_at", "updated_at") VALUES
-(1,	1,	'2024',	'3',	'2024-10-15',	'2024-12-15',	NULL,	NULL,	'2024-10-04 17:09:27',	'2024-10-04 17:09:27'),
-(2,	1,	'2025',	'1',	'2025-01-15',	'2025-03-15',	NULL,	NULL,	'2024-10-04 17:09:51',	'2024-10-04 17:09:51'),
-(3,	7,	'2024',	'3',	'2024-10-15',	'2024-12-15',	NULL,	NULL,	'2024-10-04 17:20:46',	'2024-10-04 17:20:46'),
-(4,	4,	'2024',	'3',	'2024-10-15',	'2024-12-15',	NULL,	NULL,	'2024-10-04 17:27:44',	'2024-10-04 17:27:44');
+INSERT INTO "ciclos" ("id", "taller_id", "periodo_id", "anio", "fecha_inicio", "fecha_fin", "usuario_actualiza", "estado", "deleted_at", "created_at", "updated_at") VALUES
+(1,	1,	3,	'2024',	'2024-10-15',	'2024-12-15',	NULL,	't',	NULL,	'2024-10-04 17:09:27',	'2024-10-04 17:09:27'),
+(2,	1,	1,	'2025',	'2025-01-15',	'2025-03-15',	NULL,	't',	NULL,	'2024-10-04 17:09:51',	'2024-10-04 17:09:51'),
+(3,	7,	3,	'2024',	'2024-10-15',	'2024-12-15',	NULL,	't',	NULL,	'2024-10-04 17:20:46',	'2024-10-04 17:20:46'),
+(4,	4,	3,	'2024',	'2024-10-15',	'2024-12-15',	NULL,	't',	NULL,	'2024-10-04 17:27:44',	'2024-10-04 17:27:44'),
+(5,	15,	3,	'2024',	'2024-06-01',	'2024-09-01',	NULL,	'f',	NULL,	'2024-10-09 12:10:16',	'2024-10-09 12:10:16'),
+(6,	21,	3,	'2024',	'2024-10-15',	'2024-12-15',	NULL,	't',	NULL,	'2024-10-09 12:41:55',	'2024-10-09 12:41:55'),
+(7,	23,	3,	'2024',	'2024-10-15',	'2024-12-15',	NULL,	't',	NULL,	'2024-10-09 12:42:14',	'2024-10-09 12:42:14');
 
 DROP TABLE IF EXISTS "condicion_socio_economicas";
 DROP SEQUENCE IF EXISTS condicion_socio_economicas_id_seq;
-CREATE SEQUENCE condicion_socio_economicas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
+CREATE SEQUENCE condicion_socio_economicas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."condicion_socio_economicas" (
     "id" bigint DEFAULT nextval('condicion_socio_economicas_id_seq') NOT NULL,
@@ -191,7 +205,7 @@ CREATE TABLE "public"."diagnostico_medicos" (
 
 DROP TABLE IF EXISTS "dias";
 DROP SEQUENCE IF EXISTS dias_id_seq;
-CREATE SEQUENCE dias_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 7 CACHE 1;
+CREATE SEQUENCE dias_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."dias" (
     "id" bigint DEFAULT nextval('dias_id_seq') NOT NULL,
@@ -203,16 +217,16 @@ CREATE TABLE "public"."dias" (
 
 INSERT INTO "dias" ("id", "dia", "created_at", "updated_at") VALUES
 (1,	'LUNES',	'2024-10-04 17:07:47',	'2024-10-04 17:07:47'),
-(2,	'DOMINGO',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
-(3,	'MARTES',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
-(4,	'MIERCOLES',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
-(5,	'JUEVES',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
-(6,	'VIERNES',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
-(7,	'SABADO',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45');
+(2,	'MARTES',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
+(3,	'MIERCOLES',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
+(4,	'JUEVES',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
+(5,	'VIERNES',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
+(6,	'SABADO',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45'),
+(7,	'DOMINGO',	'2024-10-04 17:08:45',	'2024-10-04 17:08:45');
 
 DROP TABLE IF EXISTS "encargado_ciclos";
 DROP SEQUENCE IF EXISTS encargado_ciclos_id_seq;
-CREATE SEQUENCE encargado_ciclos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
+CREATE SEQUENCE encargado_ciclos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;
 
 CREATE TABLE "public"."encargado_ciclos" (
     "id" bigint DEFAULT nextval('encargado_ciclos_id_seq') NOT NULL,
@@ -226,21 +240,26 @@ CREATE TABLE "public"."encargado_ciclos" (
 INSERT INTO "encargado_ciclos" ("id", "persona_id", "ciclo_horario_id", "created_at", "updated_at") VALUES
 (1,	2,	1,	'2024-10-04 17:25:21',	'2024-10-04 17:25:21'),
 (2,	2,	2,	'2024-10-04 17:25:36',	'2024-10-04 17:25:36'),
-(3,	3,	3,	'2024-10-04 17:29:40',	'2024-10-04 17:29:40');
+(3,	3,	3,	'2024-10-04 17:29:40',	'2024-10-04 17:29:40'),
+(4,	2,	7,	'2024-10-09 15:56:58',	'2024-10-09 15:56:58');
 
 DROP TABLE IF EXISTS "espera_persona_tallers";
 DROP SEQUENCE IF EXISTS espera_persona_tallers_id_seq;
-CREATE SEQUENCE espera_persona_tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
+CREATE SEQUENCE espera_persona_tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 2 CACHE 1;
 
 CREATE TABLE "public"."espera_persona_tallers" (
     "id" bigint DEFAULT nextval('espera_persona_tallers_id_seq') NOT NULL,
     "persona_id" bigint NOT NULL,
     "taller_id" bigint NOT NULL,
+    "inscrito" character varying(1) DEFAULT 'E' NOT NULL,
     "created_at" timestamp(0),
     "updated_at" timestamp(0),
     CONSTRAINT "espera_persona_tallers_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
+INSERT INTO "espera_persona_tallers" ("id", "persona_id", "taller_id", "inscrito", "created_at", "updated_at") VALUES
+(1,	5,	7,	'E',	'2024-10-10 09:42:15',	'2024-10-10 09:42:15'),
+(2,	10,	4,	'E',	'2024-10-10 11:39:15',	'2024-10-10 11:39:15');
 
 DROP TABLE IF EXISTS "failed_jobs";
 DROP SEQUENCE IF EXISTS failed_jobs_id_seq;
@@ -261,7 +280,7 @@ CREATE TABLE "public"."failed_jobs" (
 
 DROP TABLE IF EXISTS "generos";
 DROP SEQUENCE IF EXISTS generos_id_seq;
-CREATE SEQUENCE generos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
+CREATE SEQUENCE generos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."generos" (
     "id" bigint DEFAULT nextval('generos_id_seq') NOT NULL,
@@ -272,13 +291,13 @@ CREATE TABLE "public"."generos" (
 ) WITH (oids = false);
 
 INSERT INTO "generos" ("id", "tipo_genero", "created_at", "updated_at") VALUES
+(1,	'MASCULINO',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20'),
 (2,	'FEMENINO',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20'),
-(3,	'NO INDICADO',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20'),
-(1,	'MASCULINO',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20');
+(3,	'NO INDICADO',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20');
 
 DROP TABLE IF EXISTS "horarios";
 DROP SEQUENCE IF EXISTS horarios_id_seq;
-CREATE SEQUENCE horarios_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 7 CACHE 1;
+CREATE SEQUENCE horarios_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."horarios" (
     "id" bigint DEFAULT nextval('horarios_id_seq') NOT NULL,
@@ -295,15 +314,22 @@ CREATE TABLE "public"."horarios" (
 INSERT INTO "horarios" ("id", "dia_id", "hora_inicio", "hora_fin", "usuario_actualiza", "deleted_at", "created_at", "updated_at") VALUES
 (1,	5,	'12:00:00',	'13:00:00',	NULL,	NULL,	'2024-10-04 17:11:01',	'2024-10-04 17:11:01'),
 (2,	1,	'08:00:00',	'09:00:00',	NULL,	NULL,	'2024-10-04 17:14:00',	'2024-10-04 17:14:00'),
+(3,	1,	'10:00:00',	'11:00:00',	NULL,	NULL,	'2024-10-04 17:14:00',	'2024-10-04 17:14:00'),
 (4,	3,	'10:00:00',	'11:00:00',	NULL,	NULL,	'2024-10-04 17:14:00',	'2024-10-04 17:14:00'),
 (5,	2,	'09:00:00',	'10:00:00',	NULL,	NULL,	'2024-10-04 17:14:00',	'2024-10-04 17:14:00'),
 (6,	5,	'10:00:00',	'11:00:00',	NULL,	NULL,	'2024-10-04 17:14:00',	'2024-10-04 17:14:00'),
-(3,	1,	'10:00:00',	'11:00:00',	NULL,	NULL,	'2024-10-04 17:14:00',	'2024-10-04 17:14:00'),
-(7,	4,	'09:30:00',	'10:00:00',	NULL,	NULL,	'2024-10-04 17:17:06',	'2024-10-04 17:17:06');
+(7,	4,	'09:30:00',	'10:00:00',	NULL,	NULL,	'2024-10-04 17:17:06',	'2024-10-04 17:17:06'),
+(8,	2,	'11:00:00',	'12:00:00',	NULL,	NULL,	'2024-10-09 14:44:10',	'2024-10-09 14:44:10'),
+(9,	5,	'08:30:00',	'09:00:00',	NULL,	NULL,	'2024-10-09 14:47:35',	'2024-10-09 14:47:35'),
+(10,	3,	'11:00:00',	'12:00:00',	NULL,	NULL,	'2024-10-09 14:47:35',	'2024-10-09 14:47:35'),
+(11,	4,	'12:00:00',	'13:00:00',	NULL,	NULL,	'2024-10-09 14:47:35',	'2024-10-09 14:47:35'),
+(12,	1,	'12:00:00',	'12:30:00',	NULL,	NULL,	'2024-10-09 14:48:54',	'2024-10-09 14:48:54'),
+(13,	1,	'09:00:00',	'09:30:00',	NULL,	NULL,	'2024-10-09 14:48:54',	'2024-10-09 14:48:54'),
+(14,	2,	'08:00:00',	'08:30:00',	NULL,	NULL,	'2024-10-09 14:48:54',	'2024-10-09 14:48:54');
 
 DROP TABLE IF EXISTS "inscripcions";
 DROP SEQUENCE IF EXISTS inscripcions_id_seq;
-CREATE SEQUENCE inscripcions_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 2 CACHE 1;
+CREATE SEQUENCE inscripcions_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."inscripcions" (
     "id" bigint DEFAULT nextval('inscripcions_id_seq') NOT NULL,
@@ -312,7 +338,7 @@ CREATE TABLE "public"."inscripcions" (
     "es_derivado" boolean DEFAULT false NOT NULL,
     "fecha_derivacion" timestamp(0),
     "estado_inscripcion" character varying(1) DEFAULT 'I' NOT NULL,
-    "fecha_inscripcion" timestamp(0) NOT NULL,
+    "fecha_inscripcion" timestamp(0),
     "usuario_actualiza" character varying(50),
     "deleted_at" timestamp(0),
     "created_at" timestamp(0),
@@ -322,11 +348,20 @@ CREATE TABLE "public"."inscripcions" (
 
 INSERT INTO "inscripcions" ("id", "persona_id", "horario_id", "es_derivado", "fecha_derivacion", "estado_inscripcion", "fecha_inscripcion", "usuario_actualiza", "deleted_at", "created_at", "updated_at") VALUES
 (1,	4,	3,	'f',	NULL,	'I',	'2024-10-04 00:00:00',	NULL,	NULL,	'2024-10-04 17:44:10',	'2024-10-04 17:44:10'),
-(2,	4,	7,	'f',	NULL,	'I',	'2024-10-04 00:00:00',	NULL,	NULL,	'2024-10-04 17:45:03',	'2024-10-04 17:45:03');
+(2,	4,	7,	'f',	NULL,	'I',	'2024-10-04 00:00:00',	NULL,	NULL,	'2024-10-04 17:45:03',	'2024-10-04 17:45:03'),
+(3,	4,	8,	'f',	NULL,	'I',	'2024-10-09 00:00:00',	NULL,	NULL,	'2024-10-09 15:47:41',	'2024-10-09 15:47:41'),
+(4,	4,	10,	'f',	NULL,	'I',	'2024-10-09 00:00:00',	NULL,	NULL,	'2024-10-09 15:48:07',	'2024-10-09 15:48:07'),
+(5,	4,	11,	'f',	NULL,	'I',	'2024-10-09 00:00:00',	NULL,	NULL,	'2024-10-09 15:48:14',	'2024-10-09 15:48:14'),
+(6,	4,	5,	'f',	NULL,	'I',	'2024-10-09 00:00:00',	NULL,	NULL,	'2024-10-09 15:58:13',	'2024-10-09 15:58:13'),
+(7,	5,	5,	'f',	NULL,	'I',	NULL,	NULL,	NULL,	'2024-10-10 11:35:15',	'2024-10-10 11:35:15'),
+(8,	6,	5,	'f',	NULL,	'I',	NULL,	NULL,	NULL,	'2024-10-10 11:36:34',	'2024-10-10 11:36:34'),
+(9,	7,	5,	'f',	NULL,	'I',	NULL,	NULL,	NULL,	'2024-10-10 11:36:34',	'2024-10-10 11:36:34'),
+(10,	8,	5,	'f',	NULL,	'I',	NULL,	NULL,	NULL,	'2024-10-10 11:36:34',	'2024-10-10 11:36:34'),
+(11,	9,	5,	'f',	NULL,	'I',	NULL,	NULL,	NULL,	'2024-10-10 11:36:34',	'2024-10-10 11:36:34');
 
 DROP TABLE IF EXISTS "manifestacion_voluntads";
 DROP SEQUENCE IF EXISTS manifestacion_voluntads_id_seq;
-CREATE SEQUENCE manifestacion_voluntads_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
+CREATE SEQUENCE manifestacion_voluntads_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."manifestacion_voluntads" (
     "id" bigint DEFAULT nextval('manifestacion_voluntads_id_seq') NOT NULL,
@@ -337,8 +372,8 @@ CREATE TABLE "public"."manifestacion_voluntads" (
 ) WITH (oids = false);
 
 INSERT INTO "manifestacion_voluntads" ("id", "manifestacion", "created_at", "updated_at") VALUES
-(2,	'DECLARACION JURADA',	'2024-10-04 17:39:23',	'2024-10-04 17:39:23'),
 (1,	'ACTA COMPROMISO',	'2024-10-04 17:39:23',	'2024-10-04 17:39:23'),
+(2,	'DECLARACION JURADA',	'2024-10-04 17:39:23',	'2024-10-04 17:39:23'),
 (3,	'NINGUNO',	'2024-10-04 17:39:23',	'2024-10-04 17:39:23');
 
 DROP TABLE IF EXISTS "migrations";
@@ -395,20 +430,21 @@ CREATE INDEX "password_resets_email_index" ON "public"."password_resets" USING b
 
 DROP TABLE IF EXISTS "periodos";
 DROP SEQUENCE IF EXISTS periodos_id_seq;
-CREATE SEQUENCE periodos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
+CREATE SEQUENCE periodos_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;
 
 CREATE TABLE "public"."periodos" (
     "id" bigint DEFAULT nextval('periodos_id_seq') NOT NULL,
-    "periodo" character varying(1) NOT NULL,
+    "periodo" character varying(4) NOT NULL,
     "created_at" timestamp(0),
     "updated_at" timestamp(0),
     CONSTRAINT "periodos_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
 INSERT INTO "periodos" ("id", "periodo", "created_at", "updated_at") VALUES
-(1,	'1',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20'),
-(2,	'2',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20'),
-(3,	'3',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20');
+(1,	'I',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20'),
+(2,	'II',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20'),
+(3,	'III',	'2024-10-04 21:55:20',	'2024-10-04 21:55:20'),
+(4,	'IV',	'2024-10-09 11:55:34',	'2024-10-09 11:55:34');
 
 DROP TABLE IF EXISTS "personal_access_tokens";
 DROP SEQUENCE IF EXISTS personal_access_tokens_id_seq;
@@ -433,7 +469,7 @@ CREATE INDEX "personal_access_tokens_tokenable_type_tokenable_id_index" ON "publ
 
 DROP TABLE IF EXISTS "personas";
 DROP SEQUENCE IF EXISTS personas_id_seq;
-CREATE SEQUENCE personas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 4 CACHE 1;
+CREATE SEQUENCE personas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."personas" (
     "id" bigint DEFAULT nextval('personas_id_seq') NOT NULL,
@@ -451,30 +487,37 @@ INSERT INTO "personas" ("id", "tipo_persona_id", "documento", "nombres", "apelli
 (1,	1,	'48398529',	'Sergio Alejandro',	'Corcuera Mel',	NULL,	'2024-10-04 21:55:20',	'2024-10-04 21:55:20'),
 (2,	2,	'47680246',	'ALESSANDRA',	'CHAHUA',	NULL,	'2024-10-04 17:23:06',	'2024-10-04 17:23:06'),
 (3,	2,	'70124812',	'DIANA',	'HUERTAS',	NULL,	'2024-10-04 17:23:06',	'2024-10-04 17:23:06'),
-(4,	6,	'10101048',	'BRAIAN',	'ARRUNATEGUI',	NULL,	'2024-10-04 17:35:02',	'2024-10-04 17:35:02');
+(4,	6,	'10101048',	'BRAIAN',	'ARRUNATEGUI',	NULL,	'2024-10-04 17:35:02',	'2024-10-04 17:35:02'),
+(5,	6,	'92183138',	'SAMIRA KAORI',	'CASTILLO RIOS',	NULL,	'2024-10-10 09:28:38',	'2024-10-10 09:28:38'),
+(6,	6,	'47979347',	'MIGUEL ALBERTINI',	'CASTRO HUAMAN ',	NULL,	'2024-10-10 09:51:26',	'2024-10-10 09:51:26'),
+(7,	6,	'62716560',	'RODRIGO CLIMACO',	'CCARHUAS AYQUIPA',	NULL,	'2024-10-10 10:15:01',	'2024-10-10 10:15:01'),
+(8,	6,	'76638974',	'JHONATHAN CARLOS',	'CORNEJO GUEVARA',	NULL,	'2024-10-10 10:20:13',	'2024-10-10 10:20:13'),
+(9,	6,	'78083526',	'RAFFAELE ALESSANDRO',	'CORTINES SANTILLAN',	NULL,	'2024-10-10 10:28:04',	'2024-10-10 10:28:04'),
+(10,	6,	'46829450',	'ROSARIO DEL PILAR',	'CRIOLLO LEON',	NULL,	'2024-10-10 10:51:54',	'2024-10-10 10:51:54');
 
 DROP TABLE IF EXISTS "programas";
 DROP SEQUENCE IF EXISTS programas_id_seq;
-CREATE SEQUENCE programas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 7 CACHE 1;
+CREATE SEQUENCE programas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."programas" (
     "id" bigint DEFAULT nextval('programas_id_seq') NOT NULL,
     "nombre" character varying(100) NOT NULL,
     "usuario_actualiza" character varying(50),
+    "estado" boolean DEFAULT true NOT NULL,
     "deleted_at" timestamp(0),
     "created_at" timestamp(0),
     "updated_at" timestamp(0),
     CONSTRAINT "programas_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
-INSERT INTO "programas" ("id", "nombre", "usuario_actualiza", "deleted_at", "created_at", "updated_at") VALUES
-(1,	'TALLER DE APRENDIZAJE',	NULL,	NULL,	'2024-10-04 16:56:07',	'2024-10-04 16:56:07'),
-(2,	'TALLER DE PSICOLOGIA',	NULL,	NULL,	'2024-10-04 16:56:33',	'2024-10-04 16:56:33'),
-(3,	'TALLER DE DANZA',	NULL,	NULL,	'2024-10-04 16:56:40',	'2024-10-04 16:56:40'),
-(4,	'TALLER DE MÚSICA',	NULL,	NULL,	'2024-10-04 16:56:53',	'2024-10-04 16:56:53'),
-(5,	'TALLER DE DEPORTES',	NULL,	NULL,	'2024-10-04 16:57:02',	'2024-10-04 16:57:02'),
-(6,	'TALLER DE TERAPIA FISICA Y REHABILITACION',	NULL,	NULL,	'2024-10-04 16:57:09',	'2024-10-04 16:57:09'),
-(7,	'TALLER DE LENGUAJE',	NULL,	NULL,	'2024-10-04 16:57:15',	'2024-10-04 16:57:15');
+INSERT INTO "programas" ("id", "nombre", "usuario_actualiza", "estado", "deleted_at", "created_at", "updated_at") VALUES
+(1,	'TALLER DE APRENDIZAJE',	NULL,	't',	NULL,	'2024-10-04 16:56:07',	'2024-10-04 16:56:07'),
+(2,	'TALLER DE PSICOLOGIA',	NULL,	't',	NULL,	'2024-10-04 16:56:33',	'2024-10-04 16:56:33'),
+(3,	'TALLER DE DANZA',	NULL,	't',	NULL,	'2024-10-04 16:56:40',	'2024-10-04 16:56:40'),
+(4,	'TALLER DE MÚSICA',	NULL,	't',	NULL,	'2024-10-04 16:56:53',	'2024-10-04 16:56:53'),
+(5,	'TALLER DE DEPORTES',	NULL,	't',	NULL,	'2024-10-04 16:57:02',	'2024-10-04 16:57:02'),
+(6,	'TALLER DE TERAPIA FISICA Y REHABILITACION',	NULL,	't',	NULL,	'2024-10-04 16:57:09',	'2024-10-04 16:57:09'),
+(7,	'TALLER DE LENGUAJE',	NULL,	't',	NULL,	'2024-10-04 16:57:15',	'2024-10-04 16:57:15');
 
 DROP TABLE IF EXISTS "representantes";
 DROP SEQUENCE IF EXISTS representantes_id_seq;
@@ -496,7 +539,7 @@ CREATE TABLE "public"."representantes" (
 
 DROP TABLE IF EXISTS "tallers";
 DROP SEQUENCE IF EXISTS tallers_id_seq;
-CREATE SEQUENCE tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 32 CACHE 1;
+CREATE SEQUENCE tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."tallers" (
     "id" bigint DEFAULT nextval('tallers_id_seq') NOT NULL,
@@ -504,49 +547,50 @@ CREATE TABLE "public"."tallers" (
     "tipo_taller_id" bigint NOT NULL,
     "nombre" character varying(100) NOT NULL,
     "usuario_actualiza" character varying(50),
+    "estado" boolean DEFAULT true NOT NULL,
     "deleted_at" timestamp(0),
     "created_at" timestamp(0),
     "updated_at" timestamp(0),
     CONSTRAINT "tallers_pkey" PRIMARY KEY ("id")
 ) WITH (oids = false);
 
-INSERT INTO "tallers" ("id", "programa_id", "tipo_taller_id", "nombre", "usuario_actualiza", "deleted_at", "created_at", "updated_at") VALUES
-(1,	1,	1,	'TALLER DE MONEDAS 18+',	NULL,	NULL,	'2024-10-04 16:58:04',	'2024-10-04 16:58:04'),
-(2,	1,	1,	'LECTOESCRITURA',	NULL,	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
-(3,	1,	1,	'HABILIDADES COGNITIVAS',	NULL,	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
-(4,	1,	1,	'COMPRENSIÓN LECTORA (SABER LEER)',	NULL,	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
-(5,	1,	1,	'ATENCIÓN Y CONCENTRACIÓN',	NULL,	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
-(6,	1,	1,	'DESARROLLO DE COMPRENSIÓN LECTORA (APRENDER A LEER)',	NULL,	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
-(7,	2,	2,	'HABILIDADES SOCIALES',	NULL,	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
-(8,	2,	2,	'HABILIDADES LABORALES',	NULL,	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
-(9,	2,	1,	'TALLER DE TALENTOS (MANUALIDADES)',	NULL,	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
-(10,	2,	2,	'TALLER DE AUTOCUIDADO PERSONAL',	NULL,	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
-(11,	2,	2,	'TALLER SENSORIAL (ACOMPAÑAMIENTO)',	NULL,	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
-(12,	3,	3,	'DANZAS COREOGRÁFICAS',	NULL,	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
-(13,	3,	3,	'FOLCLÓRICOS ADULTOS (10 AÑOS A +)',	NULL,	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
-(14,	3,	3,	'BAILE CON ACOMPAÑAMIENTO (SEVERO)',	NULL,	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
-(15,	3,	3,	'MARINERA',	NULL,	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
-(16,	3,	3,	'BAILE MODERNO',	NULL,	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
-(17,	3,	3,	'FOLCLÓRICOS NIÑOS (4 -9 AÑOS)',	NULL,	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
-(18,	4,	3,	'XILÓFONO',	NULL,	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
-(19,	4,	3,	'CAJÓN BÁSICO',	NULL,	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
-(20,	4,	3,	'GUITARRA',	NULL,	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
-(21,	4,	3,	'PIANO',	NULL,	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
-(22,	4,	3,	'CORO',	NULL,	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
-(23,	5,	3,	'ATLETISMO',	NULL,	NULL,	'2024-10-04 17:05:01',	'2024-10-04 17:05:01'),
-(24,	5,	3,	'INICIACIÓN A NATACIÓN',	NULL,	NULL,	'2024-10-04 17:05:01',	'2024-10-04 17:05:01'),
-(25,	6,	2,	'PSICOMOTRICIDAD',	NULL,	NULL,	'2024-10-04 17:06:30',	'2024-10-04 17:06:30'),
-(26,	6,	2,	'POSTURAL',	NULL,	NULL,	'2024-10-04 17:06:30',	'2024-10-04 17:06:30'),
-(27,	6,	2,	'MANTENIMIENTO FUNCIONAL (SEVERO)',	NULL,	NULL,	'2024-10-04 17:06:30',	'2024-10-04 17:06:30'),
-(28,	6,	1,	'EJERCICIOS EN PISCINA (TERAPIA)',	NULL,	NULL,	'2024-10-04 17:06:30',	'2024-10-04 17:06:30'),
-(29,	7,	2,	'TALLER DE LENGUAJE EXPRESIVO',	NULL,	NULL,	'2024-10-04 17:07:14',	'2024-10-04 17:07:14'),
-(30,	7,	2,	'TALLER DE ESTIMULACIÓN DE LENGUAJE ORAL (NIÑOS)',	NULL,	NULL,	'2024-10-04 17:07:14',	'2024-10-04 17:07:14'),
-(31,	7,	2,	'TALLER DE HABILIDADES COMUNICATIVO SOCIAL',	NULL,	NULL,	'2024-10-04 17:07:14',	'2024-10-04 17:07:14'),
-(32,	7,	2,	'TALLER DE LENGUAJE COMPRENSIVO',	NULL,	NULL,	'2024-10-04 17:07:14',	'2024-10-04 17:07:14');
+INSERT INTO "tallers" ("id", "programa_id", "tipo_taller_id", "nombre", "usuario_actualiza", "estado", "deleted_at", "created_at", "updated_at") VALUES
+(1,	1,	1,	'TALLER DE MONEDAS 18+',	NULL,	't',	NULL,	'2024-10-04 16:58:04',	'2024-10-04 16:58:04'),
+(2,	1,	1,	'LECTOESCRITURA',	NULL,	't',	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
+(3,	1,	1,	'HABILIDADES COGNITIVAS',	NULL,	't',	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
+(4,	1,	1,	'COMPRENSIÓN LECTORA (SABER LEER)',	NULL,	't',	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
+(5,	1,	1,	'ATENCIÓN Y CONCENTRACIÓN',	NULL,	't',	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
+(6,	1,	1,	'DESARROLLO DE COMPRENSIÓN LECTORA (APRENDER A LEER)',	NULL,	't',	NULL,	'2024-10-04 16:59:15',	'2024-10-04 16:59:15'),
+(7,	2,	2,	'HABILIDADES SOCIALES',	NULL,	't',	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
+(8,	2,	2,	'HABILIDADES LABORALES',	NULL,	't',	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
+(9,	2,	1,	'TALLER DE TALENTOS (MANUALIDADES)',	NULL,	't',	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
+(10,	2,	2,	'TALLER DE AUTOCUIDADO PERSONAL',	NULL,	't',	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
+(11,	2,	2,	'TALLER SENSORIAL (ACOMPAÑAMIENTO)',	NULL,	't',	NULL,	'2024-10-04 17:01:19',	'2024-10-04 17:01:19'),
+(12,	3,	3,	'DANZAS COREOGRÁFICAS',	NULL,	't',	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
+(13,	3,	3,	'FOLCLÓRICOS ADULTOS (10 AÑOS A +)',	NULL,	't',	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
+(14,	3,	3,	'BAILE CON ACOMPAÑAMIENTO (SEVERO)',	NULL,	't',	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
+(15,	3,	3,	'MARINERA',	NULL,	't',	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
+(16,	3,	3,	'BAILE MODERNO',	NULL,	't',	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
+(17,	3,	3,	'FOLCLÓRICOS NIÑOS (4 -9 AÑOS)',	NULL,	't',	NULL,	'2024-10-04 17:02:43',	'2024-10-04 17:02:43'),
+(18,	4,	3,	'XILÓFONO',	NULL,	't',	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
+(19,	4,	3,	'CAJÓN BÁSICO',	NULL,	't',	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
+(20,	4,	3,	'GUITARRA',	NULL,	't',	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
+(21,	4,	3,	'PIANO',	NULL,	't',	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
+(22,	4,	3,	'CORO',	NULL,	't',	NULL,	'2024-10-04 17:04:13',	'2024-10-04 17:04:13'),
+(23,	5,	3,	'ATLETISMO',	NULL,	't',	NULL,	'2024-10-04 17:05:01',	'2024-10-04 17:05:01'),
+(24,	5,	3,	'INICIACIÓN A NATACIÓN',	NULL,	't',	NULL,	'2024-10-04 17:05:01',	'2024-10-04 17:05:01'),
+(25,	6,	2,	'PSICOMOTRICIDAD',	NULL,	't',	NULL,	'2024-10-04 17:06:30',	'2024-10-04 17:06:30'),
+(26,	6,	2,	'POSTURAL',	NULL,	't',	NULL,	'2024-10-04 17:06:30',	'2024-10-04 17:06:30'),
+(27,	6,	2,	'MANTENIMIENTO FUNCIONAL (SEVERO)',	NULL,	't',	NULL,	'2024-10-04 17:06:30',	'2024-10-04 17:06:30'),
+(28,	6,	1,	'EJERCICIOS EN PISCINA (TERAPIA)',	NULL,	't',	NULL,	'2024-10-04 17:06:30',	'2024-10-04 17:06:30'),
+(29,	7,	2,	'TALLER DE LENGUAJE EXPRESIVO',	NULL,	't',	NULL,	'2024-10-04 17:07:14',	'2024-10-04 17:07:14'),
+(30,	7,	2,	'TALLER DE ESTIMULACIÓN DE LENGUAJE ORAL (NIÑOS)',	NULL,	't',	NULL,	'2024-10-04 17:07:14',	'2024-10-04 17:07:14'),
+(31,	7,	2,	'TALLER DE HABILIDADES COMUNICATIVO SOCIAL',	NULL,	't',	NULL,	'2024-10-04 17:07:14',	'2024-10-04 17:07:14'),
+(32,	7,	2,	'TALLER DE LENGUAJE COMPRENSIVO',	NULL,	't',	NULL,	'2024-10-04 17:07:14',	'2024-10-04 17:07:14');
 
 DROP TABLE IF EXISTS "tipo_discapacidads";
 DROP SEQUENCE IF EXISTS tipo_discapacidads_id_seq;
-CREATE SEQUENCE tipo_discapacidads_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 5 CACHE 1;
+CREATE SEQUENCE tipo_discapacidads_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."tipo_discapacidads" (
     "id" bigint DEFAULT nextval('tipo_discapacidads_id_seq') NOT NULL,
@@ -565,7 +609,7 @@ INSERT INTO "tipo_discapacidads" ("id", "tipo_discapacidad", "created_at", "upda
 
 DROP TABLE IF EXISTS "tipo_personas";
 DROP SEQUENCE IF EXISTS tipo_personas_id_seq;
-CREATE SEQUENCE tipo_personas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 6 CACHE 1;
+CREATE SEQUENCE tipo_personas_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."tipo_personas" (
     "id" bigint DEFAULT nextval('tipo_personas_id_seq') NOT NULL,
@@ -585,7 +629,7 @@ INSERT INTO "tipo_personas" ("id", "tipo_persona", "created_at", "updated_at") V
 
 DROP TABLE IF EXISTS "tipo_seguros";
 DROP SEQUENCE IF EXISTS tipo_seguros_id_seq;
-CREATE SEQUENCE tipo_seguros_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 5 CACHE 1;
+CREATE SEQUENCE tipo_seguros_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."tipo_seguros" (
     "id" bigint DEFAULT nextval('tipo_seguros_id_seq') NOT NULL,
@@ -604,7 +648,7 @@ INSERT INTO "tipo_seguros" ("id", "tipo_seguro", "created_at", "updated_at") VAL
 
 DROP TABLE IF EXISTS "tipo_tallers";
 DROP SEQUENCE IF EXISTS tipo_tallers_id_seq;
-CREATE SEQUENCE tipo_tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 3 CACHE 1;
+CREATE SEQUENCE tipo_tallers_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."tipo_tallers" (
     "id" bigint DEFAULT nextval('tipo_tallers_id_seq') NOT NULL,
@@ -623,7 +667,7 @@ INSERT INTO "tipo_tallers" ("id", "descripcion", "usuario_actualiza", "deleted_a
 
 DROP TABLE IF EXISTS "users";
 DROP SEQUENCE IF EXISTS users_id_seq;
-CREATE SEQUENCE users_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;
+CREATE SEQUENCE users_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1;
 
 CREATE TABLE "public"."users" (
     "id" bigint DEFAULT nextval('users_id_seq') NOT NULL,
@@ -661,6 +705,7 @@ ALTER TABLE ONLY "public"."certificado_discapacidads" ADD CONSTRAINT "certificad
 ALTER TABLE ONLY "public"."ciclo_horarios" ADD CONSTRAINT "ciclo_horarios_ciclo_id_foreign" FOREIGN KEY (ciclo_id) REFERENCES ciclos(id) ON DELETE CASCADE NOT DEFERRABLE;
 ALTER TABLE ONLY "public"."ciclo_horarios" ADD CONSTRAINT "ciclo_horarios_horario_id_foreign" FOREIGN KEY (horario_id) REFERENCES horarios(id) ON DELETE CASCADE NOT DEFERRABLE;
 
+ALTER TABLE ONLY "public"."ciclos" ADD CONSTRAINT "ciclos_periodo_id_foreign" FOREIGN KEY (periodo_id) REFERENCES periodos(id) ON DELETE CASCADE NOT DEFERRABLE;
 ALTER TABLE ONLY "public"."ciclos" ADD CONSTRAINT "ciclos_taller_id_foreign" FOREIGN KEY (taller_id) REFERENCES tallers(id) ON DELETE CASCADE NOT DEFERRABLE;
 
 ALTER TABLE ONLY "public"."diagnostico_medicos" ADD CONSTRAINT "diagnostico_medicos_alumnos_id_foreign" FOREIGN KEY (alumnos_id) REFERENCES alumnos(id) ON DELETE CASCADE NOT DEFERRABLE;
@@ -686,4 +731,4 @@ ALTER TABLE ONLY "public"."tallers" ADD CONSTRAINT "tallers_tipo_taller_id_forei
 
 ALTER TABLE ONLY "public"."users" ADD CONSTRAINT "users_persona_id_foreign" FOREIGN KEY (persona_id) REFERENCES personas(id) NOT DEFERRABLE;
 
--- 2024-10-09 08:32:30.077808-05
+-- 2024-10-10 11:40:15.533843-05
