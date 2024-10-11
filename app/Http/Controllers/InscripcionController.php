@@ -38,7 +38,8 @@ class InscripcionController extends Controller
     public function index():View
     {
         $programas = $this->programaService->getProgramasAll();
-        return view('pages.inscripciones.index', ['programas'=>$programas]);
+        $listaEspera = $this->inscripcionEsperaService->getListaEspera();
+        return view('pages.inscripciones.index', ['programas'=>$programas,'listaEspera'=>$listaEspera]);
     }
 
     public function getAnioPeriodoByTaller($id): JsonResponse{

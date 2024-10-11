@@ -214,6 +214,10 @@
 @endsection
 @push('js')
 <script>
+
+</script>
+
+<script>
     $("#buscador").on('click', function() {
         $("#tiposTalleres").addClass('d-none');
         $("#programas").addClass('d-none');

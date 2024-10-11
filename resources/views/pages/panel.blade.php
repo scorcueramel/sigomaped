@@ -3,7 +3,7 @@
 @section('content')
 <div class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-        @include('components.haeder')
+        @include('components.header')
         @include('components.aside', ['activePage' => 'home'])
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

@@ -12,10 +12,10 @@ class ProgramaService{
     }
 
     public function getValidateInscriptionUser($tipo_programa, $alumno_id){
-        $validation = DB::select('SELECT
-                                            p.id AS "persona_id",
-                                            t.id AS "taller_id",
-                                            t.tipo_taller_id AS "tipo_taller"
+        $validation = DB::select("SELECT
+                                            p.id AS \"persona_id\",
+                                            t.id AS \"taller_id\",
+                                            t.tipo_taller_id AS \"tipo_taller\"
                                         FROM tallers t
                                         LEFT JOIN ciclos c
                                             ON c.taller_id = t.id
@@ -27,7 +27,7 @@ class ProgramaService{
                                             ON i.horario_id = h.id
                                         LEFT JOIN personas p
                                             ON p.id = i.persona_id
-                                        WHERE p.id = ? AND t.tipo_taller_id = ?;',[$alumno_id,$tipo_programa]);
+                                        WHERE p.id = ? AND t.tipo_taller_id = ? AND i.estado_inscripcion = 'I';",[$alumno_id,$tipo_programa]);
 
         return $validation;
     }

@@ -3,7 +3,7 @@
 @section('content')
 <div class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
-        @include('components.haeder')
+        @include('components.header')
         @include('components.aside', ['activePage' => 'inscripciones.index'])
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -21,6 +21,10 @@
 
             <!-- Main content -->
             <section class="content">
+                @if (count($listaEspera) > 0)
+                    @include('components.alerts',['type'=>'warning','icontype'=>'info','title'=>'Recuerda!','message'=>'Actualmente tu lista de espera cuenta con alumnos, te recomendamos verificarla antes de continuar con una inscripción. <br>
+                    Ve al apartado <strong><a href="/lista-espera/index">Lista de Espera</a></strong> para verificar.'])
+                @endif
                 <div class="row">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
@@ -166,6 +170,7 @@
             }
         });
     });
+
     function selectedRadio(id) {
         $("#datosAlumnos").addClass('d-none');
         $(".datos_alumnos").html('');

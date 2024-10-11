@@ -1,6 +1,6 @@
   <?php
-    $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
-    ?>
+  $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
+  ?>
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
       <!-- sidebar-->
@@ -10,7 +10,7 @@
           <ul class="sidebar-menu" data-widget="tree">
               <li class="user-profile treeview">
                   <a href="index.html">
-                      <img src="{{ asset('assets/images/user5-128x128.jpg')}}" alt="user">
+                      <img src="{{ asset('assets/images/user5-128x128.jpg') }}" alt="user">
                       <span>{{ $usuario->persona->nombres }}</span>
                       <span class="pull-right-container">
                           <i class="fa fa-angle-right pull-right"></i>
@@ -19,7 +19,9 @@
                   <ul class="treeview-menu">
                       <li><a href="javascript:void()"><i class="fa fa-user mr-5"></i>Mi Perfíl </a></li>
                       <li>
-                          <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i class="fa fa-power-off mr-5"></i>Cerrar Sesión</a>
+                          <a href="{{ route('logout') }}"
+                              onclick="event.preventDefault(); document.getElementById('frm-logout').submit();"><i
+                                  class="fa fa-power-off mr-5"></i>Cerrar Sesión</a>
                           <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
                               {{ csrf_field() }}
                           </form>
@@ -47,9 +49,9 @@
                                 <a href="pages/app/app-chat.html">
                                     <i class="fa fa-circle-thin"></i>Registros
                                 </a>
-                            </li>                            
+                            </li>
                         </ul>
-                    </li> 
+                    </li>
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-envelope"></i> <span>Mailbox</span>
@@ -160,140 +162,157 @@
                             <li><a href="pages/charts/peity.html"><i class="fa fa-circle-thin"></i>Peity</a></li>
                         </ul>
                     </li> --}}
-              <li class="treeview {{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.create' ? 'menu-open' : '' }}">
+              <li
+                  class="treeview {{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.create' ? 'menu-open' : '' }}">
                   <a href="#">
                       <i class="fa fa-edit"></i> <span>Inscripciones</span>
                       <span class="pull-right-container">
                           <i class="fa fa-angle-right pull-right"></i>
                       </span>
                   </a>
-                  <ul class="treeview-menu {{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.create' ? 'd-block' : '' }}">
-                      <li class="{{ $activePage == 'inscripciones.index' ? 'active' : '' }}"><a href="{{route('inscripciones.index')}}"><i class="fa fa-circle-thin"></i>Inscritos</a></li>
+                  <ul
+                      class="treeview-menu {{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.create' || $activePage == 'listaespera.index' ? 'd-block' : '' }}">
+                      <li class="{{ $activePage == 'inscripciones.index' ? 'active' : '' }}"><a
+                              href="{{ route('inscripciones.index') }}"><i class="fa fa-circle-thin"></i>Inscritos</a>
+                      </li>
+                      <li class="{{ $activePage == 'listaespera.index' ? 'active' : '' }}"><a
+                              href="{{ route('listaespera.index') }}"><i class="fa fa-circle-thin"></i>Lista de Espera</a>
+                      </li>
                   </ul>
               </li>
               {{-- <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-table"></i> <span>Tables</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-thin"></i>Simple tables</a></li>
-                            <li><a href="pages/tables/data.html"><i class="fa fa-circle-thin"></i>Data tables</a></li>
-                            <li><a href="pages/tables/editable-tables.html"><i class="fa fa-circle-thin"></i>Editable Tables</a></li>
-                            <li><a href="pages/tables/table-color.html"><i class="fa fa-circle-thin"></i>Table Color</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="pages/email/index.html">
-                            <i class="fa fa-envelope-open-o"></i> <span>Emails</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                    </li> --}}
-              {{-- <li class="header nav-small-cap">EXTRA COMPONENTS</li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-map"></i> <span>Map</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/map/map-google.html"><i class="fa fa-circle-thin"></i>Google Map</a></li>
-                            <li><a href="pages/map/map-vector.html"><i class="fa fa-circle-thin"></i>Vector Map</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-plug"></i> <span>Extension</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/extension/fullscreen.html"><i class="fa fa-circle-thin"></i>Fullscreen</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-file"></i> <span>Sample Pages</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="pages/samplepage/blank.html"><i class="fa fa-circle-thin"></i>Blank</a></li>
-                            <li><a href="pages/samplepage/coming-soon.html"><i class="fa fa-circle-thin"></i>Coming Soon</a></li>
-                            <li><a href="pages/samplepage/custom-scroll.html"><i class="fa fa-circle-thin"></i>Custom Scrolls</a></li>
-                            <li><a href="pages/samplepage/faq.html"><i class="fa fa-circle-thin"></i>FAQ</a></li>
-                            <li><a href="pages/samplepage/gallery.html"><i class="fa fa-circle-thin"></i>Gallery</a></li>
-                            <li><a href="pages/samplepage/invoice.html"><i class="fa fa-circle-thin"></i>Invoice</a></li>
-                            <li><a href="pages/samplepage/lightbox.html"><i class="fa fa-circle-thin"></i>Lightbox Popup</a></li>
-                            <li><a href="pages/samplepage/pace.html"><i class="fa fa-circle-thin"></i>Pace</a></li>
-                            <li><a href="pages/samplepage/pricing.html"><i class="fa fa-circle-thin"></i>Pricing</a></li>
-                            <li class="treeview">
-                                <a href="#"><i class="fa fa-circle-thin"></i>Authentication
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-right pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="pages/samplepage/login.html"><i class="fa fa-circle"></i>Login</a></li>
-                                    <li><a href="pages/samplepage/register.html"><i class="fa fa-circle"></i>Register</a></li>
-                                    <li><a href="pages/samplepage/lockscreen.html"><i class="fa fa-circle"></i>Lockscreen</a></li>
-                                    <li><a href="pages/samplepage/user-pass.html"><i class="fa fa-circle"></i>Recover password</a></li>
-                                </ul>
-                            </li>
-                            <li class="treeview">
-                                <a href="#"><i class="fa fa-circle-thin"></i>Error Pages
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-right pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="pages/samplepage/404.html"><i class="fa fa-circle"></i>404</a></li>
-                                    <li><a href="pages/samplepage/500.html"><i class="fa fa-circle"></i>500</a></li>
-                                    <li><a href="pages/samplepage/maintenance.html"><i class="fa fa-circle"></i>Maintenance</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-share"></i> <span>Multilevel</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-right pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#">Level One</a></li>
-                            <li class="treeview">
-                                <a href="#">Level One
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-right pull-right"></i>
-                                    </span>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#">Level Two</a></li>
-                                    <li class="treeview">
-                                        <a href="#">Level Two
-                                            <span class="pull-right-container">
-                                                <i class="fa fa-angle-right pull-right"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="treeview-menu">
-                                            <li><a href="#">Level Three</a></li>
-                                            <li><a href="#">Level Three</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Level One</a></li>
-                        </ul>
-                    </li> --}}
+                  <a href="#">
+                      <i class="fa fa-table"></i> <span>Tables</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                      </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li><a href="pages/tables/simple.html"><i class="fa fa-circle-thin"></i>Simple tables</a></li>
+                      <li><a href="pages/tables/data.html"><i class="fa fa-circle-thin"></i>Data tables</a></li>
+                      <li><a href="pages/tables/editable-tables.html"><i class="fa fa-circle-thin"></i>Editable
+                              Tables</a></li>
+                      <li><a href="pages/tables/table-color.html"><i class="fa fa-circle-thin"></i>Table Color</a></li>
+                  </ul>
+              </li>
+              <li>
+                  <a href="pages/email/index.html">
+                      <i class="fa fa-envelope-open-o"></i> <span>Emails</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                      </span>
+                  </a>
+              </li>
+              <li class="header nav-small-cap">EXTRA COMPONENTS</li>
+              <li class="treeview">
+                  <a href="#">
+                      <i class="fa fa-map"></i> <span>Map</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                      </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li><a href="pages/map/map-google.html"><i class="fa fa-circle-thin"></i>Google Map</a></li>
+                      <li><a href="pages/map/map-vector.html"><i class="fa fa-circle-thin"></i>Vector Map</a></li>
+                  </ul>
+              </li>
+              <li class="treeview">
+                  <a href="#">
+                      <i class="fa fa-plug"></i> <span>Extension</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                      </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li><a href="pages/extension/fullscreen.html"><i class="fa fa-circle-thin"></i>Fullscreen</a></li>
+                  </ul>
+              </li>
+              <li class="treeview">
+                  <a href="#">
+                      <i class="fa fa-file"></i> <span>Sample Pages</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                      </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li><a href="pages/samplepage/blank.html"><i class="fa fa-circle-thin"></i>Blank</a></li>
+                      <li><a href="pages/samplepage/coming-soon.html"><i class="fa fa-circle-thin"></i>Coming Soon</a>
+                      </li>
+                      <li><a href="pages/samplepage/custom-scroll.html"><i class="fa fa-circle-thin"></i>Custom
+                              Scrolls</a></li>
+                      <li><a href="pages/samplepage/faq.html"><i class="fa fa-circle-thin"></i>FAQ</a></li>
+                      <li><a href="pages/samplepage/gallery.html"><i class="fa fa-circle-thin"></i>Gallery</a></li>
+                      <li><a href="pages/samplepage/invoice.html"><i class="fa fa-circle-thin"></i>Invoice</a></li>
+                      <li><a href="pages/samplepage/lightbox.html"><i class="fa fa-circle-thin"></i>Lightbox Popup</a>
+                      </li>
+                      <li><a href="pages/samplepage/pace.html"><i class="fa fa-circle-thin"></i>Pace</a></li>
+                      <li><a href="pages/samplepage/pricing.html"><i class="fa fa-circle-thin"></i>Pricing</a></li>
+                      <li class="treeview">
+                          <a href="#"><i class="fa fa-circle-thin"></i>Authentication
+                              <span class="pull-right-container">
+                                  <i class="fa fa-angle-right pull-right"></i>
+                              </span>
+                          </a>
+                          <ul class="treeview-menu">
+                              <li><a href="pages/samplepage/login.html"><i class="fa fa-circle"></i>Login</a></li>
+                              <li><a href="pages/samplepage/register.html"><i class="fa fa-circle"></i>Register</a>
+                              </li>
+                              <li><a href="pages/samplepage/lockscreen.html"><i
+                                          class="fa fa-circle"></i>Lockscreen</a></li>
+                              <li><a href="pages/samplepage/user-pass.html"><i class="fa fa-circle"></i>Recover
+                                      password</a></li>
+                          </ul>
+                      </li>
+                      <li class="treeview">
+                          <a href="#"><i class="fa fa-circle-thin"></i>Error Pages
+                              <span class="pull-right-container">
+                                  <i class="fa fa-angle-right pull-right"></i>
+                              </span>
+                          </a>
+                          <ul class="treeview-menu">
+                              <li><a href="pages/samplepage/404.html"><i class="fa fa-circle"></i>404</a></li>
+                              <li><a href="pages/samplepage/500.html"><i class="fa fa-circle"></i>500</a></li>
+                              <li><a href="pages/samplepage/maintenance.html"><i
+                                          class="fa fa-circle"></i>Maintenance</a></li>
+                          </ul>
+                      </li>
+                  </ul>
+              </li>
+              <li class="treeview">
+                  <a href="#">
+                      <i class="fa fa-share"></i> <span>Multilevel</span>
+                      <span class="pull-right-container">
+                          <i class="fa fa-angle-right pull-right"></i>
+                      </span>
+                  </a>
+                  <ul class="treeview-menu">
+                      <li><a href="#">Level One</a></li>
+                      <li class="treeview">
+                          <a href="#">Level One
+                              <span class="pull-right-container">
+                                  <i class="fa fa-angle-right pull-right"></i>
+                              </span>
+                          </a>
+                          <ul class="treeview-menu">
+                              <li><a href="#">Level Two</a></li>
+                              <li class="treeview">
+                                  <a href="#">Level Two
+                                      <span class="pull-right-container">
+                                          <i class="fa fa-angle-right pull-right"></i>
+                                      </span>
+                                  </a>
+                                  <ul class="treeview-menu">
+                                      <li><a href="#">Level Three</a></li>
+                                      <li><a href="#">Level Three</a></li>
+                                  </ul>
+                              </li>
+                          </ul>
+                      </li>
+                      <li><a href="#">Level One</a></li>
+                  </ul>
+              </li> --}}
+
+
           </ul>
       </section>
   </aside>

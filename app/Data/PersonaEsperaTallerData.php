@@ -10,6 +10,7 @@ class PersonaEsperaTallerData extends Data {
         public int $alumnoid,
         public int $tallerid,
         public string $inscrito,
+        public ?string $tallernombre,
     ) {}
 
 }

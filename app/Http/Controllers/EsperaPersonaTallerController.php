@@ -3,18 +3,36 @@
 namespace App\Http\Controllers;
 
 use App\Models\EsperaPersonaTaller;
+use App\Services\InscripcionEsperaService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\View\View;
 
 class EsperaPersonaTallerController extends Controller
 {
+    public function __construct(
+        private InscripcionEsperaService $inscripcionEsperaService,
+    ) {}
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
-        //
+        $preLista = [];
+        $listaActual = [];
+
+        $listaService = $this->inscripcionEsperaService->getListaEspera();
+        // validar que no se repital los talleres que tienen alumnos en espera
+        foreach ($listaService as $ls) {
+            array_push($preLista,['taller_id'=>$ls->tallerid,'taller_nombre'=>$ls->tallernombre]);
+        }
+
+        $listaActual = array_unique($preLista, SORT_ASC);
+        $listaFinal = Arr::sort($listaActual);
+
+        return view("pages.lista-espera.index", compact("listaFinal"));
     }
 
     /**
