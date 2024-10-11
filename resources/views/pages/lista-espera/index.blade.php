@@ -21,7 +21,7 @@
 
             <!-- Main content -->
             <section class="content">
-                @unless (count($listaFinal) == 0)
+                @if (count($listaFinal) <= 0)
                     @include('components.alerts',['type'=>'success','icontype'=>'check','title'=>'Sin Espera','message'=>'<span class="mt-5">Actualmente no cuentas con una lista de espera para ninguno de los talleres.</span>','btndismiss'=>false])
                 @else
                 <div class="row">
@@ -51,7 +51,7 @@
                         <!-- /.box -->
                     </div>
                 </div>
-                @endunless
+                @endif
                 <!-- /.row -->
             </section>
             <!-- /.content -->
