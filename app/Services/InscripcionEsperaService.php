@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Data\PersonaEsperaTallerData;
+use App\Data\ListaEsperaTallerData;
 use App\Models\EsperaPersonaTaller;
 
 class InscripcionEsperaService{
@@ -13,8 +13,9 @@ class InscripcionEsperaService{
         $alumnosEspera = EsperaPersonaTaller::where("inscrito","=","E")->with('taller')->get();
 
         foreach($alumnosEspera as $key => $value){
-            $this->listaDeEspera[] = PersonaEsperaTallerData::from(['alumnoid'=>$alumnosEspera[$key]->persona_id,'tallerid'=>$alumnosEspera[$key]->taller_id,'inscrito'=>$alumnosEspera[$key]->inscrito,'tallernombre'=>$alumnosEspera[$key]->taller->nombre]);
+            $this->listaDeEspera[] = ListaEsperaTallerData::from(['alumnoid'=>$alumnosEspera[$key]->persona_id,'tallerid'=>$alumnosEspera[$key]->taller_id,'inscrito'=>$alumnosEspera[$key]->inscrito,'tallernombre'=>$alumnosEspera[$key]->taller->nombre]);
         }
+
         return $this->listaDeEspera;
     }
 

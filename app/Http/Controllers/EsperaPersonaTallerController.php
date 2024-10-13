@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\EsperaPersonaTaller;
+use App\Services\EsperaPersonaService;
 use App\Services\InscripcionEsperaService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Response;
 use Illuminate\View\View;
 
 class EsperaPersonaTallerController extends Controller
 {
     public function __construct(
         private InscripcionEsperaService $inscripcionEsperaService,
+        private EsperaPersonaService $esperaPersonaService
     ) {}
     /**
      * Display a listing of the resource.
@@ -24,7 +28,7 @@ class EsperaPersonaTallerController extends Controller
         $listaActual = [];
 
         $listaService = $this->inscripcionEsperaService->getListaEspera();
-        // validar que no se repital los talleres que tienen alumnos en espera
+
         foreach ($listaService as $ls) {
             array_push($preLista,['taller_id'=>$ls->tallerid,'taller_nombre'=>$ls->tallernombre]);
         }
@@ -33,6 +37,28 @@ class EsperaPersonaTallerController extends Controller
         $listaFinal = Arr::sort($listaActual);
 
         return view("pages.lista-espera.index", compact("listaFinal"));
+    }
+
+    public function getPersonasByTypeTaller($id):JsonResponse{
+        $preLista = [];
+        $listaActual = [];
+
+        $listaPersonasEspera = $this->esperaPersonaService->getListaEsperaPersonasByTallerId($id);
+
+        foreach ($listaPersonasEspera as $ls) {
+            array_push($preLista,[
+                'persona_id'=>$ls->personaid,
+                'taller_id'=>$ls->tallerid,
+                'documento'=>$ls->documento,
+                'nombres'=>$ls->nombres,
+                'apellidos'=>$ls->apellidos,
+            ]);
+        }
+
+        $listaActual = array_unique($preLista, SORT_ASC);
+        $listaFinal = Arr::sort($listaActual);
+
+        return Response::json($listaFinal);
     }
 
     /**

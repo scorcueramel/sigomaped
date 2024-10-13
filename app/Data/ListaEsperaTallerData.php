@@ -4,7 +4,7 @@ namespace App\Data;
 
 use Spatie\LaravelData\Data;
 
-class PersonaEsperaTallerData extends Data {
+class ListaEsperaTallerData extends Data {
 
     public function __construct(
         public int $alumnoid,

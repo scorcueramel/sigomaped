@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Data\InscripcionNuevoData;
-use App\Data\PersonaEsperaTallerData;
+use App\Data\ListaEsperaTallerData;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Carbon;
 
@@ -41,9 +41,9 @@ class InscripcionNuevoRequest extends FormRequest
     {
         $fechainscripcion = Carbon::today()->format('Y-m-d');
         if ($this->listaEspera == "0") {
-            $this->inscripcion[] = InscripcionNuevoData::from(['alumnoid' => $this->alumnoId, 'horarioid' => $this->horarioId, 'fechainscripcion' => $fechainscripcion]);
+            $this->inscripcion[] = InscripcionNuevoData::from(['alumnoid' => $this->alumnoId, 'horarioid' => $this->horarioId, 'cicloid'=>$this->tallerId,'fechainscripcion' => $fechainscripcion]);
         } elseif ($this->listaEspera == "1") {
-            $this->personaespera[] = PersonaEsperaTallerData::from(['alumnoid' => $this->alumnoId, 'tallerid' => $this->tallerId, 'inscrito' => 'E']);
+            $this->personaespera[] = ListaEsperaTallerData::from(['alumnoid' => $this->alumnoId, 'tallerid' => $this->tallerId, 'inscrito' => 'E']);
         }
     }
 }

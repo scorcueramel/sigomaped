@@ -29,7 +29,7 @@ Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
     Route::get('/get-ciclo-taller/{id}',[InscripcionController::class,'getAnioPeriodoByTaller'])->name('inscripciones.ciclos.taller');
     Route::get('/get-inscritos-ciclo/{id}',[InscripcionController::class,'getInscritoToCicle'])->name('inscripciones.ciclos.inscritos');
     Route::get('/create',[InscripcionController::class,'create'])->name('inscripciones.create');
-    Route::get('/get-persona/{documento}',[InscripcionController::class,'getPersonaByDocumento'])->name('inscripciones.ciclos.persona');
+    Route::get('/get-persona/{documento}',[InscripcionController::class,'getPersonaByDocument'])->name('inscripciones.ciclos.persona');
     Route::get('/get-programa/{id}',[InscripcionController::class,'getProgramaByType'])->name('inscripciones.getprogram');
     Route::get('/get-talleres/{id}',[InscripcionController::class,'getTalleresByType'])->name('inscripciones.gettaller');
     Route::get('/get-ciclos/{id}',[InscripcionController::class,'getCiclosByType'])->name('inscripciones.ciclos');
@@ -39,4 +39,5 @@ Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
 });
 Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
     Route::get('/index',[EsperaPersonaTallerController::class,'index'])->name('listaespera.index');
+    Route::get('/get-personas-espera/{id}',[EsperaPersonaTallerController::class,'getPersonasByTypeTaller'])->name('inscripciones.ciclos.dias');
 });

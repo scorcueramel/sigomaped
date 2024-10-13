@@ -15,4 +15,5 @@ class CicloHorarioService{
                                             WHERE ch.ciclo_id = ?', [$id]);
         return $cicloHorario;
     }
+
 }

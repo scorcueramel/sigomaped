@@ -572,6 +572,7 @@
             icon: `${icon}`,
             confirmButtonColor: "#3085d6",
             confirmButtonText: `${textbtnconfirm}`,
+            allowOutsideClick: false,
         });
     }
 </script>

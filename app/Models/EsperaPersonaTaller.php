@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class EsperaPersonaTaller extends Model
@@ -13,7 +12,7 @@ class EsperaPersonaTaller extends Model
         'inscrito',
         'usuario_actualiza',
     ];
-        
+
     public function persona(){
         return $this->belongsTo(Persona::class);
     }

@@ -73,7 +73,7 @@ class InscripcionController extends Controller
         return Response::json($validatation);
     }
 
-    public function getPersonaByDocumento($documento): JsonResponse {
+    public function getPersonaByDocument($documento): JsonResponse {
         $persona = $this->personaService->getPersonas($documento);
         if(count($persona)>0)
             return Response::json($persona);
@@ -126,6 +126,8 @@ class InscripcionController extends Controller
             return Response::json(['code'=>$registerCode,'mensaje'=>'Alumno inscrito correctamente!']);
         elseif($registerCode === 300)
             return Response::json(['code'=>$registerCode,'mensaje'=> 'El alumno ya se encuentra en lista de espera para el taller seleccionado.']);
+        elseif($registerCode === 400)
+            return Response::json(['code'=>$registerCode,'mensaje'=> 'Ya no quedan cupos en este periodo para el taller elejido, te recomendamos inscribirlo en la lista de espera para la apertura de un nuevo ciclo.']);
         else
             return Response::json(['code'=>500,'mensaje'=> 'Algo sucedio al intentar inscribir al alumno, comuniquese con sistemas porfavor.']);
     }
