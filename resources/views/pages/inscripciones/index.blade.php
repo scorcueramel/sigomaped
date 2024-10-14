@@ -113,7 +113,7 @@
                                         <thead>
                                             <tr>
                                                 <th>NOMBRES</th>
-                                                <th>DIAS</th>
+                                                <th>DIA</th>
                                                 <th>HORA INICIO</th>
                                                 <th>HORA FIN</th>
                                             </tr>

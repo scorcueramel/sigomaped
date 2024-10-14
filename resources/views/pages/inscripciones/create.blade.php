@@ -133,6 +133,7 @@
                     </div>
                 </div>
                 <div class="row d-none" id="ciclos">
+                    <input type="hidden" value="0" id="cicloid">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
                         <div class="box">
@@ -282,28 +283,36 @@
         let horarioId = $("#horarioid").val();
         let listaEspera = $("#espera").val();
         let tallerId = $("#tallerid").val();
+        let cicloId = $("#cicloid").val();
 
-        Swal.fire({
-            icon: 'info',
-            html: "Espere un momento porfavor ...",
-            timerProgressBar: true,
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
+        // Swal.fire({
+        //     icon: 'info',
+        //     html: "Espere un momento porfavor ...",
+        //     timerProgressBar: true,
+        //     allowOutsideClick: false,
+        //     didOpen: () => {
+        //         Swal.showLoading();
+        //     }
+        // });
 
         $.ajax({
             type: "POST",
-            url: "{{route('inscirpciones.store')}}",
+            url: "{{route('inscripciones.store')}}",
             data: {
                 alumnoId,
                 horarioId,
                 listaEspera,
+                cicloId,
                 tallerId,
             },
             success: function(response) {
-                if (response.code === 200)
+                if (response.code === 100)
+                    mensaje("Ops", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.close();
+                        }
+                    });
+                else if (response.code === 200)
                     mensaje("Alumno Inscrito", `${response.mensaje}`, "success", "Entendido!").then((result) => {
                         if (result.isConfirmed) {
                             window.location.href = "{{route('inscripciones.index')}}";
@@ -315,8 +324,14 @@
                             Swal.close();
                         }
                     });
+                else if (response.code === 400)
+                    mensaje("Oops!", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.close();
+                        }
+                    });
                 else if (response.code === 500)
-                    mensaje("Opps", `${response.mensaje}`, "error", "Entendido!").then((result) => {
+                    mensaje("Ops", `${response.mensaje}`, "error", "Entendido!").then((result) => {
                         if (result.isConfirmed) {
                             Swal.close();
                         }
@@ -440,7 +455,7 @@
                     response.forEach((e) => {
                         $("#radios-talleres").append(`
                         <div class="radio">
-                            <input name="taller" type="radio" id="taller_${e.id}" onclick="javascript:consultaCiclos(${id},'${descripcion}');$('#tallerid').val(${e.id})">
+                            <input name="taller" type="radio" id="taller_${e.id}" onclick="javascript:consultaCiclos(${e.id},'${descripcion}');$('#tallerid').val(${e.id})">
                             <label for="taller_${e.id}">${e.nombre}</label>
                         </div>
                         `);
@@ -493,6 +508,7 @@
     }
 
     function consultaHorariosCiclos(id, descripcion) {
+        $("#cicloid").val(id);
         $("#dias-ciclo").html("");
         $("#dias").addClass("d-none");
         $.ajax({

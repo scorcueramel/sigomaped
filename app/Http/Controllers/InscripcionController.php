@@ -122,7 +122,9 @@ class InscripcionController extends Controller
         elseif($enEspera == 1)
             $registerCode = $this->inscripcionEsperaService->inscribirEspera($request->personaespera);
 
-        if($registerCode === 200)
+        if($registerCode === 100)
+            return Response::json(['code'=>$registerCode,'mensaje'=>'El alumno ya encuenta inscrito al taller seleccionado, puedes verificarlo en la sección de inscritos.']);
+        elseif($registerCode === 200)
             return Response::json(['code'=>$registerCode,'mensaje'=>'Alumno inscrito correctamente!']);
         elseif($registerCode === 300)
             return Response::json(['code'=>$registerCode,'mensaje'=> 'El alumno ya se encuentra en lista de espera para el taller seleccionado.']);

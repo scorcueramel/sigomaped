@@ -35,7 +35,7 @@ Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
     Route::get('/get-ciclos/{id}',[InscripcionController::class,'getCiclosByType'])->name('inscripciones.ciclos');
     Route::get('/get-horarios-ciclos/{id}',[InscripcionController::class,'getCiclosByHorarios'])->name('inscripciones.ciclos.horarios');
     Route::get('/get-validacion/{tipotaller}/{alumnonid}/inscripciones',[InscripcionController::class,'validateAlumnoInscription'])->name('inscripciones.validacion.isncripciones');
-    Route::post('/store',[InscripcionController::class, 'store'])->name('inscirpciones.store');
+    Route::post('/store',[InscripcionController::class, 'store'])->name('inscripciones.store');
 });
 Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
     Route::get('/index',[EsperaPersonaTallerController::class,'index'])->name('listaespera.index');

@@ -10,6 +10,7 @@ class InscripcionNuevoData extends Data
         public int $alumnoid,
         public int $horarioid,
         public string $fechainscripcion,
+        public ?int $tallerid,
         public ?int $cicloid,
     ) {}
 }

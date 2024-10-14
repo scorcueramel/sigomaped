@@ -34,6 +34,7 @@ class InscripcionNuevoRequest extends FormRequest
             'alumnoId' => 'required',
             'listaEspera' => 'required',
             'tallerId' => 'required',
+            'cicloId' => 'required',
         ];
     }
 
@@ -41,7 +42,7 @@ class InscripcionNuevoRequest extends FormRequest
     {
         $fechainscripcion = Carbon::today()->format('Y-m-d');
         if ($this->listaEspera == "0") {
-            $this->inscripcion[] = InscripcionNuevoData::from(['alumnoid' => $this->alumnoId, 'horarioid' => $this->horarioId, 'cicloid'=>$this->tallerId,'fechainscripcion' => $fechainscripcion]);
+            $this->inscripcion[] = InscripcionNuevoData::from(['alumnoid' => $this->alumnoId, 'horarioid' => $this->horarioId, 'tallerid'=>$this->tallerId,'cicloid'=>$this->cicloId,'fechainscripcion' => $fechainscripcion]);
         } elseif ($this->listaEspera == "1") {
             $this->personaespera[] = ListaEsperaTallerData::from(['alumnoid' => $this->alumnoId, 'tallerid' => $this->tallerId, 'inscrito' => 'E']);
         }
