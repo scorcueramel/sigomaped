@@ -25,19 +25,20 @@ Route::get('/panel/principal', [App\Http\Controllers\HomeController::class, 'ind
 
 Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
     Route::get('/index',[InscripcionController::class,'index'])->name('inscripciones.index');
-    Route::get('/get-ciclo-dias/{id}',[InscripcionController::class,'getDiasByPeriodAndYear'])->name('inscripciones.ciclos.dias');
-    Route::get('/get-ciclo-taller/{id}',[InscripcionController::class,'getAnioPeriodoByTaller'])->name('inscripciones.ciclos.taller');
-    Route::get('/get-inscritos-ciclo/{id}',[InscripcionController::class,'getInscritoToCicle'])->name('inscripciones.ciclos.inscritos');
-    Route::get('/create',[InscripcionController::class,'create'])->name('inscripciones.create');
-    Route::get('/get-persona/{documento}',[InscripcionController::class,'getPersonaByDocument'])->name('inscripciones.ciclos.persona');
+    Route::get('/get-ciclo-dias/{id}',[InscripcionController::class,'getDiasByPeriodAndYear'])->name('inscripciones.dias');
+    Route::get('/get-ciclo-taller/{id}',[InscripcionController::class,'getAnioPeriodoByTaller'])->name('inscripciones.taller');
+    Route::get('/get-inscritos-ciclo/{id}',[InscripcionController::class,'getInscritoToCicle'])->name('inscripciones.inscritos');
+    Route::get('/create/',[InscripcionController::class,'create'])->name('inscripciones.create');
+    Route::get('/get-persona/{documento}',[InscripcionController::class,'getPersonaByDocument'])->name('inscripciones.persona');
     Route::get('/get-programa/{id}',[InscripcionController::class,'getProgramaByType'])->name('inscripciones.getprogram');
     Route::get('/get-talleres/{id}',[InscripcionController::class,'getTalleresByType'])->name('inscripciones.gettaller');
     Route::get('/get-ciclos/{id}',[InscripcionController::class,'getCiclosByType'])->name('inscripciones.ciclos');
-    Route::get('/get-horarios-ciclos/{id}',[InscripcionController::class,'getCiclosByHorarios'])->name('inscripciones.ciclos.horarios');
+    Route::get('/get-horarios-ciclos/{id}',[InscripcionController::class,'getCiclosByHorarios'])->name('inscripciones.horarios');
     Route::get('/get-validacion/{tipotaller}/{alumnonid}/inscripciones',[InscripcionController::class,'validateAlumnoInscription'])->name('inscripciones.validacion.isncripciones');
     Route::post('/store',[InscripcionController::class, 'store'])->name('inscripciones.store');
 });
 Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
     Route::get('/index',[EsperaPersonaTallerController::class,'index'])->name('listaespera.index');
-    Route::get('/get-personas-espera/{id}',[EsperaPersonaTallerController::class,'getPersonasByTypeTaller'])->name('inscripciones.ciclos.dias');
+    Route::get('/get-personas-espera/{id}',[EsperaPersonaTallerController::class,'getPersonasByTypeTaller'])->name('espera.persona.detalle');
+    // Route::get('/registrar-persona-espera/',EsperaPersonaTallerController::class,'')->name('espera.ciclos.');
 });

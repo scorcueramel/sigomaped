@@ -62,10 +62,10 @@ class InscripcionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create():View
     {
         $tiposTalleres = TipoTaller::all();
-        return Response::view('pages.inscripciones.create', compact('tiposTalleres'));
+        return view('pages.inscripciones.create', compact('tiposTalleres'));
     }
 
     public function validateAlumnoInscription($tipo_programa,$alumno_id){

@@ -115,7 +115,7 @@
                             $("#datos_alumno").append(`
                             <tr>
                                 <td>
-                                    <input type="radio" name="alumnoid" id="alumno_${e.persona_id}">
+                                    <input type="radio" name="alumnoid" id="alumno_${e.persona_id}" onclick="javascript:inscribirAlumno()">
                                     <label for="alumno_${e.persona_id}"></label>
                                 </td>
                                 <td>
@@ -137,6 +137,27 @@
                         `);
                         });
                     }
+                }
+            });
+        }
+
+        function inscribirAlumno() {
+            Swal.fire({
+                title: "¿Inscribir Alumno?",
+                html: "Deseas inscribir al alumno a un nuevo ciclo y periodo",
+                icon: "question",
+                allowOutsideClick: false,
+                showCloseButton: false,
+                showConfirmButton: true,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Si",
+                showCancelButton: true,
+                cancelButtonColor: "#d33",
+                cancelButtonText: "No",
+                focusConfirm: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.close();
                 }
             });
         }

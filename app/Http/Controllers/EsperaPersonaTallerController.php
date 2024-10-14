@@ -66,9 +66,9 @@ class EsperaPersonaTallerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create():View
     {
-        //
+        return view('pages.lista-espera.create');
     }
 
     /**
