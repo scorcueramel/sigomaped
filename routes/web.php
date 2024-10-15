@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EsperaPersonaTallerController;
 use App\Http\Controllers\InscripcionController;
+use App\Http\Controllers\ProgramaController;
 use App\Http\Controllers\PersonaEsperaTallerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -44,4 +45,13 @@ Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
     Route::get('/index',[EsperaPersonaTallerController::class,'index'])->name('listaespera.index');
     Route::get('/get-personas-espera/{id}',[EsperaPersonaTallerController::class,'getPersonasByTypeTaller'])->name('listaespera.detalle');
     Route::get('/create/{personaid}/{tallerid}',[EsperaPersonaTallerController::class,'create'])->name('listaespera.create');
+});
+
+Route::group(['prefix'=> 'programas','middleware'=>'auth'],function(){
+    Route::get('/index',[ProgramaController::class,'index'])->name('programas.index');
+    Route::get('/get-programas/', [ProgramaController::class, 'getProgramas'])->name('programas.getProgramas');
+    Route::get('/create/',[ProgramaController::class,'create'])->name('programas.create');
+    Route::post('/store',[ProgramaController::class, 'store'])->name('programas.store');
+    Route::get('/programas/{id}/edit', [ProgramaController::class, 'edit'])->name('programas.edit');
+    Route::delete('/programas/{id}', [ProgramaController::class, 'destroy'])->name('programas.destroy');
 });

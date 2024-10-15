@@ -181,6 +181,25 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                     </li>
                 </ul>
             </li>
+            <li class="header nav-small-cap">PROGRAMAS</li>
+            <li
+                class="treeview {{ $activePage == 'programas.index' || $activePage == 'programas.create' ? 'menu-open' : '' }}">
+                <a href="#" onclick="">
+                    <i class="fa fa-edit"></i> <span>Programas</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu {{ $activePage == 'programas.index' || $activePage == 'programas.create' ? 'd-block' : '' }}"
+                    id="programas">
+                    <li class="{{ $activePage == 'programas.index' ? 'active' : '' }}"><a
+                            href="{{ route('programas.index') }}"><i class="fa fa-circle-thin"></i>Listado</a>
+                    </li>
+                    <li class="{{ $activePage == 'programas.create' ? 'active' : '' }}"><a
+                            href="{{ route('programas.create') }}"><i class="fa fa-circle-thin"></i>Nuevo Programa</a>
+                    </li>
+                </ul>
+            </li>             
             {{-- <li class="treeview">
                 <a href="#">
                     <i class="fa fa-table"></i> <span>Tables</span>

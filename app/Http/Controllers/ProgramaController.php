@@ -4,27 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\Programa;
 use Illuminate\Http\Request;
+use App\Services\ProgramaService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Response;
+use Illuminate\View\View;
 
 class ProgramaController extends Controller
 {
+    
+    public function __construct(
+        private ProgramaService $programaService,
+    ){}
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index():View
     {
-        //
+        $programas = $this->programaService->getProgramasAll();
+        return view('pages.programas.index', ['programas'=>$programas]);
     }
 
+    public function getProgramas(): JsonResponse{
+        $programas = $this->programaService->getProgramasAll();
+        return Response::json($programas);
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create():View
     {
-        //
+        return view('pages.programas.create');
     }
 
     /**

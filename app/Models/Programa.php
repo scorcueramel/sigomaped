@@ -11,6 +11,7 @@ class Programa extends Model
 
     protected $fillable = [
         'nombre',
+        'estado',
         'usuario_actualiza',
     ];
 
