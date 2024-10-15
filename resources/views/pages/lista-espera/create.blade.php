@@ -4,7 +4,7 @@
 <div class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         @include('components.header')
-        @include('components.aside', ['activePage' => 'inscripciones.create'])
+        @include('components.aside', ['activePage' => 'listaespera.create'])
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -21,7 +21,9 @@
             <!-- Main content -->
             <section class="content">
                 <div class="row" id="datosAlumno">
-                    <input type="hidden" id="alumonid" value="">
+                    <input type="hidden" id="espera" value="2">
+                    <input type="hidden" id="alumonid" value="{{$data->alumnoid}}">
+                    <input type="hidden" id="tallerid" value="{{$data->tallerid}}">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
                         <div class="box">
@@ -80,10 +82,14 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">AÑO</th>
-                                                <th scope="col">PERIODO</th>
-                                                <th scope="col">DURACIÓN</th>
+                                                <th scope="col" rowspan="2">#</th>
+                                                <th scope="col" rowspan="2">AÑO</th>
+                                                <th scope="col" rowspan="2">PERIODO</th>
+                                                <th scope="col" colspan="2" class="text-center">DURACIÓN</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col" class="text-center">INICIO</th>
+                                                <th scope="col" class="text-center">FIN</th>
                                             </tr>
                                         </thead>
                                         <tbody id="radios-ciclos">
@@ -145,19 +151,18 @@
 @push('js')
 <script>
     function consultaCiclos(tallerid, programa) {
-            $("#radios-ciclos").html("");
-            $("#ciclos").addClass("d-none");
-            $("#dias").addClass("d-none");
-            $.ajax({
-                type: "GET",
-                url: `/inscripciones/get-ciclos/${tallerid}`,
-                success: function(response) {
-                    if (response.length > 0) {
-                        $("#ciclos").removeClass("d-none");
-                        $("#cicloTitulo").html(`${programa}`);
-                        response.forEach((e) => {
-                            console.log(e);
-                            $("#radios-ciclos").append(`
+        $("#radios-ciclos").html("");
+        $("#ciclos").addClass("d-none");
+        $("#dias").addClass("d-none");
+        $.ajax({
+            type: "GET",
+            url: `/inscripciones/get-ciclos/${tallerid}`,
+            success: function(response) {
+                if (response.length > 0) {
+                    $("#ciclos").removeClass("d-none");
+                    $("#cicloTitulo").html(`${programa}`);
+                    response.forEach((e) => {
+                        $("#radios-ciclos").append(`
                             <tr>
                                 <td>
                                     <input type="radio" name="ciclos" id="ciclo_${e.id}" onclick="javascript:consultaHorariosCiclos(${e.id},'${e.anio}','${e.periodo.periodo}')">
@@ -169,15 +174,18 @@
                                 <td>
                                     <label for="ciclo_${e.id}">${e.periodo.periodo}</label>
                                 </td>
-                                <td>
-                                    <label for="ciclo_${e.id}">${e.fecha_inicio} / ${e.fecha_fin}</label>
+                                <td class="text-center">
+                                    <label for="ciclo_${e.id}">${e.fecha_inicio}</label>
+                                </td>
+                                <td class="text-center">
+                                    <label for="ciclo_${e.id}">${e.fecha_fin}</label>
                                 </td>
                             </tr>
                         `);
-                        });
-                    }
+                    });
                 }
-            });
+            }
+        });
     }
 
     function consultaHorariosCiclos(id, anio, periodo) {
@@ -233,10 +241,6 @@
         });
     }
 
-    function generarRegistro(diaid, horarioid){
-
-    }
-
     function activaInscripcionAsignaDiaId(diaid) {
         $("#inscribiralumno").removeClass("disabled");
         $("#horarioid").val(diaid);
@@ -289,7 +293,7 @@
                         }
                     });
                 else if (response.code === 400)
-                    mensaje("Oops!", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                    mensaje("Ops!", `Ya no quedan cupos en este periodo para el taller elejido, el alumno continuará en la lista de espera para la apertura de un nuevo ciclo.`, "warning", "Entendido!").then((result) => {
                         if (result.isConfirmed) {
                             Swal.close();
                         }

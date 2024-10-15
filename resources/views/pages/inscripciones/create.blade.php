@@ -33,8 +33,8 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control input-sm" placeholder="Documento del alumno" id="documento_alumno" autofocus required>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-info" type="button" id="buscador"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                            <button class="btn btn-warning" type="button" id="limpiar" onclick="javascript:limpiarCampos()"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                            <button class="btn btn-info" type="button" id="buscador" data-toggle="tooltip" data-placement="top" title="BUSCAR ALUMNO"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                            <button class="btn btn-warning" type="button" id="limpiar" onclick="javascript:limpiarCampos()" data-toggle="tooltip" data-placement="top" title="LIMPIAR DATOS DE BUSQUEDA"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                         </span>
                                     </div>
                                 </div>
@@ -146,11 +146,16 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">AÑO</th>
-                                                <th scope="col">PERIODO</th>
-                                                <th scope="col">DURACIÓN</th>
+                                                <th scope="col" rowspan="2">#</th>
+                                                <th scope="col" rowspan="2">AÑO</th>
+                                                <th scope="col" rowspan="2">PERIODO</th>
+                                                <th scope="col" colspan="2" class="text-center">DURACIÓN</th>
                                             </tr>
+                                            <tr>
+                                                <th scope="col" class="text-center">INICIO</th>
+                                                <th scope="col" class="text-center">FIN</th>
+                                            </tr>
+                                        </thead>
                                         </thead>
                                         <tbody id="radios-ciclos">
                                         </tbody>
@@ -176,13 +181,18 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">DÍA</th>
-                                                <th scope="col">HORA INICIO</th>
-                                                <th scope="col">HORA FIN</th>
-                                                <th scope="col">CUPOS MÁXIMOS</th>
-                                                <th scope="col">CUPOS ACTUALES</th>
+                                                <th scope="col" rowspan="2">#</th>
+                                                <th scope="col" rowspan="2">DÍA</th>
+                                                <th scope="col" rowspan="2">HORA INICIO</th>
+                                                <th scope="col" rowspan="2">HORA FIN</th>
+                                                <th scope="col" colspan="2" class="text-center">CANTIDAD DE CUPOS</th>
                                             </tr>
+                                            <tr>
+                                                <th scope="col" class="text-center">MÁXIMOS</th>
+                                                <th scope="col" class="text-center">ACTUALES</th>
+                                            </tr>
+                                            <thead>
+                                            </thead>
                                         </thead>
                                         <tbody id="dias-ciclo">
                                         </tbody>
@@ -236,6 +246,7 @@
             success: function(response) {
                 if (response.length > 0) {
                     let data = response[0];
+                    $("#documento_alumno").focus();
                     $("#alumonid").val(data.id);
                     $("#datosAlumno").removeClass('d-none');
                     $(".datos_alumno").html('');
@@ -493,8 +504,11 @@
                                 <td>
                                     <label for="ciclo_${e.id}">${e.periodo.periodo}</label>
                                 </td>
-                                <td>
-                                    <label for="ciclo_${e.id}">${e.fecha_inicio} / ${e.fecha_fin}</label>
+                                <td class="text-center">
+                                    <label for="ciclo_${e.id}">${e.fecha_inicio}</label>
+                                </td>
+                                <td class="text-center">
+                                    <label for="ciclo_${e.id}">${e.fecha_fin}</label>
                                 </td>
                             </tr>
                         `);
@@ -534,10 +548,10 @@
                                 <td>
                                     <label for="dia_${e.id}">${e.hora_fin}</label>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <label for="dia_${e.id}">${e.cupo_maximo}</label>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <label for="dia_${e.id}">${e.cupo_actual}</label>
                                 </td>
                             </tr>

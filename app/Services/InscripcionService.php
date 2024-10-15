@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\CicloHorario;
+use App\Models\EsperaPersonaTaller;
 use App\Models\Inscripcion;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
@@ -57,6 +58,9 @@ class InscripcionService
                     $nuevoInscrito->usuario_actualiza = $usuarioActualiza;
                     $nuevoInscrito->save();
                     $this->updateCuposCiclo($inscripcion->horarioid,$inscripcion->cicloid);
+                    $this->getPersonaEspera($inscripcion->alumnoid, $inscripcion->tallerid);
+                    if($inscripcion->enespera == "2")
+                        null;
                     return 200;
                 }else{
                     return 100;
@@ -85,7 +89,7 @@ class InscripcionService
         $cicloshorarios = $this->getCiclosHorariosGlobal($horario,$ciclo);
 
         foreach ($cicloshorarios as $ch) {
-            $ch->cupo_actual = $ch->cupo_actual - 1;
+            $ch->cupo_actual--;
             $ch->save();
         }
     }
@@ -98,5 +102,14 @@ class InscripcionService
     public function getCiclosHorariosGlobal($horario,$ciclo): Collection{
         $cicloshorarios = CicloHorario::where('horario_id',$horario)->where('ciclo_id',$ciclo)->get();
         return $cicloshorarios;
+    }
+
+    public function getPersonaEspera(int $personaid, int $tallerid){
+        $personaespera = EsperaPersonaTaller::where('persona_id',$personaid)->where('taller_id',$tallerid)->get();
+        foreach ($personaespera as $p) {
+            $p->inscrito = 'I';
+            $p->save();
+        }
+        return $personaespera;
     }
 }

@@ -4,7 +4,7 @@
 <div class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         @include('components.header')
-        @include('components.aside', ['activePage' => 'listalistaespera.index'])
+        @include('components.aside', ['activePage' => 'listaespera.index'])
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
