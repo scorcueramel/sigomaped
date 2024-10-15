@@ -15,7 +15,7 @@ class EsperaPersonaTallerController extends Controller
 {
     public function __construct(
         private InscripcionEsperaService $inscripcionEsperaService,
-        private EsperaPersonaService $esperaPersonaService
+        private EsperaPersonaService $esperaPersonaService,
     ) {}
     /**
      * Display a listing of the resource.
@@ -30,7 +30,7 @@ class EsperaPersonaTallerController extends Controller
         $listaService = $this->inscripcionEsperaService->getListaEspera();
 
         foreach ($listaService as $ls) {
-            array_push($preLista,['taller_id'=>$ls->tallerid,'taller_nombre'=>$ls->tallernombre]);
+            array_push($preLista, ['taller_id' => $ls->tallerid, 'taller_nombre' => $ls->tallernombre]);
         }
 
         $listaActual = array_unique($preLista, SORT_ASC);
@@ -39,19 +39,20 @@ class EsperaPersonaTallerController extends Controller
         return view("pages.lista-espera.index", compact("listaFinal"));
     }
 
-    public function getPersonasByTypeTaller($id):JsonResponse{
+    public function getPersonasByTypeTaller($id): JsonResponse
+    {
         $preLista = [];
         $listaActual = [];
 
         $listaPersonasEspera = $this->esperaPersonaService->getListaEsperaPersonasByTallerId($id);
 
         foreach ($listaPersonasEspera as $ls) {
-            array_push($preLista,[
-                'persona_id'=>$ls->personaid,
-                'taller_id'=>$ls->tallerid,
-                'documento'=>$ls->documento,
-                'nombres'=>$ls->nombres,
-                'apellidos'=>$ls->apellidos,
+            array_push($preLista, [
+                'persona_id' => $ls->personaid,
+                'taller_id' => $ls->tallerid,
+                'documento' => $ls->documento,
+                'nombres' => $ls->nombres,
+                'apellidos' => $ls->apellidos,
             ]);
         }
 
@@ -66,9 +67,11 @@ class EsperaPersonaTallerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create():View
+    public function create(int $personaid, int $tallerid): View
     {
-        return view('pages.lista-espera.create');
+        $data = $this->esperaPersonaService->getListaEsperaDetalle($personaid, $tallerid)[0];
+
+        return view('pages.lista-espera.create', compact('data'));
     }
 
     /**

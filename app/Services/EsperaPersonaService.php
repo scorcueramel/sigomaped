@@ -2,7 +2,10 @@
 
 namespace App\Services;
 
+use App\Data\DatosAlumnoEsperaData;
 use App\Data\PersonaListaEsperaData;
+use App\Models\Persona;
+use App\Models\Taller;
 use Illuminate\Support\Facades\DB;
 
 class EsperaPersonaService
@@ -23,8 +26,29 @@ class EsperaPersonaService
                 'tallerid' => $alespera->taller_id,
                 'documento' => $alespera->documento,
                 'nombres' => $alespera->nombres,
-                'apellidos' => $alespera->apellidos]);
+                'apellidos' => $alespera->apellidos
+            ]);
         }
+
+        return $this->listaAlumnosEspera;
+    }
+
+    public function getListaEsperaDetalle(int $personaid, int $tallerid):array
+    {
+        $alumno = Persona::find($personaid);
+        $datotaller = Taller::where('id', $tallerid)->with('tipo_taller')->with('programa')->get()[0];
+        $this->listaAlumnosEspera[] = DatosAlumnoEsperaData::from([
+            'alumnoid' => $alumno->id,
+            'alumnonombres' => $alumno->nombres,
+            'alumnoapellidos' => $alumno->apellidos,
+            'alumnodocumento' => $alumno->documento,
+            'tipotallerid' => $datotaller->tipo_taller->id,
+            'tipotallerdescripcion' => $datotaller->tipo_taller->descripcion,
+            'programaid' => $datotaller->programa->id,
+            'programanombre' => $datotaller->programa->nombre,
+            'tallerid' => $datotaller->id,
+            'tallernombre' => $datotaller->nombre,
+        ]);
 
         return $this->listaAlumnosEspera;
     }

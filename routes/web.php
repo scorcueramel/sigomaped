@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\EsperaPersonaTallerController;
 use App\Http\Controllers\InscripcionController;
+use App\Http\Controllers\PersonaEsperaTallerController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,8 +39,9 @@ Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
     Route::get('/get-validacion/{tipotaller}/{alumnonid}/inscripciones',[InscripcionController::class,'validateAlumnoInscription'])->name('inscripciones.validacion.isncripciones');
     Route::post('/store',[InscripcionController::class, 'store'])->name('inscripciones.store');
 });
+
 Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
     Route::get('/index',[EsperaPersonaTallerController::class,'index'])->name('listaespera.index');
-    Route::get('/get-personas-espera/{id}',[EsperaPersonaTallerController::class,'getPersonasByTypeTaller'])->name('espera.persona.detalle');
-    // Route::get('/registrar-persona-espera/',EsperaPersonaTallerController::class,'')->name('espera.ciclos.');
+    Route::get('/get-personas-espera/{id}',[EsperaPersonaTallerController::class,'getPersonasByTypeTaller'])->name('listaespera.detalle');
+    Route::get('/create/{personaid}/{tallerid}',[EsperaPersonaTallerController::class,'create'])->name('listaespera.create');
 });

@@ -4,7 +4,7 @@
     <div class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
             @include('components.header')
-            @include('components.aside', ['activePage' => 'listaespera.index'])
+            @include('components.aside', ['activePage' => 'listalistaespera.index'])
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -40,7 +40,7 @@
                                                     <div class="radio">
                                                         <input name="listaespera" type="radio"
                                                             id="Option_{{ $espera['taller_id'] }}"
-                                                            onclick="javascript:personasPorTaller('{{ $espera['taller_id'] }}')">
+                                                            onclick="javascript:personasPorTaller({{ $espera['taller_id'] }})">
                                                         <label
                                                             for="Option_{{ $espera['taller_id'] }}">{{ $espera['taller_nombre'] }}</label>
                                                     </div>
@@ -76,7 +76,7 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
+                                                    <th>ACCIONES</th>
                                                     <th>NOMBRES</th>
                                                     <th>APELLIDOS</th>
                                                     <th>DOCUMENTO</th>
@@ -103,11 +103,11 @@
 @endsection
 @push('js')
     <script>
-        function personasPorTaller(id) {
+        function personasPorTaller(tallerid) {
             $("#datos_alumno").html('');
             $.ajax({
                 type: "GET",
-                url: `/lista-espera/get-personas-espera/${id}`,
+                url: `/lista-espera/get-personas-espera/${tallerid}`,
                 success: function(response) {
                     if (response.length > 0) {
                         $("#datosAlumno").removeClass('d-none');
@@ -115,23 +115,24 @@
                             $("#datos_alumno").append(`
                             <tr>
                                 <td>
-                                    <input type="radio" name="alumnoid" id="alumno_${e.persona_id}" onclick="javascript:inscribirAlumno()">
-                                    <label for="alumno_${e.persona_id}"></label>
+                                    <div class="dropdown">
+                                        <button class="btn btn-outline btn-secondary dropdown-toggle" type="button"
+                                        data-toggle="dropdown"></button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="#" onclick="javascript:inscribirAlumno(${e.persona_id},${tallerid});"><i class="fa fa-plus"></i> Inscribir</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="#" onclick="javascript:confirm('¿Deseas quitar a este alumno de la lista de espera?')"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
-                                    <label for="alumno_${e.persona_id}">
-                                        ${e.nombres}
-                                    </label>
+                                    ${e.nombres}
                                 </td>
                                 <td>
-                                    <label for="alumno_${e.persona_id}">
-                                        ${e.apellidos}
-                                    </label>
+                                    ${e.apellidos}
                                 </td>
                                 <td>
-                                    <label for="alumno_${e.persona_id}">
-                                        ${e.documento}
-                                    </label>
+                                    ${e.documento}
                                 </td>
                             </tr>
                         `);
@@ -141,10 +142,10 @@
             });
         }
 
-        function inscribirAlumno() {
+        function inscribirAlumno(personaid,tallerid) {
             Swal.fire({
                 title: "¿Inscribir Alumno?",
-                html: "Deseas inscribir al alumno a un nuevo ciclo y periodo",
+                html: `¿Deseas inscribir al alumno a un nuevo ciclo?`,
                 icon: "question",
                 allowOutsideClick: false,
                 showCloseButton: false,
@@ -157,7 +158,7 @@
                 focusConfirm: true,
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Swal.close();
+                    window.location.href =  `/lista-espera/create/${personaid}/${tallerid}`;
                 }
             });
         }
