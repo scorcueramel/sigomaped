@@ -51,7 +51,7 @@
                                                 <td>{{$data->programanombre}}</td>
                                                 <td>{{$data->tallernombre}}</td>
                                                 <td>
-                                                    <button class="btn btn-success btn-sm">
+                                                    <button class="btn btn-success btn-sm" onclick="javascript:consultaCiclos('{{$data->tallerid}}','{{$data->programanombre}}')">
                                                         <i class="fa fa-search mr-5" aria-hidden="true"></i>Buscar Horario
                                                     </button>
                                                 </td>
@@ -103,7 +103,7 @@
                         <!-- Form Element sizes -->
                         <div class="box">
                             <div class="box-header with-border">
-                                <h4 class="box-title">DIAS RELACIONADOS A <span class="font-weight-bold" id="diaTitulo"></span></h4>
+                                <h4 class="box-title">DIAS RELACIONADOS AL AÑO <span class="font-weight-bold" id="anio"></span> PERIODO <span class="font-weight-bold" id="periodo"></span></h4>
                             </div>
                             <p style="margin: 20px 0 0 20px">SELECCIONA UN DÍA</p>
                             <div class="box-body form-element">
@@ -144,50 +144,23 @@
 @endsection
 @push('js')
 <script>
-    function continuarInscripcion(id, descripcion) {
-        $.ajax({
-            type: "GET",
-            url: `/inscripciones/get-programa/${id}`,
-            success: function(response) {
-                if (response.length > 0) {
-                    $("#dias").addClass('d-none');
-                    $("#ciclos").addClass('d-none');
-                    $("#talleres").addClass('d-none');
-                    $("#programas").removeClass('d-none');
-                    $("#programaTitulo").html(descripcion);
-                    response.forEach((e) => {
-                        $("#radios-programas").append(`
-                            <div class="radio">
-                                <input name="programa" type="radio" id="programa_${e.id}" onclick="javascript:consultaTalleres(${e.id},'${e.nombre}')">
-                                <label for="programa_${e.id}">${e.nombre}</label>
-                            </div>
-                        `);
-                    });
-                }
-            }
-        });
-    }
-
-    function consultaCiclos(id, descripcion) {
-        let espera = $("#espera").val();
-
-        if (espera == 0) {
-            $('#tallerid').val(id);
+    function consultaCiclos(tallerid, programa) {
             $("#radios-ciclos").html("");
             $("#ciclos").addClass("d-none");
             $("#dias").addClass("d-none");
             $.ajax({
                 type: "GET",
-                url: `/inscripciones/get-ciclos/${id}`,
+                url: `/inscripciones/get-ciclos/${tallerid}`,
                 success: function(response) {
                     if (response.length > 0) {
                         $("#ciclos").removeClass("d-none");
-                        $("#cicloTitulo").html(`${descripcion}`);
+                        $("#cicloTitulo").html(`${programa}`);
                         response.forEach((e) => {
+                            console.log(e);
                             $("#radios-ciclos").append(`
                             <tr>
                                 <td>
-                                    <input type="radio" name="ciclos" id="ciclo_${e.id}" onclick="javascript:consultaHorariosCiclos(${e.id},'${e.anio}')">
+                                    <input type="radio" name="ciclos" id="ciclo_${e.id}" onclick="javascript:consultaHorariosCiclos(${e.id},'${e.anio}','${e.periodo.periodo}')">
                                     <label for="ciclo_${e.id}"></label>
                                 </td>
                                 <td>
@@ -205,12 +178,9 @@
                     }
                 }
             });
-        } else {
-            $('#inscribirespera').removeClass('d-none');
-        }
     }
 
-    function consultaHorariosCiclos(id, descripcion) {
+    function consultaHorariosCiclos(id, anio, periodo) {
         $("#cicloid").val(id);
         $("#dias-ciclo").html("");
         $("#dias").addClass("d-none");
@@ -218,7 +188,8 @@
             type: "GET",
             url: `/inscripciones/get-horarios-ciclos/${id}`,
             success: function(response) {
-                $("#diaTitulo").html(`${descripcion}`);
+                $("#anio").html(`${anio}`);
+                $("#periodo").html(`${periodo}`);
                 if (response.length > 0) {
                     $("#dias").removeClass("d-none");
                     response.forEach((e) => {
@@ -261,6 +232,78 @@
             }
         });
     }
+
+    function generarRegistro(diaid, horarioid){
+
+    }
+
+    function activaInscripcionAsignaDiaId(diaid) {
+        $("#inscribiralumno").removeClass("disabled");
+        $("#horarioid").val(diaid);
+    }
+
+    function inscribirAlumno() {
+        let alumnoId = $("#alumonid").val();
+        let horarioId = $("#horarioid").val();
+        let listaEspera = $("#espera").val();
+        let tallerId = $("#tallerid").val();
+        let cicloId = $("#cicloid").val();
+
+        Swal.fire({
+            icon: 'info',
+            html: "Espere un momento porfavor ...",
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "{{route('inscripciones.store')}}",
+            data: {
+                alumnoId,
+                horarioId,
+                listaEspera,
+                cicloId,
+                tallerId,
+            },
+            success: function(response) {
+                if (response.code === 100)
+                    mensaje("Ops", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.close();
+                        }
+                    });
+                else if (response.code === 200)
+                    mensaje("Alumno Inscrito", `${response.mensaje}`, "success", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{{route('inscripciones.index')}}";
+                        }
+                    });
+                else if (response.code === 300)
+                    mensaje("Alumno en Espera", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.close();
+                        }
+                    });
+                else if (response.code === 400)
+                    mensaje("Oops!", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.close();
+                        }
+                    });
+                else if (response.code === 500)
+                    mensaje("Ops", `${response.mensaje}`, "error", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.close();
+                        }
+                    });
+            }
+        });
+
+    };
 
     function confirmacion(title, message, icon, cancel, canceltext, confirmtext) {
         return Swal.fire({

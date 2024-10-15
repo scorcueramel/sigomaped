@@ -336,11 +336,34 @@
                             Swal.close();
                         }
                     });
-                console.log(`alumno : ${alumnoId}, taller: ${tallerId}`);
             }
         });
 
     };
+
+    function continuarInscripcion(id, descripcion) {
+        $.ajax({
+            type: "GET",
+            url: `/inscripciones/get-programa/${id}`,
+            success: function(response) {
+                if (response.length > 0) {
+                    $("#dias").addClass('d-none');
+                    $("#ciclos").addClass('d-none');
+                    $("#talleres").addClass('d-none');
+                    $("#programas").removeClass('d-none');
+                    $("#programaTitulo").html(descripcion);
+                    response.forEach((e) => {
+                        $("#radios-programas").append(`
+                            <div class="radio">
+                                <input name="programa" type="radio" id="programa_${e.id}" onclick="javascript:consultaTalleres(${e.id},'${e.nombre}')">
+                                <label for="programa_${e.id}">${e.nombre}</label>
+                            </div>
+                        `);
+                    });
+                }
+            }
+        });
+    }
 
     function limpiarCampos() {
         $("#documento_alumno").val('');
@@ -411,30 +434,6 @@
                 } else {
                     $('#espera').val('0');
                     continuarInscripcion(tipotallerid, descripcion);
-                }
-            }
-        });
-    }
-
-    function continuarInscripcion(id, descripcion) {
-        $.ajax({
-            type: "GET",
-            url: `/inscripciones/get-programa/${id}`,
-            success: function(response) {
-                if (response.length > 0) {
-                    $("#dias").addClass('d-none');
-                    $("#ciclos").addClass('d-none');
-                    $("#talleres").addClass('d-none');
-                    $("#programas").removeClass('d-none');
-                    $("#programaTitulo").html(descripcion);
-                    response.forEach((e) => {
-                        $("#radios-programas").append(`
-                            <div class="radio">
-                                <input name="programa" type="radio" id="programa_${e.id}" onclick="javascript:consultaTalleres(${e.id},'${e.nombre}')">
-                                <label for="programa_${e.id}">${e.nombre}</label>
-                            </div>
-                        `);
-                    });
                 }
             }
         });

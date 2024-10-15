@@ -36,7 +36,7 @@ Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
     Route::get('/get-talleres/{id}',[InscripcionController::class,'getTalleresByType'])->name('inscripciones.gettaller');
     Route::get('/get-ciclos/{id}',[InscripcionController::class,'getCiclosByType'])->name('inscripciones.ciclos');
     Route::get('/get-horarios-ciclos/{id}',[InscripcionController::class,'getCiclosByHorarios'])->name('inscripciones.horarios');
-    Route::get('/get-validacion/{tipotaller}/{alumnonid}/inscripciones',[InscripcionController::class,'validateAlumnoInscription'])->name('inscripciones.validacion.isncripciones');
+    Route::get('/get-validacion/{tipotaller}/{alumnoid}/inscripciones',[InscripcionController::class,'validateAlumnoInscription'])->name('inscripciones.validacion.isncripciones');
     Route::post('/store',[InscripcionController::class, 'store'])->name('inscripciones.store');
 });
 
