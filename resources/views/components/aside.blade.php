@@ -186,9 +186,6 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                 class="treeview {{ $activePage == 'personas.index' || $activePage == 'personas.create' ? 'menu-open' : '' }}">
                 <a href="#">
                     <i class="fa fa-users"></i> <span>Personas</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
                 </a>
                 <ul class="treeview-menu {{ $activePage == 'personas.index' || $activePage == 'personas.create' ? 'd-block' : '' }}"
                     id="personas">
@@ -206,14 +203,16 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
+
+            </li>
                 <ul class="treeview-menu {{ $activePage == 'programas.index' || $activePage == 'programas.create' ? 'd-block' : '' }}"
                     id="programas">
-                    <li class="{{ $activePage == 'programas.index' || $activePage == 'programas.create' ? 'active' : '' }}"><a
+                    <li class="{{ $activePage == 'programas.index' ? 'active' : '' }}"><a
                             href="{{ route('programas.index') }}"><i class="fa fa-circle-thin"></i>Listado</a>
                     </li>
-                    {{-- <li class="{{ $activePage == 'programas.create' ? 'active' : '' }}"><a
+                    <li class="{{ $activePage == 'programas.create' ? 'active' : '' }}"><a
                             href="{{ route('programas.create') }}"><i class="fa fa-circle-thin"></i>Nuevo Programa</a>
-                    </li> --}}
+                    </li>
                 </ul>
             </li>
             {{-- <li class="treeview">
