@@ -121,7 +121,7 @@
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="#" onclick="javascript:inscribirAlumno(${e.persona_id},${tallerid});"><i class="fa fa-plus"></i> Inscribir</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" onclick="javascript:confirmacion('${e.nombres} ${e.apellidos}')"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
+                                            <a class="dropdown-item" href="#" onclick="javascript:quitarDeEspera('${e.nombres} ${e.apellidos}',${e.persona_id},${tallerid})"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
                                         </div>
                                     </div>
                                 </td>
@@ -163,10 +163,10 @@
         });
     }
 
-    function confirmacion(persona) {
+    function quitarDeEspera(nombres, personaid, tallerid) {
         Swal.fire({
             title: `¿Quitar de la lista?`,
-            html: `¿Deseas <strong><span class="font-weight-bold">Quitar</span></strgon> a ${persona} de la lista de espera¡`,
+            html: `<p class="text-justify">¿Deseas <strong><span class="font-weight-bold">Quitar</span></strgon> a ${nombres} de la lista de espera?</p>`,
             icon: `warning`,
             allowOutsideClick: false,
             showCloseButton: false,
@@ -179,16 +179,33 @@
             focusConfirm: true,
         }).then((result) => {
             if (result.isConfirmed) {
-                Swal.fire({
-                    icon: "success",
-                    title: "El alumno se retiro de la lista de espera."
+                $.ajax({
+                    type: "GET",
+                    url: `/lista-espera/delete/${personaid}/${tallerid}`,
+                    success: function(response) {
+                        if (response.code === 200) {
+                            Swal.fire({
+                                icon: "success",
+                                title: `${response.mensaje}`,
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "Entendido!",
+                            }).then((resp) => {
+                                if(resp.isConfirmed){
+                                    window.location.reload();
+                                }
+                            });
+                        }
+                    }
                 });
             } else {
-                Swal.fire(
-                    'Cancelled',
-                    'Recuerda si quitas al alumno de la lista de espera no podras recuperarlo hasta que se vuelva a inscribir en la lista de espera',
-                    'error'
-                )
+                Swal.fire({
+                    title: 'Cancelado',
+                    html: `<p class="text-justify"><strong><span class="font-weight-bold">Recuerda:</span></strong> si quitas al alumno de la lista de espera no podras recuperarlo hasta que se vuelva a inscribir en la lista de espera</p>`,
+                    icon: `info`,
+                    allowOutsideClick: false,
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: 'Entendido!',
+                });
             }
         });
     }

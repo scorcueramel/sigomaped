@@ -125,11 +125,13 @@ class EsperaPersonaTallerController extends Controller
      * @param  \App\Models\EsperaPersonaTaller  $esperaPersonaTaller
      * @return \Illuminate\Http\Response
      */
-    public function destroy(int $personaid, int $tallerid)
+    public function destroy(int $personaid, int $tallerid): JsonResponse
     {
-        //
-        $personaEspera = $this->esperaPersonaService->getListaEsperaDetalle($personaid,$tallerid);
-        dd($personaEspera);
+        $personaEspera = $this->esperaPersonaService->updateEstadoPersonaEspera($personaid, $tallerid);
+        if ($personaEspera === 200) {
+            return Response::json(['code' => $personaEspera, 'mensaje' => 'Alumno retirado de espera']);
+        } else {
+            return Response::json(['code' => 500, 'mensaje' => 'Error inesperado.']);
+        }
     }
 }
-

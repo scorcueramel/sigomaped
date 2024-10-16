@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Data\DatosAlumnoEsperaData;
 use App\Data\PersonaListaEsperaData;
+use App\Models\EsperaPersonaTaller;
 use App\Models\Persona;
 use App\Models\Taller;
 use Illuminate\Support\Facades\DB;
@@ -51,5 +52,14 @@ class EsperaPersonaService
         ]);
 
         return $this->listaAlumnosEspera;
+    }
+
+    public function updateEstadoPersonaEspera(int $personaid, int $tallerid){
+        $personaEspera = EsperaPersonaTaller::where('persona_id', $personaid)->where('taller_id',$tallerid)->get();
+        foreach($personaEspera as $espera){
+            $espera->inscrito = 'D';
+            $espera->save();
+        }
+        return 200;
     }
 }

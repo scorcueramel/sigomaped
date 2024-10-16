@@ -45,7 +45,7 @@ Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
     Route::get('/index',[EsperaPersonaTallerController::class,'index'])->name('listaespera.index');
     Route::get('/get-personas-espera/{id}',[EsperaPersonaTallerController::class,'getPersonasByTypeTaller'])->name('listaespera.detalle');
     Route::get('/create/{personaid}/{tallerid}',[EsperaPersonaTallerController::class,'create'])->name('listaespera.create');
-    Route::post('/delete/{personaid}/{tallerid}',[EsperaPersonaTallerController::class, 'destroy'])->name('personas.destroy');
+    Route::get('/delete/{personaid}/{tallerid}',[EsperaPersonaTallerController::class, 'destroy'])->name('personas.destroy');
 });
 
 Route::group(['prefix'=>'personas','middleware'=>'auth'], function(){

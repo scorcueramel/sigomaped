@@ -349,10 +349,17 @@
                         }
                     });
                 else if (response.code === 400)
-                    mensaje("Oops!", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
-                        if (result.isConfirmed) {
-                            Swal.close();
-                        }
+                    mensaje("Ops!", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                        let listaEspera = $("#espera").val('1');
+                        confirmacion("¿Deseas Continuar?", "Puedes Inscribit al alumno la lista de espera para el próximo ciclo a iniciar.", "question", true, "No Inscribir", "Si Inscribir").then((result) => {
+                            if (result.isConfirmed) {
+                                inscribirEspera();
+                            } else if (result.dismiss) {
+                                $('#espera').val('0');
+                                mensaje("¡Cancelado!", "Puedes verificar los programas a los que se encuentra inscrito el alumno en la sección de <strong>INSCRITOS</strong>", "warning", "Entendido!", );
+                            }
+                        });
+
                     });
                 else if (response.code === 500)
                     mensaje("Ops", `${response.mensaje}`, "error", "Entendido!").then((result) => {
@@ -364,6 +371,42 @@
         });
 
     };
+
+    function inscribirEspera() {
+        let alumnoId = $("#alumonid").val();
+        let horarioId = $("#horarioid").val();
+        let listaEspera = $("#espera").val();
+        let tallerId = $("#tallerid").val();
+        let cicloId = $("#cicloid").val();
+        Swal.fire({
+            icon: 'info',
+            html: "Espere un momento porfavor ...",
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        $.ajax({
+            type: "POST",
+            url: "{{route('inscripciones.store')}}",
+            data: {
+                alumnoId,
+                horarioId,
+                listaEspera,
+                cicloId,
+                tallerId,
+            },
+            success: function(response) {
+                if (response.code === 200)
+                    mensaje("Alumno en Espera", `${response.mensaje} recuerda que el alumno se encuentra en la seccion de espera`, "success", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = "{{route('inscripciones.index')}}";
+                        }
+                    });
+            }
+        });
+    }
 
     function continuarInscripcion(id, descripcion) {
         $.ajax({
@@ -597,7 +640,7 @@
     function confirmacion(title, message, icon, cancel, canceltext, confirmtext) {
         return Swal.fire({
             title: `${title}`,
-            html: `${message}`,
+            html: `<p class="text-justify">${message}</p>`,
             icon: `${icon}`,
             allowOutsideClick: false,
             showCloseButton: false,
@@ -614,7 +657,7 @@
     function mensaje(title, message, icon, textbtnconfirm) {
         return Swal.fire({
             title: `${title}`,
-            html: `${message}`,
+            html: `<p class="text-justify">${message}</p>`,
             icon: `${icon}`,
             confirmButtonColor: "#3085d6",
             confirmButtonText: `${textbtnconfirm}`,
