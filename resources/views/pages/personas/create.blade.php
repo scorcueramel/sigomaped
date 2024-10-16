@@ -33,21 +33,19 @@
                                 <div class="box-header with-border d-flex justify-content-between">
                                     <h4 class="box-title">DATOS GENERALES DE LA PERSONA</span></h4>
                                 </div>
-                                <div class="box-body">
+                                <div class="box-body form-element">
                                     <div class="form-group">
                                         <label for="tipos-personas">TIPO <span class="text-danger">*</span></label>
                                         <select class="form-control" id="tipos-personas" required>
                                             <option selected disabled value="">SELECCIONA UN TIPO DE PERSONAS</option>
                                             @foreach ($tipospersonas as $tp)
-                                            <option value="{{$tp->tipopersonaid}}">{{$tp->tipopersonadescripcion}}</option>
+                                            <option class="mx-3" value="{{$tp->tipopersonaid}}">{{$tp->tipopersonadescripcion}}</option>
                                             @endforeach
                                         </select>
                                         <div class="invalid-feedback">
                                             El tipo de personas es obligatorio
                                         </div>
                                     </div>
-                                </div>
-                                <div class="box-body form-element">
                                     <div class="form-group">
                                         <label for="documento">DOCUMENTO DE IDENTIDAD <span class="text-danger">*</span></label>
                                         <div class="controls">
@@ -199,14 +197,20 @@
                 <div class="row d-none" id="datosrepresentante"></div>
             `);
         } else if (tipoPersona == 6) {
+            let generos = @json($generos);
             limpiarCampos();
             $("#datosgeneralesregistrar").html('');
             $("#datosgenerales").addClass('col-lg-6');
             $("#formularioextend").removeClass('d-none');
             $("#boxheader").html('DATOS DEL ALUMNO');
             $("#boxbody").html(`
-
+                <div class="form-group" id="radio-generos">
+                </div>
             `);
+
+            generos.forEach(element => {
+                console.log(element);
+            });
         }
     });
 
@@ -260,7 +264,7 @@
         });
     }
 
-    function camposRepesentanteLegal(alumnoid){
+    function camposRepesentanteLegal(alumnoid) {
         $('#alumonid').val(alumnoid);
         $("#datosrepresentante").removeClass('d-none');
         $("#datosrepresentante").html('');

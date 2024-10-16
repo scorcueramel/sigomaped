@@ -9,7 +9,7 @@ class TipoPersonaService {
 
     public array $tipospoersonas = [];
 
-    public function getTiposServicios():array{
+    public function getTiposPersonasServicios():array{
         $tipopersona = TipoPersona::all();
 
         foreach ($tipopersona as $tp) {

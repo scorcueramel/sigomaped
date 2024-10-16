@@ -36,7 +36,7 @@
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
-                                    <select class="form-control" id="programas">
+                                    <select class="form-control" id="programasseleccionado">
                                         <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
                                         @foreach ($programas as $programa)
                                         <option value="{{$programa->id}}">{{$programa->nombre}}</option>
@@ -139,7 +139,7 @@
 @endsection
 @push('js')
 <script>
-    $('#programas').on('change', function() {
+    $('#programasseleccionado').on('change', function() {
         let id = $(this).val();
         $("#talleres").addClass('d-none');
         $("#anioperiodo").addClass('d-none');
