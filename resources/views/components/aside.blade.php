@@ -164,8 +164,8 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                 </li> --}}
             <li
                 class="treeview {{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.create' || $activePage == 'listaespera.index' || $activePage == 'listaespera.create' ? 'menu-open' : '' }}">
-                <a href="#" onclick="">
-                    <i class="fa fa-edit"></i> <span>Inscripciones</span>
+                <a href="#">
+                    <i class="fa fa-pencil-square"></i> <span>Inscripciones</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -178,6 +178,22 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                     <li class="{{ $activePage == 'listaespera.index' || $activePage == 'listaespera.create' ? 'active' : '' }}"><a
                             href="{{ route('listaespera.index') }}"><i class="fa fa-circle-thin"></i>Lista de
                             Espera</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="header nav-small-cap">GESTIÓN DE PERSONAS</li>
+            <li
+                class="treeview {{ $activePage == 'personas.index' || $activePage == 'personas.create' ? 'menu-open' : '' }}">
+                <a href="#">
+                    <i class="fa fa-users"></i> <span>Personas</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu {{ $activePage == 'personas.index' || $activePage == 'personas.create' ? 'd-block' : '' }}"
+                    id="personas">
+                    <li class="{{ $activePage == 'personas.index' || $activePage == 'personas.create' ? 'active' : '' }}"><a
+                            href="{{ route('personas.index') }}"><i class="fa fa-circle-thin"></i>Registradas</a>
                     </li>
                 </ul>
             </li>

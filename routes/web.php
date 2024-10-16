@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EsperaPersonaTallerController;
 use App\Http\Controllers\InscripcionController;
+use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\PersonaEsperaTallerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -44,4 +45,10 @@ Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
     Route::get('/index',[EsperaPersonaTallerController::class,'index'])->name('listaespera.index');
     Route::get('/get-personas-espera/{id}',[EsperaPersonaTallerController::class,'getPersonasByTypeTaller'])->name('listaespera.detalle');
     Route::get('/create/{personaid}/{tallerid}',[EsperaPersonaTallerController::class,'create'])->name('listaespera.create');
+});
+
+Route::group(['prefix'=>'personas','middleware'=>'auth'], function(){
+    Route::get('/index',[PersonaController::class, 'index'])->name('personas.index');
+    Route::get('/create',[PersonaController::class, 'create'])->name('personas.create');
+    Route::post('/store',[PersonaController::class, 'store'])->name('personas.store');
 });

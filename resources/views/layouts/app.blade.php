@@ -50,9 +50,8 @@
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    />
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- toast tr -->
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.toast.css') }}">
 </head>
@@ -129,6 +128,7 @@
 
     <script src="{{asset('assets/js/jquery.toast.js')}}"></script>
     <script src="{{asset('assets/js/toastr.js')}}"></script>
+    <script src="{{ asset('assets/js/validation.js') }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -138,6 +138,27 @@
                 }
             });
         });
+
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
     </script>
 
     @stack('js')
