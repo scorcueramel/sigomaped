@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Programa;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class ProgramaService{
@@ -40,5 +41,15 @@ class ProgramaService{
                                         WHERE tt.id = ?
                                         GROUP BY p.nombre, p.id', [$id]);
         return $programas;
+    }
+
+    public function crearPrograma(array $data)
+    {
+        try {
+            $programa = Programa::create($data);
+            return $programa;
+        } catch (Exception $e) {
+            throw new Exception('Error al crear el programa: ' . $e->getMessage());
+        }
     }
 }

@@ -39,7 +39,6 @@
                                             </tr>
                                         </thead>
                                         <tbody id="programast">
-                                            <!-- Los programas se cargarán aquí mediante AJAX -->
                                         </tbody>
                                     </table>
                                 </div>

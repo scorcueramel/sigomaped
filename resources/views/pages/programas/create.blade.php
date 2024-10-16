@@ -25,7 +25,8 @@
                                 <h4 class="box-title">CREAR NUEVO PROGRAMA</h4>
                             </div>
                             <div class="box-body">
-                                <form action="{{ route('programas.store') }}" method="POST">
+                                {{-- Formulario para crear un nuevo programa --}}
+                                <form id="crearProgramaForm">
                                     @csrf
                                     <div class="form-group">
                                         <label for="nombre">Nombre del Programa</label>
@@ -55,3 +56,58 @@
     </div>
 </div>
 @endsection
+
+@push('js')
+<script>
+    $(document).ready(function() {
+        $('#crearProgramaForm').on('submit', function(e) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¿Quieres crear este programa?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, crear programa',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var nombre = $('#nombre').val();
+                    var estado = $('#estado').is(':checked') ? 1 : 0;
+
+                    $.ajax({
+                        url: "{{ route('programas.store') }}",
+                        type: "POST",
+                        dataType: "json",
+                        contentType: "application/json",
+                        data: JSON.stringify({
+                            nombre: nombre,
+                            estado: estado
+                        }),
+                        success: function(response) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Programa creado exitosamente',
+                                text: response.programa.nombre,
+                                confirmButtonText: 'Aceptar'
+                            }).then(() => {
+                                window.location.href = "{{ route('programas.index') }}";
+                            });
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error al crear el programa',
+                                text: xhr.responseText,
+                                confirmButtonText: 'Aceptar'
+                            });
+                        }
+                    });
+                }
+            });
+        });
+    });
+</script>
+@endpush

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Programa;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProgramaNuevoRequest;
 use App\Services\ProgramaService;
 use Illuminate\Http\JsonResponse;
+use Exception;
 use Illuminate\Support\Facades\Response;
 use Illuminate\View\View;
 
@@ -47,9 +49,15 @@ class ProgramaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProgramaNuevoRequest $request): JsonResponse
     {
-        //
+        $data = $request->validated();
+        try {
+            $programa = $this->programaService->crearPrograma($data);
+            return Response::json(['mensaje' => 'Programa creado correctamente', 'programa' => $programa], 201);
+        } catch (Exception $e) {
+            return Response::json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**
