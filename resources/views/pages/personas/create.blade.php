@@ -198,6 +198,15 @@
                 </div>
                 <div class="row d-none" id="datosrepresentante"></div>
             `);
+        } else if (tipoPersona == 6) {
+            limpiarCampos();
+            $("#datosgeneralesregistrar").html('');
+            $("#datosgenerales").addClass('col-lg-6');
+            $("#formularioextend").removeClass('d-none');
+            $("#boxheader").html('DATOS DEL ALUMNO');
+            $("#boxbody").html(`
+
+            `);
         }
     });
 
@@ -281,7 +290,6 @@
             </div>
         `);
     }
-
 
     function confirmacion(title, message, icon, cancel, canceltext, confirmtext) {
         return Swal.fire({

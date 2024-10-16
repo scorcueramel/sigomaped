@@ -121,7 +121,7 @@
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="#" onclick="javascript:inscribirAlumno(${e.persona_id},${tallerid});"><i class="fa fa-plus"></i> Inscribir</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" onclick="javascript:confirm('¿Deseas quitar a este alumno de la lista de espera?')"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
+                                            <a class="dropdown-item" href="#" onclick="javascript:confirmacion('${e.nombres} ${e.apellidos}')"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
                                         </div>
                                     </div>
                                 </td>
@@ -159,6 +159,36 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 window.location.href = `/lista-espera/create/${personaid}/${tallerid}`;
+            }
+        });
+    }
+
+    function confirmacion(persona) {
+        Swal.fire({
+            title: `¿Quitar de la lista?`,
+            html: `¿Deseas <strong><span class="font-weight-bold">Quitar</span></strgon> a ${persona} de la lista de espera¡`,
+            icon: `warning`,
+            allowOutsideClick: false,
+            showCloseButton: false,
+            showConfirmButton: true,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: `Si`,
+            showCancelButton: true,
+            cancelButtonColor: "#d33",
+            cancelButtonText: `No`,
+            focusConfirm: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    icon: "success",
+                    title: "El alumno se retiro de la lista de espera."
+                });
+            } else {
+                Swal.fire(
+                    'Cancelled',
+                    'Recuerda si quitas al alumno de la lista de espera no podras recuperarlo hasta que se vuelva a inscribir en la lista de espera',
+                    'error'
+                )
             }
         });
     }

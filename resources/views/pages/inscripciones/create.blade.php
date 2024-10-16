@@ -33,8 +33,8 @@
                                     <div class="input-group">
                                         <input type="text" class="form-control input-sm" placeholder="Documento del alumno" id="documento_alumno" autofocus required>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-info" type="button" id="buscador" data-toggle="tooltip" data-placement="top" title="BUSCAR ALUMNO"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                            <button class="btn btn-warning" type="button" id="limpiar" onclick="javascript:limpiarCampos()" data-toggle="tooltip" data-placement="top" title="LIMPIAR DATOS DE BUSQUEDA"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+                                            <button class="btn btn-info" type="button" id="buscador"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                            <button class="btn btn-warning" type="button" id="limpiar" onclick="javascript:limpiarCampos()"><i class="fa fa-eraser" aria-hidden="true"></i></button>
                                         </span>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                 <div class="form-group">
                                     @foreach ($tiposTalleres as $tp)
                                     <div class="radio">
-                                        <input name="tipotaller" type="radio" id="Option_{{$tp->id}}" class="tallerselec" onclick="javascript:consultaProgramas('{{ $tp->id }}','{{$tp->descripcion}}')">
+                                        <input name="tipotaller" type="radio" id="Option_{{$tp->id}}" class="tallerselec" onclick="consultaProgramas('{{ $tp->id }}','{{$tp->descripcion}}');">
                                         <label for="Option_{{$tp->id}}">{{$tp->descripcion}}</label>
                                     </div>
                                     @endforeach
@@ -97,7 +97,7 @@
                         <!-- /.box -->
                     </div>
                 </div>
-                <div class="row d-none" id="programas">
+                <div class="row d-none" id="seccionprogramas">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
                         <div class="box">
@@ -227,7 +227,7 @@
 <script>
     $("#buscador").on('click', function() {
         $("#tiposTalleres").addClass('d-none');
-        $("#programas").addClass('d-none');
+        $("#seccionprogramas").addClass('d-none');
         $("#radios-programas").html('');
         $("#talleres").addClass('d-none');
         $("#radios-talleres").html('');
@@ -240,13 +240,26 @@
         $(".tallerselec").removeAttr('checked');
 
         let documento = $('#documento_alumno').val();
+
+        if (documento == '') {
+            $.toast({
+                heading: 'Mensaje Informativo',
+                text: `Debes ingresar un número de documento`,
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: 'warning',
+                hideAfter: 5000,
+                stack: 6
+            });
+            return;
+        }
+
         $.ajax({
             type: "GET",
             url: `/inscripciones/get-persona/${documento}`,
             success: function(response) {
                 if (response.length > 0) {
                     let data = response[0];
-                    $("#documento_alumno").focus();
                     $("#alumonid").val(data.id);
                     $("#datosAlumno").removeClass('d-none');
                     $(".datos_alumno").html('');
@@ -361,7 +374,7 @@
                     $("#dias").addClass('d-none');
                     $("#ciclos").addClass('d-none');
                     $("#talleres").addClass('d-none');
-                    $("#programas").removeClass('d-none');
+                    $("#seccionprogramas").removeClass('d-none');
                     $("#programaTitulo").html(descripcion);
                     response.forEach((e) => {
                         $("#radios-programas").append(`
@@ -382,7 +395,7 @@
         $("#datosAlumno").addClass('d-none');
         $(".datos_alumno").html('');
         $("#tiposTalleres").addClass('d-none');
-        $("#programas").addClass('d-none');
+        $("#seccionprogramas").addClass('d-none');
         $("#radios-programas").html('');
         $("#talleres").addClass('d-none');
         $("#radios-talleres").html('');
@@ -399,8 +412,8 @@
         let contadorIndividuales = 0;
         let contadorGrupales = 0;
         let contadorRecreativas = 0;
+        $("#seccionprogramas").addClass('d-none');
         $("#talleres").addClass('d-none');
-        $("#programas").addClass('d-none');
         $("#radios-programas").html('');
         // pendiente para la validacion sobre la cantidad de talleres al que se encuentra inscrito el alumno
         $.ajax({
@@ -415,6 +428,7 @@
                 if (contadorIndividuales == 1) {
                     confirmacion("¿Deseas Continuar?", "El alumno ya se encuentra inscrito a <strong>una</strong> clase <strong>INDIVIDUAL</strong>, si lo inscribes pasará a una lista de espera para el próximo ciclo a iniciar.", "question", true, "No Continuar", "Continuar").then((result) => {
                         if (result.isConfirmed) {
+                            $("#seccionprogramas").removeClass('d-none');
                             $('#espera').val('1');
                             continuarInscripcion(tipotallerid, descripcion);
                         } else if (result.dismiss) {
@@ -425,6 +439,7 @@
                 } else if (contadorGrupales == 2) {
                     confirmacion("¿Deseas Continuar?", "El alumno ya se encuentra inscrito a <strong>dos</strong> clases <strong>GRUPALES</strong>, si lo inscribes pasará a una lista de espera para el próximo ciclo a iniciar.", "question", true, "No Continuar", "Continuar").then((result) => {
                         if (result.isConfirmed) {
+                            $("#seccionprogramas").removeClass('d-none');
                             $('#espera').val('1');
                             continuarInscripcion(tipotallerid, descripcion);
                         } else if (result.dismiss) {
@@ -435,6 +450,7 @@
                 } else if (contadorRecreativas == 3) {
                     confirmacion("¿Deseas Continuar?", "El alumno ya se encuentra inscrito a <strong>tres</strong> clases <strong>RECREATIVAS</strong>, si lo inscribes pasará a una lista de espera para el próximo ciclo a iniciar.", "question", true, "No Continuar", "Continuar").then((result) => {
                         if (result.isConfirmed) {
+                            $("#seccionprogramas").removeClass('d-none');
                             $('#espera').val('1');
                             continuarInscripcion(tipotallerid, descripcion);
                         } else if (result.dismiss) {

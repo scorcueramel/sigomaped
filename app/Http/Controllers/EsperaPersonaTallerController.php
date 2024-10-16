@@ -125,8 +125,11 @@ class EsperaPersonaTallerController extends Controller
      * @param  \App\Models\EsperaPersonaTaller  $esperaPersonaTaller
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EsperaPersonaTaller $esperaPersonaTaller)
+    public function destroy(int $personaid, int $tallerid)
     {
         //
+        $personaEspera = $this->esperaPersonaService->getListaEsperaDetalle($personaid,$tallerid);
+        dd($personaEspera);
     }
 }
+
