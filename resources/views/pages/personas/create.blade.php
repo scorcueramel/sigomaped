@@ -20,7 +20,7 @@
             </section>
             <!-- Main content -->
             <section class="content">
-                <div class="callout callout-secondary">
+                <div class="callout bg-light-blue">
                     <h4 class="text-dark">IMPORTANTE!</h4>
                     <p class="text-dark">NO OLVIDES RELLENAR TODOS LOS CAMPOS QUE CONTENGAN <span class="text-danger"><strong>(*)</strong></span> ESTOS SON OBLIGATORIOS.</p>
                 </div>
@@ -92,7 +92,6 @@
                                     <h4 class="box-title" id="boxheader"></h4>
                                 </div>
                                 <div class="box-body form-element" id="boxbody">
-
                                 </div>
                                 <!-- /.box-body -->
                             </div>
@@ -198,18 +197,45 @@
             `);
         } else if (tipoPersona == 6) {
             let generos = @json($generos);
+            let seguros = @json($seguros);
             limpiarCampos();
             $("#datosgeneralesregistrar").html('');
             $("#datosgenerales").addClass('col-lg-6');
             $("#formularioextend").removeClass('d-none');
             $("#boxheader").html('DATOS DEL ALUMNO');
             $("#boxbody").html(`
-                <div class="form-group" id="radio-generos">
+                <div class="row c-inputs-stacked">
+                    <div class="col-auto">
+                        <label for="tipos-personas">GENERO <span class="text-danger">*</span></label>
+                        <div class="form-group">
+                            <div class="controls" id="radio-generos">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto" id="tiposseguros">
+                        <label for="radio-anios">SEGURO <span class="text-danger">*</span></label>
+                        <div class="form-group">
+                            <div class="controls" id="radio-seguros">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             `);
-
-            generos.forEach(element => {
-                console.log(element);
+            generos.forEach((g) => {
+                $("#radio-generos").append(`
+                    <div class="radio">
+                        <input name="genero" type="radio" id="genero_${g.generoid}" onclick="javascript:" required>
+                        <label for="genero_${g.generoid}">${g.generotipo}</label>
+                    </div>
+                `);
+            });
+            seguros.forEach((s) => {
+                $("#radio-seguros").append(`
+                    <div class="radio">
+                        <input name="tiposeguro" type="radio" id="tiposeguro_${s.tipoguroid}" required>
+                        <label for="tiposeguro_${s.tipoguroid}">${s.tiposeguro}</label>
+                    </div>
+                `);
             });
         }
     });

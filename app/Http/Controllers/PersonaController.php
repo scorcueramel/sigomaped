@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Services\GeneroService;
 use App\Services\TipoPersonaService;
+use App\Services\TipoSeguroService;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -12,6 +15,7 @@ class PersonaController extends Controller
     public function __construct(
         private TipoPersonaService $tipoPersonaService,
         private GeneroService $generoService,
+        private TipoSeguroService $tipoSeguroService,
     ){}
     /**
      * Display a listing of the resource.
@@ -33,8 +37,9 @@ class PersonaController extends Controller
     {
         $tipospersonas = $this->tipoPersonaService->getTiposPersonasServicios();
         $generos = $this->generoService->getGeneros();
+        $seguros = $this->tipoSeguroService->getTipoSerguro();
 
-        return view("pages.personas.create",compact("tipospersonas","generos"));
+        return view("pages.personas.create",compact("tipospersonas","generos","seguros"));
     }
 
     /**
