@@ -12,7 +12,7 @@ class Alumno extends Model
     protected $fillable = [
         'persona_id',
         'genero_id',
-        'anio_ingreso_id',
+        'anio_periodo_id',
         'tipo_seguro_id',
         'cond_socio_economica_id',
         'manif_volunta_id',
@@ -43,8 +43,8 @@ class Alumno extends Model
         return $this->belongsTo(Genero::class);
     }
 
-    public function anio_ingreso(){
-        return $this->belongsTo(AnioIngreso::class);
+    public function anio_periodo(){
+        return $this->belongsTo(AnioPeriodo::class);
     }
 
     public function tipo_seguro(){
