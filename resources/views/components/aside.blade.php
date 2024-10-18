@@ -216,7 +216,7 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
             <li
                 class="treeview {{ $activePage == 'anioperiodo.index' || $activePage == 'anioperiodo.create' ? 'menu-open' : '' }}">
                 <a href="#" onclick="">
-                    <i class="fa fa-calendar-plus-o"></i> <span>Año-Periodo</span>
+                    <i class="fa fa-calendar-plus-o"></i> <span>Año Periodo</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
