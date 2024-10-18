@@ -56,13 +56,17 @@ class PersonaController extends Controller
         $tipopersona = $request->input('tipopersonaid');
 
         if ($tipopersona == 1 || $tipopersona == 2)
-            $registerCode = $this->personaService->registerDatosGenerales($request->usuario);
+            $registerCode = $this->personaService->registerDatosGenerales($request->datos);
 
         if ($tipopersona == 3 || $tipopersona == 4)
-            $registerCode = $this->personaService->registerDatosGenerales($request->padre);
+            $registerCode = $this->personaService->registerDatosGenerales($request->datos);
+
+        if ($tipopersona == 5)
+            $registerCode = $this->personaService->registerDatosGenerales($request->datos);
 
         if ($registerCode === 200)
             return Response::json(['code' => $registerCode, 'mensaje' => 'Se registro la nueva persona correctamente.']);
+
         elseif($registerCode === 500)
             return Response::json(['code' => $registerCode, 'mensaje' => 'Error en el servicio "App\Services\PersonaService", comuniquese con GTI.']);
     }

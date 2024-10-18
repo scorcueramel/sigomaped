@@ -20,7 +20,7 @@
             </section>
             <!-- Main content -->
             <section class="content">
-                <div class="callout callout-success">
+                <div class="callout bg-secondary-gradient">
                     <h4 class="text-dark">IMPORTANTE!</h4>
                     <p class="text-dark">NO OLVIDES RELLENAR TODOS LOS CAMPOS QUE CONTENGAN <span class="text-danger"><strong>(*)</strong></span> ESTOS SON OBLIGATORIOS.</p>
                 </div>
@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <label for="documento">DOCUMENTO DE IDENTIDAD <span class="text-danger">*</span></label>
                                     <div class="controls">
-                                        <input type="text" name="documento" maxlength="12" id="documento" class="form-control" value="{{ old('documento') }}" disabled required>
+                                        <input type="number" name="documento" id="documento" class="form-control" disabled required>
                                         <div class="d-none" id="documentoerror">
                                         </div>
                                     </div>
@@ -55,7 +55,7 @@
                                 <div class="form-group">
                                     <label for="nombres">NOMBRES <span class="text-danger">*</span></label>
                                     <div class="controls">
-                                        <input type="text" name="nombres" maxlength="50" id="nombres" class="form-control" value="{{ old('nombres') }}" disabled required>
+                                        <input type="text" name="nombres" maxlength="50" id="nombres" class="form-control" disabled required>
                                         <div class="d-none" id="nombreerror">
                                         </div>
                                     </div>
@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label for="apellidos">APELLIDOS <span class="text-danger">*</span></label>
                                     <div class="controls">
-                                        <input type="text" name="apellidos" maxlength="100" id="apellidos" class="form-control" value="{{ old('apellidos') }}" disabled required>
+                                        <input type="text" name="apellidos" maxlength="100" id="apellidos" class="form-control" disabled required>
                                         <div class="d-none" id="apellidoerror">
                                         </div>
                                     </div>
@@ -101,125 +101,6 @@
 @endsection
 @push('js')
 <script>
-    function registrarPersona() {
-        let tipopersonaid = $("#tipos-personas").val();
-        let documento = $("#documento").val();
-        let nombres = $("#nombres").val();
-        let apellidos = $("#apellidos").val();
-
-        Swal.fire({
-            icon: 'info',
-            html: "Espere un momento porfavor ...",
-            timerProgressBar: true,
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
-
-        if (tipopersonaid == 1 || tipopersonaid == 2) {
-            let email = $('#email').val();
-            let password = $('#password').val();
-            let password_confirmation = $('#password_confirmation').val();
-            let data = {tipopersonaid,documento,nombres,apellidos,email,password,password_confirmation};
-            guardarDatos(data)
-        } else if (tipopersonaid == 3 || tipopersonaid == 4) {
-            let data = {tipopersonaid,documento,nombres,apellidos};
-            guardarDatos(data)
-        }
-    }
-
-    function guardarDatos(data) {
-        $.ajax({
-            type: "POST",
-            url: "{{route('personas.store')}}",
-            data: data,
-            success: function(response) {
-                if (response.code === 200) {
-                    mensaje('Persona Registrada', `${response.mensaje}`, 'success', 'Entendido')
-                        .then((result) => {
-                            if (result.isConfirmed) {
-                                window.location.href = "{{route('personas.index')}}";
-                            }
-                        });
-                }
-            },
-            error: function(error) {
-                Swal.close();
-                mostrarSeccionErroes();
-                let errores = error.responseJSON.errors;
-                console.log(errores);
-                gestionMensajes(errores);
-            }
-        });
-    }
-
-    function mostrarSeccionErroes() {
-        $('#documentoerror').removeClass('d-none');
-        $('#nombreerror').removeClass('d-none');
-        $('#apellidoerror').removeClass('d-none');
-        $('#correoerror').removeClass('d-none');
-        $('#passworderror').removeClass('d-none');
-        $('#passwordconfirmationderror').removeClass('d-none');
-    }
-
-    function gestionMensajes(erroresresp) {
-        let documentoexist = 'documento' in erroresresp;
-        let nombreexist = 'nombres' in erroresresp;
-        let apellidoexist = 'apellidos' in erroresresp;
-        let correoeexist = 'email' in erroresresp;
-        let passwordeexist = 'password' in erroresresp;
-        let confirmationpasswordeexist = 'password_confirmation' in erroresresp;
-
-        if (documentoexist) {
-            $('#documentoerror').html(`<span class="text-danger">${erroresresp.documento}<span>`)
-        } else {
-            $('#documentoerror').addClass('d-none');
-            $('#documentoerror').html('');
-        }
-
-        if (nombreexist) {
-            $('#nombreerror').html(`<span class="text-danger">${erroresresp.nombres}<span>`)
-        } else {
-            $('#nombreerror').addClass('d-none');
-            $('#nombreerror').html('');
-        }
-
-        if (apellidoexist) {
-            $('#apellidoerror').html(`<span class="text-danger">${erroresresp.apellidos}<span>`)
-        } else {
-            $('#apellidoerror').addClass('d-none');
-            $('#apellidoerror').html('');
-        }
-
-        if (correoeexist) {
-            $('#correoerror').html(`<span class="text-danger">${erroresresp.email}<span>`)
-        } else {
-            $('#correoerror').addClass('d-none');
-            $('#correoerror').html('');
-        }
-
-        if (passwordeexist) {
-            $('#passworderror').html(`<span class="text-danger">${erroresresp.password}<span>`)
-        } else {
-            $('#passworderror').addClass('d-none');
-            $('#passworderror').html('');
-        }
-
-        if (confirmationpasswordeexist) {
-            $('#passwordconfirmationderror').html(`<span class="text-danger">${erroresresp.password_confirmation}<span>`)
-        } else {
-            $('#passwordconfirmationderror').addClass('d-none');
-            $('#passwordconfirmationderror').html('');
-        }
-    }
-
-    function limpiarCampos() {
-        $("#datosgeneralesregistrar").html('');
-        $("#formularioextend").addClass('d-none');
-        $("#boxheader").html('')
-        $("#boxbodysection").html('')
-    }
 
     $("#tipos-personas").on('change', function() {
         $("#documento").removeAttr('disabled')
@@ -406,21 +287,15 @@
         $("#datosrepresentante").html(`
             <div class="col-12">
                 <div class="form-group">
-                    <label for="email">CORREO ELÉCTRONICO</label>
+                    <label for="correo">CORREO ELÉCTRONICO</label>
                     <div class="controls">
-                        <input type="text" name="email" id="email" class="form-control" autocomplete="off" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\\.([a-z\\.]{2,6})" data-validation-regex-message="Ingresa un correo valido">
-                        <div class="invalid-feedback">
-                            El correo eléctronico del representante es obligatorio
-                        </div>
+                        <input type="text" name="correo" id="correo" class="form-control" autocomplete="off" data-validation-regex-regex="([a-z0-9_\.-]+)@([\da-z\.-]+)\\.([a-z\\.]{2,6})">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="telefono">NRO DE CONTÁCTO</label>
                     <div class="controls">
                         <input type="number" name="telefono" id="telefono" class="form-control">
-                        <div class="invalid-feedback">
-                            La constraseña es obligatoria
-                        </div>
                     </div>
                 </div>
             </div>
@@ -428,6 +303,141 @@
                 <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
             </div>
         `);
+    }
+
+    function registrarPersona() {
+        let tipopersonaid = $("#tipos-personas").val();
+        let documento = $("#documento").val();
+        let nombres = $("#nombres").val();
+        let apellidos = $("#apellidos").val();
+
+        Swal.fire({
+            icon: 'info',
+            html: "Espere un momento porfavor ...",
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        if (tipopersonaid == 1 || tipopersonaid == 2) {
+            let email = $('#email').val();
+            let password = $('#password').val();
+            let password_confirmation = $('#password_confirmation').val();
+            let data = {tipopersonaid,documento,nombres,apellidos,email,password,password_confirmation};
+            guardarDatos(data)
+        } else if (tipopersonaid == 3 || tipopersonaid == 4) {
+            let data = {tipopersonaid,documento,nombres,apellidos};
+            guardarDatos(data)
+        } else if (tipopersonaid == 5) {
+            let alumnoid = $('#alumonid').val();
+            let correo = $('#correo').val();
+            let telefono = $('#telefono').val();
+            let data = {tipopersonaid,documento,nombres,apellidos,alumonid,correo,telefono};
+            // guardarDatos(data)
+            console.log(data);
+        }
+    }
+
+    function guardarDatos(data) {
+        $.ajax({
+            type: "POST",
+            url: "{{route('personas.store')}}",
+            data: data,
+            success: function(response) {
+                if (response.code === 200) {
+                    mensaje('Persona Registrada', `${response.mensaje}`, 'success', 'Entendido')
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "{{route('personas.index')}}";
+                            }
+                        });
+                }
+                if (response.code === 500) {
+                    mensaje('Ops!', `${response.mensaje}`, 'error', 'Entendido!')
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.close();
+                            }
+                        });
+                }
+            },
+            error: function(error) {
+                Swal.close();
+                mostrarSeccionErroes();
+                let errores = error.responseJSON.errors;
+                console.log(errores);
+                gestionMensajes(errores);
+            }
+        });
+    }
+
+    function mostrarSeccionErroes() {
+        $('#documentoerror').removeClass('d-none');
+        $('#nombreerror').removeClass('d-none');
+        $('#apellidoerror').removeClass('d-none');
+        $('#correoerror').removeClass('d-none');
+        $('#passworderror').removeClass('d-none');
+        $('#passwordconfirmationderror').removeClass('d-none');
+    }
+
+    function gestionMensajes(erroresresp) {
+        let documentoexist = 'documento' in erroresresp;
+        let nombreexist = 'nombres' in erroresresp;
+        let apellidoexist = 'apellidos' in erroresresp;
+        let correoeexist = 'email' in erroresresp;
+        let passwordeexist = 'password' in erroresresp;
+        let confirmationpasswordeexist = 'password_confirmation' in erroresresp;
+
+        if (documentoexist) {
+            $('#documentoerror').html(`<span class="text-danger">${erroresresp.documento}<span>`)
+        } else {
+            $('#documentoerror').addClass('d-none');
+            $('#documentoerror').html('');
+        }
+
+        if (nombreexist) {
+            $('#nombreerror').html(`<span class="text-danger">${erroresresp.nombres}<span>`)
+        } else {
+            $('#nombreerror').addClass('d-none');
+            $('#nombreerror').html('');
+        }
+
+        if (apellidoexist) {
+            $('#apellidoerror').html(`<span class="text-danger">${erroresresp.apellidos}<span>`)
+        } else {
+            $('#apellidoerror').addClass('d-none');
+            $('#apellidoerror').html('');
+        }
+
+        if (correoeexist) {
+            $('#correoerror').html(`<span class="text-danger">${erroresresp.email}<span>`)
+        } else {
+            $('#correoerror').addClass('d-none');
+            $('#correoerror').html('');
+        }
+
+        if (passwordeexist) {
+            $('#passworderror').html(`<span class="text-danger">${erroresresp.password}<span>`)
+        } else {
+            $('#passworderror').addClass('d-none');
+            $('#passworderror').html('');
+        }
+
+        if (confirmationpasswordeexist) {
+            $('#passwordconfirmationderror').html(`<span class="text-danger">${erroresresp.password_confirmation}<span>`)
+        } else {
+            $('#passwordconfirmationderror').addClass('d-none');
+            $('#passwordconfirmationderror').html('');
+        }
+    }
+
+    function limpiarCampos() {
+        $("#datosgeneralesregistrar").html('');
+        $("#formularioextend").addClass('d-none');
+        $("#boxheader").html('')
+        $("#boxbodysection").html('')
     }
 
     function confirmacion(title, message, icon, cancel, canceltext, confirmtext) {

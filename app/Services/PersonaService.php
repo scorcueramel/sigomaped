@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Persona;
+use App\Models\Representante;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +30,8 @@ class PersonaService
                 return $this->registerUsuario($d, $usuarioActualiza);
             if ($d->tipopersonaid == 3 || $d->tipopersonaid == 4)
                 return $this->registerPadres($d);
+            if ($d->tipopersonaid == 5)
+                return $this->registerRepresentante($d,$usuarioActualiza);
         }
 
         return 500;
@@ -59,6 +62,25 @@ class PersonaService
         $nuevaPersona->nombres = Str::upper($data->nombres);
         $nuevaPersona->apellidos = Str::upper($data->apellidos);
         $nuevaPersona->save();
+
+        return 200;
+    }
+
+    public function registerRepresentante($data,$usuario)
+    {
+        $nuevaPersona = new Persona();
+        $nuevaPersona->tipo_persona_id = $data->tipopersonaid;
+        $nuevaPersona->documento = $data->documento;
+        $nuevaPersona->nombres = Str::upper($data->nombres);
+        $nuevaPersona->apellidos = Str::upper($data->apellidos);
+        $nuevaPersona->save();
+        $nuevoRepresentante = new Representante();
+        $nuevoRepresentante->persona_id = $nuevaPersona->personaid;
+        $nuevoRepresentante->alumno_id = $data->alumnoid;
+        $nuevoRepresentante->telefono = $data->telefono;
+        $nuevoRepresentante->email = $data->correo;
+        $nuevoRepresentante->usuario_actualiza = Str::upper($usuario);
+        $nuevoRepresentante->save();
 
         return 200;
     }

@@ -8,10 +8,10 @@ use Illuminate\Foundation\Http\FormRequest;
 class PersonaNuevoRequest extends FormRequest
 {
 
-    public array $usuario;
-    public array $padre;
-    public array $representante;
-    public array $alumno;
+    public array $datos;
+    // public array $padre;
+    // public array $representante;
+    // public array $alumno;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -71,7 +71,7 @@ class PersonaNuevoRequest extends FormRequest
 
     private function cargaDto($personatipo){
         if ($personatipo == 1 || $personatipo == 2) {
-            $this->usuario[] = PersonaData::from([
+            $this->datos[] = PersonaData::from([
                 'tipopersonaid' => $personatipo,
                 'documento' => $this->documento,
                 'nombres' => $this->nombres,
@@ -82,11 +82,23 @@ class PersonaNuevoRequest extends FormRequest
         }
 
         if ($personatipo == 3 || $personatipo == 4) {
-            $this->padre[] = PersonaData::from([
+            $this->datos[] = PersonaData::from([
                 'tipopersonaid' => $personatipo,
                 'documento' => $this->documento,
                 'nombres' => $this->nombres,
                 'apellidos' => $this->apellidos
+            ]);
+        }
+
+        if ($personatipo == 5) {
+            $this->datos[] = PersonaData::from([
+                'alumnoid'=>$this->alumnoid,
+                'tipopersonaid' => $personatipo,
+                'documento' => $this->documento,
+                'nombres' => $this->nombres,
+                'apellidos' => $this->apellidos,
+                'correo' => $this->correo,
+                'telefono' => $this->telefono,
             ]);
         }
     }
