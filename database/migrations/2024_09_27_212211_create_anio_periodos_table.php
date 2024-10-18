@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('anio_ingresos', function (Blueprint $table) {
+        Schema::create('anio_periodos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('periodo_id')->constrained('periodos')->onDelete('cascade');
-            $table->string('anio',4);
+            $table->string('descripcion',10);
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anio_ingresos');
+        Schema::dropIfExists('anio_periodos');
     }
 };
