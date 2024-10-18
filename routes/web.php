@@ -4,6 +4,8 @@ use App\Http\Controllers\EsperaPersonaTallerController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\ProgramaController;
+use App\Http\Controllers\AnioPeriodoController;
+use App\Models\AnioPeriodo;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -61,4 +63,13 @@ Route::group(['prefix'=> 'programas','middleware'=>'auth'],function(){
     Route::post('/store',[ProgramaController::class, 'store'])->name('programas.store');
     Route::get('/programas/{id}/edit', [ProgramaController::class, 'edit'])->name('programas.edit');
     Route::delete('/programas/{id}', [ProgramaController::class, 'destroy'])->name('programas.destroy');
+});
+
+Route::group(['prefix'=> 'anio-periodo','middleware'=>'auth'],function(){
+    Route::get('/index',[AnioPeriodoController::class,'index'])->name('anioperiodo.index');
+    Route::get('/get-anio-periodo/', [AnioPeriodoController::class, 'getAnioPeriodo'])->name('anioperiodo.getAnioPeriodo');
+    Route::get('/create/',[AnioPeriodoController::class,'create'])->name('anioperiodo.create');
+    Route::post('/store',[AnioPeriodoController::class, 'store'])->name('anioperiodo.store');
+    Route::get('/anio-periodo/{id}/edit', [AnioPeriodoController::class, 'edit'])->name('anioperiodo.edit');
+    Route::delete('/anio-periodo/{id}', [AnioPeriodoController::class, 'destroy'])->name('anioperiodo.destroy');    
 });

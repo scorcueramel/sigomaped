@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('anio_periodos', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion',6);
+            $table->string('descripcion',10);
             $table->boolean('estado')->default(true);
             $table->timestamps();
         });
