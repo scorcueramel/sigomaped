@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PersonaNuevoRequest;
 use App\Services\GeneroService;
+use App\Services\PersonaService;
 use App\Services\TipoPersonaService;
 use App\Services\TipoSeguroService;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -16,16 +18,17 @@ class PersonaController extends Controller
         private TipoPersonaService $tipoPersonaService,
         private GeneroService $generoService,
         private TipoSeguroService $tipoSeguroService,
-    ){}
+        private PersonaService $personaService,
+    ) {}
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index():View
+    public function index(): View
     {
         $tipospersonas = $this->tipoPersonaService->getTiposPersonasServicios();
-        return view("pages.personas.index",compact("tipospersonas"));
+        return view("pages.personas.index", compact("tipospersonas"));
     }
 
     /**
@@ -33,13 +36,13 @@ class PersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create():View
+    public function create(): View
     {
         $tipospersonas = $this->tipoPersonaService->getTiposPersonasServicios();
         $generos = $this->generoService->getGeneros();
         $seguros = $this->tipoSeguroService->getTipoSerguro();
 
-        return view("pages.personas.create",compact("tipospersonas","generos","seguros"));
+        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros"));
     }
 
     /**
@@ -48,10 +51,19 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PersonaNuevoRequest $request):JsonResponse
     {
-        //
-        dd($request->all());
+        $tipopersona = $request->input('tipopersonaid');
+
+        if ($tipopersona == 1 || $tipopersona == 2)
+            $registerCode = $this->personaService->registerDatosGenerales($request->usuario);
+
+        if ($registerCode === 100)
+            return Response::json(['code' => $registerCode, 'mensaje' => 'El correo ingresado ya fue registrado anteriormente.']);
+
+
+        if ($registerCode === 200)
+            return Response::json(['code' => $registerCode, 'mensaje' => 'Se registro la nueva persona correctamente.']);
     }
 
     /**

@@ -45,6 +45,5 @@ class InscripcionNuevoRequest extends FormRequest
             $this->inscripcion[] = InscripcionNuevoData::from(['alumnoid' => $this->alumnoId, 'horarioid' => $this->horarioId, 'tallerid'=>$this->tallerId,'cicloid'=>$this->cicloId,'fechainscripcion' => $fechainscripcion,'enespera'=>$this->listaEspera]);
         elseif ($this->listaEspera == "1")
             $this->personaespera[] = ListaEsperaTallerData::from(['alumnoid' => $this->alumnoId, 'tallerid' => $this->tallerId, 'inscrito' => 'E']);
-
     }
 }

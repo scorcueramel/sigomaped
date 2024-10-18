@@ -21,6 +21,9 @@
 
             <!-- Main content -->
             <section class="content">
+                @if (Session::has('message'))
+                    @include('components.alerts',['type'=>'success','icontype'=>'check','title'=>'Persona Creada','withTag'=>false,'message'=>"{{ Seesion::get('message') }}",'btndismiss'=>true,'textcolor'=>'text-primary'])
+                @endif
                 <div class="row">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
