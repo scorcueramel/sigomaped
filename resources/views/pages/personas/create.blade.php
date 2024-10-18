@@ -47,8 +47,7 @@
                                 <div class="form-group">
                                     <label for="documento">DOCUMENTO DE IDENTIDAD <span class="text-danger">*</span></label>
                                     <div class="controls">
-                                        <input type="text" name="documento" maxlength="12" id="documento" class="form-control" value="{{ old('documento') }}" disabled required
-                                            data-validation-required-message="El documento de identidad de la personas es obligatorio">
+                                        <input type="text" name="documento" maxlength="12" id="documento" class="form-control" value="{{ old('documento') }}" disabled required>
                                         <div class="d-none" id="documentoerror">
                                         </div>
                                     </div>
@@ -56,8 +55,7 @@
                                 <div class="form-group">
                                     <label for="nombres">NOMBRES <span class="text-danger">*</span></label>
                                     <div class="controls">
-                                        <input type="text" name="nombres" maxlength="50" id="nombres" class="form-control" value="{{ old('nombres') }}" disabled required
-                                            data-validation-required-message="El nombre de la personas es obligatorio">
+                                        <input type="text" name="nombres" maxlength="50" id="nombres" class="form-control" value="{{ old('nombres') }}" disabled required>
                                         <div class="d-none" id="nombreerror">
                                         </div>
                                     </div>
@@ -65,9 +63,8 @@
                                 <div class="form-group">
                                     <label for="apellidos">APELLIDOS <span class="text-danger">*</span></label>
                                     <div class="controls">
-                                        <input type="text" name="apellidos" maxlength="100" id="apellidos" class="form-control" value="{{ old('apellidos') }}" disabled required
-                                            data-validation-required-message="El apellido de la personas es obligatorio">
-                                        <div class="d-none" id="apellidoserror">
+                                        <input type="text" name="apellidos" maxlength="100" id="apellidos" class="form-control" value="{{ old('apellidos') }}" disabled required>
+                                        <div class="d-none" id="apellidoerror">
                                         </div>
                                     </div>
                                 </div>
@@ -110,58 +107,57 @@
         let nombres = $("#nombres").val();
         let apellidos = $("#apellidos").val();
 
+        Swal.fire({
+            icon: 'info',
+            html: "Espere un momento porfavor ...",
+            timerProgressBar: true,
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
         if (tipopersonaid == 1 || tipopersonaid == 2) {
             let email = $('#email').val();
             let password = $('#password').val();
             let password_confirmation = $('#password_confirmation').val();
-
-            Swal.fire({
-                icon: 'info',
-                html: "Espere un momento porfavor ...",
-                timerProgressBar: true,
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-            $.ajax({
-                type: "POST",
-                url: "{{route('personas.store')}}",
-                data: {
-                    tipopersonaid,
-                    documento,
-                    nombres,
-                    apellidos,
-                    email,
-                    password,
-                    password_confirmation,
-                },
-                success: function(response) {
-                    if (response.code === 200) {
-                        mensaje('Persona Registrada', `${response.mensaje}`, 'success', 'Entendido')
-                            .then((result) => {
-                                if (result.isConfirmed) {
-                                    window.location.href = "{{route('personas.index')}}";
-                                }
-                            });
-                    }
-                },
-                error: function(error) {
-                    Swal.close();
-                    gestionErrores();
-                    let errores = error.responseJSON.errors;
-                    console.log(errores);
-                    gestionMensajes(errores);
-                }
-            });
+            let data = {tipopersonaid,documento,nombres,apellidos,email,password,password_confirmation};
+            guardarDatos(data)
+        } else if (tipopersonaid == 3 || tipopersonaid == 4) {
+            let data = {tipopersonaid,documento,nombres,apellidos};
+            guardarDatos(data)
         }
     }
 
-    function gestionErrores() {
+    function guardarDatos(data) {
+        $.ajax({
+            type: "POST",
+            url: "{{route('personas.store')}}",
+            data: data,
+            success: function(response) {
+                if (response.code === 200) {
+                    mensaje('Persona Registrada', `${response.mensaje}`, 'success', 'Entendido')
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "{{route('personas.index')}}";
+                            }
+                        });
+                }
+            },
+            error: function(error) {
+                Swal.close();
+                mostrarSeccionErroes();
+                let errores = error.responseJSON.errors;
+                console.log(errores);
+                gestionMensajes(errores);
+            }
+        });
+    }
+
+    function mostrarSeccionErroes() {
         $('#documentoerror').removeClass('d-none');
         $('#nombreerror').removeClass('d-none');
-        $('#apellidoserror').removeClass('d-none');
+        $('#apellidoerror').removeClass('d-none');
         $('#correoerror').removeClass('d-none');
         $('#passworderror').removeClass('d-none');
         $('#passwordconfirmationderror').removeClass('d-none');
@@ -170,6 +166,7 @@
     function gestionMensajes(erroresresp) {
         let documentoexist = 'documento' in erroresresp;
         let nombreexist = 'nombres' in erroresresp;
+        let apellidoexist = 'apellidos' in erroresresp;
         let correoeexist = 'email' in erroresresp;
         let passwordeexist = 'password' in erroresresp;
         let confirmationpasswordeexist = 'password_confirmation' in erroresresp;
@@ -186,6 +183,13 @@
         } else {
             $('#nombreerror').addClass('d-none');
             $('#nombreerror').html('');
+        }
+
+        if (apellidoexist) {
+            $('#apellidoerror').html(`<span class="text-danger">${erroresresp.apellidos}<span>`)
+        } else {
+            $('#apellidoerror').addClass('d-none');
+            $('#apellidoerror').html('');
         }
 
         if (correoeexist) {
@@ -257,13 +261,13 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registar Persona</button>
+                                <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
                             </div>
                         </div>
             `);
         } else if (tipoPersona == 3 || tipoPersona == 4) {
             $("#datosgeneralesregistrar").html(`
-                <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registar Persona</button>
+                <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
             `);
         } else if (tipoPersona == 5) {
             limpiarCampos();
@@ -421,7 +425,7 @@
                 </div>
             </div>
             <div class="col-12">
-                <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registar Persona</button>
+                <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
             </div>
         `);
     }

@@ -66,14 +66,27 @@ class PersonaNuevoRequest extends FormRequest
     {
         $tipopersona = $this->tipopersonaid;
 
-        if ($tipopersona == 1 || $tipopersona == 2) {
+        $this->cargaDto($tipopersona);
+    }
+
+    private function cargaDto($personatipo){
+        if ($personatipo == 1 || $personatipo == 2) {
             $this->usuario[] = PersonaData::from([
-                'tipopersonaid' => $tipopersona,
+                'tipopersonaid' => $personatipo,
                 'documento' => $this->documento,
                 'nombres' => $this->nombres,
                 'apellidos' => $this->apellidos,
                 'correo' => $this->email,
                 'password' => $this->password,
+            ]);
+        }
+
+        if ($personatipo == 3 || $personatipo == 4) {
+            $this->padre[] = PersonaData::from([
+                'tipopersonaid' => $personatipo,
+                'documento' => $this->documento,
+                'nombres' => $this->nombres,
+                'apellidos' => $this->apellidos
             ]);
         }
     }
