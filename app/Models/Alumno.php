@@ -78,4 +78,8 @@ class Alumno extends Model
     public function representante(){
         return $this->hasMany(Horario::class);
     }
+
+    public function padre_alumno(){
+        return $this->hasMany(PadreAlumno::class);
+    }
 }

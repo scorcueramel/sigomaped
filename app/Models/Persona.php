@@ -37,6 +37,10 @@ class Persona extends Model
         return $this->hasMany(Representante::class);
     }
 
+    public function padre_alumno(){
+        return $this->hasMany(PadreAlumno::class);
+    }
+    
     public function encargado_ciclo(){
         return $this->hasMany(EncargadoCiclo::class);
     }
