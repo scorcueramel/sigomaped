@@ -181,11 +181,15 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                     </li>
                 </ul>
             </li>
-            <li class="header nav-small-cap">GESTIÓN DE PERSONAS</li>
+            <!-- <li class="header nav-small-cap">GESTIÓN DE PERSONAS</li> -->
+            <li class="header nav-small-cap">CONFIGURACIÓN</li>
             <li
                 class="treeview {{ $activePage == 'personas.index' || $activePage == 'personas.create' ? 'menu-open' : '' }}">
                 <a href="#">
                     <i class="fa fa-users"></i> <span>Personas</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu {{ $activePage == 'personas.index' || $activePage == 'personas.create' ? 'd-block' : '' }}"
                     id="personas">
@@ -194,11 +198,10 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                     </li>
                 </ul>
             </li>
-            <li class="header nav-small-cap">PROGRAMAS</li>
             <li
                 class="treeview {{ $activePage == 'programas.index' || $activePage == 'programas.create' ? 'menu-open' : '' }}">
                 <a href="#" onclick="">
-                    <i class="fa fa-edit"></i> <span>Programas</span>
+                    <i class="fa fa-list"></i> <span>Programas</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
@@ -207,6 +210,21 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                     id="programas">
                     <li class="{{ $activePage == 'programas.index' ? 'active' : '' }}"><a
                             href="{{ route('programas.index') }}"><i class="fa fa-circle-thin"></i>Listado</a>
+                    </li>
+                </ul>
+            </li>
+            <li
+                class="treeview {{ $activePage == 'anioperiodo.index' || $activePage == 'anioperiodo.create' ? 'menu-open' : '' }}">
+                <a href="#" onclick="">
+                    <i class="fa fa-calendar-plus-o"></i> <span>Año-Periodo</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu {{ $activePage == 'anioperiodo.index' || $activePage == 'anioperiodo.create' ? 'd-block' : '' }}"
+                    id="anioperiodo">
+                    <li class="{{ $activePage == 'anioperiodo.index' ? 'active' : '' }}"><a
+                            href="{{ route('anioperiodo.index') }}"><i class="fa fa-circle-thin"></i>Listado</a>
                     </li>
                 </ul>
             </li>
