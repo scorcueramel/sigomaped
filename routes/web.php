@@ -30,6 +30,7 @@ Route::get('/panel/principal', [App\Http\Controllers\HomeController::class, 'ind
 
 Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
     Route::get('/index',[InscripcionController::class,'index'])->name('inscripciones.index');
+    Route::get('/calendar',[InscripcionController::class,'calendar'])->name('inscripciones.calendar');
     Route::get('/get-ciclo-dias/{id}',[InscripcionController::class,'getDiasByPeriodAndYear'])->name('inscripciones.dias');
     Route::get('/get-ciclo-taller/{id}',[InscripcionController::class,'getAnioPeriodoByTaller'])->name('inscripciones.taller');
     Route::get('/get-inscritos-ciclo/{id}',[InscripcionController::class,'getInscritoToCicle'])->name('inscripciones.inscritos');
@@ -71,5 +72,5 @@ Route::group(['prefix'=> 'anio-periodo','middleware'=>'auth'],function(){
     Route::get('/create/',[AnioPeriodoController::class,'create'])->name('anioperiodo.create');
     Route::post('/store',[AnioPeriodoController::class, 'store'])->name('anioperiodo.store');
     Route::get('/anio-periodo/{id}/edit', [AnioPeriodoController::class, 'edit'])->name('anioperiodo.edit');
-    Route::delete('/anio-periodo/{id}', [AnioPeriodoController::class, 'destroy'])->name('anioperiodo.destroy');    
+    Route::delete('/anio-periodo/{id}', [AnioPeriodoController::class, 'destroy'])->name('anioperiodo.destroy');
 });

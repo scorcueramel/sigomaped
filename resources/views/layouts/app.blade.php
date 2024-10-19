@@ -54,6 +54,9 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- toast tr -->
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.toast.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('/assets/js/fullcalendar/fullcalendar.min.css')}}">
+	<link rel="stylesheet" href="{{ asset('/assets/js/fullcalendar/fullcalendar.print.min.css')}}" media="print">
 </head>
 
 <body class="hold-transition">
@@ -129,6 +132,9 @@
     <script src="{{asset('assets/js/jquery.toast.js')}}"></script>
     <script src="{{asset('assets/js/toastr.js')}}"></script>
     <script src="{{ asset('assets/js/validation.js') }}"></script>
+
+    <script src="{{ asset('/assets/js/fullcalendar/lib/moment.min.js') }}"></script>
+	<script src="{{ asset('/assets/js/fullcalendar/fullcalendar.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {

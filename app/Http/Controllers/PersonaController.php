@@ -67,7 +67,7 @@ class PersonaController extends Controller
         if ($registerCode === 200)
             return Response::json(['code' => $registerCode, 'mensaje' => 'Se registro la nueva persona correctamente.']);
 
-        elseif($registerCode === 500)
+        if($registerCode === 500)
             return Response::json(['code' => $registerCode, 'mensaje' => 'Error en el servicio "App\Services\PersonaService", comuniquese con GTI.']);
     }
 

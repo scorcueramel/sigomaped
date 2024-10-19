@@ -22,8 +22,8 @@
             <!-- Main content -->
             <section class="content">
                 @if (count($listaEspera) > 0)
-                    @include('components.alerts',['type'=>'warning','icontype'=>'info','title'=>'Recuerda!','message'=>'Actualmente tu lista de espera cuenta con alumnos, te recomendamos verificarla antes de continuar con una inscripción. <br>
-                    Ve al apartado <strong><a class="text-dark font-weight-bold" href="/lista-espera/index">Lista de Espera</a></strong> para verificar.','btndismiss'=>true,'textcolor'=>'text-dark'])
+                @include('components.alerts',['type'=>'warning','icontype'=>'info','title'=>'Recuerda!','message'=>'Actualmente tu lista de espera cuenta con alumnos, te recomendamos verificarla antes de continuar con una inscripción. <br>
+                Ve al apartado <strong><a class="text-dark font-weight-bold" href="/lista-espera/index">Lista de Espera</a></strong> para verificar.','btndismiss'=>true,'textcolor'=>'text-dark'])
                 @endif
                 <div class="row">
                     <div class="col-12 col-lg-12">
@@ -36,7 +36,7 @@
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
-                                    <select class="form-control" id="programasseleccionado">
+                                    <select class="form-control" id="programa">
                                         <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
                                         @foreach ($programas as $programa)
                                         <option value="{{$programa->id}}">{{$programa->nombre}}</option>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
-                                    <select class="form-control" id="talleresprogramas">
+                                    <select class="form-control" id="taller">
                                         <option selected disabled value="">SELECCIONA UN TALLER</option>
                                     </select>
                                 </div>
@@ -68,7 +68,7 @@
                         <!-- /.box -->
                     </div>
                 </div>
-                <div class="row d-none" id="anioperiodo">
+                <div class="row d-none" id="aniosperiodos">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
                         <div class="box">
@@ -139,10 +139,10 @@
 @endsection
 @push('js')
 <script>
-    $('#programasseleccionado').on('change', function() {
+    $('#programa').on('change', function() {
         let id = $(this).val();
         $("#talleres").addClass('d-none');
-        $("#anioperiodo").addClass('d-none');
+        $("#aniosperiodos").addClass('d-none');
         $("#datosAlumnos").addClass('d-none');
         $("#dias").addClass('d-none');
         $("#radios_dias").html('');
@@ -151,13 +151,13 @@
             url: `/inscripciones/get-talleres/${id}`,
             success: function(response) {
                 if (response.length > 0) {
-                    $("#talleresprogramas").html('');
+                    $("#taller").html('');
                     $("#talleres").removeClass('d-none');
-                    $("#talleresprogramas").append(`
+                    $("#taller").append(`
                         <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
                     `);
                     response.forEach((e) => {
-                        $("#talleresprogramas").append(`
+                        $("#taller").append(`
                             <option value="${e.id}">${e.nombre}</option>
                         `);
                     });
@@ -165,8 +165,8 @@
             }
         });
     });
-    $('#talleresprogramas').on('change', function() {
-        $("#anioperiodo").addClass('d-none');
+
+    $('#taller').on('change', function() {
         $("#radios-anio-periodo").html('');
         $("#dias").addClass('d-none');
         $("#radios_dias").html('');
@@ -177,8 +177,8 @@
             type: "GET",
             url: `/inscripciones/get-ciclo-taller/${id}`,
             success: function(response) {
+                $("#aniosperiodos").removeClass('d-none');
                 if (response.length > 0) {
-                    $("#anioperiodo").removeClass('d-none');
                     response.forEach((e) => {
                         $("#radios-anio-periodo").append(`
                         <div class="radio">
@@ -192,7 +192,7 @@
         });
     });
 
-    function diasPorAnioYPeriodo(id){
+    function diasPorAnioYPeriodo(id) {
         $("#dias").addClass('d-none');
         $("#radios_dias").html('');
         $.ajax({

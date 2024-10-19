@@ -163,17 +163,20 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                     </ul>
                 </li> --}}
             <li
-                class="treeview {{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.create' || $activePage == 'listaespera.index' || $activePage == 'listaespera.create' ? 'menu-open' : '' }}">
+                class="treeview {{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.calendar' || $activePage == 'inscripciones.create' || $activePage == 'listaespera.index' || $activePage == 'listaespera.create' ? 'menu-open' : '' }}">
                 <a href="#">
                     <i class="fa fa-pencil-square"></i> <span>Inscripciones</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
-                <ul class="treeview-menu {{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.create' || $activePage == 'listaespera.create' || $activePage == 'listaespera.index' ? 'd-block' : '' }}"
+                <ul class="treeview-menu {{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.calendar' || $activePage == 'inscripciones.create' || $activePage == 'listaespera.create' || $activePage == 'listaespera.index' ? 'd-block' : '' }}"
                     id="inscripciones">
                     <li class="{{ $activePage == 'inscripciones.index' || $activePage == 'inscripciones.create' ? 'active' : '' }}"><a
                             href="{{ route('inscripciones.index') }}"><i class="fa fa-circle-thin"></i>Inscritos</a>
+                    </li>
+                    <li class="{{ $activePage == 'inscripciones.calendar' ? 'active' : '' }}"><a
+                            href="{{ route('inscripciones.calendar') }}"><i class="fa fa-circle-thin"></i>Calendario</a>
                     </li>
                     <li class="{{ $activePage == 'listaespera.index' || $activePage == 'listaespera.create' ? 'active' : '' }}"><a
                             href="{{ route('listaespera.index') }}"><i class="fa fa-circle-thin"></i>Lista de

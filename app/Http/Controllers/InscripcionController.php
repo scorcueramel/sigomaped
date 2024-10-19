@@ -12,6 +12,7 @@ use App\Services\InscripcionService;
 use App\Services\PersonaService;
 use App\Services\ProgramaService;
 use App\Services\TalleresService;
+use App\Services\TipoTallerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -28,6 +29,7 @@ class InscripcionController extends Controller
         private TalleresService $talleresService,
         private InscripcionService $inscripcionService,
         private InscripcionEsperaService $inscripcionEsperaService,
+        private TipoTallerService $tipoTallerService,
     ){}
 
     /**
@@ -40,6 +42,12 @@ class InscripcionController extends Controller
         $programas = $this->programaService->getProgramasAll();
         $listaEspera = $this->inscripcionEsperaService->getListaEspera();
         return view('pages.inscripciones.index', ['programas'=>$programas,'listaEspera'=>$listaEspera]);
+    }
+
+    public function calendar():View{
+        $tiposProgramas = $this->tipoTallerService->getTiposTalleres();
+        $listaEspera = $this->inscripcionEsperaService->getListaEspera();
+        return view('pages.inscripciones.calendario', ['listaEspera'=>$listaEspera,'tiposPorgramas'=>$tiposProgramas]);
     }
 
     public function getAnioPeriodoByTaller($id): JsonResponse{
@@ -64,7 +72,7 @@ class InscripcionController extends Controller
      */
     public function create():View
     {
-        $tiposTalleres = TipoTaller::all();
+        $tiposTalleres = $this->tipoTallerService->getTiposTalleres();
         return view('pages.inscripciones.create', compact('tiposTalleres'));
     }
 

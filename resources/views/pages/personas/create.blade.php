@@ -101,7 +101,6 @@
 @endsection
 @push('js')
 <script>
-
     $("#tipos-personas").on('change', function() {
         $("#documento").removeAttr('disabled')
         $("#nombres").removeAttr('disabled')
@@ -240,7 +239,6 @@
                 $('#alumonid').val('');
                 if (response.length > 0) {
                     let data = response[0];
-                    $("#alumonid").val(data.id);
                     $(".datos_alumno").html('');
                     $(".datos_alumno").append(`
                         <tr>
@@ -325,18 +323,38 @@
             let email = $('#email').val();
             let password = $('#password').val();
             let password_confirmation = $('#password_confirmation').val();
-            let data = {tipopersonaid,documento,nombres,apellidos,email,password,password_confirmation};
+            let data = {
+                tipopersonaid,
+                documento,
+                nombres,
+                apellidos,
+                email,
+                password,
+                password_confirmation
+            };
             guardarDatos(data)
         } else if (tipopersonaid == 3 || tipopersonaid == 4) {
-            let data = {tipopersonaid,documento,nombres,apellidos};
+            let data = {
+                tipopersonaid,
+                documento,
+                nombres,
+                apellidos
+            };
             guardarDatos(data)
         } else if (tipopersonaid == 5) {
             let alumnoid = $('#alumonid').val();
             let correo = $('#correo').val();
             let telefono = $('#telefono').val();
-            let data = {tipopersonaid,documento,nombres,apellidos,alumonid,correo,telefono};
-            // guardarDatos(data)
-            console.log(data);
+            let data = {
+                tipopersonaid,
+                documento,
+                nombres,
+                apellidos,
+                alumnoid,
+                correo,
+                telefono
+            };
+            guardarDatos(data)
         }
     }
 
@@ -354,21 +372,20 @@
                             }
                         });
                 }
-                if (response.code === 500) {
-                    mensaje('Ops!', `${response.mensaje}`, 'error', 'Entendido!')
+            },
+            error: function(error) {
+                Swal.close();
+                let errores = error.responseJSON;
+                if (error.status === 500) {
+                    mensaje('Ops!', `${error.responseJSON.message}`, 'error', 'Entendido!')
                         .then((result) => {
                             if (result.isConfirmed) {
                                 Swal.close();
                             }
                         });
                 }
-            },
-            error: function(error) {
-                Swal.close();
                 mostrarSeccionErroes();
-                let errores = error.responseJSON.errors;
-                console.log(errores);
-                gestionMensajes(errores);
+                gestionMensajes(errores.errors);
             }
         });
     }
@@ -460,7 +477,7 @@
     function mensaje(title, message, icon, textbtnconfirm) {
         return Swal.fire({
             title: `${title}`,
-            html: `${message}`,
+            html: `<p class="text-justify">${message}</p>`,
             icon: `${icon}`,
             confirmButtonColor: "#3085d6",
             confirmButtonText: `${textbtnconfirm}`,

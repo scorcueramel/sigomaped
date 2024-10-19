@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Models\Alumno;
 use App\Models\Persona;
 use App\Models\Representante;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -68,6 +70,8 @@ class PersonaService
 
     public function registerRepresentante($data,$usuario)
     {
+        $alumno = Alumno::where('persona_id',$data->alumnoid)->get()[0];
+
         $nuevaPersona = new Persona();
         $nuevaPersona->tipo_persona_id = $data->tipopersonaid;
         $nuevaPersona->documento = $data->documento;
@@ -75,8 +79,8 @@ class PersonaService
         $nuevaPersona->apellidos = Str::upper($data->apellidos);
         $nuevaPersona->save();
         $nuevoRepresentante = new Representante();
-        $nuevoRepresentante->persona_id = $nuevaPersona->personaid;
-        $nuevoRepresentante->alumno_id = $data->alumnoid;
+        $nuevoRepresentante->persona_id = $nuevaPersona->id;
+        $nuevoRepresentante->alumno_id = $alumno->id;
         $nuevoRepresentante->telefono = $data->telefono;
         $nuevoRepresentante->email = $data->correo;
         $nuevoRepresentante->usuario_actualiza = Str::upper($usuario);
