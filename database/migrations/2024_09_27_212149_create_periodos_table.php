@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('periodos', function (Blueprint $table) {
             $table->id();
-            $table->string('periodo',1);
+            $table->string('periodo',5);
             $table->timestamps();
         });
     }
