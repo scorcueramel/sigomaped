@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('persona_id')->constrained('personas')->onDelete('cascade');
             $table->foreignId('genero_id')->constrained('generos')->onDelete('cascade');
-            $table->foreignId('anio_periodo_id')->constrained('anio_periodo')->onDelete('cascade');
+            $table->foreignId('anio_periodo_id')->constrained('anio_periodos')->onDelete('cascade');
             $table->foreignId('tipo_seguro_id')->constrained('tipo_seguros')->onDelete('cascade');
             $table->foreignId('cond_socio_economica_id')->constrained('condicion_socio_economicas')->onDelete('cascade');
             $table->foreignId('manif_volunta_id')->constrained('manifestacion_voluntads')->onDelete('cascade');
