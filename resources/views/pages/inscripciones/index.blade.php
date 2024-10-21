@@ -36,7 +36,7 @@
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
-                                    <select class="form-control" id="programa">
+                                    <select class="form-control" id="programasAll">
                                         <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
                                         @foreach ($programas as $programa)
                                         <option value="{{$programa->id}}">{{$programa->nombre}}</option>
@@ -49,7 +49,7 @@
                         <!-- /.box -->
                     </div>
                 </div>
-                <div class="row d-none" id="talleres">
+                <div class="row d-none" id="talleresProgramas">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
                         <div class="box">
@@ -139,9 +139,9 @@
 @endsection
 @push('js')
 <script>
-    $('#programa').on('change', function() {
+    $('#programasAll').on('change', function() {
         let id = $(this).val();
-        $("#talleres").addClass('d-none');
+        $("#talleresProgramas").addClass('d-none');
         $("#aniosperiodos").addClass('d-none');
         $("#datosAlumnos").addClass('d-none');
         $("#dias").addClass('d-none');
@@ -152,7 +152,7 @@
             success: function(response) {
                 if (response.length > 0) {
                     $("#taller").html('');
-                    $("#talleres").removeClass('d-none');
+                    $("#talleresProgramas").removeClass('d-none');
                     $("#taller").append(`
                         <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
                     `);
