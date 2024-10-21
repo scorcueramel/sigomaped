@@ -4,6 +4,7 @@ use App\Http\Controllers\EsperaPersonaTallerController;
 use App\Http\Controllers\InscripcionController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\ProgramaController;
+use App\Http\Controllers\TallerController;
 use App\Http\Controllers\AnioPeriodoController;
 use App\Models\AnioPeriodo;
 use Illuminate\Support\Facades\Route;
@@ -73,4 +74,13 @@ Route::group(['prefix'=> 'anio-periodo','middleware'=>'auth'],function(){
     Route::post('/store',[AnioPeriodoController::class, 'store'])->name('anioperiodo.store');
     Route::get('/anio-periodo/{id}/edit', [AnioPeriodoController::class, 'edit'])->name('anioperiodo.edit');
     Route::delete('/anio-periodo/{id}', [AnioPeriodoController::class, 'destroy'])->name('anioperiodo.destroy');
+});
+
+Route::group(['prefix'=> 'talleres','middleware'=>'auth'],function(){
+    Route::get('/index',[TallerController::class,'index'])->name('talleres.index');
+    Route::get('/get-talleres/', [TallerController::class, 'getTalleres'])->name('talleres.getTalleres');
+    Route::get('/create/',[TallerController::class,'create'])->name('talleres.create');
+    Route::post('/store',[TallerController::class, 'store'])->name('talleres.store');
+    Route::get('/talleres/{id}/edit', [TallerController::class, 'edit'])->name('talleres.edit');
+    Route::delete('/talleres/{id}', [TallerController::class, 'destroy'])->name('talleres.destroy');
 });

@@ -98,7 +98,7 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                         <li><a href="pages/UI/timeline-horizontal.html"><i class="fa fa-circle-thin"></i>Horizontal Timeline</a></li>
                     </ul>
                 </li> --}}
-            <li class="header nav-small-cap">TALLERES / INSCRIPCIONES</li>
+            <li class="header nav-small-cap">INSCRIPCIONES</li>
             {{-- <li class="treeview">
                     <a href="#">
                         <i class="fa fa-bars"></i>
@@ -213,6 +213,21 @@ $usuario = \App\Models\User::find(Auth::id())->with('persona')->get()[0];
                     id="programas">
                     <li class="{{ $activePage == 'programas.index' ? 'active' : '' }}"><a
                             href="{{ route('programas.index') }}"><i class="fa fa-circle-thin"></i>Listado</a>
+                    </li>
+                </ul>
+            </li>
+            <li
+                class="treeview {{ $activePage == 'talleres.index' || $activePage == 'talleres.create' ? 'menu-open' : '' }}">
+                <a href="#" onclick="">
+                    <i class="fa fa-list"></i> <span>Talleres</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu {{ $activePage == 'talleres.index' || $activePage == 'talleres.create' ? 'd-block' : '' }}"
+                    id="talleres">
+                    <li class="{{ $activePage == 'talleres.index' ? 'active' : '' }}"><a
+                            href="{{ route('talleres.index') }}"><i class="fa fa-circle-thin"></i>Listado</a>
                     </li>
                 </ul>
             </li>

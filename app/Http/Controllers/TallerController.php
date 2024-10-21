@@ -4,27 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\Taller;
 use Illuminate\Http\Request;
+use App\Http\Requests\TallerNuevoRequest;
+use App\Services\TalleresService;
+use Illuminate\Http\JsonResponse;
+use Exception;
+use Illuminate\Support\Facades\Response;
+use Illuminate\View\View;
 
 class TallerController extends Controller
-{
+{    
+    public function __construct(
+        private TalleresService $tallerService,
+    ){}
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index():View
     {
-        //
+        $talleres = $this->tallerService->getTalleresAll();
+        return view('pages.talleres.index', ['talleres'=>$talleres]);
     }
 
+    public function getTalleres(): JsonResponse{
+        $talleres = $this->tallerService->getTalleresAll();
+        return Response::json($talleres);
+    }
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create():View
     {
-        //
+        return view('pages.talleres.create');
     }
 
     /**
