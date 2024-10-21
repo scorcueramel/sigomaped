@@ -158,6 +158,8 @@
         } else if (tipoPersona == 6) {
             let generos = @json($generos);
             let seguros = @json($seguros);
+            let aniospreiodos = @json($aniosperiodos);
+            let condicionse = @json($condicionse);
             limpiarCampos();
             $("#datosgeneralesregistrar").html('');
             $("#datosgenerales").addClass('col-lg-6');
@@ -176,10 +178,28 @@
                     </div>
                     <div class="col-12" id="tiposseguros">
                         <div class="form-group">
-                            <label abel for="radio-anios">SEGURO <span class="text-danger">*</span></label>
+                            <label abel for="radio-seguros">TIPO DE SEGURO <span class="text-danger">*</span></label>
                             <div class="c-inputs-stacked" id="radio-seguros">
                             </div>
                             <div class="d-none" id="seguroerror">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12" id="aniosperiodos">
+                        <div class="form-group">
+                            <label abel for="radio-anios-periodos">AÑO PERIODO DE INGRESO <span class="text-danger">*</span></label>
+                            <div class="c-inputs-stacked" id="radio-anios-periodos">
+                            </div>
+                            <div class="d-none" id="anioperiodoserror">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12" id="condsocioeconomica">
+                        <div class="form-group">
+                            <label abel for="radio-condicion-socioeconomica">CONDICIÓN SOCIOECONOMICA <span class="text-danger">*</span></label>
+                            <div class="c-inputs-stacked" id="radio-condicion-socioeconomica">
+                            </div>
+                            <div class="d-none" id=condsocioeconomicaerror">
                             </div>
                         </div>
                     </div>
@@ -195,6 +215,18 @@
                 $("#radio-seguros").append(`
                     <input name="tiposeguro" type="radio" id="tiposeguro_${s.tipoguroid}" required>
                     <label for="tiposeguro_${s.tipoguroid}" class="mr-30">${s.tiposeguro}</label>
+                `);
+            });
+            aniospreiodos.forEach((a) => {
+                $("#radio-anios-periodos").append(`
+                    <input name="anioperiodo" type="radio" id="anioperiodo${a.anioperiodoid}" required>
+                    <label for="anioperiodo${a.anioperiodoid}" class="mr-30">${a.descripcion}</label>
+                `);
+            });
+            condicionse.forEach((c) => {
+                $("#radio-condicion-socioeconomica").append(`
+                    <input name="cse" type="radio" id="cse${c.cseid}" required>
+                    <label for="cse${c.cseid}" class="mr-30">${c.csedescripcion}</label>
                 `);
             });
         }
@@ -354,17 +386,7 @@
                 password_confirmation
             };
             guardarDatos(data)
-        } else if (tipopersonaid == 3 || tipopersonaid == 4) {
-            let alumnoid = $('#alumonid').val();
-            let data = {
-                tipopersonaid,
-                documento,
-                nombres,
-                apellidos,
-                alumnoid
-            };
-            guardarDatos(data)
-        } else if (tipopersonaid == 5) {
+        } else if (tipopersonaid == 3 || tipopersonaid == 4 || tipopersonaid == 5) {
             let alumnoid = $('#alumonid').val();
             let correo = $('#correo').val();
             let telefono = $('#telefono').val();
@@ -378,6 +400,8 @@
                 telefono
             };
             guardarDatos(data)
+        } else if(tipopersonaid == 6){
+
         }
     }
 

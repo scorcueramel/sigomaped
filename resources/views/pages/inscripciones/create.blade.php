@@ -114,7 +114,7 @@
                         <!-- /.box -->
                     </div>
                 </div>
-                <div class="row d-none" id="talleres">
+                <div class="row d-none" id="selecciontaller">
                     <input type="hidden" value="" id="tallerid">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
@@ -229,7 +229,7 @@
         $("#tiposTalleres").addClass('d-none');
         $("#seccionprogramas").addClass('d-none');
         $("#radios-programas").html('');
-        $("#talleres").addClass('d-none');
+        $("#selecciontaller").addClass('d-none');
         $("#radios-talleres").html('');
         $("#ciclos").addClass('d-none');
         $("#radios-ciclos").html('');
@@ -416,7 +416,7 @@
                 if (response.length > 0) {
                     $("#dias").addClass('d-none');
                     $("#ciclos").addClass('d-none');
-                    $("#talleres").addClass('d-none');
+                    $("#selecciontaller").addClass('d-none');
                     $("#seccionprogramas").removeClass('d-none');
                     $("#programaTitulo").html(descripcion);
                     response.forEach((e) => {
@@ -440,7 +440,7 @@
         $("#tiposTalleres").addClass('d-none');
         $("#seccionprogramas").addClass('d-none');
         $("#radios-programas").html('');
-        $("#talleres").addClass('d-none');
+        $("#selecciontaller").addClass('d-none');
         $("#radios-talleres").html('');
         $("#ciclos").addClass('d-none');
         $("#radios-ciclos").html('');
@@ -456,7 +456,7 @@
         let contadorGrupales = 0;
         let contadorRecreativas = 0;
         $("#seccionprogramas").addClass('d-none');
-        $("#talleres").addClass('d-none');
+        $("#selecciontaller").addClass('d-none');
         $("#radios-programas").html('');
         // pendiente para la validacion sobre la cantidad de talleres al que se encuentra inscrito el alumno
         $.ajax({
@@ -513,14 +513,14 @@
         let titulo = descripcion.includes("TALLER") ? descripcion.substring(6, descripcion.length, -1) : '';
         $("#radios-talleres").html('');
         $("#ciclos").addClass('d-none');
-        $("#talleres").addClass('d-none');
+        $("#selecciontaller").addClass('d-none');
         $("#dias").addClass('d-none');
         $.ajax({
             type: "GET",
             url: `/inscripciones/get-talleres/${id}`,
             success: function(response) {
                 if (response.length > 0) {
-                    $("#talleres").removeClass('d-none');
+                    $("#selecciontaller").removeClass('d-none');
                     $("#tallerTitulo").html(`TALLERES ${titulo}`);
                     response.forEach((e) => {
                         $("#radios-talleres").append(`

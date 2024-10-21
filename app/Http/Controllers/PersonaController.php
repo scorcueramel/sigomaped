@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonaNuevoRequest;
+use App\Services\AnioPeriodoService;
+use App\Services\CondicionSocioEconomicaService;
 use App\Services\GeneroService;
 use App\Services\PersonaService;
 use App\Services\TipoPersonaService;
@@ -19,6 +21,8 @@ class PersonaController extends Controller
         private GeneroService $generoService,
         private TipoSeguroService $tipoSeguroService,
         private PersonaService $personaService,
+        private AnioPeriodoService $anioPeriodoService,
+        private CondicionSocioEconomicaService $condicionSocioEconomicaService,
     ) {}
     /**
      * Display a listing of the resource.
@@ -41,8 +45,10 @@ class PersonaController extends Controller
         $tipospersonas = $this->tipoPersonaService->getTiposPersonasServicios();
         $generos = $this->generoService->getGeneros();
         $seguros = $this->tipoSeguroService->getTipoSerguro();
+        $aniosperiodos =$this->anioPeriodoService->getAnioPeriodosAll();
+        $condicionse = $this->condicionSocioEconomicaService->getCondicionSocioEconomica();
 
-        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros"));
+        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse"));
     }
 
     /**
@@ -58,10 +64,10 @@ class PersonaController extends Controller
         if ($tipopersona == 1 || $tipopersona == 2)
             $registerCode = $this->personaService->registerDatosGenerales($request->datos);
 
-        if ($tipopersona == 3 || $tipopersona == 4)
+        if ($tipopersona == 3 || $tipopersona == 4 || $tipopersona == 5)
             $registerCode = $this->personaService->registerDatosGenerales($request->datos);
 
-        if ($tipopersona == 5)
+        if ($tipopersona == 6)
             $registerCode = $this->personaService->registerDatosGenerales($request->datos);
 
         if ($registerCode === 200)
