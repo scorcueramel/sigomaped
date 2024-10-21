@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('es_derivado')->default(false);
             $table->dateTime('fecha_derivacion')->nullable();
             $table->string('estado_inscripcion',1)->default('I');
-            $table->date('fecha_inscripcion');
+            $table->date('fecha_inscripcion')->nullable(true);
             $table->string('usuario_actualiza',50)->nullable();
             $table->softDeletes();
             $table->timestamps();
