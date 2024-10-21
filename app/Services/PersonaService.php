@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Alumno;
+use App\Models\PadreAlumno;
 use App\Models\Persona;
 use App\Models\Representante;
 use App\Models\User;
@@ -56,15 +57,20 @@ class PersonaService
 
         return 200;
     }
+
     public function registerPadres($data)
     {
+        $alumno = Alumno::where('persona_id',$data->alumnoid)->get()[0];
         $nuevaPersona = new Persona();
         $nuevaPersona->tipo_persona_id = $data->tipopersonaid;
         $nuevaPersona->documento = $data->documento;
         $nuevaPersona->nombres = Str::upper($data->nombres);
         $nuevaPersona->apellidos = Str::upper($data->apellidos);
         $nuevaPersona->save();
-
+        $padreAlumno = new PadreAlumno();
+        $padreAlumno->persona_id = $nuevaPersona->id;
+        $padreAlumno->alumno_id = $alumno->id;
+        $padreAlumno->save();
         return 200;
     }
 

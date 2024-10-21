@@ -146,44 +146,15 @@
                         </div>
             `);
         } else if (tipoPersona == 3 || tipoPersona == 4) {
-            $("#datosgeneralesregistrar").html(`
-                <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
-            `);
+            let titulo = 'DATOS DEL ALUMNO';
+            datosAlumno(tipoPersona,titulo);
+            // $("#datosgeneralesregistrar").html(`
+            //     <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
+            // `);
         } else if (tipoPersona == 5) {
+            let titulo = 'DATOS PARA EL REPRESENTANTE LEGAL';
             limpiarCampos();
-            $("#datosgeneralesregistrar").html('');
-            $("#datosgenerales").addClass('col-lg-6');
-            $("#formularioextend").removeClass('d-none');
-            $("#boxheader").html('DATOS PARA EL REPRESENTANTE LEGAL');
-            $("#boxbodysection").html(`
-                <div class="form-group">
-                    <label for="documento_alumno">Buscar alumno por número de documento</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control input-sm" id="documento_alumno" autofocus>
-                        <span class="input-group-btn">
-                            <button class="btn btn-info" type="button" id="buscador" onclick="buscarAlumno()"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </span>
-                    </div>
-                </div>
-                <div class="table-responsive d-none" id="tablaalumno">
-                <input type="hidden" id="alumonid" value="" required>
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>NOMBRES</th>
-                            <th>APELLIDOS</th>
-                            <th>DOCUMENTO</th>
-                        </tr>
-                    </thead>
-                    <tbody class="datos_alumno">
-                    </tbody>
-                    <div class="d-none" id="datosalumnoerror">
-                    </div>
-                </table>
-                </div>
-                <div class="row d-none" id="datosrepresentante"></div>
-            `);
+            datosAlumno(tipoPersona,titulo);
         } else if (tipoPersona == 6) {
             let generos = @json($generos);
             let seguros = @json($seguros);
@@ -243,7 +214,7 @@
                     $(".datos_alumno").append(`
                         <tr>
                             <td>
-                                <input type="radio" name="alumnoid" id="alumno_${data.id}" onclick="javascript:camposRepesentanteLegal(${data.id});" required>
+                                <input type="radio" name="alumnoid" id="alumno_${data.id}" onclick="javascript:camposRepesentanteLegal(${data.id});$('#datosdelalumnopadre').removeClass('d-none');" required>
                                 <label for="alumno_${data.id}"></label>
                             </td>
                             <td>
@@ -276,6 +247,56 @@
                 }
             }
         });
+    }
+
+    function datosAlumno(tipopersona,titulo){
+        if (tipopersona == 3 || tipopersona == 4) {
+            generalRepreYPadres(titulo)
+            $("#boxbodysection").append(`
+                <div class="col-12 d-none" id="datosdelalumnopadre">
+                    <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
+                </div>`);
+        }else if (tipopersona == 5) {
+            generalRepreYPadres(titulo)
+            $("#boxbodysection").append('<div class="row d-none" id="datosrepresentante"></div>');
+        }
+
+
+    }
+
+    function generalRepreYPadres(titulo){
+        $("#datosgeneralesregistrar").html('');
+            $("#datosgenerales").addClass('col-lg-6');
+            $("#formularioextend").removeClass('d-none');
+            $("#boxheader").html(`${titulo}`);
+            $("#boxbodysection").html(`
+                <div class="form-group">
+                    <label for="documento_alumno">Buscar alumno por número de documento</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" id="documento_alumno" autofocus>
+                        <span class="input-group-btn">
+                            <button class="btn btn-info" type="button" id="buscador" onclick="buscarAlumno()"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="table-responsive d-none" id="tablaalumno">
+                    <input type="hidden" id="alumonid" value="" required>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>NOMBRES</th>
+                                <th>APELLIDOS</th>
+                                <th>DOCUMENTO</th>
+                            </tr>
+                        </thead>
+                        <tbody class="datos_alumno">
+                        </tbody>
+                        <div class="d-none" id="datosalumnoerror">
+                        </div>
+                    </table>
+                </div>
+            `);
     }
 
     function camposRepesentanteLegal(alumnoid) {
@@ -334,11 +355,13 @@
             };
             guardarDatos(data)
         } else if (tipopersonaid == 3 || tipopersonaid == 4) {
+            let alumnoid = $('#alumonid').val();
             let data = {
                 tipopersonaid,
                 documento,
                 nombres,
-                apellidos
+                apellidos,
+                alumnoid
             };
             guardarDatos(data)
         } else if (tipopersonaid == 5) {

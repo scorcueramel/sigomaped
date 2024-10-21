@@ -84,6 +84,7 @@ class PersonaNuevoRequest extends FormRequest
         if ($personatipo == 3 || $personatipo == 4) {
             $this->datos[] = PersonaData::from([
                 'tipopersonaid' => $personatipo,
+                'alumnoid'=>$this->alumnoid,
                 'documento' => $this->documento,
                 'nombres' => $this->nombres,
                 'apellidos' => $this->apellidos

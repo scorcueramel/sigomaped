@@ -86,8 +86,8 @@
                                 <div class="form-group">
                                     @foreach ($tiposTalleres as $tp)
                                     <div class="radio">
-                                        <input name="tipotaller" type="radio" id="Option_{{$tp->id}}" class="tallerselec" onclick="consultaProgramas('{{ $tp->id }}','{{$tp->descripcion}}');">
-                                        <label for="Option_{{$tp->id}}">{{$tp->descripcion}}</label>
+                                        <input name="tipotaller" type="radio" id="Option_{{$tp->tipotallerid}}" class="tallerselec" onclick="consultaProgramas('{{ $tp->tipotallerid }}','{{$tp->tipotallerdescripcion}}');">
+                                        <label for="Option_{{$tp->tipotallerid}}">{{$tp->tipotallerdescripcion}}</label>
                                     </div>
                                     @endforeach
                                 </div>

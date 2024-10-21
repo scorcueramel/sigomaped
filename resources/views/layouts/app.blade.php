@@ -115,9 +115,6 @@
     <!-- jquerysteps -->
     <script src="{{ asset('/assets/js/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('/assets/js/sweetalert2@11.js') }}"></script>
-    <!-- validar su funcionalidad -->
-    <!-- <script src="{{ asset('/assets/js/steps.js') }}"></script> -->
-    <!-- <script src="{{ asset('/assets/js/jq') }}"></script> -->
 
     {{-- icons --}}
 
@@ -131,7 +128,6 @@
 
     <script src="{{asset('assets/js/jquery.toast.js')}}"></script>
     <script src="{{asset('assets/js/toastr.js')}}"></script>
-    <script src="{{ asset('assets/js/validation.js') }}"></script>
 
     <script src="{{ asset('/assets/js/fullcalendar/lib/moment.min.js') }}"></script>
 	<script src="{{ asset('/assets/js/fullcalendar/fullcalendar.min.js') }}"></script>

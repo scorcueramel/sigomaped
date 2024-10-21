@@ -25,7 +25,7 @@
                             'icontype' => 'info',
                             'title' => 'Recuerda!',
                             'message' => 'Actualmente tu lista de espera cuenta con alumnos, te recomendamos verificarla antes de continuar con una inscripción. <br>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Ve al apartado <strong><a class="text-dark font-weight-bold" href="/lista-espera/index">Lista de Espera</a></strong> para verificar.',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Ve al apartado <strong><a class="text-dark font-weight-bold" href="/lista-espera/index">Lista de Espera</a></strong> para verificar.',
                             'btndismiss' => true,
                             'textcolor' => 'text-dark',
                         ])
@@ -70,6 +70,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div id="calendar"></div>
                                 </div>
                             </div>
@@ -84,6 +85,7 @@
             @include('components.controls')
         </div>
     </div>
+    @include('components.modal')
     <div class="modal none-border" id="my-event">
         <div class="modal-dialog">
             <div class="modal-content">
