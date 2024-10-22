@@ -8,5 +8,6 @@ class AnioPeriodoData extends Data{
     public function __construct(
         public int $anioperiodoid,
         public string $descripcion,
+        public ?string $createdat,
     ){}
 }

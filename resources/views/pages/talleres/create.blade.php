@@ -4,16 +4,16 @@
 <div class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         @include('components.header')
-        @include('components.aside', ['activePage' => 'programas.create'])
+        @include('components.aside', ['activePage' => 'talleres.create'])
 
         <div class="content-wrapper">
             <section class="content-header">
                 <h1>
-                    Crear Programa
+                    Crear Taller
                 </h1>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-edit"></i> Programas</a></li>
-                    <li class="breadcrumb-item active">Crear Programa</li>
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-edit"></i> Talleres</a></li>
+                    <li class="breadcrumb-item active">Crear taller</li>
                 </ol>
             </section>
 
@@ -22,14 +22,14 @@
                     <div class="col-12 col-lg-12">
                         <div class="box">
                             <div class="box-header with-border">
-                                <h4 class="box-title">CREAR NUEVO PROGRAMA</h4>
+                                <h4 class="box-title">CREAR NUEVO TALLER</h4>
                             </div>
                             <div class="box-body">
-                                <form id="crearProgramaForm">
+                                <form id="crearTallerForm">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="nombre">Nombre del Programa</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del programa" required>
+                                        <label for="nombre">Nombre del Taller</label>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del taller" required>
                                     </div>
 
                                     <div class="form-group">
@@ -40,7 +40,7 @@
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-success">Guardar</button>
-                                        <a href="{{ route('programas.index') }}" class="btn btn-secondary">Cancelar</a>
+                                        <a href="{{ route('talleres.index') }}" class="btn btn-secondary">Cancelar</a>
                                     </div>
                                 </form>
                             </div>
@@ -59,17 +59,17 @@
 @push('js')
 <script>
     $(document).ready(function() {
-        $('#crearProgramaForm').on('submit', function(e) {
+        $('#crearTallerForm').on('submit', function(e) {
             e.preventDefault();
 
             Swal.fire({
                 title: '¿Estás seguro?',
-                text: "¿Quieres crear este programa?",
+                text: "¿Quieres crear este taller?",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, crear programa',
+                confirmButtonText: 'Sí, crear taller',
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
@@ -77,7 +77,7 @@
                     var estado = $('#estado').is(':checked') ? 1 : 0;
 
                     $.ajax({
-                        url: "{{ route('programas.store') }}",
+                        url: "{{ route('talleres.store') }}",
                         type: "POST",
                         dataType: "json",
                         contentType: "application/json",
@@ -88,17 +88,17 @@
                         success: function(response) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Programa creado exitosamente',
-                                text: response.programa.nombre,
+                                title: 'Taller creado exitosamente',
+                                text: response.taller.nombre,
                                 confirmButtonText: 'Aceptar'
                             }).then(() => {
-                                window.location.href = "{{ route('programas.index') }}";
+                                window.location.href = "{{ route('talleres.index') }}";
                             });
                         },
                         error: function(xhr, status, error) {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Error al crear el programa',
+                                title: 'Error al crear el taller',
                                 text: xhr.responseText,
                                 confirmButtonText: 'Aceptar'
                             });

@@ -16,6 +16,7 @@ class AnioPeriodoService{
             $this->aniosPeriodosList[]=AnioPeriodoData::from([
                 "anioperiodoid"=> $ap->id,
                 "descripcion"=> $ap->descripcion,
+                "createdat"=> $ap->created_at,
             ]);
         }
 
