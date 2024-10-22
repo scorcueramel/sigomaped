@@ -5,7 +5,7 @@ namespace App\Services;
 use App\Models\Taller;
 use Illuminate\Support\Facades\DB;
 
-class TalleresService
+class TallerService
 {    
     public function getTalleresAll()
     {

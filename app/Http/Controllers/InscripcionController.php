@@ -11,7 +11,7 @@ use App\Services\InscripcionEsperaService;
 use App\Services\InscripcionService;
 use App\Services\PersonaService;
 use App\Services\ProgramaService;
-use App\Services\TalleresService;
+use App\Services\TallerService;
 use App\Services\TipoTallerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class InscripcionController extends Controller
         private ProgramaService $programaService,
         private CiclosService $ciclosService,
         private CicloHorarioService $cicloHorarioService,
-        private TalleresService $talleresService,
+        private TallerService $TallerService,
         private InscripcionService $inscripcionService,
         private InscripcionEsperaService $inscripcionEsperaService,
         private TipoTallerService $tipoTallerService,
@@ -95,7 +95,7 @@ class InscripcionController extends Controller
     }
 
     public function getTalleresByType($id): JsonResponse{
-        $talleresAll = $this->talleresService->getTalleres($id);
+        $talleresAll = $this->TallerService->getTalleres($id);
         return Response::json($talleresAll);
     }
 
