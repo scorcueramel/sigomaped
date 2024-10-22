@@ -60,7 +60,7 @@ class InscripcionService
                     $this->updateCuposCiclo($inscripcion->horarioid,$inscripcion->cicloid);
                     $this->getPersonaEspera($inscripcion->alumnoid, $inscripcion->tallerid);
                     if($inscripcion->enespera == "2")
-                        null;
+                        return 100;
                     return 200;
                 }else{
                     return 100;

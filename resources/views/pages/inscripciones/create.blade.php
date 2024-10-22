@@ -330,25 +330,25 @@
                 tallerId,
             },
             success: function(response) {
-                if (response.code === 100)
+                if (response.code === 100) {
                     mensaje("Ops", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
                         if (result.isConfirmed) {
                             Swal.close();
                         }
                     });
-                else if (response.code === 200)
+                } else if (response.code === 200) {
                     mensaje("Alumno Inscrito", `${response.mensaje}`, "success", "Entendido!").then((result) => {
                         if (result.isConfirmed) {
                             window.location.href = "{{route('inscripciones.index')}}";
                         }
                     });
-                else if (response.code === 300)
+                } else if (response.code === 300) {
                     mensaje("Alumno en Espera", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
                         if (result.isConfirmed) {
                             Swal.close();
                         }
                     });
-                else if (response.code === 400)
+                } else if (response.code === 400) {
                     mensaje("Ops!", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
                         let listaEspera = $("#espera").val('1');
                         confirmacion("¿Deseas Continuar?", "Puedes Inscribit al alumno la lista de espera para el próximo ciclo a iniciar.", "question", true, "No Inscribir", "Si Inscribir").then((result) => {
@@ -361,12 +361,13 @@
                         });
 
                     });
-                else if (response.code === 500)
+                } else if (response.code === 500) {
                     mensaje("Ops", `${response.mensaje}`, "error", "Entendido!").then((result) => {
                         if (result.isConfirmed) {
                             Swal.close();
                         }
                     });
+                }
             }
         });
 
@@ -399,11 +400,18 @@
             },
             success: function(response) {
                 if (response.code === 200)
-                    mensaje("Alumno en Espera", `${response.mensaje} recuerda que el alumno se encuentra en la seccion de espera`, "success", "Entendido!").then((result) => {
+                    mensaje("Alumno en Espera", `${response.mensaje} recuerda que puedes visualizar el registro del alumno en la seccion de espera`, "success", "Entendido!").then((result) => {
                         if (result.isConfirmed) {
                             window.location.href = "{{route('inscripciones.index')}}";
                         }
                     });
+                else if (response.code === 300) {
+                    mensaje("Alumno en Espera", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.close();
+                        }
+                    });
+                }
             }
         });
     }

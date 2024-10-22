@@ -175,6 +175,7 @@
                             <div class="d-none" id="generoerror">
                             </div>
                         </div>
+                        <hr>
                     </div>
                     <div class="col-12" id="tiposseguros">
                         <div class="form-group">
@@ -183,15 +184,17 @@
                             </div>
                             <div class="d-none" id="seguroerror">
                             </div>
+                            <hr>
                         </div>
                     </div>
                     <div class="col-12" id="aniosperiodos">
                         <div class="form-group">
-                            <label abel for="radio-anios-periodos">AÑO PERIODO DE INGRESO <span class="text-danger">*</span></label>
+                            <label abel for="radio-anios-periodos">AÑO Y PERIODO DE INGRESO <span class="text-danger">*</span></label>
                             <div class="c-inputs-stacked" id="radio-anios-periodos">
                             </div>
                             <div class="d-none" id="anioperiodoserror">
                             </div>
+                            <hr>
                         </div>
                     </div>
                     <div class="col-12" id="condsocioeconomica">
@@ -201,6 +204,7 @@
                             </div>
                             <div class="d-none" id=condsocioeconomicaerror">
                             </div>
+                            <hr>
                         </div>
                     </div>
                 </div>
