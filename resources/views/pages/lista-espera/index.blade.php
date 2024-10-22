@@ -34,7 +34,7 @@
                             <div class="box-body">
                                 <p style="margin: 25px 0 0 20px">LISTA DE TALLERES CON ALUMNOS EN ESPERA DE
                                     INSCRIPCIÓN</p>
-                                <div class="box-body form-element">
+                                <div class="box-body ">
                                     <div class="form-group">
                                         @foreach ($listaFinal as $espera)
                                         <div class="radio">

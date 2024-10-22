@@ -77,7 +77,7 @@
                                 <h4 class="box-title">CICLOS RELACIONADOS A <span class="font-weight-bold" id="cicloTitulo"></span></h4>
                             </div>
                             <p style="margin: 20px 0 0 20px">SELECCIONA UN AÑO Y PERIODO</p>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -112,7 +112,7 @@
                                 <h4 class="box-title">DIAS RELACIONADOS AL AÑO <span class="font-weight-bold" id="anio"></span> PERIODO <span class="font-weight-bold" id="periodo"></span></h4>
                             </div>
                             <p style="margin: 20px 0 0 20px">SELECCIONA UN DÍA</p>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>

@@ -43,7 +43,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="box-body form-element">
+                            <div class="box-body">
                                 <div class="form-group">
                                     <label for="documento">DOCUMENTO DE IDENTIDAD <span class="text-danger">*</span></label>
                                     <div class="controls">
@@ -83,7 +83,7 @@
                             <div class="box-header with-border">
                                 <h4 class="box-title" id="boxheader"></h4>
                             </div>
-                            <div class="box-body form-element" id="boxbodysection">
+                            <div class="box-body" id="boxbodysection">
                             </div>
                             <!-- /.box-body -->
                         </div>
@@ -147,14 +147,14 @@
             `);
         } else if (tipoPersona == 3 || tipoPersona == 4) {
             let titulo = 'DATOS DEL ALUMNO';
-            datosAlumno(tipoPersona,titulo);
+            datosAlumno(tipoPersona, titulo);
             // $("#datosgeneralesregistrar").html(`
             //     <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
             // `);
         } else if (tipoPersona == 5) {
             let titulo = 'DATOS PARA EL REPRESENTANTE LEGAL';
             limpiarCampos();
-            datosAlumno(tipoPersona,titulo);
+            datosAlumno(tipoPersona, titulo);
         } else if (tipoPersona == 6) {
             let generos = @json($generos);
             let seguros = @json($seguros);
@@ -172,7 +172,7 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label for="tipos-personas">GENERO <span class="text-danger">*</span></label>
-                            <div class="c-inputs-stacked" id="radio-generos">
+                            <div id="radio-generos">
                             </div>
                             <div class="d-none" id="generoerror">
                             </div>
@@ -182,7 +182,7 @@
                     <div class="col-12" id="tiposseguros">
                         <div class="form-group">
                             <label abel for="radio-seguros">TIPO DE SEGURO <span class="text-danger">*</span></label>
-                            <div class="c-inputs-stacked" id="radio-seguros">
+                            <div id="radio-seguros">
                             </div>
                             <div class="d-none" id="seguroerror">
                             </div>
@@ -192,7 +192,7 @@
                     <div class="col-12" id="aniosperiodos">
                         <div class="form-group">
                             <label abel for="radio-anios-periodos">AÑO Y PERIODO DE INGRESO <span class="text-danger">*</span></label>
-                            <div class="c-inputs-stacked" id="radio-anios-periodos">
+                            <div id="radio-anios-periodos">
                             </div>
                             <div class="d-none" id="anioperiodoserror">
                             </div>
@@ -202,7 +202,7 @@
                     <div class="col-12" id="condsocioeconomica">
                         <div class="form-group">
                             <label abel for="radio-condicion-socioeconomica">CONDICIÓN SOCIOECONOMICA <span class="text-danger">*</span></label>
-                            <div class="c-inputs-stacked" id="radio-condicion-socioeconomica">
+                            <div id="radio-condicion-socioeconomica">
                             </div>
                             <div class="d-none" id="condsocioeconomicaerror">
                             </div>
@@ -212,7 +212,7 @@
                     <div class="col-12" id="manifestacionvoluntad">
                         <div class="form-group">
                             <label abel for="radio-manifestacion-voluntad">MANIFESTACIÓN DE VOLUNTAD <span class="text-danger">*</span></label>
-                            <div class="c-inputs-stacked" id="radio-manifestacion-voluntad">
+                            <div id="radio-manifestacion-voluntad">
                             </div>
                             <div class="d-none" id="manifestacionvoluntaderror">
                             </div>
@@ -222,12 +222,29 @@
                     <div class="col-12" id="tipodiscapacidad">
                         <div class="form-group">
                             <label abel for="radio-tipos-discapacidades">TIPOS DE DISCAPACIDADES <span class="text-danger">*</span></label>
-                            <div class="c-inputs-stacked" id="radio-tipos-discapacidades">
+                            <div id="radio-tipos-discapacidades">
                             </div>
                             <div class="d-none" id="tiposdediscapacidadeserror">
                             </div>
                             <hr>
                         </div>
+                    </div>
+                    <div class="col-12" id="tipodiscapacidad">
+                        <div class="form-group">
+                            <label abel for="radio-tipos-discapacidades">FECHA DE INSCRIPCIÓN <span class="text-danger">*</span></label>
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                            <div class="d-none" id="fechadeinscripcionerror">
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
                     </div>
                 </div>
             `);
@@ -319,14 +336,14 @@
         });
     }
 
-    function datosAlumno(tipopersona,titulo){
+    function datosAlumno(tipopersona, titulo) {
         if (tipopersona == 3 || tipopersona == 4) {
             generalRepreYPadres(titulo)
             $("#boxbodysection").append(`
                 <div class="col-12 d-none" id="datosdelalumnopadre">
                     <button type="submit" class="btn btn-info btn-block" onclick="javascript:registrarPersona();">Registrar Persona</button>
                 </div>`);
-        }else if (tipopersona == 5) {
+        } else if (tipopersona == 5) {
             generalRepreYPadres(titulo)
             $("#boxbodysection").append('<div class="row d-none" id="datosrepresentante"></div>');
         }
@@ -334,12 +351,12 @@
 
     }
 
-    function generalRepreYPadres(titulo){
+    function generalRepreYPadres(titulo) {
         $("#datosgeneralesregistrar").html('');
-            $("#datosgenerales").addClass('col-lg-6');
-            $("#formularioextend").removeClass('d-none');
-            $("#boxheader").html(`${titulo}`);
-            $("#boxbodysection").html(`
+        $("#datosgenerales").addClass('col-lg-6');
+        $("#formularioextend").removeClass('d-none');
+        $("#boxheader").html(`${titulo}`);
+        $("#boxbodysection").html(`
                 <div class="form-group">
                     <label for="documento_alumno">Buscar alumno por número de documento</label>
                     <div class="input-group">
@@ -438,7 +455,7 @@
                 telefono
             };
             guardarDatos(data)
-        } else if(tipopersonaid == 6){
+        } else if (tipopersonaid == 6) {
 
         }
     }
@@ -482,6 +499,13 @@
         $('#correoerror').removeClass('d-none');
         $('#passworderror').removeClass('d-none');
         $('#passwordconfirmationderror').removeClass('d-none');
+        $('#generoerror').removeClass('d-none');
+        $('#seguroerror').removeClass('d-none');
+        $('#anioperiodoserror').removeClass('d-none');
+        $('#condsocioeconomicaerror').removeClass('d-none');
+        $('#manifestacionvoluntaderror').removeClass('d-none');
+        $('#tiposdediscapacidadeserror').removeClass('d-none');
+        $('#fechadeinscripcionerror').removeClass('d-none');
     }
 
     function gestionMensajes(erroresresp) {

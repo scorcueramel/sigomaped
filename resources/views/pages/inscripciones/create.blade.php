@@ -27,7 +27,7 @@
                             <div class="box-header with-border">
                                 <h4 class="box-title">ALUMNO A INSCRIBIR</h4>
                             </div>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="form-group">
                                     <label for="documento_alumno">Buscar alumno por número de documento</label>
                                     <div class="input-group">
@@ -82,7 +82,7 @@
                                 <h4 class="box-title">TIPOS DE TALLERES</h4>
                             </div>
                             <p style="margin: 25px 0 0 20px">SELECCIONA UN TIPO DE TALLER</p>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="form-group">
                                     @foreach ($tiposTalleres as $tp)
                                     <div class="radio">
@@ -105,7 +105,7 @@
                                 <h4 class="box-title">PROGRAMAS ASOCIADOS AL TIPO DE TALLER <span class="font-weight-bold" id="programaTitulo"></span></h4>
                             </div>
                             <p style="margin: 25px 0 0 20px">SELECCIONA UN PROGRAMA</p>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="form-group" id="radios-programas">
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                                 <h4 class="box-title font-weight-bold" id="tallerTitulo"></h4>
                             </div>
                             <p style="margin: 25px 0 0 20px">SELECCIONA UN TALLER</p>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="form-group" id="radios-talleres">
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                                 <h4 class="box-title">CICLOS RELACIONADOS A <span class="font-weight-bold" id="cicloTitulo"></span></h4>
                             </div>
                             <p style="margin: 20px 0 0 20px">SELECCIONA UN AÑO Y PERIODO</p>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -176,7 +176,7 @@
                                 <h4 class="box-title">DIAS RELACIONADOS A <span class="font-weight-bold" id="diaTitulo"></span></h4>
                             </div>
                             <p style="margin: 20px 0 0 20px">SELECCIONA UN DÍA</p>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>

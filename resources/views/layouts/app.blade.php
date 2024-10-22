@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.toast.css') }}">
 
     <link rel="stylesheet" href="{{ asset('/assets/js/fullcalendar/fullcalendar.min.css')}}">
-	<link rel="stylesheet" href="{{ asset('/assets/js/fullcalendar/fullcalendar.print.min.css')}}" media="print">
+    <link rel="stylesheet" href="{{ asset('/assets/js/fullcalendar/fullcalendar.print.min.css')}}" media="print">
 </head>
 
 <body class="hold-transition">
@@ -69,7 +69,7 @@
     <script src="{{ asset('/assets/js/jquery.js') }}"></script>
 
     <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('/assets/js/jquery-ui.js') }}"></script>
+    <script src="{{ asset('/assets/js/jquery-ui/jquery-ui.js') }}"></script>
 
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
@@ -88,9 +88,6 @@
     <!-- Slimscroll -->
     <script src="{{ asset('/assets/js/jquery.slimscroll.js') }}"></script>
 
-    <!-- FastClick -->
-    <script src="{{ asset('/assets/js/fastclick.js') }}"></script>
-
     <!-- peity -->
     <script src="{{ asset('/assets/js/jquery.peity.js') }}"></script>
 
@@ -100,17 +97,6 @@
 
     <!-- Fab Admin App -->
     <script src="{{ asset('/assets/js/template.js') }}"></script>
-
-    <!-- Fab Admin dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('/assets/js/dashboard.js') }}"></script>
-
-    <!-- Fab Admin for demo purposes -->
-    <script src="{{ asset('/assets/js/demo.js') }}"></script>
-
-    <!-- Vector map JavaScript -->
-    <script src="{{ asset('/assets/js/jquery-jvectormap-2.0.2.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/jquery-jvectormap-world-mill-en.js') }}"></script>
-    <script src="{{ asset('/assets/js/jquery-jvectormap-us-aea-en.js') }}"></script>
 
     <!-- jquerysteps -->
     <script src="{{ asset('/assets/js/jquery.validate.min.js') }}"></script>
@@ -130,7 +116,7 @@
     <script src="{{asset('assets/js/toastr.js')}}"></script>
 
     <script src="{{ asset('/assets/js/fullcalendar/lib/moment.min.js') }}"></script>
-	<script src="{{ asset('/assets/js/fullcalendar/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/fullcalendar/fullcalendar.min.js') }}"></script>
 
     <script>
         $(document).ready(function() {
@@ -163,6 +149,13 @@
         })()
     </script>
 
+    <script src="{{asset('assets/js/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+    <script src="{{asset('assets/js/fastclick/lib/fastclick.js')}}"></script>
+    <script src="{{asset('assets/js/formatter/formatter.js')}}"></script>
+    <script src="{{asset('assets/js/formatter/jquery.formatter.js')}}"></script>
+    <script src="{{asset('assets/js/formatter.js')}}"></script>
+    <!-- Fab Admin for demo purposes -->
+    <script src="{{ asset('/assets/js/demo.js') }}"></script>
     @stack('js')
 </body>
 

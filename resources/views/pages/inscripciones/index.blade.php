@@ -75,7 +75,7 @@
                             <div class="box-header with-border">
                                 <h4 class="box-title">AÑO Y PERIODO</h4>
                             </div>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="form-group" id="radios-anio-periodo">
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                             <div class="box-header with-border">
                                 <h4 class="box-title">DIAS RELACIONADOS AL AÑO Y PERIODO</h4>
                             </div>
-                            <div class="box-body form-element">
+                            <div class="box-body ">
                                 <div class="form-group" id="radios_dias">
                                 </div>
                             </div>
