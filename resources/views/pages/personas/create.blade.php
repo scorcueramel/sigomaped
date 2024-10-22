@@ -161,6 +161,7 @@
             let aniospreiodos = @json($aniosperiodos);
             let condicionse = @json($condicionse);
             let manifestaciones = @json($manifestaciones);
+            let tipodiscapacidades = @json($tipodiscapacidades);
             limpiarCampos();
             $("#datosgeneralesregistrar").html('');
             $("#datosgenerales").addClass('col-lg-6');
@@ -203,7 +204,7 @@
                             <label abel for="radio-condicion-socioeconomica">CONDICIÓN SOCIOECONOMICA <span class="text-danger">*</span></label>
                             <div class="c-inputs-stacked" id="radio-condicion-socioeconomica">
                             </div>
-                            <div class="d-none" id=condsocioeconomicaerror">
+                            <div class="d-none" id="condsocioeconomicaerror">
                             </div>
                             <hr>
                         </div>
@@ -213,7 +214,17 @@
                             <label abel for="radio-manifestacion-voluntad">MANIFESTACIÓN DE VOLUNTAD <span class="text-danger">*</span></label>
                             <div class="c-inputs-stacked" id="radio-manifestacion-voluntad">
                             </div>
-                            <div class="d-none" id=manifestacionvoluntaderror">
+                            <div class="d-none" id="manifestacionvoluntaderror">
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="col-12" id="tipodiscapacidad">
+                        <div class="form-group">
+                            <label abel for="radio-tipos-discapacidades">TIPOS DE DISCAPACIDADES <span class="text-danger">*</span></label>
+                            <div class="c-inputs-stacked" id="radio-tipos-discapacidades">
+                            </div>
+                            <div class="d-none" id="tiposdediscapacidadeserror">
                             </div>
                             <hr>
                         </div>
@@ -248,6 +259,12 @@
                 $("#radio-manifestacion-voluntad").append(`
                     <input name="cse" type="radio" id="cse${m.manifestacionid}" required>
                     <label for="cse${m.manifestacionid}" class="mr-30">${m.manifestacion}</label>
+                `);
+            });
+            tipodiscapacidades.forEach((d) => {
+                $("#radio-tipos-discapacidades").append(`
+                    <input name="cse" type="radio" id="cse${d.tipodiscapacidadid}" required>
+                    <label for="cse${d.tipodiscapacidadid}" class="mr-30">${d.tipodiscapacidad}</label>
                 `);
             });
         }

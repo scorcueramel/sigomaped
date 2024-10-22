@@ -8,6 +8,7 @@ use App\Services\CondicionSocioEconomicaService;
 use App\Services\GeneroService;
 use App\Services\ManifestacionVoluntadService;
 use App\Services\PersonaService;
+use App\Services\TipoDiscapacidadService;
 use App\Services\TipoPersonaService;
 use App\Services\TipoSeguroService;
 use Illuminate\Http\JsonResponse;
@@ -25,6 +26,7 @@ class PersonaController extends Controller
         private AnioPeriodoService $anioPeriodoService,
         private CondicionSocioEconomicaService $condicionSocioEconomicaService,
         private ManifestacionVoluntadService $manifestacionVoluntadService,
+        private TipoDiscapacidadService $tipoDiscapacidadService,
     ) {}
     /**
      * Display a listing of the resource.
@@ -50,8 +52,9 @@ class PersonaController extends Controller
         $aniosperiodos =$this->anioPeriodoService->getAnioPeriodosAll();
         $condicionse = $this->condicionSocioEconomicaService->getCondicionSocioEconomica();
         $manifestaciones = $this->manifestacionVoluntadService->getAllManifestaciones();
+        $tipodiscapacidades = $this->tipoDiscapacidadService->getTiposDiscapacidadesAll();
 
-        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse","manifestaciones"));
+        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse","manifestaciones","tipodiscapacidades"));
     }
 
     /**
