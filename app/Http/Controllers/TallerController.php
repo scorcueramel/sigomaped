@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Taller;
 use Illuminate\Http\Request;
 use App\Http\Requests\TallerNuevoRequest;
-use App\Services\TalleresService;
+use App\Services\TallerService;
 use Illuminate\Http\JsonResponse;
 use Exception;
 use Illuminate\Support\Facades\Response;
@@ -14,7 +14,7 @@ use Illuminate\View\View;
 class TallerController extends Controller
 {    
     public function __construct(
-        private TalleresService $tallerService,
+        private TallerService $tallerService,
     ){}
     /**
      * Display a listing of the resource.
