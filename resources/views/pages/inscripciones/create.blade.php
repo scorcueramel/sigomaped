@@ -412,6 +412,13 @@
                         }
                     });
                 }
+                else if (response.code === 500) {
+                    mensaje("Ops!", `${response.mensaje}`, "error", "Entendido!").then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.close();
+                        }
+                    });
+                }
             }
         });
     }
@@ -648,7 +655,7 @@
     function confirmacion(title, message, icon, cancel, canceltext, confirmtext) {
         return Swal.fire({
             title: `${title}`,
-            html: `<p class="text-justify">${message}</p>`,
+            html: `<p class="text-cecnter">${message}</p>`,
             icon: `${icon}`,
             allowOutsideClick: false,
             showCloseButton: false,
@@ -665,7 +672,7 @@
     function mensaje(title, message, icon, textbtnconfirm) {
         return Swal.fire({
             title: `${title}`,
-            html: `<p class="text-justify">${message}</p>`,
+            html: `<p class="text-center">${message}</p>`,
             icon: `${icon}`,
             confirmButtonColor: "#3085d6",
             confirmButtonText: `${textbtnconfirm}`,

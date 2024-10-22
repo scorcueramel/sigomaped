@@ -166,7 +166,7 @@
     function quitarDeEspera(nombres, personaid, tallerid) {
         Swal.fire({
             title: `¿Quitar de la lista?`,
-            html: `<p class="text-justify">¿Deseas <strong><span class="font-weight-bold">Quitar</span></strgon> a ${nombres} de la lista de espera?</p>`,
+            html: `<p class="text-center">¿Deseas <strong><span class="font-weight-bold">Quitar</span></strgon> a ${nombres} de la lista de espera?</p>`,
             icon: `warning`,
             allowOutsideClick: false,
             showCloseButton: false,
@@ -200,7 +200,7 @@
             } else {
                 Swal.fire({
                     title: 'Cancelado',
-                    html: `<p class="text-justify"><strong><span class="font-weight-bold">Recuerda:</span></strong> si quitas al alumno de la lista de espera no podras recuperarlo hasta que se vuelva a inscribir en la lista de espera</p>`,
+                    html: `<p class="text-center"><strong><span class="font-weight-bold">Recuerda:</span></strong> si quitas al alumno de la lista de espera no podras recuperarlo hasta que se vuelva a inscribir en la lista de espera</p>`,
                     icon: `info`,
                     allowOutsideClick: false,
                     confirmButtonColor: "#3085d6",

@@ -63,7 +63,7 @@ class InscripcionService
                         return 100;
                     return 200;
                 }else{
-                    return 100;
+                    return 500;
                 }
             }else{
                 return 400;

@@ -6,6 +6,7 @@ use App\Http\Requests\PersonaNuevoRequest;
 use App\Services\AnioPeriodoService;
 use App\Services\CondicionSocioEconomicaService;
 use App\Services\GeneroService;
+use App\Services\ManifestacionVoluntadService;
 use App\Services\PersonaService;
 use App\Services\TipoPersonaService;
 use App\Services\TipoSeguroService;
@@ -23,6 +24,7 @@ class PersonaController extends Controller
         private PersonaService $personaService,
         private AnioPeriodoService $anioPeriodoService,
         private CondicionSocioEconomicaService $condicionSocioEconomicaService,
+        private ManifestacionVoluntadService $manifestacionVoluntadService,
     ) {}
     /**
      * Display a listing of the resource.
@@ -47,8 +49,9 @@ class PersonaController extends Controller
         $seguros = $this->tipoSeguroService->getTipoSerguro();
         $aniosperiodos =$this->anioPeriodoService->getAnioPeriodosAll();
         $condicionse = $this->condicionSocioEconomicaService->getCondicionSocioEconomica();
+        $manifestaciones = $this->manifestacionVoluntadService->getAllManifestaciones();
 
-        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse"));
+        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse","manifestaciones"));
     }
 
     /**

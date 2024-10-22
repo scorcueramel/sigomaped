@@ -160,6 +160,7 @@
             let seguros = @json($seguros);
             let aniospreiodos = @json($aniosperiodos);
             let condicionse = @json($condicionse);
+            let manifestaciones = @json($manifestaciones);
             limpiarCampos();
             $("#datosgeneralesregistrar").html('');
             $("#datosgenerales").addClass('col-lg-6');
@@ -207,6 +208,16 @@
                             <hr>
                         </div>
                     </div>
+                    <div class="col-12" id="manifestacionvoluntad">
+                        <div class="form-group">
+                            <label abel for="radio-manifestacion-voluntad">MANIFESTACIÓN DE VOLUNTAD <span class="text-danger">*</span></label>
+                            <div class="c-inputs-stacked" id="radio-manifestacion-voluntad">
+                            </div>
+                            <div class="d-none" id=manifestacionvoluntaderror">
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
                 </div>
             `);
             generos.forEach((g) => {
@@ -231,6 +242,12 @@
                 $("#radio-condicion-socioeconomica").append(`
                     <input name="cse" type="radio" id="cse${c.cseid}" required>
                     <label for="cse${c.cseid}" class="mr-30">${c.csedescripcion}</label>
+                `);
+            });
+            manifestaciones.forEach((m) => {
+                $("#radio-manifestacion-voluntad").append(`
+                    <input name="cse" type="radio" id="cse${m.manifestacionid}" required>
+                    <label for="cse${m.manifestacionid}" class="mr-30">${m.manifestacion}</label>
                 `);
             });
         }
@@ -528,7 +545,7 @@
     function mensaje(title, message, icon, textbtnconfirm) {
         return Swal.fire({
             title: `${title}`,
-            html: `<p class="text-justify">${message}</p>`,
+            html: `<p class="text-center">${message}</p>`,
             icon: `${icon}`,
             confirmButtonColor: "#3085d6",
             confirmButtonText: `${textbtnconfirm}`,
