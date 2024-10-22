@@ -78,7 +78,7 @@
                             </td>
                             <td>${anioPeriodos.descripcion}</td>
                             <td>${anioPeriodos.estado == 1 ? 'Activo' : 'Inactivo'}</td>
-                            <td>${new Date(anioPeriodos.created_at).toLocaleDateString()}</td>
+                            <td>${new Date(anioPeriodos.createdat).toLocaleDateString()}</td>
                         </tr>
                     `);
                 });

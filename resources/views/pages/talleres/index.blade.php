@@ -12,7 +12,7 @@
                     Talleres
                 </h1>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-edit"></i> talleres</a></li>
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-edit"></i> Talleres</a></li>
                     <li class="breadcrumb-item active">Listado de Talleres</li>
                 </ol>
             </section>
