@@ -51,6 +51,9 @@ class TallerService
     public function getTalleresByProgramas($id)
     {
         $talleres = Taller::where('estado', true)->where('programa_id', $id)->orderBy('id', 'asc')->get();
+
+
+
         return $talleres;
     }
 }

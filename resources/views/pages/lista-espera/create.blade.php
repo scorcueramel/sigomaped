@@ -21,7 +21,6 @@
             <!-- Main content -->
             <section class="content">
                 <div class="row" id="datosAlumno">
-                    <input type="hidden" id="espera" value="2">
                     <input type="hidden" id="alumonid" value="{{$data->alumnoid}}">
                     <input type="hidden" id="tallerid" value="{{$data->tallerid}}">
                     <div class="col-12 col-lg-12">
@@ -77,7 +76,7 @@
                                 <h4 class="box-title">CICLOS RELACIONADOS A <span class="font-weight-bold" id="cicloTitulo"></span></h4>
                             </div>
                             <p style="margin: 20px 0 0 20px">SELECCIONA UN AÑO Y PERIODO</p>
-                            <div class="box-body ">
+                            <div class="box-body form-element">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -112,7 +111,7 @@
                                 <h4 class="box-title">DIAS RELACIONADOS AL AÑO <span class="font-weight-bold" id="anio"></span> PERIODO <span class="font-weight-bold" id="periodo"></span></h4>
                             </div>
                             <p style="margin: 20px 0 0 20px">SELECCIONA UN DÍA</p>
-                            <div class="box-body ">
+                            <div class="box-body form-element">
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <thead>
@@ -249,7 +248,7 @@
     function inscribirAlumno() {
         let alumnoId = $("#alumonid").val();
         let horarioId = $("#horarioid").val();
-        let listaEspera = $("#espera").val();
+        let listaEspera = 2;
         let tallerId = $("#tallerid").val();
         let cicloId = $("#cicloid").val();
 
