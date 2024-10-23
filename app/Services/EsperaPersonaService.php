@@ -20,7 +20,7 @@ class EsperaPersonaService
                                             FROM espera_persona_tallers ept
                                             LEFT JOIN personas p ON p.id = ept.persona_id
                                             LEFT JOIN tallers t ON t.id = ept.taller_id
-                                            WHERE ept.taller_id = ?", [$id]);
+                                            WHERE ept.taller_id = ? and ept.inscrito = 'E'", [$id]);
         foreach ($alumnosEspera as $alespera) {
             $this->listaAlumnosEspera[] = PersonaListaEsperaData::from([
                 'personaid' => $alespera->persona_id,

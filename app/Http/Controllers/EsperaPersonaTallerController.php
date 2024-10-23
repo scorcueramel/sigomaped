@@ -41,25 +41,28 @@ class EsperaPersonaTallerController extends Controller
 
     public function getPersonasByTypeTaller($id): JsonResponse
     {
-        $preLista = [];
-        $listaActual = [];
+        // $preLista = [];
+        // $listaActual = [];
 
         $listaPersonasEspera = $this->esperaPersonaService->getListaEsperaPersonasByTallerId($id);
 
-        foreach ($listaPersonasEspera as $ls) {
-            array_push($preLista, [
-                'persona_id' => $ls->personaid,
-                'taller_id' => $ls->tallerid,
-                'documento' => $ls->documento,
-                'nombres' => $ls->nombres,
-                'apellidos' => $ls->apellidos,
-            ]);
-        }
+        // foreach ($listaPersonasEspera as $ls) {
+        //     array_push($preLista, [
+        //         'persona_id' => $ls->personaid,
+        //         'taller_id' => $ls->tallerid,
+        //         'documento' => $ls->documento,
+        //         'nombres' => $ls->nombres,
+        //         'apellidos' => $ls->apellidos,
+        //     ]);
+        // }
 
-        $listaActual = array_unique($preLista, SORT_ASC);
-        $listaFinal = Arr::sort($listaActual);
+        // $listaActual = array_unique($preLista, SORT_ASC);
+        // $listaFinal = Arr::sort($listaActual);
 
-        return Response::json($listaFinal);
+        // dd($listaPersonasEspera);
+
+        // return Response::json($listaFinal);
+        return Response::json($listaPersonasEspera);
     }
 
     /**

@@ -248,7 +248,7 @@
     function inscribirAlumno() {
         let alumnoId = $("#alumonid").val();
         let horarioId = $("#horarioid").val();
-        let listaEspera = 2;
+        let listaEspera = "2";
         let tallerId = $("#tallerid").val();
         let cicloId = $("#cicloid").val();
 
@@ -261,6 +261,8 @@
                 Swal.showLoading();
             }
         });
+
+        console.log(listaEspera);
 
         $.ajax({
             type: "POST",

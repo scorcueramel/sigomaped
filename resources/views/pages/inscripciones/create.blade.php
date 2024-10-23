@@ -346,25 +346,28 @@
             success: function(response) {
                 if (response.code === 100) {
                     mensaje("Ops", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                        $('#espera').val('0');
                         if (result.isConfirmed) {
                             Swal.close();
                         }
                     });
                 } else if (response.code === 200) {
                     mensaje("Alumno Inscrito", `${response.mensaje}`, "success", "Entendido!").then((result) => {
+                        $('#espera').val('0');
                         if (result.isConfirmed) {
                             window.location.href = "{{route('inscripciones.index')}}";
                         }
                     });
                 } else if (response.code === 300) {
                     mensaje("Alumno en Espera", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
+                        $('#espera').val('0');
                         if (result.isConfirmed) {
                             Swal.close();
                         }
                     });
                 } else if (response.code === 400) {
                     mensaje("Ops!", `${response.mensaje}`, "warning", "Entendido!").then((result) => {
-                        let listaEspera = $("#espera").val('1');
+                        let listaEspera = $("#espera").val('2');
                         confirmacion("¿Deseas Continuar?", "Puedes Inscribit al alumno la lista de espera para el próximo ciclo a iniciar.", "question", true, "No Inscribir", "Si Inscribir").then((result) => {
                             if (result.isConfirmed) {
                                 inscribirEspera();

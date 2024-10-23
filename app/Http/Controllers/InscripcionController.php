@@ -204,9 +204,9 @@ class InscripcionController extends Controller
         $enEspera = $request->input('listaEspera');
         $request->input('tallerId');
 
-        if ($enEspera == 0 || $enEspera == 2)
+        if ($enEspera == 0 || $enEspera == 1)
             $registerCode = $this->inscripcionService->inscribirAlumno($request->inscripcion);
-        elseif ($enEspera == 1)
+        elseif ($enEspera == 2)
             $registerCode = $this->inscripcionEsperaService->inscribirEspera($request->personaespera);
 
         if ($registerCode === 100)

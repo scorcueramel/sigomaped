@@ -109,6 +109,7 @@
             type: "GET",
             url: `/lista-espera/get-personas-espera/${tallerid}`,
             success: function(response) {
+                console.log(response)
                 if (response.length > 0) {
                     $("#datosAlumno").removeClass('d-none');
                     response.forEach((e) => {
@@ -119,9 +120,9 @@
                                         <button class="btn btn-outline btn-secondary dropdown-toggle" type="button"
                                         data-toggle="dropdown"></button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="#" onclick="javascript:inscribirAlumno(${e.persona_id},${tallerid});"><i class="fa fa-plus"></i> Inscribir</a>
+                                            <a class="dropdown-item" href="#" onclick="javascript:inscribirAlumno(${e.personaid},${tallerid});"><i class="fa fa-plus"></i> Inscribir</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#" onclick="javascript:quitarDeEspera('${e.nombres} ${e.apellidos}',${e.persona_id},${tallerid})"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
+                                            <a class="dropdown-item" href="#" onclick="javascript:quitarDeEspera('${e.nombres} ${e.apellidos}',${e.personaid},${tallerid})"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
                                         </div>
                                     </div>
                                 </td>
