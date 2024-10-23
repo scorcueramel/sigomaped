@@ -12,6 +12,18 @@ class ProgramaService{
         return $programas;
     }
 
+    public function getProgramasWithInscritos(){
+        $programas = DB::select('SELECT p.id, p.nombre  FROM inscripcions i
+                                        LEFT JOIN horarios h ON h.id = i.horario_id
+                                        LEFT JOIN ciclo_horarios ch ON ch.horario_id = h.id
+                                        LEFT JOIN ciclos c ON c.id = ch.ciclo_id
+                                        LEFT JOIN tallers t ON t.id = c.taller_id
+                                        LEFT JOIN programas p ON p.id = t.programa_id
+                                        GROUP BY p.id, p.nombre
+                                        ORDER BY p.id ASC');
+        return $programas;
+    }
+
     public function getValidateInscriptionUser($tipo_programa, $alumno_id){
         $validation = DB::select("SELECT
                                             p.id AS \"persona_id\",
@@ -39,7 +51,7 @@ class ProgramaService{
                                         LEFT JOIN programas p ON p.id = t.programa_id
                                         LEFT JOIN tipo_tallers tt ON tt.id = t.tipo_taller_id
                                         WHERE tt.id = ?
-                                        GROUP BY p.nombre, p.id', [$id]);
+                                        GROUP BY p.id, p.nombre', [$id]);
         return $programas;
     }
 

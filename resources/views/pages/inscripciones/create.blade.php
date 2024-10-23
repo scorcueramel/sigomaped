@@ -98,14 +98,28 @@
                     </div>
                 </div>
                 <div class="row d-none" id="seccionprogramas">
+                    <input type="hidden" value="" id="tallerid">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
                         <div class="box">
                             <div class="box-header with-border">
-                                <h4 class="box-title">PROGRAMAS ASOCIADOS AL TIPO DE TALLER <span class="font-weight-bold" id="programaTitulo"></span></h4>
+                                <h4 class="box-title">TALLERES DEL TIPO <span class="font-weight-bold" id="programaTitulo"></span></h4>
                             </div>
-                            <p style="margin: 25px 0 0 20px">SELECCIONA UN PROGRAMA</p>
+                            <p style="margin: 25px 0 0 20px">SELECCIONA UN TALLER</p>
                             <div class="box-body ">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>NOMBRE DEL TALLER</th>
+                                                <th>PROGRAMA AL QUE PERTENECE</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="datos-programas">
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <div class="form-group" id="radios-programas">
                                 </div>
                             </div>
@@ -114,7 +128,7 @@
                         <!-- /.box -->
                     </div>
                 </div>
-                <div class="row d-none" id="selecciontaller">
+                {{-- <div class="row d-none" id="selecciontaller">
                     <input type="hidden" value="" id="tallerid">
                     <div class="col-12 col-lg-12">
                         <!-- Form Element sizes -->
@@ -131,7 +145,7 @@
                         </div>
                         <!-- /.box -->
                     </div>
-                </div>
+                </div> --}}
                 <div class="row d-none" id="ciclos">
                     <input type="hidden" value="0" id="cicloid">
                     <div class="col-12 col-lg-12">
@@ -212,7 +226,7 @@
                 <div class="row d-none" id="inscribirespera">
                     <div class="col-12 col-lg-12 mb-4">
                         <!-- Form Element sizes -->
-                        <button class="btn btn-block btn-info" id="inscribiralumnoespera" onclick="javascript:inscribirAlumno()">INSCRIBIR EN LISTA DE ESPERA</button>
+                        <button class="btn btn-block btn-info" id="inscribiralumnoespera" onclick="javascript:inscribirEspera()">INSCRIBIR EN LISTA DE ESPERA</button>
                     </div>
                 </div>
             </section>
@@ -229,7 +243,7 @@
         $("#tiposTalleres").addClass('d-none');
         $("#seccionprogramas").addClass('d-none');
         $("#radios-programas").html('');
-        $("#selecciontaller").addClass('d-none');
+        // $("#selecciontaller").addClass('d-none');
         $("#radios-talleres").html('');
         $("#ciclos").addClass('d-none');
         $("#radios-ciclos").html('');
@@ -426,20 +440,35 @@
     function continuarInscripcion(id, descripcion) {
         $.ajax({
             type: "GET",
-            url: `/inscripciones/get-programa/${id}`,
+            url: `/inscripciones/get-talleres/${id}`,
             success: function(response) {
                 if (response.length > 0) {
                     $("#dias").addClass('d-none');
                     $("#ciclos").addClass('d-none');
-                    $("#selecciontaller").addClass('d-none');
+                    // $("#selecciontaller").addClass('d-none');
                     $("#seccionprogramas").removeClass('d-none');
                     $("#programaTitulo").html(descripcion);
+                    $(".datos-programas").html('');
                     response.forEach((e) => {
-                        $("#radios-programas").append(`
-                            <div class="radio">
-                                <input name="programa" type="radio" id="programa_${e.id}" onclick="javascript:consultaTalleres(${e.id},'${e.nombre}')">
-                                <label for="programa_${e.id}">${e.nombre}</label>
-                            </div>
+                        console.log(e);
+                        $(".datos-programas").append(`
+                        <tr>
+                            <td>
+                                <input name="programa" type="radio" id="programa_${e.id}" onclick="javascript:consultaCiclos(${e.id},'${e.nombre}');$('#tallerid').val(${e.id})">
+                                <label for="programa_${e.id}"></label>
+                            </td>
+                            <td>
+                                <label for="programa_${e.id}">
+                                    ${e.nombre}
+                                </label>
+                            </td>
+                            <td>
+                                <label for="programa_${e.id}">
+                                    ${e.programa.nombre}
+                                </label>
+                            </td>
+
+                        </tr>
                         `);
                     });
                 }
@@ -455,7 +484,7 @@
         $("#tiposTalleres").addClass('d-none');
         $("#seccionprogramas").addClass('d-none');
         $("#radios-programas").html('');
-        $("#selecciontaller").addClass('d-none');
+        // $("#selecciontaller").addClass('d-none');
         $("#radios-talleres").html('');
         $("#ciclos").addClass('d-none');
         $("#radios-ciclos").html('');
@@ -471,7 +500,7 @@
         let contadorGrupales = 0;
         let contadorRecreativas = 0;
         $("#seccionprogramas").addClass('d-none');
-        $("#selecciontaller").addClass('d-none');
+        // $("#selecciontaller").addClass('d-none');
         $("#radios-programas").html('');
         // pendiente para la validacion sobre la cantidad de talleres al que se encuentra inscrito el alumno
         $.ajax({
@@ -479,8 +508,8 @@
             url: `/inscripciones/get-validacion/${tipotallerid}/${alumnoid}/inscripciones`,
             success: function(response) {
                 response.forEach((e) => {
-                    if (alumnoid == e.persona_id && e.tipo_taller == 2) contadorIndividuales++;
                     if (alumnoid == e.persona_id && e.tipo_taller == 1) contadorGrupales++;
+                    if (alumnoid == e.persona_id && e.tipo_taller == 2) contadorIndividuales++;
                     if (alumnoid == e.persona_id && e.tipo_taller == 3) contadorRecreativas++;
                 });
                 if (contadorIndividuales == 1) {
@@ -524,31 +553,31 @@
         });
     }
 
-    function consultaTalleres(id, descripcion) {
-        let titulo = descripcion.includes("TALLER") ? descripcion.substring(6, descripcion.length, -1) : '';
-        $("#radios-talleres").html('');
-        $("#ciclos").addClass('d-none');
-        $("#selecciontaller").addClass('d-none');
-        $("#dias").addClass('d-none');
-        $.ajax({
-            type: "GET",
-            url: `/inscripciones/get-talleres/${id}`,
-            success: function(response) {
-                if (response.length > 0) {
-                    $("#selecciontaller").removeClass('d-none');
-                    $("#tallerTitulo").html(`TALLERES ${titulo}`);
-                    response.forEach((e) => {
-                        $("#radios-talleres").append(`
-                        <div class="radio">
-                            <input name="taller" type="radio" id="taller_${e.id}" onclick="javascript:consultaCiclos(${e.id},'${descripcion}');$('#tallerid').val(${e.id})">
-                            <label for="taller_${e.id}">${e.nombre}</label>
-                        </div>
-                        `);
-                    });
-                }
-            }
-        });
-    }
+    // function consultaTalleres(id, descripcion) {
+    //     let titulo = descripcion.includes("TALLER") ? descripcion.substring(6, descripcion.length, -1) : '';
+    //     $("#radios-talleres").html('');
+    //     $("#ciclos").addClass('d-none');
+    //     // $("#selecciontaller").addClass('d-none');
+    //     $("#dias").addClass('d-none');
+    //     $.ajax({
+    //         type: "GET",
+    //         url: `/inscripciones/get-talleres/${id}`,
+    //         success: function(response) {
+    //             if (response.length > 0) {
+    //                 // $("#selecciontaller").removeClass('d-none');
+    //                 $("#tallerTitulo").html(`TALLERES ${titulo}`);
+    //                 response.forEach((e) => {
+    //                     $("#radios-talleres").append(`
+    //                     <div class="radio">
+    //                         <input name="taller" type="radio" id="taller_${e.id}" onclick="javascript:consultaCiclos(${e.id},'${descripcion}');$('#tallerid').val(${e.id})">
+    //                         <label for="taller_${e.id}">${e.nombre}</label>
+    //                     </div>
+    //                     `);
+    //                 });
+    //             }
+    //         }
+    //     });
+    // }
 
     function consultaCiclos(id, descripcion) {
         let espera = $("#espera").val();

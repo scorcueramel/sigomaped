@@ -32,13 +32,15 @@ Route::get('/panel/principal', [App\Http\Controllers\HomeController::class, 'ind
 Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
     Route::get('/index',[InscripcionController::class,'index'])->name('inscripciones.index');
     Route::get('/calendar',[InscripcionController::class,'calendar'])->name('inscripciones.calendar');
-    Route::get('/get-ciclo-dias/{id}',[InscripcionController::class,'getDiasByPeriodAndYear'])->name('inscripciones.dias');
-    Route::get('/get-ciclo-taller/{id}',[InscripcionController::class,'getAnioPeriodoByTaller'])->name('inscripciones.taller');
+    Route::get('/calendar-paramas/{tipotaller}/{programa}/{taller}',[InscripcionController::class,'getCalendarByParams'])->name('inscripciones.calendar.inscritos');
+    Route::get('/get-isncritos-dias/{taller}/{dia}',[InscripcionController::class,'getInscritosByTallerDia'])->name('inscripciones.dias');
+    Route::get('/get-dia-taller/{id}',[InscripcionController::class,'getDiaByTaller'])->name('inscripciones.taller');
     Route::get('/get-inscritos-ciclo/{id}',[InscripcionController::class,'getInscritoToCicle'])->name('inscripciones.inscritos');
     Route::get('/create/',[InscripcionController::class,'create'])->name('inscripciones.create');
     Route::get('/get-persona/{documento}',[InscripcionController::class,'getPersonaByDocument'])->name('inscripciones.persona');
     Route::get('/get-programa/{id}',[InscripcionController::class,'getProgramaByType'])->name('inscripciones.getprogram');
     Route::get('/get-talleres/{id}',[InscripcionController::class,'getTalleresByType'])->name('inscripciones.gettaller');
+    Route::get('/get-talleres-programs/{id}',[InscripcionController::class,'getTalleresWithInscripcions'])->name('inscripciones.gettalleresprograms');
     Route::get('/get-ciclos/{id}',[InscripcionController::class,'getCiclosByType'])->name('inscripciones.ciclos');
     Route::get('/get-horarios-ciclos/{id}',[InscripcionController::class,'getCiclosByHorarios'])->name('inscripciones.horarios');
     Route::get('/get-validacion/{tipotaller}/{alumnoid}/inscripciones',[InscripcionController::class,'validateAlumnoInscription'])->name('inscripciones.validacion.isncripciones');
