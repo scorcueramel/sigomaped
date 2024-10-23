@@ -166,7 +166,7 @@ class InscripcionController extends Controller
 
     public function getTalleresByType($id): JsonResponse
     {
-        $talleresAll = $this->TallerService->getTalleresByProgramas($id);
+        $talleresAll = $this->TallerService->getTalleres($id);
         return Response::json($talleresAll);
     }
 
