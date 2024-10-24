@@ -64,27 +64,23 @@ class InscripcionController extends Controller
 
         foreach ($cargaCalendario as $carga) {
             $listaCalendario[] = [
-                'title' => $carga['title'],
-                'start' =>  $carga['start'],
-                'end' => $carga['end'],
-                'backgroundColor' =>  $this->colorsCalendar()[$carga['tallerid']],
-                'borderColor' =>  $this->colorsCalendar()[$carga['tallerid']],
-                // 'extendedProps' => [
-                //     'sede' => $sede->descripcion,
-                //     'lugar' => $lugar->descripcion,
-                //     'categoria_id' => $inscrito->categoria_id,
-                //     'categoria' => $inscrito->categoria,
-                //     'fecha' => $fecha,
-                //     'inicio' => $inicio,
-                //     'fin' => $fin,
-                //     'correo' => $inscrito->email,
-                //     'movil' => $inscrito->movil,
-                //     'color' =>  $colores[$inscrito->categoria_id],
-                //     'servicioinscripcion' => $inscrito->servicioinscripcion_id
-                // ],
+                'title' => $carga->title,
+                'start' =>  $carga->start,
+                'end' => $carga->end,
+                'backgroundColor' =>  $this->colorsCalendar()[$carga->tallerid],
+                'borderColor' =>  $this->colorsCalendar()[$carga->tallerid],
+                'extendedProps' => [
+                    'anio' => $carga->anio,
+                    'periodo' => $carga->periodo,
+                    'programa' => $carga->programa,
+                    'taller' => $carga->taller,
+                    'representante'=>$carga->nomnbrerepre,
+                    'telefonorepre'=>$carga->telefonorepre,
+                    'correorepre'=>$carga->correorepre,
+                ],
             ];
         }
-        dd();
+
         return Response::json($listaCalendario);
     }
 

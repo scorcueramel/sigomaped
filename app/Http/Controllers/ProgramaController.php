@@ -13,7 +13,7 @@ use Illuminate\View\View;
 
 class ProgramaController extends Controller
 {
-    
+
     public function __construct(
         private ProgramaService $programaService,
     ){}
@@ -31,6 +31,11 @@ class ProgramaController extends Controller
 
     public function getProgramas(): JsonResponse{
         $programas = $this->programaService->getProgramasAll();
+        return Response::json($programas);
+    }
+
+    public function getProgramasByTypeTaller(int $id): JsonResponse{
+        $programas = $this->programaService->getProgramasByTipoTaller($id);
         return Response::json($programas);
     }
     /**

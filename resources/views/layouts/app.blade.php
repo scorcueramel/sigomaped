@@ -57,6 +57,7 @@
 
     <link rel="stylesheet" href="{{ asset('/assets/js/fullcalendar/fullcalendar.min.css')}}">
     <link rel="stylesheet" href="{{ asset('/assets/js/fullcalendar/fullcalendar.print.min.css')}}" media="print">
+    @yield('css')
 </head>
 
 <body class="hold-transition">
@@ -97,6 +98,7 @@
 
     <!-- Fab Admin App -->
     <script src="{{ asset('/assets/js/template.js') }}"></script>
+
 
     <!-- jquerysteps -->
     <script src="{{ asset('/assets/js/jquery.validate.min.js') }}"></script>

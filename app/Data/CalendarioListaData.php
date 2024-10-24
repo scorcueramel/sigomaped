@@ -18,6 +18,9 @@ class CalendarioListaData extends Data {
         public string $taller,
         public int $programaid,
         public string $programa,
+        public ?string $nomnbrerepre,
+        public ?string $telefonorepre,
+        public ?string $correorepre,
     ) {}
 
 }

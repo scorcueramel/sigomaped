@@ -2,17 +2,24 @@
 
 namespace App\Services;
 
+use App\Data\ProgramaData;
 use App\Models\Programa;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class ProgramaService{
-    public function getProgramasAll(){
+class ProgramaService
+{
+
+    public array $programas = [];
+
+    public function getProgramasAll()
+    {
         $programas = Programa::all();
         return $programas;
     }
 
-    public function getProgramasWithInscritos(){
+    public function getProgramasWithInscritos()
+    {
         $programas = DB::select('SELECT p.id, p.nombre  FROM inscripcions i
                                         LEFT JOIN horarios h ON h.id = i.horario_id
                                         LEFT JOIN ciclo_horarios ch ON ch.horario_id = h.id
@@ -24,7 +31,8 @@ class ProgramaService{
         return $programas;
     }
 
-    public function getValidateInscriptionUser($tipo_programa, $alumno_id){
+    public function getValidateInscriptionUser($tipo_programa, $alumno_id)
+    {
         $validation = DB::select("SELECT
                                             p.id AS \"persona_id\",
                                             t.id AS \"taller_id\",
@@ -40,7 +48,7 @@ class ProgramaService{
                                             ON i.horario_id = h.id
                                         LEFT JOIN personas p
                                             ON p.id = i.persona_id
-                                        WHERE p.id = ? AND t.tipo_taller_id = ? AND i.estado_inscripcion = 'I';",[$alumno_id,$tipo_programa]);
+                                        WHERE p.id = ? AND t.tipo_taller_id = ? AND i.estado_inscripcion = 'I';", [$alumno_id, $tipo_programa]);
 
         return $validation;
     }
@@ -53,6 +61,28 @@ class ProgramaService{
                                         WHERE tt.id = ?
                                         GROUP BY p.id, p.nombre', [$id]);
         return $programas;
+    }
+
+    public function getProgramasByTipoTaller(int $tipotallerid)
+    {
+        $programasByTipo = DB::select("SELECT p.id ,p.nombre FROM inscripcions i
+                                                LEFT JOIN horarios h ON h.id = i.horario_id
+                                                LEFT JOIN ciclo_horarios ch ON ch.horario_id = h.id
+                                                LEFT JOIN ciclos c ON c.id = ch.ciclo_id
+                                                LEFT JOIN tallers t ON t.id = c.taller_id
+                                                LEFT JOIN tipo_tallers tt ON tt.id = t.tipo_taller_id
+                                                LEFT JOIN programas p ON p.id = t.programa_id
+                                                WHERE tt.id = ?
+                                                GROUP BY p.id, p.nombre", [$tipotallerid]);
+
+        foreach ($programasByTipo as $pt) {
+            $this->programas[] = ProgramaData::from([
+                'programaid' => $pt->id,
+                'nombre' => $pt->nombre,
+            ]);
+        }
+
+        return $this->programas;
     }
 
     public function crearPrograma(array $data)

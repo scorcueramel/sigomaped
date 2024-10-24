@@ -27,7 +27,7 @@ class TallerService
     }
 
     /* Carga de talleres basados en personas con inscripciones en ellos */
-    public function getTalleresWithInscripciones($id)
+    public function getTalleresWithInscripciones(int $id)
     {
         $talleresprogramas = DB::select("SELECT t.id AS taller_id, t.nombre AS taller_nombre FROM inscripcions i
                                                 LEFT JOIN horarios h ON h.id = i.horario_id

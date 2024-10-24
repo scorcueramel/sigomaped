@@ -38,8 +38,9 @@ Route::group(['prefix'=> 'inscripciones','middleware'=>'auth'],function(){
     Route::get('/get-inscritos-ciclo/{id}',[InscripcionController::class,'getInscritoToCicle'])->name('inscripciones.inscritos');
     Route::get('/create/',[InscripcionController::class,'create'])->name('inscripciones.create');
     Route::get('/get-persona/{documento}',[InscripcionController::class,'getPersonaByDocument'])->name('inscripciones.persona');
-    Route::get('/get-programa/{id}',[InscripcionController::class,'getProgramaByType'])->name('inscripciones.getprogram');
-    Route::get('/get-talleres/{id}',[InscripcionController::class,'getTalleresByType'])->name('inscripciones.gettaller');
+    Route::get('/get-programa/{id}',[InscripcionController::class,'getProgramaByType'])->name('inscripciones.getprogram'); /**Ruta anterio de carga de programas escalonada, en la vista calendario */
+    Route::get('/get-programa-tipo/{id}',[ProgramaController::class,'getProgramasByTypeTaller'])->name('inscripciones.getprogrambytypetalle');
+    Route::get('/get-talleres/{id}',[InscripcionController::class,'getTalleresByType'])->name('inscripciones.gettaller'); /**Ruta anterio de carga de programas escalonada, en la vista calendario */
     Route::get('/get-talleres-programs/{id}',[InscripcionController::class,'getTalleresWithInscripcions'])->name('inscripciones.gettalleresprograms');
     Route::get('/get-ciclos/{id}',[InscripcionController::class,'getCiclosByType'])->name('inscripciones.ciclos');
     Route::get('/get-horarios-ciclos/{id}',[InscripcionController::class,'getCiclosByHorarios'])->name('inscripciones.horarios');

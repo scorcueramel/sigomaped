@@ -1,5 +1,11 @@
 @extends('layouts.app')
-
+@section('css')
+<style>
+    .fc-time>span {
+        color: #cacaca !important;
+    }
+</style>
+@endsection
 @section('content')
 <div class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -71,13 +77,9 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div id="calendar"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-lg-12">
-                        <div id="calendar"></div>
                     </div>
                 </div>
             </section>
@@ -97,6 +99,7 @@
 ])
 @endsection
 @push('js')
+<script src="{{asset('assets/js/calendar.js')}}"></script>
 <script>
     $('#tipoprograma').on('change', function() {
         let id = $(this).val();
@@ -112,7 +115,7 @@
         `);
         $.ajax({
             type: "GET",
-            url: `/inscripciones/get-programa/${id}`,
+            url: `/inscripciones/get-programa-tipo/${id}`,
             success: function(response) {
                 if (response.length > 0) {
                     $("#programa").removeAttr('disabled');
@@ -122,7 +125,7 @@
                     `);
                     response.forEach((e) => {
                         $("#programa").append(`
-                        <option value="${e.id}">${e.nombre}</option>
+                        <option value="${e.programaid}">${e.nombre}</option>
                     `);
                     });
                 }
@@ -134,7 +137,7 @@
         $("#taller").attr('disabled', 'disabled');
         $.ajax({
             type: "GET",
-            url: `/inscripciones/get-talleres/${id}`,
+            url: `/inscripciones/get-talleres-programs/${id}`,
             success: function(response) {
                 if (response.length > 0) {
                     $("#taller").removeAttr('disabled');
@@ -144,10 +147,13 @@
                     `);
                     response.forEach((e) => {
                         $("#taller").append(`
-                        <option value="${e.id}">${e.nombre}</option>
+                        <option value="${e.tallerid}">${e.tallernombre}</option>
                     `);
                     });
                 }
+            },
+            error:function(err){
+                console.log(err);
             }
         });
     });
@@ -159,10 +165,21 @@
             type: "GET",
             url: `/inscripciones/calendar-paramas/${tipoTallerid}/${porgramaid}/${id}`,
             success: function(response) {
-                console.log(response)
+                if(response.length > 0) {
+                    $.CalendarApp.init(response);
+                }else{
+                    $.toast({
+                        heading: 'Mensaje Informativo',
+                        text: `No se encontraron inscripciones para tu búsqueda`,
+                        position: 'top-right',
+                        loaderBg: '#ff6849',
+                        icon: 'warning',
+                        hideAfter: 5000,
+                        stack: 6
+                    });
+                }
             }
         });
     });
 </script>
-<script src="{{ asset('/assets/js/calendar.js') }}"></script>
 @endpush
