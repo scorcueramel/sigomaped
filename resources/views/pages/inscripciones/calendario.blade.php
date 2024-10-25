@@ -50,10 +50,11 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-4">
                                         <div class="form-group">
+                                            <label>TIPOS DE PROGRMAS</label>
                                             <select class="form-control" id="tipoprograma">
                                                 <option selected disabled value="">SELECCIONA UN TIPO DE PROGRAMA
                                                 </option>
-                                                @foreach ($tiposPorgramas as $tp)
+                                                @foreach ($tiposProgramas as $tp)
                                                 <option value="{{ $tp->tipotallerid }}">
                                                     {{ $tp->tipotallerdescripcion }}
                                                 </option>
@@ -63,6 +64,7 @@
                                     </div>
                                     <div class="col-12 col-lg-4">
                                         <div class="form-group">
+                                            <label>PROGRMAS</label>
                                             <select class="form-control" id="programa" disabled>
                                                 <option selected disabled value="">SELECCIONA UN PROGRAMA
                                                 </option>
@@ -71,13 +73,14 @@
                                     </div>
                                     <div class="col-12 col-lg-4">
                                         <div class="form-group" id="talleres">
+                                            <label>TALLERES</label>
                                             <select class="form-control" id="taller" disabled>
                                                 <option selected disabled value="">SELECCIONA UN TALLER</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="calendar"></div>
+                                <div id="calendario"></div>
                             </div>
                         </div>
                     </div>
@@ -95,91 +98,11 @@
 'bodyContentModal'=>'BODY DEL MODAL CALENDARIO',
 'heightCancelButton'=>'btn-sm',
 'colorButtonCancel'=>'danger',
+'textCancelButton'=>'CERRAR',
 'withCancelButton'=>'btn-block'
 ])
 @endsection
 @push('js')
-<script src="{{asset('assets/js/calendar.js')}}"></script>
-<script>
-    $('#tipoprograma').on('change', function() {
-        let id = $(this).val();
-        $("#programa").attr('disabled', 'disabled');
-        $("#taller").attr('disabled', 'disabled');
-        $("#taller").html('');
-        $("#taller").append(`
-        <option selected disabled value="">SELECCIONA UN TALLER</option>
-        `);
-        $("#programa").html('');
-        $("#programa").append(`
-        <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
-        `);
-        $.ajax({
-            type: "GET",
-            url: `/inscripciones/get-programa-tipo/${id}`,
-            success: function(response) {
-                if (response.length > 0) {
-                    $("#programa").removeAttr('disabled');
-                    $("#programa").html('');
-                    $("#programa").append(`
-                    <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
-                    `);
-                    response.forEach((e) => {
-                        $("#programa").append(`
-                        <option value="${e.programaid}">${e.nombre}</option>
-                    `);
-                    });
-                }
-            }
-        });
-    });
-    $('#programa').on('change', function() {
-        let id = $(this).val();
-        $("#taller").attr('disabled', 'disabled');
-        $.ajax({
-            type: "GET",
-            url: `/inscripciones/get-talleres-programs/${id}`,
-            success: function(response) {
-                if (response.length > 0) {
-                    $("#taller").removeAttr('disabled');
-                    $("#taller").html('');
-                    $("#taller").append(`
-                    <option selected disabled value="">SELECCIONA UN TALLER</option>
-                    `);
-                    response.forEach((e) => {
-                        $("#taller").append(`
-                        <option value="${e.tallerid}">${e.tallernombre}</option>
-                    `);
-                    });
-                }
-            },
-            error:function(err){
-                console.log(err);
-            }
-        });
-    });
-    $('#taller').on('change', function() {
-        let id = $(this).val();
-        let tipoTallerid = $("#tipoprograma").val();
-        let porgramaid = $("#taller").val();
-        $.ajax({
-            type: "GET",
-            url: `/inscripciones/calendar-paramas/${tipoTallerid}/${porgramaid}/${id}`,
-            success: function(response) {
-                if(response.length > 0) {
-                    $.CalendarApp.init(response);
-                }else{
-                    $.toast({
-                        heading: 'Mensaje Informativo',
-                        text: `No se encontraron inscripciones para tu búsqueda`,
-                        position: 'top-right',
-                        loaderBg: '#ff6849',
-                        icon: 'warning',
-                        hideAfter: 5000,
-                        stack: 6
-                    });
-                }
-            }
-        });
-    });
-</script>
+<script src="{{asset('assets/js/calendario.js')}}"></script>
+<script src="{{asset('assets/js/perzonalized/inscripciones.js')}}"></script>
 @endpush

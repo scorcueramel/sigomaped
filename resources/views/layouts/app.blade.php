@@ -54,9 +54,8 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <!-- toast tr -->
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.toast.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('/assets/js/fullcalendar/fullcalendar.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('/assets/js/fullcalendar/fullcalendar.print.min.css')}}" media="print">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
     @yield('css')
 </head>
 
@@ -117,9 +116,6 @@
     <script src="{{asset('assets/js/jquery.toast.js')}}"></script>
     <script src="{{asset('assets/js/toastr.js')}}"></script>
 
-    <script src="{{ asset('/assets/js/fullcalendar/lib/moment.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/fullcalendar/fullcalendar.min.js') }}"></script>
-
     <script>
         $(document).ready(function() {
             $.ajaxSetup({
@@ -155,9 +151,12 @@
     <script src="{{asset('assets/js/fastclick/lib/fastclick.js')}}"></script>
     <script src="{{asset('assets/js/formatter/formatter.js')}}"></script>
     <script src="{{asset('assets/js/formatter/jquery.formatter.js')}}"></script>
-    <script src="{{asset('assets/js/formatter.js')}}"></script>
     <!-- Fab Admin for demo purposes -->
     <script src="{{ asset('/assets/js/demo.js') }}"></script>
+    {{-- MomentJS (locale date) --}}
+    <script src="{{asset('assets/js/moment-with-locales.min.js')}}"></script>
+    <script src='{{asset('assets/js/fullcalendar.js')}}'></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @stack('js')
 </body>
 

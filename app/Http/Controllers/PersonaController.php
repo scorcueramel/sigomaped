@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PersonaNuevoRequest;
 use App\Services\AnioPeriodoService;
 use App\Services\CondicionSocioEconomicaService;
+use App\Services\DistritosService;
 use App\Services\GeneroService;
 use App\Services\ManifestacionVoluntadService;
 use App\Services\PersonaService;
@@ -27,6 +28,7 @@ class PersonaController extends Controller
         private CondicionSocioEconomicaService $condicionSocioEconomicaService,
         private ManifestacionVoluntadService $manifestacionVoluntadService,
         private TipoDiscapacidadService $tipoDiscapacidadService,
+        private DistritosService $distritosService,
     ) {}
     /**
      * Display a listing of the resource.
@@ -53,8 +55,9 @@ class PersonaController extends Controller
         $condicionse = $this->condicionSocioEconomicaService->getCondicionSocioEconomica();
         $manifestaciones = $this->manifestacionVoluntadService->getAllManifestaciones();
         $tipodiscapacidades = $this->tipoDiscapacidadService->getTiposDiscapacidadesAll();
+        $distritos = $this->distritosService->distritosLimaArray();
 
-        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse","manifestaciones","tipodiscapacidades"));
+        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse","manifestaciones","tipodiscapacidades","distritos"));
     }
 
     /**
@@ -66,6 +69,8 @@ class PersonaController extends Controller
     public function store(PersonaNuevoRequest $request):JsonResponse
     {
         $tipopersona = $request->input('tipopersonaid');
+
+        dd($request->all());
 
         if ($tipopersona == 1 || $tipopersona == 2)
             $registerCode = $this->personaService->registerDatosGenerales($request->datos);

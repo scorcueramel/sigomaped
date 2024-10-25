@@ -35,6 +35,8 @@ class PersonaService
                 return $this->registerPadres($d);
             if ($d->tipopersonaid == 5)
                 return $this->registerRepresentante($d,$usuarioActualiza);
+            if ($d->tipopersonaid == 6)
+                return $this->registerAlumno($d,$usuarioActualiza);
         }
 
         return 500;
@@ -91,6 +93,19 @@ class PersonaService
         $nuevoRepresentante->email = $data->correo;
         $nuevoRepresentante->usuario_actualiza = Str::upper($usuario);
         $nuevoRepresentante->save();
+
+        return 200;
+    }
+
+    public function registerAlumno($data,$usuario)
+    {
+        dd($data);
+        $nuevaPersona = new Persona();
+        $nuevaPersona->tipo_persona_id = $data->tipopersonaid;
+        $nuevaPersona->documento = $data->documento;
+        $nuevaPersona->nombres = Str::upper($data->nombres);
+        $nuevaPersona->apellidos = Str::upper($data->apellidos);
+        $nuevaPersona->save();
 
         return 200;
     }

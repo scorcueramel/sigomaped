@@ -10,10 +10,9 @@ class CalendarioService
 
     public array $calendarioLista = [];
 
-    public function getCalendarioLista(int $tipoTallerid, int $porgramaid, int $tallerid): array
+    public function getCalendarioLista(int $tipoTallerid, int $programa, int $tallerid): array
     {
-
-        $listacalendario = DB::select("SELECT * FROM calendario_listar1(?,?,?)", [$tipoTallerid, $porgramaid, $tallerid]);
+        $listacalendario = DB::select("SELECT * FROM calendario_listar1(?,?,?)", [$tipoTallerid, $programa, $tallerid]);
 
         foreach ($listacalendario as $lista) {
             $this->calendarioLista[] = CalendarioListaData::from([

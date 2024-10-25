@@ -52,13 +52,13 @@ class InscripcionController extends Controller
     {
         $tiposProgramas = $this->tipoTallerService->getTiposTalleres();
         $listaEspera = $this->inscripcionEsperaService->getListaEspera();
-        return view('pages.inscripciones.calendario', ['listaEspera' => $listaEspera, 'tiposPorgramas' => $tiposProgramas]);
+        return view('pages.inscripciones.calendario', ['listaEspera' => $listaEspera, 'tiposProgramas' => $tiposProgramas]);
     }
 
-    public function getCalendarByParams(int $tipoTallerid, int $porgramaid, int $tallerid): JsonResponse
+    public function getCalendarByParams(int $tipoTallerid, int $programaid, int $tallerid): JsonResponse
     {
 
-        $cargaCalendario = $this->calendarioService->getCalendarioLista($tipoTallerid, $porgramaid, $tallerid);
+        $cargaCalendario = $this->calendarioService->getCalendarioLista($tipoTallerid, $programaid, $tallerid);
         $listaCalendario = [];
 
 
