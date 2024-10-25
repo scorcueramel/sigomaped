@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Taller;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class TallerService
@@ -55,5 +56,16 @@ class TallerService
 
 
         return $talleres;
+    }
+
+    
+    public function crearTaller(array $data)
+    {
+        try {
+            $taller = Taller::create($data);
+            return $taller;
+        } catch (Exception $e) {
+            throw new Exception('Error al crear el taller: ' . $e->getMessage());
+        }
     }
 }

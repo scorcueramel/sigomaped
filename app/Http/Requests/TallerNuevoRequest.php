@@ -25,10 +25,10 @@ class TallerNuevoRequest extends FormRequest
     public function rules()
     {
         return [
-            'programaId' => 'required',
-            'tipoTallerId' => 'required',
-            'nombre' => 'required',
-            'estado' => 'required',
+            'tipo_taller_id' => 'required|integer',
+            'programa_id' => 'required|integer',
+            'nombre' => 'required|string',
+            'estado' => 'required|boolean',
         ];
     }
 }

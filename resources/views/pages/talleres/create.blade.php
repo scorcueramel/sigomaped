@@ -28,8 +28,25 @@
                                 <form id="crearTallerForm">
                                     @csrf
                                     <div class="form-group">
+                                        <label for="tipos-taller">TIPO <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="tipotallerid" id="tipos-taller" required>
+                                            <option selected disabled value="">SELECCIONA UN TIPO DE TALLER</option>
+                                            @foreach ($tipostalleres as $tp)
+                                            <option class="mx-3" value="{{$tp->tipotallerid}}">{{$tp->tipotallerdescripcion}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="programa">PROGRAMA</label>
+                                        <select class="form-control" id="programa" name="programa" disabled required>
+                                            <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="nombre">Nombre del Taller</label>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del taller" required>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del taller" disabled required>
                                     </div>
 
                                     <div class="form-group">
@@ -59,9 +76,30 @@
 @push('js')
 <script>
     $(document).ready(function() {
+        $('#tipos-taller').on('change', function() {
+            $('#nombre').attr('disabled', 'disabled');
+            $.ajax({
+                url: `/programas/get-programas`,
+                type: 'GET',
+                success: function(response) {
+                    $('#programa').removeAttr('disabled');
+                    $('#programa').html('<option selected disabled value="">SELECCIONA UN PROGRAMA</option>');
+                    response.forEach(function(programa) {
+                        $('#programa').append(`<option value="${programa.id}">${programa.nombre}</option>`);
+                    });
+                },
+                error: function() {
+                    console.log('Error al obtener los programas.');
+                }
+            });
+        });
+
+        $('#programa').on('change', function() {
+            $('#nombre').removeAttr('disabled');
+        });
+
         $('#crearTallerForm').on('submit', function(e) {
             e.preventDefault();
-
             Swal.fire({
                 title: '¿Estás seguro?',
                 text: "¿Quieres crear este taller?",
@@ -73,18 +111,18 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var nombre = $('#nombre').val();
-                    var estado = $('#estado').is(':checked') ? 1 : 0;
-
+                    let formData = {
+                        tipo_taller_id: parseInt($('#tipos-taller').val()),
+                        programa_id: parseInt($('#programa').val()),
+                        nombre: $('#nombre').val(),
+                        estado: $('#estado').is(':checked') ? 1 : 0
+                    };
                     $.ajax({
                         url: "{{ route('talleres.store') }}",
                         type: "POST",
                         dataType: "json",
                         contentType: "application/json",
-                        data: JSON.stringify({
-                            nombre: nombre,
-                            estado: estado
-                        }),
+                        data: JSON.stringify(formData),
                         success: function(response) {
                             Swal.fire({
                                 icon: 'success',
@@ -95,7 +133,7 @@
                                 window.location.href = "{{ route('talleres.index') }}";
                             });
                         },
-                        error: function(xhr, status, error) {
+                        error: function(xhr) {
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Error al crear el taller',
