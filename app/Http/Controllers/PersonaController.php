@@ -68,9 +68,9 @@ class PersonaController extends Controller
      */
     public function store(PersonaNuevoRequest $request):JsonResponse
     {
-        $tipopersona = $request->input('tipopersonaid');
+        // dd($request->recibosercivios);
 
-        dd($request->all());
+        $tipopersona = $request->input('tipopersonaid');
 
         if ($tipopersona == 1 || $tipopersona == 2)
             $registerCode = $this->personaService->registerDatosGenerales($request->datos);

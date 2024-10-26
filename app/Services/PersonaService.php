@@ -99,13 +99,37 @@ class PersonaService
 
     public function registerAlumno($data,$usuario)
     {
-        dd($data);
         $nuevaPersona = new Persona();
         $nuevaPersona->tipo_persona_id = $data->tipopersonaid;
         $nuevaPersona->documento = $data->documento;
         $nuevaPersona->nombres = Str::upper($data->nombres);
         $nuevaPersona->apellidos = Str::upper($data->apellidos);
         $nuevaPersona->save();
+        $nuevoAlumno = new Alumno();
+        $nuevoAlumno->persona_id= $nuevaPersona->id;
+        $nuevoAlumno->genero_id= $data->generoid;
+        $nuevoAlumno->anio_periodo_id= $data->anioingresoid;
+        $nuevoAlumno->tipo_seguro_id= $data->tiposeguroid;
+        $nuevoAlumno->cond_socio_economica_id= $data->condsocecoid;
+        $nuevoAlumno->manif_volunta_id= $data->manifvolid;
+        $nuevoAlumno->acred_resid_id= $data->acredresid;
+        $nuevoAlumno->tipo_discapacidad_id= $data->tipodiscapaid;
+        $nuevoAlumno->fecha_inscripcion= $data->fecinscalumno;
+        $nuevoAlumno->ds_exp_inscripcion= $data->dsexpinsc;
+        $nuevoAlumno->distrito= $data->distrito;
+        $nuevoAlumno->sector= $data->sector;
+        $nuevoAlumno->subsector= $data->subsector;
+        $nuevoAlumno->domicilio= $data->domicilio;
+        $nuevoAlumno->fecha_nacimiento= $data->fecnac;
+        $nuevoAlumno->ro_carnet_conadis= $data->rocarnetconadis;
+        $nuevoAlumno->solicitud_inscripcion= $data->solisinsc;
+        $nuevoAlumno->cons_empadronamiento_sisfoh= $data->consempadrosisfoh;
+        $nuevoAlumno->copia_dni= $data->copiadni;
+        $nuevoAlumno->informe_medico= $data->informemed;
+        $nuevoAlumno->recibo_serv= $data->reciboserv;
+        $nuevoAlumno->copia_carnet_conadis= $data->copiacarnetconadis;
+        $nuevoAlumno->documentacion_digital= $data->docdigital;
+        $nuevoAlumno->save();
 
         return 200;
     }

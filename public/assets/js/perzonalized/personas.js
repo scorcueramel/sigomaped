@@ -58,7 +58,7 @@ $("#tipos-personas").on('change', function() {
     } else if (tipoPersona == 6) {
         limpiarCampos();
         $("#datosgeneralesregistrar").html('');
-        $("#datosgenerales").addClass('col-lg-6');
+        $("#datosgenerales").addClass('col-lg-4');
         $("#formularioextend").removeClass('d-none');
         $("#boxheader").html('DATOS DEL ALUMNO');
         $("#boxbodysectionalumno").removeClass('d-none');
@@ -512,7 +512,7 @@ function gestionMensajes(erroresresp) {
         $('#sectorerror').html('');
     }
 
-    if (subsector) {
+    if (subsectorexist) {
         $('#subsectorerror').html(`<span class="text-danger">${erroresresp.subsector}<span>`)
     } else {
         $('#subsectorerror').addClass('d-none');

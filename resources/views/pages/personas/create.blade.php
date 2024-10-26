@@ -77,7 +77,7 @@
                         </div>
                         <!-- /.box -->
                     </div>
-                    <div class="col-12 col-lg-6 d-none" id="formularioextend">
+                    <div class="col-12 col-lg-8 d-none" id="formularioextend">
                         <!-- Form Element sizes -->
                         <div class="box">
                             <div class="box-header with-border">
@@ -147,177 +147,193 @@
                                             <hr>
                                         </div>
                                     </div>
-                                    <div class="col-12" id="fechainscripcion">
-                                        <div class="form-group">
-                                            <label abel for="fecha-inscripcion">FECHA DE INSCRIPCIÓN <span class="text-danger">*</span></label>
-                                            <input type="date" class="form-control" id="fecha-inscripcion">
-                                            <div class="d-none" id="fechadeinscripcionerror">
+                                    <div class="row mx-3">
+                                        <div class="col-auto" id="fechainscripcion">
+                                            <div class="form-group">
+                                                <label abel for="fecha-inscripcion">FECHA DE INSCRIPCIÓN <span class="text-danger">*</span></label>
+                                                <input type="date" class="form-control" id="fecha-inscripcion">
+                                                <div class="d-none" id="fechadeinscripcionerror">
+                                                </div>
                                             </div>
-                                            <hr>
+                                        </div>
+                                        <div class="col-auto" id="dsexinscripcion">
+                                            <div class="form-group">
+                                                <label abel for="dsexpisncripcion">DS. EXP. INSCRIPCIÓN <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="dsexpisncripcion" value="628-2024/OMAPED" disabled>
+                                                <div class="d-none" id="dsexinscripcionerror">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto" id="distritos">
+                                            <div class="form-group">
+                                                <label abel for="distritos">DISTRITO <span class="text-danger">*</span></label>
+                                                <select class="form-control combos" id="distrito" style="width: 100%;">
+                                                    <option value="" disabled selected>SELECCIONA DISTRITO</option>
+                                                    @foreach ($distritos as $distrito)
+                                                    <option value="{{$distrito->distrito}}">{{$distrito->distrito}} - {{$distrito->codigopostal}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <div class="d-none" id="distritoserror">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12" id="dsexinscripcion">
-                                        <div class="form-group">
-                                            <label abel for="dsexpisncripcion">DS. EXP. INSCRIPCIÓN <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="dsexpisncripcion" value="628-2024/OMAPED" disabled>
-                                            <div class="d-none" id="dsexinscripcionerror">
-                                            </div>
-                                            <hr>
-                                        </div>
+                                    <div class="col-12">
+                                        <hr>
                                     </div>
-                                    <div class="col-12" id="distritos">
-                                        <div class="form-group">
-                                            <label abel for="distritos">DISTRITO <span class="text-danger">*</span></label>
-                                            <select class="form-control combos" id="distrito" style="width: 100%;">
-                                                <option value="" disabled selected>SELECCIONA DISTRITO</option>
-                                                @foreach ($distritos as $distrito)
-                                                <option value="{{$distrito->distrito}}">{{$distrito->distrito}} - {{$distrito->codigopostal}}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="d-none" id="distritoserror">
+                                    <div class="row mx-3">
+                                        <div class="col-auto" id="sectores">
+                                            <div class="form-group">
+                                                <label abel for="sector">SECTOR <span class="text-danger">*</span></label>
+                                                <select class="form-control combos" id="sector" style="width: 100%;">
+                                                    <option value="" disabled selected>SELECCIONA SECTOR</option>
+                                                    <option>1</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                    <option>6</option>
+                                                    <option>7</option>
+                                                    <option>8</option>
+                                                </select>
+                                                <div class="d-none" id="sectorerror">
+                                                </div>
                                             </div>
-                                            <hr>
                                         </div>
-                                    </div>
-                                    <div class="col-12" id="sectores">
-                                        <div class="form-group">
-                                            <label abel for="sector">SECTOR <span class="text-danger">*</span></label>
-                                            <select class="form-control combos" id="sector" style="width: 100%;">
-                                                <option value="" disabled selected>SELECCIONA SECTOR</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                                <option>6</option>
-                                                <option>7</option>
-                                                <option>8</option>
-                                            </select>
-                                            <div class="d-none" id="sectorerror">
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                    <div class="col-12" id="subsector">
-                                        <div class="form-group">
-                                            <label abel for="subsector">SUBSECTOR <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="subsector">
-                                            <!-- <div class="d-none" id="subsectorerror">
+                                        <div class="col-auto" id="subsectoralumno">
+                                            <div class="form-group">
+                                                <label abel for="subsector">SUBSECTOR <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="subsector">
+                                                <!-- <div class="d-none" id="subsectorerror">
                                             </div> -->
-                                            <hr>
-                                        </div>
-                                    </div>
-                                    <div class="col-12" id="domicilioalumno">
-                                        <div class="form-group">
-                                            <label abel for="domicilio">DOMICILIO <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="domicilio">
-                                            <div class="d-none" id="domicilioerror">
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                    <div class="col-12" id="fechanaciemiento">
-                                        <div class="form-group">
-                                            <label abel for="fecha-nacimiento">FECHA DE NACIMIENTO <span class="text-danger">*</span></label>
-                                            <input type="date" class="form-control" id="fecha-nacimiento">
-                                            <div class="d-none" id="fechanaciemientoerror">
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                    <div class="col-12" id="rocarnetconadis">
-                                        <div class="form-group">
-                                            <label abel for="ro-carnet-conadis">RO. CARNET CONADIS <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" id="ro-carnet-conadis">
-                                            <div class="d-none" id="rocarnetconadiserror">
-                                            </div>
-                                            <hr>
-                                        </div>
-                                    </div>
-                                    <div class="col-12" id="solicitudinscripcionalumno">
-                                        <label abel for="solicitud-inscripcion">SOLICITUD DE INSCRIPCIÓN <span class="text-danger">*</span></label>
-                                        <div class="form-group">
-                                            <input name="solicitudinscripcion" type="radio" class="with-gap" id="si" value="1" required />
-                                            <label for="si" class="mr-30">SI</label>
-                                            <input name="solicitudinscripcion" type="radio" id="no" class="with-gap" value="0" />
-                                            <label for="no">NO</label>
-                                            <div class="d-none" id="solicitudinscripcionerror">
+
                                             </div>
                                         </div>
+                                        <div class="col-auto" id="domicilioalumno">
+                                            <div class="form-group">
+                                                <label abel for="domicilio">DOMICILIO <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="domicilio">
+                                                <div class="d-none" id="domicilioerror">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
                                         <hr>
                                     </div>
-                                    <div class="col-12" id="empadronamientosisfohalumno">
-                                        <label abel for="empredronamiento-sisfoh">CONST. EMPRADRONAMIENTO SISFOH <span class="text-danger">*</span></label>
-                                        <div class="form-group">
-                                            <input name="empadronamientosisfoh" type="radio" class="with-gap" id="siempadronado" value="SI" required />
-                                            <label for="siempadronado" class="mr-30">SI</label>
-                                            <input name="empadronamientosisfoh" type="radio" id="noempadronado" class="with-gap" value="NO EMPADRONADO" />
-                                            <label for="noempadronado" class="mr-30">NO EMPADRONADO</label>
-                                            <input name="empadronamientosisfoh" type="radio" id="caducado" class="with-gap" value="CADUCADO" />
-                                            <label for="caducado">CADUCADO</label>
-                                            <div class="d-none" id="empadronamientosisfoherror">
+                                    <div class="row mx-3">
+                                        <div class="col-auto" id="fechanaciemiento">
+                                            <div class="form-group">
+                                                <label abel for="fecha-nacimiento">FECHA DE NACIMIENTO <span class="text-danger">*</span></label>
+                                                <input type="date" class="form-control" id="fecha-nacimiento">
+                                                <div class="d-none" id="fechanaciemientoerror">
+                                                </div>
                                             </div>
-                                            <hr>
+                                        </div>
+                                        <div class="col-auto" id="rocarnetconadis">
+                                            <div class="form-group">
+                                                <label abel for="ro-carnet-conadis">RO. CARNET CONADIS <span class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" id="ro-carnet-conadis">
+                                                <div class="d-none" id="rocarnetconadiserror">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-12" id="copiadni">
-                                        <label abel for="copia-dni">COPIA DE DNI <span class="text-danger">*</span></label>
-                                        <div class="form-group">
-                                            <input name="copiadni" type="radio" class="with-gap" id="sipcopia" value="1" required />
-                                            <label for="sipcopia" class="mr-30">SI</label>
-                                            <input name="copiadni" type="radio" id="nocopia" class="with-gap" value="0" />
-                                            <label for="nocopia">NO</label>
-                                            <div class="d-none" id="copiadnierror">
-                                            </div>
-                                        </div>
+                                    <div class="col-12">
                                         <hr>
                                     </div>
-                                    <div class="col-12" id="informemedico">
-                                        <label abel for="informe-medico">INFORME MÉDICO <span class="text-danger">*</span></label>
-                                        <div class="form-group">
-                                            <input name="informemedico" type="radio" class="with-gap" id="siinforme" value="1" required />
-                                            <label for="siinforme" class="mr-30">SI</label>
-                                            <input name="informemedico" type="radio" id="noinforme" class="with-gap" value="0" />
-                                            <label for="noinforme">NO</label>
-                                            <div class="d-none" id="informemedicoerror">
+                                    <div class="row mx-3">
+                                        <div class="col-auto" id="solicitudinscripcionalumno">
+                                            <label abel for="solicitud-inscripcion">SOLICITUD DE INSCRIPCIÓN <span class="text-danger">*</span></label>
+                                            <div class="form-group">
+                                                <input name="solicitudinscripcion" type="radio" class="with-gap" id="si" value="1" required />
+                                                <label for="si" class="mr-30">SI</label>
+                                                <input name="solicitudinscripcion" type="radio" id="no" class="with-gap" value="0" />
+                                                <label for="no">NO</label>
+                                                <div class="d-none" id="solicitudinscripcionerror">
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-auto" id="empadronamientosisfohalumno">
+                                            <label abel for="empredronamiento-sisfoh">CONST. EMPRADRONAMIENTO SISFOH <span class="text-danger">*</span></label>
+                                            <div class="form-group">
+                                                <input name="empadronamientosisfoh" type="radio" class="with-gap" id="siempadronado" value="SI" required />
+                                                <label for="siempadronado" class="mr-30">SI</label>
+                                                <input name="empadronamientosisfoh" type="radio" id="noempadronado" class="with-gap" value="NO" />
+                                                <label for="noempadronado" class="mr-30">NO EMPADRONADO</label>
+                                                <input name="empadronamientosisfoh" type="radio" id="caducado" class="with-gap" value="CADUCADO" />
+                                                <label for="caducado">CADUCADO</label>
+                                                <div class="d-none" id="empadronamientosisfoherror">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
                                         <hr>
                                     </div>
-                                    <div class="col-12" id="recibosercivios">
-                                        <label abel for="recibo-servicios">RECIBO DE SERVICIOS <span class="text-danger">*</span></label>
-                                        <div class="form-group">
-                                            <input name="recibosercivios" type="radio" class="with-gap" id="sireciboservicio" value="1" required />
-                                            <label for="sireciboservicio" class="mr-30">SI</label>
-                                            <input name="recibosercivios" type="radio" id="noreciboservicio" class="with-gap" value="0" />
-                                            <label for="noreciboservicio">NO</label>
-                                            <div class="d-none" id="reciboservicioserror">
+                                    <div class="row mx-3">
+                                        <div class="col-auto" id="copiadni">
+                                            <label abel for="copia-dni">COPIA DE DNI <span class="text-danger">*</span></label>
+                                            <div class="form-group">
+                                                <input name="copiadni" type="radio" class="with-gap" id="sipcopia" value="1" required />
+                                                <label for="sipcopia" class="mr-30">SI</label>
+                                                <input name="copiadni" type="radio" id="nocopia" class="with-gap" value="0" />
+                                                <label for="nocopia">NO</label>
+                                                <div class="d-none" id="copiadnierror">
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="col-auto" id="informemedico">
+                                            <label abel for="informe-medico">INFORME MÉDICO <span class="text-danger">*</span></label>
+                                            <div class="form-group">
+                                                <input name="informemedico" type="radio" class="with-gap" id="siinforme" value="1" required />
+                                                <label for="siinforme" class="mr-30">SI</label>
+                                                <input name="informemedico" type="radio" id="noinforme" class="with-gap" value="0" />
+                                                <label for="noinforme">NO</label>
+                                                <div class="d-none" id="informemedicoerror">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto" id="reciboserciviosalumno">
+                                            <label abel for="recibo-servicios">RECIBO DE SERVICIOS <span class="text-danger">*</span></label>
+                                            <div class="form-group">
+                                                <input name="recibosercivios" type="radio" class="with-gap" id="sireciboservicio" value="1" required />
+                                                <label for="sireciboservicio" class="mr-30">SI</label>
+                                                <input name="recibosercivios" type="radio" id="noreciboservicio" class="with-gap" value="0" />
+                                                <label for="noreciboservicio">NO</label>
+                                                <div class="d-none" id="reciboservicioserror">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
                                         <hr>
                                     </div>
-                                    <div class="col-12" id="carnetconadis">
-                                        <label abel for="copia-carnet-conadis">COPIA DE CARNET DEL CONADIS <span class="text-danger">*</span></label>
-                                        <div class="form-group">
-                                            <input name="carnetconadis" type="radio" class="with-gap" id="sicarnetconadis" value="1" required />
-                                            <label for="sicarnetconadis" class="mr-30">SI</label>
-                                            <input name="carnetconadis" type="radio" id="nocarnetconadis" class="with-gap" value="0" />
-                                            <label for="nocarnetconadis">NO</label>
-                                            <div class="d-none" id="copiacarnetconadiserror">
+                                    <div class="row mx-3">
+                                        <div class="col-auto" id="carnetconadis">
+                                            <label abel for="copia-carnet-conadis">COPIA DE CARNET DEL CONADIS <span class="text-danger">*</span></label>
+                                            <div class="form-group">
+                                                <input name="carnetconadis" type="radio" class="with-gap" id="sicarnetconadis" value="1" required />
+                                                <label for="sicarnetconadis" class="mr-30">SI</label>
+                                                <input name="carnetconadis" type="radio" id="nocarnetconadis" class="with-gap" value="0" />
+                                                <label for="nocarnetconadis">NO</label>
+                                                <div class="d-none" id="copiacarnetconadiserror">
+                                                </div>
                                             </div>
                                         </div>
-                                        <hr>
+                                        <div class="col-auto" id="documentaciondigital">
+                                            <label abel for="documentacion-digital">DOCUMENTACIÓN DIGITAL <span class="text-danger">*</span></label>
+                                            <div class="form-group">
+                                                <input name="documentaciondigital" type="radio" class="with-gap" id="sidocdigital" value="1" required />
+                                                <label for="sidocdigital" class="mr-30">SI</label>
+                                                <input name="documentaciondigital" type="radio" id="nodocdigital" class="with-gap" value="0" />
+                                                <label for="nodocdigital">NO</label>
+                                                <div class="d-none" id="documentaciondigitalerror">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-12" id="documentaciondigital">
-                                        <label abel for="documentacion-digital">DOCUMENTACIÓN DIGITAL <span class="text-danger">*</span></label>
-                                        <div class="form-group">
-                                            <input name="documentaciondigital" type="radio" class="with-gap" id="sidocdigital" value="1" required />
-                                            <label for="sidocdigital" class="mr-30">SI</label>
-                                            <input name="documentaciondigital" type="radio" id="nodocdigital" class="with-gap" value="0" />
-                                            <label for="nodocdigital">NO</label>
-                                            <div class="d-none" id="documentaciondigitalerror">
-                                            </div>
-                                        </div>
+                                    <div class="col-12">
                                         <hr>
                                     </div>
                                 </div>
