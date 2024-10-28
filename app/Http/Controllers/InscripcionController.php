@@ -147,7 +147,7 @@ class InscripcionController extends Controller
 
     public function getPersonaByDocument($documento): JsonResponse
     {
-        $persona = $this->personaService->getPersonas($documento);
+        $persona = $this->personaService->getPersonasByDocumento($documento);
         if (count($persona) > 0)
             return Response::json($persona);
         else

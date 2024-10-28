@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Data\PersonaData;
 use App\Models\Alumno;
 use App\Models\PadreAlumno;
 use App\Models\Persona;
@@ -14,16 +15,57 @@ use Illuminate\Support\Str;
 
 class PersonaService
 {
-    public function getPersonas($documento)
+    public array $personas = [];
+
+    public function getLastTenPersons():array
+    {
+        $personas = DB::select("SELECT
+                                            tp.id AS tipo_persona_id, tp.tipo_persona AS tipo_persona_descripcion, p.id AS persona_id,
+                                            p.nombres as persona_nombre, p.apellidos as persona_apellido, p.documento AS persona_documento
+                                        FROM personas p
+                                        LEFT JOIN tipo_personas tp ON p.tipo_persona_id  = tp.id
+                                        ORDER BY p.id DESC LIMIT 5;");
+        foreach ($personas as $persona) {
+            $this->personas[] = PersonaData::from([
+                'tipopersonaid' => $persona->tipo_persona_id,
+                'tipopersona' => $persona->tipo_persona_descripcion,
+                'personaid' => $persona->persona_id,
+                'documento' => $persona->persona_documento,
+                'nombres' => $persona->persona_nombre,
+                'apellidos' => $persona->persona_apellido,
+            ]);
+        }
+
+        return $this->personas;
+    }
+
+    public function getPersonasByDocumento($documento)
     {
         $persona = Persona::where('documento', $documento)
             ->where('tipo_persona_id', 6)
             ->with('tipo_persona')
             ->get();
+
         return $persona;
     }
 
-    public function registerDatosGenerales(array $data):int
+    public function getPersonasByTipoPersona(int $idTipo){
+        return Persona::where('tipo_persona_id',$idTipo)->with('tipo_persona');
+        // foreach ($personasPorTipo as $persona) {
+        //     $this->personas[] = PersonaData::from([
+        //         'tipopersonaid' => $persona->tipo_persona->id,
+        //         'tipopersona' => $persona->tipo_persona->tipo_persona,
+        //         'personaid' => $persona->id,
+        //         'documento' => $persona->documento,
+        //         'nombres' => $persona->nombres,
+        //         'apellidos' => $persona->apellidos,
+        //     ]);
+        // }
+
+        // return $this->personas;
+    }
+
+    public function registerDatosGenerales(array $data): int
     {
         $obtenerUsuario = User::find(Auth::id())->with('persona')->get();
         $usuarioActualiza = $obtenerUsuario[0]->persona->nombres . ' ' . $obtenerUsuario[0]->persona->apellidos;
@@ -34,9 +76,9 @@ class PersonaService
             if ($d->tipopersonaid == 3 || $d->tipopersonaid == 4)
                 return $this->registerPadres($d);
             if ($d->tipopersonaid == 5)
-                return $this->registerRepresentante($d,$usuarioActualiza);
+                return $this->registerRepresentante($d, $usuarioActualiza);
             if ($d->tipopersonaid == 6)
-                return $this->registerAlumno($d,$usuarioActualiza);
+                return $this->registerAlumno($d, $usuarioActualiza);
         }
 
         return 500;
@@ -62,7 +104,7 @@ class PersonaService
 
     public function registerPadres($data)
     {
-        $alumno = Alumno::where('persona_id',$data->alumnoid)->get()[0];
+        $alumno = Alumno::where('persona_id', $data->alumnoid)->get()[0];
         $nuevaPersona = new Persona();
         $nuevaPersona->tipo_persona_id = $data->tipopersonaid;
         $nuevaPersona->documento = $data->documento;
@@ -76,9 +118,9 @@ class PersonaService
         return 200;
     }
 
-    public function registerRepresentante($data,$usuario)
+    public function registerRepresentante($data, $usuario)
     {
-        $alumno = Alumno::where('persona_id',$data->alumnoid)->get()[0];
+        $alumno = Alumno::where('persona_id', $data->alumnoid)->get()[0];
 
         $nuevaPersona = new Persona();
         $nuevaPersona->tipo_persona_id = $data->tipopersonaid;
@@ -97,7 +139,7 @@ class PersonaService
         return 200;
     }
 
-    public function registerAlumno($data,$usuario)
+    public function registerAlumno($data, $usuario)
     {
         $nuevaPersona = new Persona();
         $nuevaPersona->tipo_persona_id = $data->tipopersonaid;
@@ -106,29 +148,29 @@ class PersonaService
         $nuevaPersona->apellidos = Str::upper($data->apellidos);
         $nuevaPersona->save();
         $nuevoAlumno = new Alumno();
-        $nuevoAlumno->persona_id= $nuevaPersona->id;
-        $nuevoAlumno->genero_id= $data->generoid;
-        $nuevoAlumno->anio_periodo_id= $data->anioingresoid;
-        $nuevoAlumno->tipo_seguro_id= $data->tiposeguroid;
-        $nuevoAlumno->cond_socio_economica_id= $data->condsocecoid;
-        $nuevoAlumno->manif_volunta_id= $data->manifvolid;
-        $nuevoAlumno->acred_resid_id= $data->acredresid;
-        $nuevoAlumno->tipo_discapacidad_id= $data->tipodiscapaid;
-        $nuevoAlumno->fecha_inscripcion= $data->fecinscalumno;
-        $nuevoAlumno->ds_exp_inscripcion= $data->dsexpinsc;
-        $nuevoAlumno->distrito= $data->distrito;
-        $nuevoAlumno->sector= $data->sector;
-        $nuevoAlumno->subsector= $data->subsector;
-        $nuevoAlumno->domicilio= $data->domicilio;
-        $nuevoAlumno->fecha_nacimiento= $data->fecnac;
-        $nuevoAlumno->ro_carnet_conadis= $data->rocarnetconadis;
-        $nuevoAlumno->solicitud_inscripcion= $data->solisinsc;
-        $nuevoAlumno->cons_empadronamiento_sisfoh= $data->consempadrosisfoh;
-        $nuevoAlumno->copia_dni= $data->copiadni;
-        $nuevoAlumno->informe_medico= $data->informemed;
-        $nuevoAlumno->recibo_serv= $data->reciboserv;
-        $nuevoAlumno->copia_carnet_conadis= $data->copiacarnetconadis;
-        $nuevoAlumno->documentacion_digital= $data->docdigital;
+        $nuevoAlumno->persona_id = $nuevaPersona->id;
+        $nuevoAlumno->genero_id = $data->generoid;
+        $nuevoAlumno->anio_periodo_id = $data->anioingresoid;
+        $nuevoAlumno->tipo_seguro_id = $data->tiposeguroid;
+        $nuevoAlumno->cond_socio_economica_id = $data->condsocecoid;
+        $nuevoAlumno->manif_volunta_id = $data->manifvolid;
+        $nuevoAlumno->acred_resid_id = $data->acredresid;
+        $nuevoAlumno->tipo_discapacidad_id = $data->tipodiscapaid;
+        $nuevoAlumno->fecha_inscripcion = $data->fecinscalumno;
+        $nuevoAlumno->ds_exp_inscripcion = $data->dsexpinsc;
+        $nuevoAlumno->distrito = $data->distrito;
+        $nuevoAlumno->sector = $data->sector;
+        $nuevoAlumno->subsector = $data->subsector;
+        $nuevoAlumno->domicilio = $data->domicilio;
+        $nuevoAlumno->fecha_nacimiento = $data->fecnac;
+        $nuevoAlumno->ro_carnet_conadis = $data->rocarnetconadis;
+        $nuevoAlumno->solicitud_inscripcion = $data->solisinsc;
+        $nuevoAlumno->cons_empadronamiento_sisfoh = $data->consempadrosisfoh;
+        $nuevoAlumno->copia_dni = $data->copiadni;
+        $nuevoAlumno->informe_medico = $data->informemed;
+        $nuevoAlumno->recibo_serv = $data->reciboserv;
+        $nuevoAlumno->copia_carnet_conadis = $data->copiacarnetconadis;
+        $nuevoAlumno->documentacion_digital = $data->docdigital;
         $nuevoAlumno->save();
 
         return 200;

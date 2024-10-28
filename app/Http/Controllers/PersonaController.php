@@ -37,10 +37,15 @@ class PersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): View
+    public function index():View
     {
         $tipospersonas = $this->tipoPersonaService->getTiposPersonasServicios();
         return view("pages.personas.index", compact("tipospersonas"));
+    }
+
+    public function getPersonaByType(int $tipoPersona):JsonResponse{
+        $personasFilter = $this->personaService->getPersonasByTipoPersona($tipoPersona);
+        return Response::json($personasFilter);
     }
 
     /**
@@ -53,14 +58,14 @@ class PersonaController extends Controller
         $tipospersonas = $this->tipoPersonaService->getTiposPersonasServicios();
         $generos = $this->generoService->getGeneros();
         $seguros = $this->tipoSeguroService->getTipoSerguro();
-        $aniosperiodos =$this->anioPeriodoService->getAnioPeriodosAll();
+        $aniosperiodos = $this->anioPeriodoService->getAnioPeriodosAll();
         $condicionse = $this->condicionSocioEconomicaService->getCondicionSocioEconomica();
         $manifestaciones = $this->manifestacionVoluntadService->getAllManifestaciones();
         $tipodiscapacidades = $this->tipoDiscapacidadService->getTiposDiscapacidadesAll();
         $distritos = $this->distritosService->distritosLimaArray();
         $acreditacionesResidencia = $this->acreditacionResidenciaService->getAcreditacionResidencias();
 
-        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse","manifestaciones","tipodiscapacidades","distritos","acreditacionesResidencia"));
+        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros", "aniosperiodos", "condicionse", "manifestaciones", "tipodiscapacidades", "distritos", "acreditacionesResidencia"));
     }
 
     /**
@@ -69,7 +74,7 @@ class PersonaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PersonaNuevoRequest $request):JsonResponse
+    public function store(PersonaNuevoRequest $request): JsonResponse
     {
         $tipopersona = $request->input('tipopersonaid');
 
@@ -85,7 +90,7 @@ class PersonaController extends Controller
         if ($registerCode === 200)
             return Response::json(['code' => $registerCode, 'mensaje' => 'Se registro la nueva persona correctamente.']);
 
-        if($registerCode === 500)
+        if ($registerCode === 500)
             return Response::json(['code' => $registerCode, 'mensaje' => 'Error en el servicio "App\Services\PersonaService", comuniquese con GTI.']);
     }
 
