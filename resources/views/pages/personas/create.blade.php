@@ -77,7 +77,7 @@
                         </div>
                         <!-- /.box -->
                     </div>
-                    <div class="col-12 col-lg-8 d-none" id="formularioextend">
+                    <div class="col-12 col-lg-7 d-none" id="formularioextend">
                         <!-- Form Element sizes -->
                         <div class="box">
                             <div class="box-header with-border">
@@ -137,6 +137,16 @@
                                             <hr>
                                         </div>
                                     </div>
+                                    <div class="col-12" id="acreditacionresidencialaumno">
+                                        <div class="form-group">
+                                            <label abel for="radio-acreditacion-residencia">ACREDITACION DE RESIDENCIA <span class="text-danger">*</span></label>
+                                            <div id="radio-acreditacion-residencia">
+                                            </div>
+                                            <div class="d-none" id="acreditacionresidenciaerror">
+                                            </div>
+                                            <hr>
+                                        </div>
+                                    </div>
                                     <div class="col-12" id="tipodiscapacidad">
                                         <div class="form-group">
                                             <label abel for="radio-tipos-discapacidades">TIPOS DE DISCAPACIDADES <span class="text-danger">*</span></label>
@@ -184,7 +194,7 @@
                                     <div class="row mx-3">
                                         <div class="col-auto" id="sectores">
                                             <div class="form-group">
-                                                <label abel for="sector">SECTOR <span class="text-danger">*</span></label>
+                                                <label abel for="sector">SECTOR </label>
                                                 <select class="form-control combos" id="sector" style="width: 100%;">
                                                     <option value="" disabled selected>SELECCIONA SECTOR</option>
                                                     <option>1</option>
@@ -202,7 +212,7 @@
                                         </div>
                                         <div class="col-auto" id="subsectoralumno">
                                             <div class="form-group">
-                                                <label abel for="subsector">SUBSECTOR <span class="text-danger">*</span></label>
+                                                <label abel for="subsector">SUBSECTOR </label>
                                                 <input type="text" class="form-control" id="subsector">
                                                 <!-- <div class="d-none" id="subsectorerror">
                                             </div> -->
@@ -232,7 +242,7 @@
                                         </div>
                                         <div class="col-auto" id="rocarnetconadis">
                                             <div class="form-group">
-                                                <label abel for="ro-carnet-conadis">RO. CARNET CONADIS <span class="text-danger">*</span></label>
+                                                <label abel for="ro-carnet-conadis">RO. CARNET CONADIS </label>
                                                 <input type="text" class="form-control" id="ro-carnet-conadis">
                                                 <div class="d-none" id="rocarnetconadiserror">
                                                 </div>
@@ -243,7 +253,7 @@
                                         <hr>
                                     </div>
                                     <div class="row mx-3">
-                                        <div class="col-auto" id="solicitudinscripcionalumno">
+                                        <div class="col-auto" id="solicitudinscripcionalumno" style="border-right: 1px solid #F4F4F5">
                                             <label abel for="solicitud-inscripcion">SOLICITUD DE INSCRIPCIÓN <span class="text-danger">*</span></label>
                                             <div class="form-group">
                                                 <input name="solicitudinscripcion" type="radio" class="with-gap" id="si" value="1" required />
@@ -254,7 +264,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-auto" id="empadronamientosisfohalumno">
+                                        <div class="col-auto" id="empadronamientosisfohalumno" style="border-right: 1px solid #F4F4F5">
                                             <label abel for="empredronamiento-sisfoh">CONST. EMPRADRONAMIENTO SISFOH <span class="text-danger">*</span></label>
                                             <div class="form-group">
                                                 <input name="empadronamientosisfoh" type="radio" class="with-gap" id="siempadronado" value="SI" required />
@@ -272,7 +282,7 @@
                                         <hr>
                                     </div>
                                     <div class="row mx-3">
-                                        <div class="col-auto" id="copiadni">
+                                        <div class="col-auto" id="copiadni" style="border-right: 1px solid #F4F4F5">
                                             <label abel for="copia-dni">COPIA DE DNI <span class="text-danger">*</span></label>
                                             <div class="form-group">
                                                 <input name="copiadni" type="radio" class="with-gap" id="sipcopia" value="1" required />
@@ -283,7 +293,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-auto" id="informemedico">
+                                        <div class="col-auto" id="informemedico" style="border-right: 1px solid #F4F4F5">
                                             <label abel for="informe-medico">INFORME MÉDICO <span class="text-danger">*</span></label>
                                             <div class="form-group">
                                                 <input name="informemedico" type="radio" class="with-gap" id="siinforme" value="1" required />
@@ -294,7 +304,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-auto" id="reciboserciviosalumno">
+                                        <div class="col-auto" id="reciboserciviosalumno" style="border-right: 1px solid #F4F4F5">
                                             <label abel for="recibo-servicios">RECIBO DE SERVICIOS <span class="text-danger">*</span></label>
                                             <div class="form-group">
                                                 <input name="recibosercivios" type="radio" class="with-gap" id="sireciboservicio" value="1" required />
@@ -310,7 +320,7 @@
                                         <hr>
                                     </div>
                                     <div class="row mx-3">
-                                        <div class="col-auto" id="carnetconadis">
+                                        <div class="col-auto" id="carnetconadis" style="border-right: 1px solid #F4F4F5">
                                             <label abel for="copia-carnet-conadis">COPIA DE CARNET DEL CONADIS <span class="text-danger">*</span></label>
                                             <div class="form-group">
                                                 <input name="carnetconadis" type="radio" class="with-gap" id="sicarnetconadis" value="1" required />
@@ -321,7 +331,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-auto" id="documentaciondigital">
+                                        <div class="col-auto" id="documentaciondigital" style="border-right: 1px solid #F4F4F5">
                                             <label abel for="documentacion-digital">DOCUMENTACIÓN DIGITAL <span class="text-danger">*</span></label>
                                             <div class="form-group">
                                                 <input name="documentaciondigital" type="radio" class="with-gap" id="sidocdigital" value="1" required />
@@ -363,6 +373,7 @@
     let condicionse = @json($condicionse);
     let manifestaciones = @json($manifestaciones);
     let tipodiscapacidades = @json($tipodiscapacidades);
+    let acreditacionesResidencia = @json($acreditacionesResidencia);
 </script>
 <script src="{{asset('assets/js/perzonalized/personas.js')}}"></script>
 @endpush

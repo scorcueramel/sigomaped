@@ -26,11 +26,11 @@ return new class extends Migration
             $table->date('fecha_inscripcion');
             $table->string('ds_exp_inscripcion',25);
             $table->string('distrito',30);
-            $table->string('sector',5);
-            $table->string('subsector',5);
+            $table->string('sector',5)->nullable();
+            $table->string('subsector',5)->nullable();
             $table->string('domicilio',150);
             $table->date('fecha_nacimiento');
-            $table->string('ro_carnet_conadis',20);
+            $table->string('ro_carnet_conadis',20)->nullable();
             $table->boolean('solicitud_inscripcion')->default(false);
             $table->string('cons_empadronamiento_sisfoh',10);
             $table->boolean('copia_dni')->default(false);

@@ -163,7 +163,7 @@ class PersonaNuevoRequest extends FormRequest
                 'tiposeguroid' => $this->tiposeguro,
                 'condsocecoid' => $this->cse,
                 'manifvolid' => $this->manifestacion,
-                'acredresid' => 3, //pendiente de campo en la vista
+                'acredresid' => $this->acreditacionderesidencia, //pendiente de campo en la vista
                 'tipodiscapaid' => $this->tipodiscapacidad,
                 'fecinscalumno' => $this->fechainscripcion,
                 'dsexpinsc' => $this->dsexpisncripcion,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonaNuevoRequest;
+use App\Services\AcreditacionResidenciaService;
 use App\Services\AnioPeriodoService;
 use App\Services\CondicionSocioEconomicaService;
 use App\Services\DistritosService;
@@ -29,6 +30,7 @@ class PersonaController extends Controller
         private ManifestacionVoluntadService $manifestacionVoluntadService,
         private TipoDiscapacidadService $tipoDiscapacidadService,
         private DistritosService $distritosService,
+        private AcreditacionResidenciaService $acreditacionResidenciaService
     ) {}
     /**
      * Display a listing of the resource.
@@ -56,8 +58,9 @@ class PersonaController extends Controller
         $manifestaciones = $this->manifestacionVoluntadService->getAllManifestaciones();
         $tipodiscapacidades = $this->tipoDiscapacidadService->getTiposDiscapacidadesAll();
         $distritos = $this->distritosService->distritosLimaArray();
+        $acreditacionesResidencia = $this->acreditacionResidenciaService->getAcreditacionResidencias();
 
-        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse","manifestaciones","tipodiscapacidades","distritos"));
+        return view("pages.personas.create", compact("tipospersonas", "generos", "seguros","aniosperiodos","condicionse","manifestaciones","tipodiscapacidades","distritos","acreditacionesResidencia"));
     }
 
     /**
@@ -68,8 +71,6 @@ class PersonaController extends Controller
      */
     public function store(PersonaNuevoRequest $request):JsonResponse
     {
-        // dd($request->recibosercivios);
-
         $tipopersona = $request->input('tipopersonaid');
 
         if ($tipopersona == 1 || $tipopersona == 2)

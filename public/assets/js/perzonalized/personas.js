@@ -1,13 +1,13 @@
-$("#tipos-personas").on('change', function() {
+$("#tipos-personas").on('change', function () {
     $("#documento").removeAttr('disabled')
     $("#nombres").removeAttr('disabled')
     $("#apellidos").removeAttr('disabled')
     limpiarCampos();
-    $("#datosgenerales").removeClass('col-lg-6');
+    $("#datosgenerales").removeClass('col-lg-5');
     let tipoPersona = $(this).val();
     if (tipoPersona == 1 || tipoPersona == 2) {
         $("#datosgeneralesregistrar").html('');
-        $("#datosgenerales").addClass('col-lg-6');
+        $("#datosgenerales").addClass('col-lg-5');
         $("#formularioextend").removeClass('d-none');
         $("#boxheader").html('DATOS PARA EL USUARIO');
         $("#boxbodysectionalumno").addClass('d-none');
@@ -58,7 +58,7 @@ $("#tipos-personas").on('change', function() {
     } else if (tipoPersona == 6) {
         limpiarCampos();
         $("#datosgeneralesregistrar").html('');
-        $("#datosgenerales").addClass('col-lg-4');
+        $("#datosgenerales").addClass('col-lg-5');
         $("#formularioextend").removeClass('d-none');
         $("#boxheader").html('DATOS DEL ALUMNO');
         $("#boxbodysectionalumno").removeClass('d-none');
@@ -73,6 +73,7 @@ $("#tipos-personas").on('change', function() {
         $("#radio-anios-periodos").html('');
         $("#radio-condicion-socioeconomica").html('');
         $("#radio-manifestacion-voluntad").html('');
+        $("#radio-acreditacion-residencia").html('');
         $("#radio-tipos-discapacidades").html('');
         generos.forEach((g) => {
             $("#radio-generos").append(`
@@ -110,6 +111,12 @@ $("#tipos-personas").on('change', function() {
                 <label for="tipodiscapacidad${d.tipodiscapacidadid}" class="mr-30">${d.tipodiscapacidad}</label>
             `);
         });
+        acreditacionesResidencia.forEach((r) => {
+            $("#radio-acreditacion-residencia").append(`
+                <input name="acreditacionderesidencia" type="radio" id="acreditacionderesidencia${r.acredresidid}" value="${r.acredresidid}" required>
+                <label for="acreditacionderesidencia${r.acredresidid}" class="mr-30">${r.acreditacionresidencia}</label>
+            `);
+        });
     }
 });
 
@@ -119,7 +126,7 @@ function buscarAlumno() {
     $.ajax({
         type: "GET",
         url: `/inscripciones/get-persona/${documento}`,
-        success: function(response) {
+        success: function (response) {
             $('#alumonid').val('');
             if (response.length > 0) {
                 let data = response[0];
@@ -177,7 +184,7 @@ function datosAlumno(tipopersona, titulo) {
 
 function generalRepreYPadres(titulo) {
     $("#datosgeneralesregistrar").html('');
-    $("#datosgenerales").addClass('col-lg-6');
+    $("#datosgenerales").addClass('col-lg-5');
     $("#formularioextend").removeClass('d-none');
     $("#boxheader").html(`${titulo}`);
     $("#boxbodysection").html(`
@@ -296,6 +303,7 @@ function registrarPersona() {
         let fechanacimiento = $('#fecha-nacimiento').val();
         let rocarnetconadis = $('#ro-carnet-conadis').val();
         let empadronamientosisfoh = $('input[name=empadronamientosisfoh]:checked').val();
+        let acreditacionderesidencia = $('input[name=acreditacionderesidencia]:checked').val();
 
         let solicitudinscripcion = $('input[name=solicitudinscripcion]:checked').val();
         let copiadni = $('input[name=copiadni]:checked').val();
@@ -324,6 +332,7 @@ function registrarPersona() {
             fechanacimiento,
             rocarnetconadis,
             empadronamientosisfoh,
+            acreditacionderesidencia,
             solicitudinscripcion,
             copiadni,
             informemedico,
@@ -340,7 +349,7 @@ function guardarDatos(data) {
         type: "POST",
         url: "/personas/store",
         data: data,
-        success: function(response) {
+        success: function (response) {
             if (response.code === 200) {
                 mensaje('Persona Registrada', `${response.mensaje}`, 'success', 'Entendido')
                     .then((result) => {
@@ -350,7 +359,7 @@ function guardarDatos(data) {
                     });
             }
         },
-        error: function(error) {
+        error: function (error) {
             Swal.close();
             let errores = error.responseJSON;
             if (error.status === 500) {
@@ -379,16 +388,17 @@ function mostrarSeccionErroes() {
     $('#anioperiodoserror').removeClass('d-none');
     $('#condsocioeconomicaerror').removeClass('d-none');
     $('#manifestacionvoluntaderror').removeClass('d-none');
+    $('#acreditacionresidenciaerror').removeClass('d-none');
     $('#tiposdediscapacidadeserror').removeClass('d-none');
     $('#fechadeinscripcionerror').removeClass('d-none');
     $('#seguroerror').removeClass('d-none');
     $('#dsexinscripcionerror').removeClass('d-none');
     $('#distritoserror').removeClass('d-none');
-    $('#sectorerror').removeClass('d-none');
-    $('#subsectorerror').removeClass('d-none');
+    // $('#sectorerror').removeClass('d-none');
+    // $('#subsectorerror').removeClass('d-none');
     $('#domicilioerror').removeClass('d-none');
     $('#fechanaciemientoerror').removeClass('d-none');
-    $('#rocarnetconadiserror').removeClass('d-none');
+    // $('#rocarnetconadiserror').removeClass('d-none');
     $('#solicitudinscripcionerror').removeClass('d-none');
     $('#empadronamientosisfoherror').removeClass('d-none');
     $('#copiadnierror').removeClass('d-none');
@@ -420,12 +430,13 @@ function gestionMensajes(erroresresp) {
     let documentaciondigitalexist = 'documentaciondigital' in erroresresp;
     let dsexpisncripcionexist = 'dsexpisncripcion' in erroresresp;
     let distritoserrorexist = 'distrito' in erroresresp;
-    let sectorexist = 'sector' in erroresresp;
-    let subsectorexist = 'subsector' in erroresresp;
+    // let sectorexist = 'sector' in erroresresp;
+    // let subsectorexist = 'subsector' in erroresresp;
     let domicilioexist = 'domicilio' in erroresresp;
     let fechanacimientoexist = 'fechanacimiento' in erroresresp;
-    let rocarnetconadisexist = 'rocarnetconadis' in erroresresp;
+    // let rocarnetconadisexist = 'rocarnetconadis' in erroresresp;
     let empadronamientosisfohexist = 'empadronamientosisfoh' in erroresresp;
+    let acreditacionderesidenciaexist = 'acreditacionderesidencia' in erroresresp;
 
 
     if (documentoexist) {
@@ -505,19 +516,19 @@ function gestionMensajes(erroresresp) {
         $('#dsexinscripcionerror').html('');
     }
 
-    if (sectorexist) {
-        $('#sectorerror').html(`<span class="text-danger">${erroresresp.sector}<span>`)
-    } else {
-        $('#sectorerror').addClass('d-none');
-        $('#sectorerror').html('');
-    }
+    // if (sectorexist) {
+    //     $('#sectorerror').html(`<span class="text-danger">${erroresresp.sector}<span>`)
+    // } else {
+    //     $('#sectorerror').addClass('d-none');
+    //     $('#sectorerror').html('');
+    // }
 
-    if (subsectorexist) {
-        $('#subsectorerror').html(`<span class="text-danger">${erroresresp.subsector}<span>`)
-    } else {
-        $('#subsectorerror').addClass('d-none');
-        $('#subsectorerror').html('');
-    }
+    // if (subsectorexist) {
+    //     $('#subsectorerror').html(`<span class="text-danger">${erroresresp.subsector}<span>`)
+    // } else {
+    //     $('#subsectorerror').addClass('d-none');
+    //     $('#subsectorerror').html('');
+    // }
 
     if (anioperiodoexist) {
         $('#anioperiodoserror').html(`<span class="text-danger">${erroresresp.anioperiodo}<span>`)
@@ -538,6 +549,13 @@ function gestionMensajes(erroresresp) {
     } else {
         $('#manifestacionvoluntaderror').addClass('d-none');
         $('#manifestacionvoluntaderror').html('');
+    }
+
+    if (acreditacionderesidenciaexist) {
+        $('#acreditacionresidenciaerror').html(`<span class="text-danger">${erroresresp.acreditacionderesidencia}<span>`)
+    } else {
+        $('#acreditacionresidenciaerror').addClass('d-none');
+        $('#acreditacionresidenciaerror').html('');
     }
 
     if (tipodiscapacidadexist) {
@@ -603,12 +621,12 @@ function gestionMensajes(erroresresp) {
         $('#fechanaciemientoerror').html('');
     }
 
-    if (rocarnetconadisexist) {
-        $('#rocarnetconadiserror').html(`<span class="text-danger">${erroresresp.rocarnetconadis}<span>`)
-    } else {
-        $('#rocarnetconadiserror').addClass('d-none');
-        $('#rocarnetconadiserror').html('');
-    }
+    // if (rocarnetconadisexist) {
+    //     $('#rocarnetconadiserror').html(`<span class="text-danger">${erroresresp.rocarnetconadis}<span>`)
+    // } else {
+    //     $('#rocarnetconadiserror').addClass('d-none');
+    //     $('#rocarnetconadiserror').html('');
+    // }
 
     if (empadronamientosisfohexist) {
         $('#empadronamientosisfoherror').html(`<span class="text-danger">${erroresresp.empadronamientosisfoh}<span>`)
@@ -653,7 +671,7 @@ function mensaje(title, message, icon, textbtnconfirm) {
     });
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     $(".combos").select2({
         theme: 'bootstrap-5'
     });
