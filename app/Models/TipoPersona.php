@@ -14,6 +14,12 @@ class TipoPersona extends Model
         'tipo_persona'
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+
     public function persona(){
         return $this->hasMany(Persona::class);
     }

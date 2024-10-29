@@ -37,15 +37,9 @@ class PersonaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index():View
+    public function index(): View
     {
-        $tipospersonas = $this->tipoPersonaService->getTiposPersonasServicios();
-        return view("pages.personas.index", compact("tipospersonas"));
-    }
-
-    public function getPersonaByType(int $tipoPersona):JsonResponse{
-        $personasFilter = $this->personaService->getPersonasByTipoPersona($tipoPersona);
-        return Response::json($personasFilter);
+        return view("pages.personas.index");
     }
 
     /**

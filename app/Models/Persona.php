@@ -17,6 +17,11 @@ class Persona extends Model
         'apellidos',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     public function tipo_persona():BelongsTo{
         return $this->belongsTo( TipoPersona::class);
     }
@@ -40,7 +45,7 @@ class Persona extends Model
     public function padre_alumno(){
         return $this->hasMany(PadreAlumno::class);
     }
-    
+
     public function encargado_ciclo(){
         return $this->hasMany(EncargadoCiclo::class);
     }

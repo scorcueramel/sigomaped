@@ -17,7 +17,7 @@ class PersonaService
 {
     public array $personas = [];
 
-    public function getLastTenPersons():array
+    public function getLastTenPersons(): array
     {
         $personas = DB::select("SELECT
                                             tp.id AS tipo_persona_id, tp.tipo_persona AS tipo_persona_descripcion, p.id AS persona_id,
@@ -49,20 +49,32 @@ class PersonaService
         return $persona;
     }
 
-    public function getPersonasByTipoPersona(int $idTipo){
-        return Persona::where('tipo_persona_id',$idTipo)->with('tipo_persona');
-        // foreach ($personasPorTipo as $persona) {
-        //     $this->personas[] = PersonaData::from([
-        //         'tipopersonaid' => $persona->tipo_persona->id,
-        //         'tipopersona' => $persona->tipo_persona->tipo_persona,
-        //         'personaid' => $persona->id,
-        //         'documento' => $persona->documento,
-        //         'nombres' => $persona->nombres,
-        //         'apellidos' => $persona->apellidos,
-        //     ]);
-        // }
+    public function getRegisterSeach(?string $buscar)
+    {
+        return  Persona::where('tipo_persona_id', $buscar)->with('tipo_persona')->paginate(5);
+    }
 
-        // return $this->personas;
+    public function getLastRegisters()
+    {
+        $ultimoRegistros = Persona::leftJoin('tipo_personas', 'tipo_personas.id', '=', 'personas.tipo_persona_id')
+            ->select("tipo_personas.id as tipopersona_id", "tipo_personas.tipo_persona as tipopersona_descripcion", "personas.id as persona_id", "personas.documento as persona_documento", "personas.nombres as persona_nombres", "personas.apellidos as persona_apellidos")
+            ->orderBy('personas.id', 'desc')
+            ->limit(10)
+            ->take(-1)
+            ->get();
+
+        foreach ($ultimoRegistros as $ut) {
+            $this->personas[] = collect(PersonaData::from((object)[
+                'tipopersonaid' => $ut->tipopersona_id,
+                'tipopersona' => $ut->tipopersona_descripcion,
+                'personaid' => $ut->persona_id,
+                'documento' => $ut->persona_documento,
+                'nombres' => $ut->persona_nombres,
+                'apellidos' => $ut->persona_apellidos,
+            ]));
+        }
+
+        return $this->personas;
     }
 
     public function registerDatosGenerales(array $data): int

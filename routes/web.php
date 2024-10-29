@@ -57,7 +57,7 @@ Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
 
 Route::group(['prefix'=>'personas','middleware'=>'auth'], function(){
     Route::get('/index',[PersonaController::class, 'index'])->name('personas.index');
-    Route::get('/get-personas-tipo/{tipoopersona}',[PersonaController::class, 'getPersonaByType'])->name('personas.tipopersona');
+    Route::get('/get-personas-tipo/',[PersonaController::class, 'getPersonaByType'])->name('personas.tipopersona');
     Route::get('/create',[PersonaController::class, 'create'])->name('personas.create');
     Route::post('/store',[PersonaController::class, 'store'])->name('personas.store');
 });
