@@ -18,18 +18,13 @@ class InscripcionService
 
     public function getInscripcionesByTallerDia(int $tallerid, int $diaid)
     {
-        $inscritotaller = DB::select("SELECT i.id as \"inscripcion_id\", i.estado_inscripcion as \"inscripcion_estado\",
-                                                    concat(p.nombres,' ',p.apellidos) as \"persona_nombres\",
-                                                    p.documento as \"persona_documento\", count(a.inasistio) as inasistencia
-                                                from inscripcions i
-                                                left join asistencias a on a.inscripcion_id = i.id
-                                                left join horarios h on h.id = i.horario_id
-                                                left join dias d on d.id = h.dia_id
-                                                left join ciclo_horarios ch on ch.horario_id = h.id
-                                                left join ciclos c on c.id = ch.ciclo_id
-                                                left join personas p on p.id = i.persona_id
-                                                where c.taller_id = 4 and d.id = 2
-                                                group by i.id, persona_nombres, persona_documento", [$tallerid, $diaid]);
+        $inscritotaller = DB::select("SELECT i.id as \"inscripcion_id\", i.estado_inscripcion as \"inscripcion_estado\",concat(p.nombres,' ',p.apellidos) as \"persona_nombres\", p.documento as \"persona_documento\" from inscripcions i
+                                    left join horarios h on h.id = i.horario_id
+                                    left join dias d on d.id = h.dia_id
+                                    left join ciclo_horarios ch on ch.horario_id = h.id
+                                    left join ciclos c on c.id = ch.ciclo_id
+                                    left join personas p on p.id = i.persona_id
+                                    where c.taller_id = ? and d.id = ?", [$tallerid, $diaid]);
 
         foreach ($inscritotaller as $inscrito) {
             $this->isncritos[] = PersonaInscritaData::from([
@@ -37,7 +32,6 @@ class InscripcionService
                 'personainscritanombre' => $inscrito->persona_nombres,
                 'personainscritadocumento' => $inscrito->persona_documento,
                 'personainscritaestado' => $inscrito->inscripcion_estado,
-                'personainscritainasistencias' => $inscrito->inasistencia,
             ]);
         }
 
