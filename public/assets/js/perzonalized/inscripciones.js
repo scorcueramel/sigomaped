@@ -314,7 +314,7 @@ function inscribirAlumno() {
                 mensaje("Alumno Inscrito", `${response.mensaje}`, "success", "Entendido!").then((result) => {
                     $('#espera').val('0');
                     if (result.isConfirmed) {
-                        window.location.href = "{{route('inscripciones.index')}}";
+                        window.location.href = "/inscripciones/index";
                     }
                 });
             } else if (response.code === 300) {
