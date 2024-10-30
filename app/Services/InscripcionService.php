@@ -18,7 +18,7 @@ class InscripcionService
 
     public function getInscripcionesByTallerDia(int $tallerid, int $diaid)
     {
-        $inscritotaller = DB::select("SELECT i.id as \"inscripcion_id\", concat(p.nombres,' ',p.apellidos) as \"persona_nombres\", p.documento as \"persona_documento\" from inscripcions i
+        $inscritotaller = DB::select("SELECT i.id as \"inscripcion_id\", i.estado_inscripcion as \"inscripcion_estado\",concat(p.nombres,' ',p.apellidos) as \"persona_nombres\", p.documento as \"persona_documento\" from inscripcions i
                                     left join horarios h on h.id = i.horario_id
                                     left join dias d on d.id = h.dia_id
                                     left join ciclo_horarios ch on ch.horario_id = h.id
@@ -31,6 +31,7 @@ class InscripcionService
                 'personainscritaid' => $inscrito->inscripcion_id,
                 'personainscritanombre' => $inscrito->persona_nombres,
                 'personainscritadocumento' => $inscrito->persona_documento,
+                'personainscritaestado' => $inscrito->inscripcion_estado,
             ]);
         }
 

@@ -95,6 +95,7 @@
                                             <tr>
                                                 <th>NOMBRES</th>
                                                 <th>DOCUMENTO</th>
+                                                <th>ESTADO INSCRIPCIÓN</th>
                                                 <th>CANT. INASISTENCIAS</th>
                                                 <th></th>
                                             </tr>
@@ -122,6 +123,7 @@
 'widthModal'=>'modal-lg',
 'titleModal'=>'REGISTRAR INASISTENCIA',
 'bodyContentModal'=>'BODY DEL MODAL CALENDARIO',
+'buttonUbication'=>'d-flex justify-content-end',
 'heightCancelButton'=>'btn-sm',
 'colorButtonCancel'=>'danger',
 'textCancelButton'=>'CERRAR',

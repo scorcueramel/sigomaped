@@ -10,9 +10,9 @@ $('#programasAll').on('change', function () {
         url: `/inscripciones/get-talleres-programs/${id}`,
         success: function (response) {
             if (response.length > 0) {
-                $("#taller").html('');
+                $("#tallerlistado").html('');
                 $("#talleresProgramas").removeClass('d-none');
-                $("#taller").append(`
+                $("#tallerlistado").append(`
                 <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
             `);
                 response.forEach((e) => {

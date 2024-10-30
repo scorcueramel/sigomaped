@@ -9,6 +9,7 @@ class PersonaInscritaData extends Data {
         public ?string $personainscritaid,
         public ?string $personainscritanombre,
         public ?string $personainscritadocumento,
+        public ?string $personainscritaestado,
 
     ) {}
 

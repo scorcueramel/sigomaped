@@ -10,9 +10,9 @@ $('#programasAll').on('change', function () {
         url: `/inscripciones/get-talleres-programs/${id}`,
         success: function (response) {
             if (response.length > 0) {
-                $("#taller").html('');
+                $("#tallerlistado").html('');
                 $("#talleresProgramas").removeClass('d-none');
-                $("#taller").append(`
+                $("#tallerlistado").append(`
                 <option selected disabled value="">SELECCIONA UN PROGRAMA</option>
             `);
                 response.forEach((e) => {
@@ -26,7 +26,6 @@ $('#programasAll').on('change', function () {
 });
 
 $('#tallerlistado').on('change', function () {
-    // $("#radios-anio-periodo").html('');
     $("#dias").addClass('d-none');
     $("#radios_dias").html('');
     $("#datosAlumnos").addClass('d-none');
@@ -36,7 +35,6 @@ $('#tallerlistado').on('change', function () {
         type: "GET",
         url: `/inscripciones/get-dia-taller/${id}`,
         success: function (response) {
-            // $("#aniosperiodos").removeClass('d-none');
             $("#dias").removeClass('d-none');
             if (response.length > 0) {
                 response.forEach((e) => {
@@ -63,7 +61,6 @@ function inscritosPorDia(diaid) {
             if (response.length > 0) {
                 $("#datosAlumnos").removeClass('d-none');
                 response.forEach((e) => {
-                    console.log(e)
                     $(".datos_alumnos").append(`
                     <tr>
                         <td>
@@ -73,13 +70,16 @@ function inscritosPorDia(diaid) {
                             ${e.personainscritadocumento}
                         </td>
                         <td>
+                            ${e.personainscritaestado == 'I' ? '<span class="badge badge-pill badge-info">INSCRITO</span>' : '' || e.personainscritaestado == 'D' ? '<span class="badge badge-pill badge-success">DERIVADO</span>' : '' || e.personainscritaestado == 'R' ? '<span class="badge badge-pill badge-danger">RETIRADO</span>' : ''}
+                        </td>
+                        <td>
                             0
                         </td>
                         <td class="d-flex justify-content-center">
                             <div class="dropdown">
                                 <button class="btn btn-outline btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" onclick="javascript:registrarInasistenciaAlumno(${e.personainscritaid});"><i class="fa fa-plus"></i> Registrar Inasistencia</a>
+                                    <a class="dropdown-item" href="#" onclick="javascript:registrarInasistenciaAlumno(${e.personainscritaid},'${e.personainscritanombre}');"><i class="fa fa-plus"></i> Registrar Inasistencia</a>
                                 </div>
                             </div>
                         </td>
@@ -91,6 +91,16 @@ function inscritosPorDia(diaid) {
     });
 }
 
-function registrarInasistenciaAlumno(){
+function registrarInasistenciaAlumno(inscricionid,nombrealumno){
+
     $("#modalInasistencia").modal("show");
+    $(".modal-body").html('');
+    $(".modal-body").append(`
+        <table class="table table-bordered">
+            <tr>
+                <td>NOMBRE DEL ALUMNO</td>
+                <td>${nombrealumno}</td>
+            </tr>
+        <table>
+    `);
 }
