@@ -28,7 +28,7 @@
                 </button>
                 @endif
                 @if($withButtonSave ?? false)
-                <button type="{{ $typeSaveButton ?? 'button' }}" class="btn btn-{{ $colorButtonSave ?? 'info' }}  {{$heightSaveButton ?? ''}} {{$withSavelButton ?? ''}}">{{$textSaveButton ?? 'Gaurdar'}}</button>
+                <button type="{{ $typeSaveButton ?? 'button' }}" class="btn btn-{{ $colorButtonSave ?? 'info' }}  {{$heightSaveButton ?? ''}} {{$withSavelButton ?? ''}}" id="{{$buttonId ?? ''}}">{{$textSaveButton ?? 'Gaurdar'}}</button>
                 @endif
             </div>
             @endif

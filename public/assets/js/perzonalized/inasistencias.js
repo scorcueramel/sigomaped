@@ -79,7 +79,7 @@ function inscritosPorDia(diaid) {
                             <div class="dropdown">
                                 <button class="btn btn-outline btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" onclick="javascript:registrarInasistenciaAlumno(${e.personainscritainasistencias},'${e.personainscritanombre}');"><i class="fa fa-plus"></i> Registrar Inasistencia</a>
+                                    <a class="dropdown-item" href="#" onclick="javascript:registrarInasistenciaAlumno(${e.personainscritaid},${e.personainscritainasistencias},'${e.personainscritanombre}');"><i class="fa fa-plus"></i> Registrar Inasistencia</a>
                                 </div>
                             </div>
                         </td>
@@ -91,7 +91,7 @@ function inscritosPorDia(diaid) {
     });
 }
 
-function registrarInasistenciaAlumno(cantidadinasistencias, nombrealumno) {
+function registrarInasistenciaAlumno(inscripcionid, cantidadinasistencias, nombrealumno) {
     if (cantidadinasistencias >= 3) {
         return Swal.fire({
             title: `¡Registro Restringido!`,
@@ -107,6 +107,7 @@ function registrarInasistenciaAlumno(cantidadinasistencias, nombrealumno) {
     $(".modal-body").html('');
     $(".modal-body").append(`
         <table class="table table-bordered">
+            <input type="hidden" value="${inscripcionid}" id="inscripcionid"/>
             <input type="hidden" value="1" id="inasistio"/>
             <tr>
                 <td>NOMBRE DEL ALUMNO</td>
@@ -119,13 +120,11 @@ function registrarInasistenciaAlumno(cantidadinasistencias, nombrealumno) {
             <tr>
                 <td>FALTA JUSTIFICADA</td>
                 <td>
-                    <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="sijustificada" name="justificada" onclick="javascript:mustraMotivoFalta('SI');">
-                        <label class="custom-control-label" for="sijustificada">SI</label>
-                    </div>
-                    <div class="custom-control custom-radio mb-3">
-                        <input type="radio" class="custom-control-input" id="nojustificada" name="justificada" onclick="javascript:mustraMotivoFalta('NO');">
-                        <label class="custom-control-label" for="nojustificada">NO</label>
+                    <div class="radio">
+                        <input name="justificada" type="radio" id="sijustificada" value="1" onclick="javascript:mustraMotivoFalta('SI');">
+                        <label for="sijustificada" class="mr-4">SI</label>
+                        <input name="justificada" type="radio" id="nojustificada" value="0" onclick="javascript:mustraMotivoFalta('NO');">
+                        <label for="nojustificada">NO</label>
                     </div>
                 </td>
             </tr>
@@ -140,10 +139,32 @@ function registrarInasistenciaAlumno(cantidadinasistencias, nombrealumno) {
     `);
 }
 
-function mustraMotivoFalta(justificaca) {
-
-    console.log(justificaca);
-    justificaca == 'SI' ? $("#motivoinasistencia").removeClass('d-none') : '';
-    justificaca == 'NO' ? ($("#motivoinasistencia").addClass('d-none'), $('#motivo').val('')) : '';
+function mustraMotivoFalta(justificada) {
+    justificada == 'SI' ? $("#motivoinasistencia").removeClass('d-none') : '';
+    justificada == 'NO' ? ($("#motivoinasistencia").addClass('d-none'), $('#motivo').val('')) : '';
 }
 
+
+$("#btnRegistrarInasistencia").on('click', function () {
+    let inscripcionid = inscripcionid;
+    let inasistio = inasistio;
+    let fechainasistencia = fechainasistencia;
+    let justificada = $("[name=justificada]").val();
+    let motivo = motivo;
+
+    $.ajax({
+        type: "POST",
+        url: "/asistencia/store",
+        data: {
+            inscripcionid,
+            inasistio,
+            fechainasistencia,
+            justificada,
+            motivo,
+        },
+        success: function (response) {
+            console.log(response)
+        }
+    });
+
+});

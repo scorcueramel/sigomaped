@@ -120,6 +120,7 @@
 </div>
 @include('components.modal',[
 'idModalComponent'=> 'modalInasistencia',
+'buttonId'=> 'btnRegistrarInasistencia',
 'widthModal'=>'modal-lg',
 'titleModal'=>'REGISTRAR INASISTENCIA',
 'bodyContentModal'=>'BODY DEL MODAL CALENDARIO',

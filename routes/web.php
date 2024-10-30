@@ -58,6 +58,7 @@ Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
 
 Route::group(['prefix'=>'asistencia','middleware'=>'auth'],function () {
     Route::get('/index',[AsistenciaController::class,'index'])->name('asistencia.index');
+    Route::post('/store',[AsistenciaController::class,'store'])->name('asistencia.store');
 });
 
 Route::group(['prefix'=>'personas','middleware'=>'auth'], function(){

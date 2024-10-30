@@ -366,7 +366,7 @@ function inscribirEspera() {
     });
     $.ajax({
         type: "POST",
-        url: "inscripciones/store",
+        url: "/inscripciones/store",
         data: {
             alumnoId,
             horarioId,

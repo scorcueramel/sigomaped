@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AsistenciaRequest;
 use App\Models\Asistencia;
 use App\Services\ProgramaService;
 use Illuminate\Http\Request;
@@ -40,9 +41,9 @@ class AsistenciaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AsistenciaRequest $request)
     {
-        //
+
     }
 
     /**
