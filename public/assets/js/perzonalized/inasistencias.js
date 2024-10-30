@@ -73,7 +73,7 @@ function inscritosPorDia(diaid) {
                             ${e.personainscritaestado == 'I' ? '<span class="badge badge-pill badge-info">INSCRITO</span>' : '' || e.personainscritaestado == 'D' ? '<span class="badge badge-pill badge-success">DERIVADO</span>' : '' || e.personainscritaestado == 'R' ? '<span class="badge badge-pill badge-danger">RETIRADO</span>' : ''}
                         </td>
                         <td>
-                            0
+                            ${e.personainscritainasistencia}
                         </td>
                         <td class="d-flex justify-content-center">
                             <div class="dropdown">
@@ -92,7 +92,6 @@ function inscritosPorDia(diaid) {
 }
 
 function registrarInasistenciaAlumno(inscricionid,nombrealumno){
-
     $("#modalInasistencia").modal("show");
     $(".modal-body").html('');
     $(".modal-body").append(`
