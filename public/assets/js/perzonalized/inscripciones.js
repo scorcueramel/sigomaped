@@ -294,7 +294,7 @@ function inscribirAlumno() {
 
     $.ajax({
         type: "POST",
-        url: "inscripciones/store",
+        url: "/inscripciones/store",
         data: {
             alumnoId,
             horarioId,
@@ -378,7 +378,7 @@ function inscribirEspera() {
             if (response.code === 200)
                 mensaje("Alumno en Espera", `${response.mensaje} recuerda que puedes visualizar el registro del alumno en la seccion de espera`, "success", "Entendido!").then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href = "inscripciones/index";
+                        window.location.href = "/inscripciones/index";
                     }
                 });
             else if (response.code === 300) {
