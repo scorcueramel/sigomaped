@@ -73,13 +73,13 @@ function inscritosPorDia(diaid) {
                             ${e.personainscritaestado == 'I' ? '<span class="badge badge-pill badge-info">INSCRITO</span>' : '' || e.personainscritaestado == 'D' ? '<span class="badge badge-pill badge-success">DERIVADO</span>' : '' || e.personainscritaestado == 'R' ? '<span class="badge badge-pill badge-danger">RETIRADO</span>' : ''}
                         </td>
                         <td>
-                            ${e.personainscritainasistencia}
+                            ${e.personainscritainasistencias}
                         </td>
                         <td class="d-flex justify-content-center">
                             <div class="dropdown">
                                 <button class="btn btn-outline btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"></button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#" onclick="javascript:registrarInasistenciaAlumno(${e.personainscritaid},'${e.personainscritanombre}');"><i class="fa fa-plus"></i> Registrar Inasistencia</a>
+                                    <a class="dropdown-item" href="#" onclick="javascript:registrarInasistenciaAlumno(${e.personainscritainasistencias},'${e.personainscritanombre}');"><i class="fa fa-plus"></i> Registrar Inasistencia</a>
                                 </div>
                             </div>
                         </td>
@@ -91,15 +91,59 @@ function inscritosPorDia(diaid) {
     });
 }
 
-function registrarInasistenciaAlumno(inscricionid,nombrealumno){
+function registrarInasistenciaAlumno(cantidadinasistencias, nombrealumno) {
+    if (cantidadinasistencias >= 3) {
+        return Swal.fire({
+            title: `¡Registro Restringido!`,
+            html: `<p class="text-center">Se restringió el registro debido a que el alumno ya cuenta con 3 inasistencias y por lo tanto ya fue retirado del curso.</p>`,
+            icon: `warning`,
+            confirmButtonColor: "#3085d6",
+            confirmButtonText: `Entiendo!`,
+            allowOutsideClick: false,
+        });
+    }
+
     $("#modalInasistencia").modal("show");
     $(".modal-body").html('');
     $(".modal-body").append(`
         <table class="table table-bordered">
+            <input type="hidden" value="1" id="inasistio"/>
             <tr>
                 <td>NOMBRE DEL ALUMNO</td>
                 <td>${nombrealumno}</td>
             </tr>
+            <tr>
+                <td>FECHA</td>
+                <td><input class="form-control" type="date" id="fechainasistencia"></td>
+            </tr>
+            <tr>
+                <td>FALTA JUSTIFICADA</td>
+                <td>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="sijustificada" name="justificada" onclick="javascript:mustraMotivoFalta('SI');">
+                        <label class="custom-control-label" for="sijustificada">SI</label>
+                    </div>
+                    <div class="custom-control custom-radio mb-3">
+                        <input type="radio" class="custom-control-input" id="nojustificada" name="justificada" onclick="javascript:mustraMotivoFalta('NO');">
+                        <label class="custom-control-label" for="nojustificada">NO</label>
+                    </div>
+                </td>
+            </tr>
+            <tr class="d-none" id="motivoinasistencia">
+                <td>MOTIVO</td>
+                <td>
+                    <textarea class="form-control" id="motivo" placeholder="Indica el motivo de la falta" maxlength="300"></textarea>
+                    <small>Máximo 300 caracteres.</small>
+                </td>
+            </tr>
         <table>
     `);
 }
+
+function mustraMotivoFalta(justificaca) {
+
+    console.log(justificaca);
+    justificaca == 'SI' ? $("#motivoinasistencia").removeClass('d-none') : '';
+    justificaca == 'NO' ? ($("#motivoinasistencia").addClass('d-none'), $('#motivo').val('')) : '';
+}
+
