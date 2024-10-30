@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('inscripcion_id')->constrained('inscripcions')->onDelete('cascade');
             $table->dateTime('fecha');
-            $table->boolean('asistio')->default(false);
+            $table->boolean('inasistio')->default(false);
             $table->boolean('justificada')->default(false);
             $table->string('motivo',350)->nullable();
             $table->string('usuario_actualiza',50)->nullable();

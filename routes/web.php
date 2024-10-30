@@ -6,6 +6,7 @@ use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\ProgramaController;
 use App\Http\Controllers\TallerController;
 use App\Http\Controllers\AnioPeriodoController;
+use App\Http\Controllers\AsistenciaController;
 use App\Models\AnioPeriodo;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -55,9 +56,13 @@ Route::group(['prefix'=> 'lista-espera','middleware'=>'auth'],function(){
     Route::get('/delete/{personaid}/{tallerid}',[EsperaPersonaTallerController::class, 'destroy'])->name('personas.destroy');
 });
 
+Route::group(['prefix'=>'asistencia','middleware'=>'auth'],function () {
+    Route::get('/index',[AsistenciaController::class,'index'])->name('asistencia.index');
+});
+
 Route::group(['prefix'=>'personas','middleware'=>'auth'], function(){
     Route::get('/index',[PersonaController::class, 'index'])->name('personas.index');
-    Route::get('/get-personas-tipo/',[PersonaController::class, 'getPersonaByType'])->name('personas.tipopersona');
+    Route::get('/get-personas-tipo/{tipopersona}',[PersonaController::class, 'getSearchPersona'])->name('personas.tipopersona');
     Route::get('/create',[PersonaController::class, 'create'])->name('personas.create');
     Route::post('/store',[PersonaController::class, 'store'])->name('personas.store');
 });

@@ -99,7 +99,7 @@
 'heightCancelButton'=>'btn-sm',
 'colorButtonCancel'=>'danger',
 'textCancelButton'=>'CERRAR',
-'withCancelButton'=>'btn-block'
+'wideCancelButton'=>'btn-block'
 ])
 @endsection
 @push('js')

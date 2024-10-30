@@ -242,7 +242,7 @@
                                         </div>
                                         <div class="col-auto" id="rocarnetconadis">
                                             <div class="form-group">
-                                                <label abel for="ro-carnet-conadis">RO. CARNET CONADIS </label>
+                                                <label abel for="ro-carnet-conadis">NRO. CARNET CONADIS </label>
                                                 <input type="text" class="form-control" id="ro-carnet-conadis">
                                                 <div class="d-none" id="rocarnetconadiserror">
                                                 </div>

@@ -60,7 +60,6 @@ function inscritosPorDia(diaid) {
         type: "GET",
         url: `/inscripciones/get-isncritos-dias/${tallerid}/${diaid}`,
         success: function (response) {
-            console.log(response);
             if (response.length > 0) {
                 $("#datosAlumnos").removeClass('d-none');
                 response.forEach((e) => {
@@ -413,7 +412,6 @@ function continuarInscripcion(id, descripcion) {
                 $("#programaTitulo").html(descripcion);
                 $(".datos-programas").html('');
                 response.forEach((e) => {
-                    console.log(e);
                     $(".datos-programas").append(`
                     <tr>
                         <td>

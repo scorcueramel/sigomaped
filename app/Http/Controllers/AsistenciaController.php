@@ -3,18 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asistencia;
+use App\Services\ProgramaService;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class AsistenciaController extends Controller
 {
+    public function __construct(
+        private ProgramaService $programaService,
+    ) {}
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index():View
     {
-        //
+        $programas = $this->programaService->getProgramasWithInscritos();
+        return view('pages.inasistencias.index', ['programas' => $programas]);
     }
 
     /**

@@ -17,6 +17,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Yajra\DataTables\Facades\DataTables;
+
+
 
 class PersonaController extends Controller
 {
@@ -39,7 +42,51 @@ class PersonaController extends Controller
      */
     public function index(): View
     {
-        return view("pages.personas.index");
+        $tipospersonas = $this->tipoPersonaService->getTiposPersonasServicios();
+        return view("pages.personas.index", compact("tipospersonas"));
+    }
+
+    public function getSearchPersona(int $tipopersona)
+    {
+        $personas = $this->personaService->getRegisterSeach($tipopersona);
+
+        return datatables()->of($personas)
+
+            ->addColumn('acciones', function ($row) {
+
+                if($row->tipopersonaid == 6){
+                    return
+                    '
+                    <td class="d-flex justify-content-center">
+                        <div class="dropdown">
+                            <button class="btn btn-outline btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"></button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" id="detallepersona" onclick="javascript:personaDetalle('.(int)$row->personaid.')"><i class="fa fa-eye"></i> Detalles</a>
+                                    <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> Inscribir</a>
+                                    <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
+                            </div>
+                        </div>
+                    </td>
+                    ';
+                }
+                return '
+                    <td class="d-flex justify-content-center">
+                        <div class="dropdown">
+                            <button class="btn btn-outline btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"></button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> Inscribir</a>
+                                    <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
+                            </div>
+                        </div>
+                    </td>
+                    ';
+
+            })
+            ->rawColumns(['acciones'])
+            ->make(true);
     }
 
     /**

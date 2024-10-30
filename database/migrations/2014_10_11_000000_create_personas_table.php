@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('tipo_persona_id')->constrained('tipo_personas');
-            $table->string('documento',12)->unique();
+            $table->string('documento',12);
             $table->string('nombres',50);
             $table->string('apellidos',100);
             $table->softDeletes();

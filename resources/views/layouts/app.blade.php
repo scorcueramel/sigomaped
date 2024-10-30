@@ -34,6 +34,7 @@
 
     <!-- sweetalert -->
     <link rel="stylesheet" href="{{ asset('/assets/css/sweetalert.css') }}">
+    <link rel="stylesheet" href="{{ asset('/assets/css/dataTables.bootstrap4.css') }}">
 
     <!-- Scripts -->
     {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
@@ -56,7 +57,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.toast.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" /> -->
 
     @yield('css')
 </head>
@@ -68,7 +68,10 @@
         </div>
     </div>
     <!-- jQuery 3 -->
-    <script src="{{ asset('/assets/js/jquery.js') }}"></script>
+    <!-- <script src="{{ asset('/assets/js/jquery.js') }}"></script> -->
+    <script src="{{ asset('/assets/js/jquery-3.7.1.js') }}"></script>
+    <script src="{{ asset('/assets/js/dataTables.js') }}"></script>
+    <script src="{{ asset('/assets/js/dataTables.bootstrap4.js') }}"></script>
 
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('/assets/js/jquery-ui/jquery-ui.js') }}"></script>

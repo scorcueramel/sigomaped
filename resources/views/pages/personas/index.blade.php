@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
@@ -29,38 +28,80 @@
                         <!-- Form Element sizes -->
                         <div class="box">
                             <div class="box-header with-border d-flex justify-content-between">
-                                <h4 class="box-title">BÚSCADOR DE PERSONAS REGISTRADAS</span></h4>
+                                <h4 class="box-title">PERSONAS REGISTRADAS</span></h4>
                                 <a href="{{route('personas.create')}}" class="text-info font-weight-bold"><i class="fa fa-plus" aria-hidden="true"></i>
                                     Nuevo</a>
                             </div>
                             <div class="box-body">
-                                <div class="tab-pane pad" id="profile7" role="tabpanel">
-                                    <div class="form-group">
-                                        <label>Buca registros por los siguientes criterios:</label>
-                                        <ul>
-                                            <li>Número de documento de identidad</li>
-                                            <li>Apellidos</li>
-                                            <li>Nombres</li>
-                                        </ul>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control input-sm" name="busqueda" id="buscador" autofocus required>
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-info" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                                <button class="btn btn-warning" type="button" id="limpiar" onclick="javascript:limpiarCampos()"><i class="fa fa-eraser" aria-hidden="true"></i></button>
-                                            </span>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-auto">
+                                        <div class="form-group">
+                                            <label>Buca registros por los siguientes criterios:</label>
+                                            <ul>
+                                                <li>Selecciona un tipo de persona</li>
+                                            </ul>
+                                            <div class="input-group">
+                                                <select class="form-control mr-3" name="tipopersona" id="tipopersonasbusqueda">
+                                                    <option selected disabled value="">SELECCIONA UN TIPO DE PERSONAS</option>
+                                                    @foreach ($tipospersonas as $tp)
+                                                    <option value="{{$tp->tipopersonaid}}">{{$tp->tipopersonadescripcion}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-info" type="button" id="buscarregistros"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                                </span>
+                                            </div>
+                                        </div> <!-- Nav tabs -->
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-lg-12 d-none" id="resultadodebusqueda">
+                        <!-- Form Element sizes -->
+                        <div class="box">
+                            <div class="box-header with-border d-flex justify-content-between">
+                                <h4 class="box-title">RESULTADO DE TU BÚSQUEDA</span></h4>
+                            </div>
+                            <div class="box-body"> <!-- Nav tabs -->
+                                <div class="col-12 col-lg-12 table-responsive">
+                                    <table class="table table-bordered table-hover table-striped" id="tablapersonas">
+                                        <thead>
+                                            <tr>
+                                                <th>TIPO PERSONA</th>
+                                                <th>DOCUMENTO</th>
+                                                <th>NOMBRES</th>
+                                                <th>APELLIDOS</th>
+                                                <th>ACCIONES</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                    <!-- /.row -->
             </section>
             <!-- /.content -->
         </div>
         @include('components.footer')
         @include('components.controls')
     </div>
+
+    @include('components.modal',[
+    'idModalComponent'=> 'modalPersonas',
+    'widthModal'=>'modal-lg',
+    'titleModal'=>'DETALLES DEL ALUMNO SELECCIONADO',
+    'bodyContentModal'=>'BODY DEL MODAL CALENDARIO',
+    'heightCancelButton'=>'btn-sm',
+    'colorButtonCancel'=>'danger',
+    'textCancelButton'=>'CERRAR',
+    'wideCancelButton'=>'btn-block'
+    ])
 </div>
 @endsection
+@push('js')
+<script src="{{asset('assets/js/perzonalized/personas.js')}}"></script>
+@endpush

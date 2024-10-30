@@ -358,7 +358,7 @@ function guardarDatos(data) {
                 mensaje('Persona Registrada', `${response.mensaje}`, 'success', 'Entendido')
                     .then((result) => {
                         if (result.isConfirmed) {
-                            window.location.href = "/personas/index";
+                            window.location.reload();
                         }
                     });
             }
@@ -677,7 +677,98 @@ function mensaje(title, message, icon, textbtnconfirm) {
 
 $(document).ready(function () {
     $(".combos").select2({
-        theme: 'bootstrap-5'
+        theme: 'bootstrap-5',
+        language: {
+            noResults: function () {
+                return "Sin resultados";
+            },
+            searching: function () {
+                return "Buscando..";
+            }
+        }
     });
 });
 
+/**
+ * funciones para la carga de la vista index (tablas y consultas)
+ */
+
+$("#buscarregistros").on('click', function () {
+    let tipopersona = $("#tipopersonasbusqueda").val();
+    $.ajax({
+        type: "GET",
+        url: `/personas/get-personas-tipo/${tipopersona}`,
+        success: function (data) {
+            $("#resultadodebusqueda").removeClass('d-none');
+            cargarTabla(data)
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+});
+
+
+function cargarTabla(data) {
+    $('#tablapersonas').DataTable({
+        order: [
+            [0, "asc"]
+        ],
+        processing: true,
+        // serverSide: true,
+        responsive: true,
+        autoWidth: false,
+        pageLength: 5,
+        aLengthMenu: [
+            [5, 10, 20, -1],
+            [5, 10, 20, "Todos"]
+        ],
+        data: data.data,
+        columns: [{
+            data: 'tipopersona'
+        },
+        {
+            data: 'documento'
+        },
+        {
+            data: 'nombres'
+        },
+        {
+            data: 'apellidos'
+        },
+        {
+            data: 'acciones'
+        },
+        ],
+        "language": {
+            "lengthMenu": "Mostrar " +
+                `<select class="custom-select custom-select-sm form-control form-control-sm">
+                        <option value='5'>5</option>
+                        <option value='10'>10</option>
+                        <option value='20'>20</option>
+                        <option value='-1'>Todos</option>
+                    </select>` +
+                " registros por página",
+            "zeroRecords": "Sin Resultados Actualmente",
+            "info": "Mostrando página _PAGE_ de _PAGES_",
+            "infoEmpty": "Sin Resultados",
+            "infoFiltered": "(filtrado de _MAX_ registros totales)",
+            "search": "Buscar: ",
+            // "paginate": {
+            //     "next": "Siguiente",
+            //     "previous": "Anterior"
+            // }
+        },
+        "bDestroy": true
+    });
+    $('.dt-layout-table').addClass('my-4');
+    $('#tablapersonas_wrapper').addClass('mb-3');
+}
+
+
+function personaDetalle(personaid) {
+    console.log(personaid)
+    // $("#modalPersonas").modal('show');
+    // $("#modalComponentLabel").html('');
+    // $("#modalComponentLabel").html(`DETALLES DE <span class="font-weight-bold"><span>`);
+};

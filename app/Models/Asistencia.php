@@ -12,7 +12,7 @@ class Asistencia extends Model
     protected $fillable = [
         'inscripcion_id',
         'fecha',
-        'asistio',
+        'inasistio',
         'justificada',
         'motivo',
         'usuario_actualiza',

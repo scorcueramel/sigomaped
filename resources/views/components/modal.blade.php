@@ -24,7 +24,7 @@
             @if ($withFooterModal ?? true)
             <div class="modal-footer">
                 @if ($withButtonCancelModal ?? true)
-                <button type="button" class="btn btn-{{ $colorButtonCancel ?? 'secondary' }} {{$heightCancelButton ?? ''}} {{$withCancelButton ?? ''}}" data-dismiss="modal">{{$textCancelButton ?? 'Cancelar'}}</button>
+                <button type="button" class="btn btn-{{ $colorButtonCancel ?? 'secondary' }} {{$heightCancelButton ?? ''}} {{$wideCancelButton ?? ''}}" data-dismiss="modal">{{$textCancelButton ?? 'Cancelar'}}</button>
                 @endif
                 @if($withButtonSave ?? false)
                 <button type="{{ $typeSaveButton ?? 'button' }}" class="btn btn-{{ $colorButtonSave ?? 'info' }}  {{$heightSaveButton ?? ''}} {{$withSavelButton ?? ''}}">{{$textSaveButton ?? 'Gaurdar'}}</button>
