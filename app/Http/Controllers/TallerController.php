@@ -105,8 +105,13 @@ class TallerController extends Controller
      * @param  \App\Models\Taller  $taller
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Taller $taller)
+    public function destroy(Taller $taller): JsonResponse
     {
-        //
+        try {
+            $this->tallerService->eliminarTaller($taller);
+            return Response::json(['mensaje' => 'Taller eliminado correctamente'], 200);
+        } catch (Exception $e) {
+            return Response::json(['error' => $e->getMessage()], 500);
+        }
     }
 }

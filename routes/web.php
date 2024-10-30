@@ -85,6 +85,6 @@ Route::group(['prefix'=> 'talleres','middleware'=>'auth'],function(){
     Route::get('/get-talleres/', [TallerController::class, 'getTalleres'])->name('talleres.getTalleres');
     Route::get('/create/',[TallerController::class,'create'])->name('talleres.create');
     Route::post('/store',[TallerController::class, 'store'])->name('talleres.store');
-    Route::get('/talleres/{id}/edit', [TallerController::class, 'edit'])->name('talleres.edit');
-    Route::delete('/talleres/{id}', [TallerController::class, 'destroy'])->name('talleres.destroy');
+    Route::get('/{id}/edit', [TallerController::class, 'edit'])->name('talleres.edit');
+    Route::delete('/taller/{id}', [TallerController::class, 'destroy'])->name('talleres.destroy');
 });

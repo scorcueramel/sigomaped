@@ -12,7 +12,7 @@ class TallerService
 
     public function getTalleresAll()
     {
-        $talleres = DB::select("SELECT p.nombre as programa, tt.descripcion as tipo, t.nombre, t.estado, t.created_at as fecha
+        $talleres = DB::select("SELECT t.id, p.nombre as programa, tt.descripcion as tipo, t.nombre, t.estado, t.created_at as fecha
                             from tallers t
                             inner join programas p on p.id = t.programa_id
                             inner join tipo_tallers tt on tt.id = t.tipo_taller_id
@@ -68,4 +68,14 @@ class TallerService
             throw new Exception('Error al crear el taller: ' . $e->getMessage());
         }
     }
+
+    public function eliminarTaller(Taller $taller)
+    {
+        try {
+            return $taller->delete();
+        } catch (Exception $e) {
+            throw new Exception('Error al eliminar el taller: ' . $e->getMessage());
+        }
+    }
+    
 }

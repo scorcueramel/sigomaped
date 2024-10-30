@@ -74,7 +74,7 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#";"><i class="fa fa-plus"></i> Editar</a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i>Eliminar</a>
+                                        <a class="dropdown-item" href="#" onclick="eliminarTaller(${taller.id})"><i class="fa fa-trash-o"></i>Eliminar</a>
                                     </div>
                                 </div>
                             </td>
@@ -89,6 +89,40 @@
             },
             error: function(xhr, status, error) {
                 console.error("Error al obtener los talleres:", error);
+            }
+        });
+    }
+
+    function eliminarTaller(id) {
+        Swal.fire({
+            title: "¿Eliminar Taller?",
+            text: "Esta acción no se puede deshacer.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "DELETE",
+                    url: `/talleres/taller/${id}`,
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    success: function(response) {
+                        Swal.fire({
+                                icon: 'success',
+                                title: 'Taller eliminado exitosamente',
+                                confirmButtonText: 'Aceptar'
+                            }).then(() => {
+                                window.location.href = "{{ route('talleres.index') }}";
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error al eliminar el taller:", error);
+                        Swal.fire("Error", "No se pudo eliminar el taller.", "error");
+                    }
+                });
             }
         });
     }
