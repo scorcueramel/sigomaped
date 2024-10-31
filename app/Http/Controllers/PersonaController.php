@@ -46,7 +46,7 @@ class PersonaController extends Controller
         return view("pages.personas.index", compact("tipospersonas"));
     }
 
-    public function getSearchPersona(int $tipopersona)
+    public function getSearchPersona(int $tipopersona):JsonResponse
     {
         $personas = $this->personaService->getRegisterSeach($tipopersona);
 
@@ -54,14 +54,14 @@ class PersonaController extends Controller
 
             ->addColumn('acciones', function ($row) {
 
-                if($row->tipopersonaid == 6){
+                if ($row->tipopersonaid == 6) {
                     return
-                    '
+                        '
                     <td class="d-flex justify-content-center">
                         <div class="dropdown">
                             <button class="btn btn-outline btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#" id="detallepersona" onclick="javascript:personaDetalle('.(int)$row->personaid.')"><i class="fa fa-eye"></i> Detalles</a>
+                                <a class="dropdown-item" href="#" id="detallepersona" onclick="javascript:alumnoDetalle(' . (int)$row->alumnoid . ')"><i class="fa fa-eye"></i> Detalles</a>
                                     <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#"><i class="fa fa-edit"></i> Editar</a>
                                     <div class="dropdown-divider"></div>
@@ -71,7 +71,8 @@ class PersonaController extends Controller
                     </td>
                     ';
                 }
-                return '
+                if ($row->tipopersonaid == 3 || $row->tipopersonaid == 4) {
+                    return '
                     <td class="d-flex justify-content-center">
                         <div class="dropdown">
                             <button class="btn btn-outline btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"></button>
@@ -83,10 +84,30 @@ class PersonaController extends Controller
                         </div>
                     </td>
                     ';
-
+                } else {
+                    return '
+                    <td class="d-flex justify-content-center">
+                        <div class="dropdown">
+                            <button class="btn btn-outline btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"></button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" id="detallepersona" onclick="javascript:personaDetalle(' . (int)$row->personaid . ')"><i class="fa fa-eye"></i> Detalles</a>
+                                    <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#"><i class="fa fa-edit"></i> Editar</a>
+                                    <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i>Eliminar</a>
+                            </div>
+                        </div>
+                    </td>
+                    ';
+                }
             })
             ->rawColumns(['acciones'])
             ->make(true);
+    }
+
+    public function getDetalleAlumno(int $alumnoid):JsonResponse{
+        $detalleAlumno = $this->personaService->getDetalleAlumnoPersona($alumnoid);
+        return Response::json($detalleAlumno);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Data\AlumnoDetalleData;
 use App\Data\PersonaData;
 use App\Models\Alumno;
 use App\Models\PadreAlumno;
@@ -9,6 +10,7 @@ use App\Models\Persona;
 use App\Models\Representante;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -28,18 +30,54 @@ class PersonaService
 
     public function getRegisterSeach(?int $tipopersona)
     {
-        $personasFind = Persona::where('tipo_persona_id', $tipopersona)->with('tipo_persona')->get();
+        $personasFind = Persona::where('tipo_persona_id', $tipopersona)->with('tipo_persona')->with('alumno')->get();
 
-        foreach ($personasFind as $pf) {
-            $this->personas[] = PersonaData::from([
-                'tipopersonaid' => $pf->tipo_persona->id,
-                'tipopersona' => $pf->tipo_persona->tipo_persona,
-                'personaid' => $pf->id,
-                'documento' => $pf->documento,
-                'nombres' => $pf->nombres,
-                'apellidos' => $pf->apellidos,
+        if ($tipopersona === 6) {
+            foreach ($personasFind as $key => $value) {
+                $this->personas[] = PersonaData::from([
+                    'alumnoid' => $personasFind[$key]->alumno[0]->id,
+                    'tipopersonaid' => $personasFind[$key]->tipo_persona->id,
+                    'tipopersona' => $personasFind[$key]->tipo_persona->tipo_persona,
+                    'personaid' => $personasFind[$key]->id,
+                    'documento' => $personasFind[$key]->documento,
+                    'nombres' => $personasFind[$key]->nombres,
+                    'apellidos' => $personasFind[$key]->apellidos,
+                ]);
+            }
+        } else {
+            foreach ($personasFind as $key => $value) {
+                $this->personas[] = PersonaData::from([
+                    'tipopersonaid' => $personasFind[$key]->tipo_persona->id,
+                    'tipopersona' => $personasFind[$key]->tipo_persona->tipo_persona,
+                    'personaid' => $personasFind[$key]->id,
+                    'documento' => $personasFind[$key]->documento,
+                    'nombres' => $personasFind[$key]->nombres,
+                    'apellidos' => $personasFind[$key]->apellidos,
+                ]);
+            }
+        }
+
+        return $this->personas;
+    }
+
+    public function getDetalleAlumnoPersona(int $alumnoid)
+    {
+        $detalleAlumno = DB::select("SELECT
+                                                title, email_rep, tel_rep, representante, padre, madre
+                                            FROM
+                                                calendario_listar1(0,0,0,?)
+                                            GROUP BY title, email_rep, tel_rep, representante, padre, madre", [$alumnoid]);
+        foreach ($detalleAlumno as $da) {
+            $this->personas[] = AlumnoDetalleData::from([
+                'nombre_alumno' => $da->title,
+                'email_rep' => $da->email_rep,
+                'tel_rep' => $da->tel_rep,
+                'nombre_rep' => $da->representante,
+                'nombre_padre' => $da->padre,
+                'nombre_madre' => $da->madre,
             ]);
         }
+
         return $this->personas;
     }
 

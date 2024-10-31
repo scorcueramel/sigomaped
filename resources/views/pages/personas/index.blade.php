@@ -93,8 +93,6 @@
     @include('components.modal',[
     'idModalComponent'=> 'modalPersonas',
     'widthModal'=>'modal-lg',
-    'titleModal'=>'DETALLES DEL ALUMNO SELECCIONADO',
-    'bodyContentModal'=>'BODY DEL MODAL CALENDARIO',
     'heightCancelButton'=>'btn-sm',
     'colorButtonCancel'=>'danger',
     'textCancelButton'=>'CERRAR',

@@ -64,6 +64,7 @@ Route::group(['prefix'=>'asistencia','middleware'=>'auth'],function () {
 Route::group(['prefix'=>'personas','middleware'=>'auth'], function(){
     Route::get('/index',[PersonaController::class, 'index'])->name('personas.index');
     Route::get('/get-personas-tipo/{tipopersona}',[PersonaController::class, 'getSearchPersona'])->name('personas.tipopersona');
+    Route::get('/get-alumno-detalle/{alumnoid}',[PersonaController::class, 'getDetalleAlumno'])->name('personas.detalle.alumno');
     Route::get('/create',[PersonaController::class, 'create'])->name('personas.create');
     Route::post('/store',[PersonaController::class, 'store'])->name('personas.store');
 });

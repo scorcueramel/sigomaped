@@ -767,8 +767,48 @@ function cargarTabla(data) {
 
 
 function personaDetalle(personaid) {
+    // $.ajax({
+    //     type: "method",
+    //     url: "url",
+    //     data: "data",
+    //     dataType: "dataType",
+    //     success: function (response) {
+
+    //     }
+    // });
+
     console.log(personaid)
-    // $("#modalPersonas").modal('show');
-    // $("#modalComponentLabel").html('');
-    // $("#modalComponentLabel").html(`DETALLES DE <span class="font-weight-bold"><span>`);
+};
+
+function alumnoDetalle(alumnoid) {
+    $.ajax({
+        type: "GET",
+        url: `/personas/get-alumno-detalle/${alumnoid}`,
+        success: function (response) {
+            let data = response[0];
+            $("#modalPersonas").modal("show");
+            $("#modalComponentLabel").html('');
+            $("#modalComponentLabel").html(`DETALLE DEL ALUMNO : ${data.nombre_alumno}`);
+            $(".modal-body").html('');
+            $(".modal-body").append(`
+                <table class="table table-bordered">
+                    <tr>
+                        <td>DATOS DEL REPRESENTANTE</td>
+                    </tr>
+                    <tr>
+                        <td>NOMBRES:</td>
+                        <td>${data.nombre_rep}</td>
+                    </tr>
+                    <tr>
+                        <td>CORREO:</td>
+                        <td>${data.email_rep}</td>
+                    </tr>
+                    <tr>
+                        <td>TELEFONO:</td>
+                        <td>${data.tel_rep}</td>
+                    </tr>
+                </table>
+            `);
+        }
+    });
 };
