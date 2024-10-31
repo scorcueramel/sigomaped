@@ -793,7 +793,7 @@ function alumnoDetalle(alumnoid) {
             $(".modal-body").append(`
                 <table class="table table-bordered">
                     <tr>
-                        <td>DATOS DEL REPRESENTANTE</td>
+                        <td colspan="2">DATOS DEL REPRESENTANTE</td>
                     </tr>
                     <tr>
                         <td>NOMBRES:</td>
@@ -806,6 +806,20 @@ function alumnoDetalle(alumnoid) {
                     <tr>
                         <td>TELEFONO:</td>
                         <td>${data.tel_rep}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">DATOS DEL PADRE</td>
+                    </tr>
+                    <tr>
+                        <td>NOMBRES:</td>
+                        <td>${data.nombre_padre}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">DATOS DE LA MADRE</td>
+                    </tr>
+                    <tr>
+                        <td>NOMBRES:</td>
+                        <td>${data.nombre_madre}</td>
                     </tr>
                 </table>
             `);
