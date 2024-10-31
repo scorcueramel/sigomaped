@@ -37,7 +37,7 @@
     <link rel="stylesheet" href="{{ asset('/assets/css/dataTables.bootstrap4.css') }}">
 
     <!-- Scripts -->
-    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/libs/app.js']) --}}
 
     {{-- icons --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -68,13 +68,13 @@
         </div>
     </div>
     <!-- jQuery 3 -->
-    <!-- <script src="{{ asset('/assets/js/jquery.js') }}"></script> -->
-    <script src="{{ asset('/assets/js/jquery-3.7.1.js') }}"></script>
-    <script src="{{ asset('/assets/js/dataTables.js') }}"></script>
-    <script src="{{ asset('/assets/js/dataTables.bootstrap4.js') }}"></script>
+    <!-- <script src="{{ asset('/assets/js/libs/jquery.js') }}"></script> -->
+    <script src="{{ asset('/assets/js/libs/jquery-3.7.1.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/dataTables.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/dataTables.bootstrap4.js') }}"></script>
 
     <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('/assets/js/jquery-ui/jquery-ui.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/jquery-ui/jquery-ui.js') }}"></script>
 
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
@@ -82,31 +82,31 @@
     </script>
 
     <!-- popper -->
-    <script src="{{ asset('/assets/js/popper.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/popper.min.js') }}"></script>
 
     <!-- Bootstrap 4.0-->
-    <script src="{{ asset('/assets/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/bootstrap.js') }}"></script>
 
     <!-- ChartJS -->
-    <script src="{{ asset('/assets/js/Chart.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/Chart.min.js') }}"></script>
 
     <!-- Slimscroll -->
-    <script src="{{ asset('/assets/js/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/jquery.slimscroll.js') }}"></script>
 
     <!-- peity -->
-    <script src="{{ asset('/assets/js/jquery.peity.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/jquery.peity.js') }}"></script>
 
     <!-- Morris.js charts -->
-    <script src="{{ asset('/assets/js/raphael.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/morris.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/raphael.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/morris.min.js') }}"></script>
 
     <!-- Fab Admin App -->
-    <script src="{{ asset('/assets/js/template.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/template.js') }}"></script>
 
 
     <!-- jquerysteps -->
-    <script src="{{ asset('/assets/js/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/sweetalert2@11.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/sweetalert2@11.js') }}"></script>
 
     {{-- icons --}}
 
@@ -118,8 +118,8 @@
         integrity="sha512-y8/3lysXD6CUJkBj4RZM7o9U0t35voPBOSRHLvlUZ2zmU+NLQhezEpe/pMeFxfpRJY7RmlTv67DYhphyiyxBRA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <script src="{{asset('assets/js/jquery.toast.js')}}"></script>
-    <script src="{{asset('assets/js/toastr.js')}}"></script>
+    <script src="{{asset('assets/js/libs/jquery.toast.js')}}"></script>
+    <script src="{{asset('assets/js/libs/toastr.js')}}"></script>
 
     <script>
         $(document).ready(function() {
@@ -152,16 +152,16 @@
         })()
     </script>
 
-    <script src="{{asset('assets/js/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
-    <script src="{{asset('assets/js/fastclick/lib/fastclick.js')}}"></script>
-    <script src="{{asset('assets/js/formatter/formatter.js')}}"></script>
-    <script src="{{asset('assets/js/formatter/jquery.formatter.js')}}"></script>
+    <script src="{{asset('assets/js/libs/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+    <script src="{{asset('assets/js/libs/fastclick/lib/fastclick.js')}}"></script>
+    <script src="{{asset('assets/js/libs/formatter/formatter.js')}}"></script>
+    <script src="{{asset('assets/js/libs/formatter/jquery.formatter.js')}}"></script>
     <!-- Fab Admin for demo purposes -->
-    <script src="{{ asset('/assets/js/demo.js') }}"></script>
+    <script src="{{ asset('/assets/js/libs/demo.js') }}"></script>
     {{-- MomentJS (locale date) --}}
-    <script src="{{asset('assets/js/moment-with-locales.min.js')}}"></script>
-    <script src='{{asset('assets/js/fullcalendar.js')}}'></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{asset('assets/js/libs/moment-with-locales.min.js')}}"></script>
+    <script src='{{asset('assets/js/libs/fullcalendar.js')}}'></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/libs/select2.min.js"></script>
 
     @stack('js')
 </body>

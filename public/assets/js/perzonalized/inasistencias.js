@@ -40,7 +40,7 @@ $('#tallerlistado').on('change', function () {
                 response.forEach((e) => {
                     $("#radios_dias").append(`
                 <div class="radio">
-                    <input name="taller_programa" type="radio" id="dias_${e.diaid}" onclick="javascript:inscritosPorDia(${e.diaid})">
+                    <input name="taller_programa" type="radio" id="dias_${e.diaid}" data-diaid="${e.diaid}" onclick="javascript:inscritosPorDia(${e.diaid})">
                     <label for="dias_${e.diaid}">${e.dianombre}</label>
                 </div>
                 `);
@@ -115,7 +115,11 @@ function registrarInasistenciaAlumno(inscripcionid, cantidadinasistencias, nombr
             </tr>
             <tr>
                 <td>FECHA</td>
-                <td><input class="form-control" type="date" id="fechainasistencia"></td>
+                <td>
+                    <input class="form-control" type="date" id="fechainasistencia">
+                    <div id="fechaerror" class="d-none">
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td>FALTA JUSTIFICADA</td>
@@ -123,7 +127,7 @@ function registrarInasistenciaAlumno(inscripcionid, cantidadinasistencias, nombr
                     <div class="radio">
                         <input name="justificada" type="radio" id="sijustificada" value="1" onclick="javascript:mustraMotivoFalta('SI');">
                         <label for="sijustificada" class="mr-4">SI</label>
-                        <input name="justificada" type="radio" id="nojustificada" value="0" onclick="javascript:mustraMotivoFalta('NO');">
+                        <input name="justificada" type="radio" id="nojustificada" value="0" onclick="javascript:mustraMotivoFalta('NO');" checked>
                         <label for="nojustificada">NO</label>
                     </div>
                 </td>
@@ -146,25 +150,60 @@ function mustraMotivoFalta(justificada) {
 
 
 $("#btnRegistrarInasistencia").on('click', function () {
-    let inscripcionid = inscripcionid;
-    let inasistio = inasistio;
-    let fechainasistencia = fechainasistencia;
-    let justificada = $("[name=justificada]").val();
-    let motivo = motivo;
+    let inscripcionid = $("#inscripcionid").val();
+    let inasistio = $("#inasistio").val();
+    let fechainasistencia = $("#fechainasistencia").val();
+    let justificada = $("input[name=justificada]:checked").val();
+    let motivo = $("#motivo").val();
+    let diaid = $("input[name=taller_programa]:checked").attr('data-diaid');
+
+    let data = {
+        inscripcionid,
+        inasistio,
+        fechainasistencia,
+        justificada,
+        motivo,
+    }
 
     $.ajax({
         type: "POST",
         url: "/asistencia/store",
-        data: {
-            inscripcionid,
-            inasistio,
-            fechainasistencia,
-            justificada,
-            motivo,
-        },
+        data: data,
         success: function (response) {
-            console.log(response)
+            Swal.fire({
+                title: `Registro Exitoso`,
+                html: `<p class="text-center">Inasistencia registrada Correctamente.</p>`,
+                icon: `success`,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: `Entiendo!`,
+                allowOutsideClick: false,
+            }).then((result) => {
+                $('#espera').val('0');
+                if (result.isConfirmed) {
+                    $("#modalInasistencia").modal("hide");
+                    inscritosPorDia(diaid);
+                }
+            });
+        },
+        error: function (error) {
+            let errores = error.responseJSON;
+            mostrarSeccionErroes();
+            gestionMensajes(errores.errors);
         }
     });
 
 });
+
+function mostrarSeccionErroes(){
+    $("#fechaerror").removeClass('d-none');
+}
+
+function gestionMensajes(erroresresp) {
+    let fecharegistroexist = 'fechainasistencia' in erroresresp;
+    if (fecharegistroexist) {
+        $('#fechaerror').html(`<span class="text-danger">${erroresresp.fechainasistencia}<span>`)
+    } else {
+        $('#fechaerror').addClass('d-none');
+        $('#fechaerror').html('');
+    }
+}

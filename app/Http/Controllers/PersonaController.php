@@ -63,9 +63,9 @@ class PersonaController extends Controller
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#" id="detallepersona" onclick="javascript:personaDetalle('.(int)$row->personaid.')"><i class="fa fa-eye"></i> Detalles</a>
                                     <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> Inscribir</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-edit"></i> Editar</a>
                                     <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i>Eliminar</a>
                             </div>
                         </div>
                     </td>
@@ -76,9 +76,9 @@ class PersonaController extends Controller
                         <div class="dropdown">
                             <button class="btn btn-outline btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"></button>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> Inscribir</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-edit"></i> Editar</a>
                                     <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i>Quitar de Espera</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-trash-o"></i>Eliminar</a>
                             </div>
                         </div>
                     </td>

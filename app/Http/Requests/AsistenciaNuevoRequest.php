@@ -2,11 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Data\AsistenciaData;
 use Illuminate\Foundation\Http\FormRequest;
 
-class AsistenciaRequest extends FormRequest
+class AsistenciaNuevoRequest extends FormRequest
 {
-    public array $asistencia;
+    public array $datos;
 
     /**
      * Determine if the user is authorized to make this request.
@@ -30,10 +31,9 @@ class AsistenciaRequest extends FormRequest
             'inasistio' => 'required',
             'fechainasistencia' => 'required',
             'justificada' => 'required',
-            'motivo' => 'strign',
         ];
     }
-        /**
+    /**
      * Get the error messages for the defined validation rules.
      *
      * @return array<string, string>
@@ -50,6 +50,12 @@ class AsistenciaRequest extends FormRequest
 
     public function passedValidation()
     {
-        $this->asistencia[] = [];
+        $this->datos[] = AsistenciaData::from([
+            'inscripcionid' => $this->inscripcionid,
+            'asistenciaasistio' => $this->inasistio,
+            'asistenciafecha' => $this->fechainasistencia,
+            'asistenciajustificada' => $this->justificada,
+            'asistenciamotivo' => $this->motivo,
+        ]);
     }
 }
