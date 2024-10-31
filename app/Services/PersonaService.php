@@ -30,9 +30,25 @@ class PersonaService
 
     public function getRegisterSeach(?int $tipopersona)
     {
-        $personasFind = Persona::where('tipo_persona_id', $tipopersona)->with('tipo_persona')->with('alumno')->get();
 
-        if ($tipopersona === 6) {
+        if($tipopersona === 1 || $tipopersona === 2) {
+            $personasFind = Persona::where('tipo_persona_id', $tipopersona)->with('tipo_persona')->with('user')->get();
+            foreach ($personasFind as $key => $value) {
+                dd($personasFind[$key]->user[0]['id']);
+                $this->personas[] = PersonaData::from([
+                    'tipopersonaid' => $personasFind[$key]->tipo_persona->id,
+                    'tipopersona' => $personasFind[$key]->tipo_persona->tipo_persona,
+                    'personaid' => $personasFind[$key]->id,
+                    'documento' => $personasFind[$key]->documento,
+                    'nombres' => $personasFind[$key]->nombres,
+                    'apellidos' => $personasFind[$key]->apellidos,
+                    'usuarioid' => $personasFind[$key]->user[0]['id'],
+                    'correo' => $personasFind[$key]->user[0]['email'],
+                ]);
+            }
+        }
+        elseif ($tipopersona === 6) {
+            $personasFind = Persona::where('tipo_persona_id', $tipopersona)->with('tipo_persona')->with('alumno')->get();
             foreach ($personasFind as $key => $value) {
                 $this->personas[] = PersonaData::from([
                     'alumnoid' => $personasFind[$key]->alumno[0]->id,
@@ -44,19 +60,7 @@ class PersonaService
                     'apellidos' => $personasFind[$key]->apellidos,
                 ]);
             }
-        } else {
-            foreach ($personasFind as $key => $value) {
-                $this->personas[] = PersonaData::from([
-                    'tipopersonaid' => $personasFind[$key]->tipo_persona->id,
-                    'tipopersona' => $personasFind[$key]->tipo_persona->tipo_persona,
-                    'personaid' => $personasFind[$key]->id,
-                    'documento' => $personasFind[$key]->documento,
-                    'nombres' => $personasFind[$key]->nombres,
-                    'apellidos' => $personasFind[$key]->apellidos,
-                ]);
-            }
         }
-
         return $this->personas;
     }
 

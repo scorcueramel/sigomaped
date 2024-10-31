@@ -700,7 +700,7 @@ $("#buscarregistros").on('click', function () {
         url: `/personas/get-personas-tipo/${tipopersona}`,
         success: function (data) {
             $("#resultadodebusqueda").removeClass('d-none');
-            cargarTabla(data)
+            cargarTabla(data, tipopersona)
         },
         error: function (err) {
             console.log(err);
@@ -709,7 +709,33 @@ $("#buscarregistros").on('click', function () {
 });
 
 
-function cargarTabla(data) {
+function cargarTabla(data, tipopersona) {
+    if (tipopersona == 1 || tipopersona == 2 || tipopersona == 5) {
+        $("#isuser").removeClass('d-none')
+        let columnas = [{
+            data: 'tipopersona'
+        },
+        {
+            data: 'documento'
+        },
+        {
+            data: 'nombres'
+        },
+        {
+            data: 'apellidos'
+        },
+        {
+            data: 'correo'
+        },
+        {
+            data: 'acciones'
+        }]
+        cargaTabla(data,columnas);
+    }
+}
+
+function cargaTabla(data,columnas) {
+    console.log(columnas);
     $('#tablapersonas').DataTable({
         order: [
             [0, "asc"]
@@ -724,22 +750,7 @@ function cargarTabla(data) {
             [5, 10, 20, "Todos"]
         ],
         data: data.data,
-        columns: [{
-            data: 'tipopersona'
-        },
-        {
-            data: 'documento'
-        },
-        {
-            data: 'nombres'
-        },
-        {
-            data: 'apellidos'
-        },
-        {
-            data: 'acciones'
-        },
-        ],
+        columns: columnas,
         "language": {
             "lengthMenu": "Mostrar " +
                 `<select class="custom-select custom-select-sm form-control form-control-sm">

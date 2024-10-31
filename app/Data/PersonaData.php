@@ -15,6 +15,7 @@ class PersonaData extends Data{
         public string $nombres,
         public string $apellidos,
         // usuario y correo tambien se usa para representante
+        public ?string $usuarioid,
         public ?string $correo,
         public ?string $password,
         // repesentante
