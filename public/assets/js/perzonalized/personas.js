@@ -797,29 +797,29 @@ function alumnoDetalle(alumnoid) {
                     </tr>
                     <tr>
                         <td>NOMBRES:</td>
-                        <td>${data.nombre_rep}</td>
+                        <td>${data.nombre_rep == null ? '<span class="text-danger">NO REGISTRADO</span>' : data.nombre_rep}</td>
                     </tr>
                     <tr>
                         <td>CORREO:</td>
-                        <td>${data.email_rep}</td>
+                        <td>${data.email_rep == null ? '<span class="text-danger">NO REGISTRADO</span>' : data.email_rep}</td>
                     </tr>
                     <tr>
                         <td>TELEFONO:</td>
-                        <td>${data.tel_rep}</td>
+                        <td>${data.tel_rep == null ? '<span class="text-danger">NO REGISTRADO</span>' : data.tel_rep}</td>
                     </tr>
                     <tr>
                         <td colspan="2">DATOS DEL PADRE</td>
                     </tr>
                     <tr>
                         <td>NOMBRES:</td>
-                        <td>${data.nombre_padre}</td>
+                        <td>${data.nombre_padre == null ? '<span class="text-danger">NO REGISTRADO</span>' : data.nombre_padre}</td>
                     </tr>
                     <tr>
                         <td colspan="2">DATOS DE LA MADRE</td>
                     </tr>
                     <tr>
                         <td>NOMBRES:</td>
-                        <td>${data.nombre_madre}</td>
+                        <td>${data.nombre_madre == null ? '<span class="text-danger">NO REGISTRADO</span>' : data.nombre_madre}</td>
                     </tr>
                 </table>
             `);
