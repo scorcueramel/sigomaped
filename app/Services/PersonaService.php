@@ -34,7 +34,6 @@ class PersonaService
         if($tipopersona === 1 || $tipopersona === 2) {
             $personasFind = Persona::where('tipo_persona_id', $tipopersona)->with('tipo_persona')->with('user')->get();
             foreach ($personasFind as $key => $value) {
-                dd($personasFind[$key]->user[0]['id']);
                 $this->personas[] = PersonaData::from([
                     'tipopersonaid' => $personasFind[$key]->tipo_persona->id,
                     'tipopersona' => $personasFind[$key]->tipo_persona->tipo_persona,
@@ -47,13 +46,40 @@ class PersonaService
                 ]);
             }
         }
-        elseif ($tipopersona === 6) {
+        if($tipopersona === 3 || $tipopersona === 4) {
+            $personasFind = Persona::where('tipo_persona_id', $tipopersona)->with('tipo_persona')->get();
+            foreach ($personasFind as $key => $value) {
+                $this->personas[] = PersonaData::from([
+                    'tipopersonaid' => $personasFind[$key]->tipo_persona->id,
+                    'tipopersona' => $personasFind[$key]->tipo_persona->tipo_persona,
+                    'personaid' => $personasFind[$key]->id,
+                    'documento' => $personasFind[$key]->documento,
+                    'nombres' => $personasFind[$key]->nombres,
+                    'apellidos' => $personasFind[$key]->apellidos,
+                ]);
+            }
+        }
+        if($tipopersona === 5) {
+            $personasFind = Persona::where('tipo_persona_id', $tipopersona)->with('tipo_persona')->with('representante')->get();
+            foreach ($personasFind as $key => $value) {
+                $this->personas[] = PersonaData::from([
+                    'tipopersonaid' => $personasFind[$key]->tipo_persona->id,
+                    'tipopersona' => $personasFind[$key]->tipo_persona->tipo_persona,
+                    'personaid' => $personasFind[$key]->id,
+                    'documento' => $personasFind[$key]->documento,
+                    'nombres' => $personasFind[$key]->nombres,
+                    'apellidos' => $personasFind[$key]->apellidos,
+                    'correo' => $personasFind[$key]->representante[0]->email,
+                ]);
+            }
+        }
+        if($tipopersona === 6) {
             $personasFind = Persona::where('tipo_persona_id', $tipopersona)->with('tipo_persona')->with('alumno')->get();
             foreach ($personasFind as $key => $value) {
                 $this->personas[] = PersonaData::from([
-                    'alumnoid' => $personasFind[$key]->alumno[0]->id,
                     'tipopersonaid' => $personasFind[$key]->tipo_persona->id,
                     'tipopersona' => $personasFind[$key]->tipo_persona->tipo_persona,
+                    'alumnoid' => $personasFind[$key]->alumno[0]->id,
                     'personaid' => $personasFind[$key]->id,
                     'documento' => $personasFind[$key]->documento,
                     'nombres' => $personasFind[$key]->nombres,

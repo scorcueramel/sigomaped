@@ -11,9 +11,7 @@ class PersonaNuevoRequest extends FormRequest
 {
 
     public array $datos;
-    // public array $padre;
-    // public array $representante;
-    // public array $alumno;
+
     /**
      * Determine if the user is authorized to make this request.
      *

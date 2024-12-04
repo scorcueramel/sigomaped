@@ -76,7 +76,7 @@ class Alumno extends Model
     }
 
     public function representante(){
-        return $this->hasMany(Horario::class);
+        return $this->hasMany(Representante::class);
     }
 
     public function padre_alumno(){

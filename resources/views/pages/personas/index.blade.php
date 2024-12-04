@@ -72,7 +72,6 @@
                                                 <th>DOCUMENTO</th>
                                                 <th>NOMBRES</th>
                                                 <th>APELLIDOS</th>
-                                                <th class="d-none" id="isuser">CORREO</th>
                                                 <th>ACCIONES</th>
                                             </tr>
                                         </thead>

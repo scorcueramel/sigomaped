@@ -51,9 +51,7 @@ class PersonaController extends Controller
         $personas = $this->personaService->getRegisterSeach($tipopersona);
 
         return datatables()->of($personas)
-
             ->addColumn('acciones', function ($row) {
-
                 if ($row->tipopersonaid == 6) {
                     return
                         '

@@ -700,7 +700,7 @@ $("#buscarregistros").on('click', function () {
         url: `/personas/get-personas-tipo/${tipopersona}`,
         success: function (data) {
             $("#resultadodebusqueda").removeClass('d-none');
-            cargarTabla(data, tipopersona)
+            cargarTabla(data)
         },
         error: function (err) {
             console.log(err);
@@ -708,34 +708,7 @@ $("#buscarregistros").on('click', function () {
     });
 });
 
-
-function cargarTabla(data, tipopersona) {
-    if (tipopersona == 1 || tipopersona == 2 || tipopersona == 5) {
-        $("#isuser").removeClass('d-none')
-        let columnas = [{
-            data: 'tipopersona'
-        },
-        {
-            data: 'documento'
-        },
-        {
-            data: 'nombres'
-        },
-        {
-            data: 'apellidos'
-        },
-        {
-            data: 'correo'
-        },
-        {
-            data: 'acciones'
-        }]
-        cargaTabla(data,columnas);
-    }
-}
-
-function cargaTabla(data,columnas) {
-    console.log(columnas);
+function cargarTabla(data) {
     $('#tablapersonas').DataTable({
         order: [
             [0, "asc"]
@@ -750,7 +723,21 @@ function cargaTabla(data,columnas) {
             [5, 10, 20, "Todos"]
         ],
         data: data.data,
-        columns: columnas,
+        columns: [{
+            data: 'tipopersona'
+        },
+        {
+            data: 'documento'
+        },
+        {
+            data: 'nombres'
+        },
+        {
+            data: 'apellidos'
+        },
+        {
+            data: 'acciones'
+        }],
         "language": {
             "lengthMenu": "Mostrar " +
                 `<select class="custom-select custom-select-sm form-control form-control-sm">
@@ -760,15 +747,23 @@ function cargaTabla(data,columnas) {
                         <option value='-1'>Todos</option>
                     </select>` +
                 " registros por página",
-            "zeroRecords": "Sin Resultados Actualmente",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "infoEmpty": "Sin Resultados",
             "infoFiltered": "(filtrado de _MAX_ registros totales)",
-            "search": "Buscar: ",
-            // "paginate": {
-            //     "next": "Siguiente",
-            //     "previous": "Anterior"
-            // }
+            "decimal": "",
+            "emptyTable": "No hay información",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+            "infoPostFix": "",
+            "thousands": ",",
+            "loadingRecords": "Cargando...",
+            "processing": "Procesando...",
+            "search": "Buscar:",
+            "zeroRecords": "Sin resultados encontrados",
+            "paginate": {
+                "first": "Primero",
+                "last": "Ultimo",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            }
         },
         "bDestroy": true
     });
