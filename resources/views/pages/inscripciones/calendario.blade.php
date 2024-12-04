@@ -103,6 +103,6 @@
 ])
 @endsection
 @push('js')
-<script src="{{asset('assets/js/calendario.js')}}"></script>
+<script src="{{asset('assets/js/perzonalized/calendario.js')}}"></script>
 <script src="{{asset('assets/js/perzonalized/inscripciones.js')}}"></script>
 @endpush
